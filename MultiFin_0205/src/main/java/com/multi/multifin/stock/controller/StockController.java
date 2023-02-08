@@ -90,7 +90,11 @@ public class StockController {
 		model.addAttribute("kosdaqRanking", kosdaqRanking);
 		
 		
-		
+		log.info("코스피/코스닥 리스트 정보 요청");
+		List<StockPrice> kospiList = service.getKospiList();
+		List<StockPrice> kosdaqList = service.getKosdaqList();
+		model.addAttribute("kospiList", kospiList);
+		model.addAttribute("kosdaqList", kosdaqList);
 		
 		log.info("각 지수별 최근 6개 정보 요청");
 		List<StockPriceIndex> KOSPI = service.currentStockList("KOSPI");
@@ -100,11 +104,6 @@ public class StockController {
 		model.addAttribute("KOSPI", KOSPI);
 		model.addAttribute("KOSDAQ", KOSDAQ);
 		model.addAttribute("NASDAQ", NASDAQ);
-		
-	
-		log.info("주가동향 요청");
-		
-		
 		
 		return "stock/stockList";
 	}
