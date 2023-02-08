@@ -1,14 +1,17 @@
 package com.multi.multifin.stock.model.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.multi.multifin.stock.model.mapper.ExchangeRateMapper;
+import com.multi.multifin.stock.model.mapper.FundProductInfoMapper;
 import com.multi.multifin.stock.model.mapper.StockPriceIndexMapper;
 import com.multi.multifin.stock.model.mapper.StockPriceMapper;
 import com.multi.multifin.stock.model.vo.ExchangeRate;
+import com.multi.multifin.stock.model.vo.FundProductInfo;
 import com.multi.multifin.stock.model.vo.StockPrice;
 import com.multi.multifin.stock.model.vo.StockPriceIndex;
 
@@ -20,6 +23,9 @@ public class StockPriceService {
 	private ExchangeRateMapper erMapper;
 	@Autowired
 	private StockPriceIndexMapper spiMapper;
+	
+	@Autowired
+	private FundProductInfoMapper fpMapper;
 	
 	
 	public List<StockPrice> getKospiList(){
@@ -77,6 +83,11 @@ public class StockPriceService {
 	
 	public List<StockPriceIndex> currentStockList(String name){
 		return spiMapper.currentStockList(name);
+	}
+	
+	// 펀드 리스트 출력
+	public List<FundProductInfo> getFundList() {
+		return fpMapper.selectFundProduct();
 	}
 
 }

@@ -108,16 +108,6 @@ public class StockController {
 		return "stock/stockList";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping("/stockBuying")
 	public String stockBuying() {
 		return "stock/stockBuying";
@@ -125,6 +115,8 @@ public class StockController {
 	
 	@RequestMapping("/stockFund")
 	public String stockFund() {
+		
+		
 		return "stock/stockFund";
 	}
 	
