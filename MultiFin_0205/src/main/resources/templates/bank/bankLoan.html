@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="layout/head :: config"></th:block>
+	<title>MultiFin:대출상품</title>
+	<!-- 현재 페이지에서만 쓰는 css, script -->
+	<link rel="stylesheet" th:href="@{/css/bank/bank.css}">
+</head>
+
+<body>
+<header th:replace="~{layout/header :: #header}"></header>
+<main>
+<!-- 배너 시작 -->
+        <!-- Hero -->
+        <section class="section section-header bg-soft pb-0 pt-6">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-12 col-md-5 order-lg-1 mt-6">
+                        <h1 class="display-3 lh-100 font-weight-bolder mb-0">대출 상품</h1>
+                        <p class="lead my-4">
+                            <span class="font-weight-normal">주택담보대출부터 전세자금대출까지!<br>대출의 모든 것을 MULTIFIN에서 비교해 보세요</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-7 order-lg-2 d-none d-md-block">
+                       <!-- Image --> <img src="../../assets/img/ours/bank-deposit-free-flat-illustration.png" class="img-fluid mr-3" style="width: 80%;float: right;" alt="Forest Illustration">
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- 배너 끝 -->
+
+
+<!-- 저금리 대출상품 시작 -->
+<section class="section section-lg pt-0 pb-6 loan_main_card">
+    <div class="container" style="width: 1200px;">
+        <div class="row">
+            <div class="col-12 loan-title mb-2">
+                <div class="main_loan_title">
+                    <div class="loans_title_container">
+                        <p style="font-size: 26px;"  class="h3 font-weight-bolder loan_here_title">저금리 대출 상품</p>
+                        <span class="pointBox pl-2 pr-2">BEST</span>
+                    </div>
+                </div>
+                <!--이부분은 top4개만 보여주는 자리 같은 곳이었던거 같아서 임의로 제거해뒀씁니다!
+                <div class="loan_btn_container">
+                    <a href="#" class="bankMainMore">
+                        <span class="bankMainMore_title">더보기</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+                -->
+            </div>
+            <div class="loain_main_card-container">
+                <a href="#" class="card img-card fh-220 outer-bg border-gray-500 lowRateCard loan_card_main">
+                    <div class="align-items-center fh-220">
+                        <div class="loan_card-body text-dark p-3">
+                            <h5 class="text-center">KB주택전세자금대출</h5>
+                            <hr style="border-color: black;margin: 0;">
+                            <p class="text-dark mt-3">
+                                * 한도 : 최대 2.22억원<br>
+                                * 상환 : 만기일시상환방식<br>
+                                * 금리 : 변동금리<br>
+                            </p>
+                            <hr style="border-color: black;margin: 0;">
+                            <h5 class="text-right mt-3">4.04%</h5>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="card img-card fh-220 outer-bg border-gray-500 lowRateCard loan_card_main">
+                    <div class="align-items-center fh-220">
+                            <div class="loan_card-body text-dark p-3">
+                                <h5 class="text-center">SC전세담보대출</h5>
+                                <hr style="border-color: black;margin: 0;">
+                                <p class="text-dark mt-3">
+                                    * 한도 : 최대 2.22억원<br>
+                                    * 상환 : 만기일시상환방식<br>
+                                    * 금리 : 변동금리<br>
+                                </p>
+                                <hr style="border-color: black;margin: 0;">
+                                <h5 class="text-right mt-3">4.33%</h5>
+                            </div>
+                    </div>
+                </a>
+                <a href="#" class="card img-card fh-220 outer-bg border-gray-500 lowRateCard loan_card_main">
+                    <div class="align-items-center fh-220">
+                        <div class="loan_card-body text-dark p-3">
+                            <h5 class="text-center">우리전세론(금융보증)</h5>
+                            <hr style="border-color: black;margin: 0;">
+                            <p class="text-dark mt-3">
+                                * 한도 : 최대 2.22억원<br>
+                                * 상환 : 만기일시상환방식<br>
+                                * 금리 : 변동금리<br>
+                            </p>
+                            <hr style="border-color: black;margin: 0;">
+                            <h5 class="text-right mt-3">4.04%</h5>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="card img-card fh-220 outer-bg border-gray-500 lowRateCard loan_card_main">
+                    <div class="align-items-center fh-220">
+                        <div class="loan_card-body text-dark p-3">
+                            <h5 class="text-center">신한전세대출(보증)</h5>
+                            <hr style="border-color: black;margin: 0;">
+                            <p class="text-dark mt-3">
+                                * 한도 : 최대 2.22억원<br>
+                                * 상환 : 만기일시상환방식<br>
+                                * 금리 : 변동금리<br>
+                            </p>
+                            <hr style="border-color: black;margin: 0;">
+                            <h5 class="text-right mt-3">4.04%</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 저금리 대출상품 끝 -->
+
+<!-- 상품 검색 시작 -->
+<section class="section section-lg pt-0 pb-6">
+    <div class="container" style="width: 1200px;">
+        <div class="row">
+            <div class="col-12  mb-3">
+                <p style="font-size: 26px;"  class="h3 font-weight-bolder m-0">상품검색</p>
+            </div>
+            <div class="col-sm-3 border-gray-500 text-center bankSearch fh-320 rounded">
+                <div class="border-gray-500 border rounded selector">
+                    <ul class="list-style-none text-dark blSearchTap">
+                        <li>
+                            <a href="#">주택담보대출</a>
+                        </li>
+                        <li>
+                            <a href="#">전세자금대출</a>
+                        </li>
+                        <li class="border-0">
+                            <a href="#">개인신용대출</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-soft text-center bankSearch fh-320 rounded">
+                    <a href="#" ><i class="fa-solid fa-comments fa-2x onlineChatBtn m-4"></i></a>
+                    <p class="font-weight-bolder">궁금한 것이 있으신가요?</p>
+                    <p>실시간 채팅을 통해 궁금한 것을<br>한 번에 해결해 보세요!</p>
+                    <p>이용 시간 : 09:00 - 18:00<br>월~금 / 주말 • 공휴일 제외</p>
+                </div>
+            </div>
+            <div class="col-sm-9 border-gray-500">
+                <form autocomplete="off" class="row search" method="get" action="#">
+                    <div class="col-12 mb-3 mb-lg-4">
+                        <div class="form-group form-group-lg mb-0">
+                            <div class="input-group">
+                                <input id="search-bank" type="text" class="form-control autocomplete border-gray-500 border-right-0" placeholder="금융회사명을 입력하세요" required>
+                                <button class="bankMainSubmit border border-gray-500 border-left-0 bg-white text-dark fw-60" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <table id="tbl-board" class="board-table">
+                    <tr class="text-center bg-info text-white">
+                        <th class="table-header">번호</th>
+                        <th class="table-header" >금융상품</th>
+                        <th class="table-header">이율</th>
+                        <th class="table-header">금융회사</th>
+                        <th class="table-header">가입방법</th>
+                        <th class="table-header">적립유형</th>
+                    </tr>
+                    <tr>
+                        <td class="board-content">1</td>
+                        <td class="board-content board-title">우리SUPER주거래적금</td>
+                        <td class="board-content">최고 연 4.25%</td>
+                        <td class="board-content">우리은행</td>
+                        <td class="board-content">영업점, 인터넷, 스마트폰</td>
+                        <td class="board-content">정액적립식</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">2</td>
+                        <td class="board-content board-title">WON적금</td>
+                        <td class="board-content">최고 연 4.25%</td>
+                        <td class="board-content">우리은행</td>
+                        <td class="board-content">영업점, 스마트폰, 전화(텔레뱅킹)</td>
+                        <td class="board-content">자유적립식</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">3</td>
+                        <td class="board-content board-title">WON적금</td>
+                        <td class="board-content">최고 연 4.25%</td>
+                        <td class="board-content">우리은행</td>
+                        <td class="board-content">영업점, 스마트폰, 전화(텔레뱅킹)</td>
+                        <td class="board-content">자유적립식</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">4</td>
+                        <td class="board-content board-title">WON적금</td>
+                        <td class="board-content">최고 연 4.25%</td>
+                        <td class="board-content">우리은행</td>
+                        <td class="board-content">영업점, 스마트폰, 전화(텔레뱅킹)</td>
+                        <td class="board-content">자유적립식</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">5</td>
+                        <td class="board-content board-title">WON적금</td>
+                        <td class="board-content">최고 연 4.25%</td>
+                        <td class="board-content">우리은행</td>
+                        <td class="board-content">영업점, 스마트폰, 전화(텔레뱅킹)</td>
+                        <td class="board-content">자유적립식</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">6</td>
+                        <td class="board-content board-title">WON적금</td>
+                        <td class="board-content">최고 연 4.25%</td>
+                        <td class="board-content">우리은행</td>
+                        <td class="board-content">영업점, 스마트폰, 전화(텔레뱅킹)</td>
+                        <td class="board-content">자유적립식</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">7</td>
+                        <td class="board-content board-title">WON적금</td>
+                        <td class="board-content">최고 연 4.25%</td>
+                        <td class="board-content">우리은행</td>
+                        <td class="board-content">영업점, 스마트폰, 전화(텔레뱅킹)</td>
+                        <td class="board-content">자유적립식</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">8</td>
+                        <td class="board-content board-title">WON적금</td>
+                        <td class="board-content">최고 연 4.25%</td>
+                        <td class="board-content">우리은행</td>
+                        <td class="board-content">영업점, 스마트폰, 전화(텔레뱅킹)</td>
+                        <td class="board-content">자유적립식</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">9</td>
+                        <td class="board-content board-title">WON적금</td>
+                        <td class="board-content">최고 연 4.25%</td>
+                        <td class="board-content">우리은행</td>
+                        <td class="board-content">영업점, 스마트폰, 전화(텔레뱅킹)</td>
+                        <td class="board-content">자유적립식</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">10</td>
+                        <td class="board-content board-title">WON적금</td>
+                        <td class="board-content">최고 연 4.25%</td>
+                        <td class="board-content">우리은행</td>
+                        <td class="board-content">영업점, 스마트폰, 전화(텔레뱅킹)</td>
+                        <td class="board-content">자유적립식</td>
+                    </tr>
+                </table>
+                <div class="table-buttons">
+                    <button onclick="" class="table-button">&lt;&lt;</button>
+                    <button onclick="" class="table-button">&lt;</button>
+                    <button onclick="" class="table-button">1</button>
+                    <button onclick="" class="table-button">2</button>
+                    <button onclick="" class="table-button">3</button>
+                    <button onclick="" class="table-button">4</button>
+                    <button onclick="" class="table-button">5</button>
+                    <button onclick="" class="table-button">6</button>
+                    <button onclick="" class="table-button">7</button>
+                    <button onclick="" class="table-button">8</button>
+                    <button onclick="" class="table-button">9</button>
+                    <button onclick="" class="table-button">10</button>
+                    <button onclick="" class="table-button">&gt;</button>
+                    <button onclick="" class="table-button">&gt;&gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 상품 검색 끝 -->
+
+</main>
+
+<footer th:replace="~{layout/footer :: #footer}"></footer>
+
+<th:block th:replace="layout/scripts :: scripts"></th:block>
+
+
+</body>
+
+</html>

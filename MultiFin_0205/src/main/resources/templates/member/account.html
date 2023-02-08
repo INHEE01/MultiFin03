@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="layout/head :: config"></th:block>
+	<title>MultiFin:나의계좌</title>
+	<!-- 현재 페이지에서만 쓰는 css, script -->
+</head>
+<body>
+<header th:replace="~{layout/header :: #header}"></header>
+    <main>
+        <div class="section section-lg bg-soft">
+            <div class="container">
+                <div class="row pt-5 pt-md-0">
+                    <div class="col-12 col-md-4 d-none d-lg-block">
+                        <div class="card border-light p-2">
+                            <div class="card-body p-2">
+                                <div class="profile-thumbnail small-thumbnail mx-auto">
+                                    <img src="../../assets/img/member/mypage_img01 copy.jpg" class="card-img-top rounded-circle border-white" alt="Joseph Portrait">
+                                </div>
+                                <h2 class="h5 font-weight-normal text-center mt-3 mb-0">User</h2>
+                                <div class="list-group dashboard-menu list-group-sm mt-4">
+                                    <a href="./account.html" class="d-flex list-group-item list-group-item-action active ">나의 계좌 <span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
+                                    <a href="./mypage.html" class="d-flex list-group-item list-group-item-action ">회원정보변경<span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
+                                    <a href="./mywrite.html" class="d-flex list-group-item list-group-item-action ">내 글 보기<span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
+                                    <a href="./myreply.html" class="d-flex list-group-item list-group-item-action ">내 댓글 보기<span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card card-body bg-white border-light mb-4 pt-5 pb-5 pl-5 pr-5">
+                                    <h2 class="h5 mb-4">나의 계좌</h2>
+                                    <span class="d-block h6 font-weight-normal">
+                                        현재 잔고
+                                    </span>
+                                    <h5 class="h3 font-weight-bold mb-1">￦5,910,000</h5>
+                                    <div class="small mt-2">                               
+                                        <span class="fas fa-angle-up text-success"></span>                                   
+                                        전월대비 <span class="text-success font-weight-bold" >18.2%</span> 상승
+                                    </div>
+                                    <br>
+                                    <span class="d-block h6 font-weight-normal">
+                                        평가손익
+                                    </span>
+                                    <h5 class="h3 font-weight-bold mb-1" style="color: red;">￦910,000</h5>
+                                    <div class="small mt-2">
+                                        <hr>
+                                        <h2 class="h5 mb-4">모의투자</h2>
+                                        <span class="d-block h6 font-weight-normal">
+                                            시드머니
+                                        </span>
+                                        <h5 class="h3 font-weight-bold mb-1">$500,000</h5>
+                                        <div class="small mt-2">                               
+                                            <span class="fas fa-angle-up text-success"></span>                                   
+                                            전월대비 <span class="text-success font-weight-bold" >0.0%</span> 상승
+                                        </div>
+                                        <br>
+                                        <span class="d-block h6 font-weight-normal">
+                                            평가손익
+                                        </span>
+                                        <h5 class="h3 font-weight-bold mb-1" style="color: rgb(0, 0, 0);">$0</h5>
+                                        <br>
+                                        <span class="d-block h6 font-weight-normal">
+                                            주문가능
+                                        </span>
+                                        <h5 class="h3 font-weight-bold mb-1">$500,000</h5>
+                                        <br>
+                                        <span class="d-block h6 font-weight-normal">
+                                            추정자산
+                                        </span>
+                                        <h5 class="h3 font-weight-bold mb-1">$500,000</h5>
+                                        <br>
+                                        <span class="d-block h6 font-weight-normal">
+                                            잔고평가
+                                        </span>
+                                        <h5 class="h3 font-weight-bold mb-1">$0</h5>
+                                        <div class="mt-3">
+                                            <br>
+                                            <button type="submit" class="btn btn-primary" href="#"> 모의투자 하러가기 </button>
+                                            <button type="submit" class="btn btn-primary" href="#" style="margin-left: 10px;"> 조회 </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+<footer th:replace="~{layout/footer :: #footer}"></footer>
+<th:block th:replace="layout/scripts :: scripts"></th:block>
+</body>
+</html>

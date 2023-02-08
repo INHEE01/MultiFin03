@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="layout/head :: config"></th:block>
+	<title>MultiFin:부동산 경매</title>
+	<!-- 현재 페이지에서만 쓰는 css, script -->
+	<link type="text/css" th:href="@{/css/home/homeBlue.css}" rel="stylesheet">
+</head>
+<body>
+<header th:replace="~{layout/header :: #header}"></header>
+    <main>
+        <!-- Hero -->
+        <div class="section section-header section-image bg-tertiary overlay-primary text-white overflow-hidden" data-background="../../assets/img/home/new-york-hero.jpg">
+            <div class="container z-2">
+                <div class="row justify-content-center pt-3">
+                    <div class="col-12 text-center">
+                        <h1 class="home-mainTitle">청약 조회</h1></span></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 상품 검색 시작 -->
+<section class="Blue_search_container pb-5">
+        <div class="search_container">
+            <div class="search-left">
+                <h5 class="optionTitle">지역선택</h5>
+                <form class="search-form" saction="" method="get">
+                    <div class="question">
+                        <div class="local">
+                            <div>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">전국</span><br>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">서울</span><br>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">인천</span><br>      
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">경기</span><br>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">세종</span><br>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">충청</span><br>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">강원</span><br>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">광주</span><br>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">전라</span><br>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">대구</span><br>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">울산</span><br>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">부산</span><br>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">경상</span><br>
+                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">제주</span><br>
+                            </div>
+                        </div>
+                        <hr>
+                    
+                        <h5 class="optionTitle">주택구분</h5>
+                        <input class="search_title" type="checkbox" name="houseTypeCheck" value=""><span class="search_title">APT</span><br>
+                        <input class="search_title" type="checkbox" name="houseTypeCheck" value=""><span class="search_title">도시형/오피스텔/민간임대</span><br>
+                        <input class="search_title" type="checkbox" name="houseTypeCheck" value=""><span class="search_title">무순위/잔여세대</span><br>
+                        <hr>
+                    
+                        <h5 class="optionTitle">아파트 분양 종류</h5>
+                        <input class="search_title" type="checkbox" name="houseTypeCheck" value=""><span class="search_title">민영</span><br>
+                        <input class="search_title" type="checkbox" name="houseTypeCheck" value=""><span class="search_title">국민</span><br>
+                    
+                    </div>
+                    <div class="btnCheck">
+                        <button class="search_btn btn btn-primary" type="submit">Search</button>
+                        <button class="search_btn btn btn-outline-gray" type="reset">Reset</button>
+                    </div><!--버튼끝-->
+                </form>
+            </div>
+            <div class="col-sm-9 border-gray-500">
+               <div class="form_container">
+                    <form autocomplete="off" class="search" method="get" action="#">
+                        <div class="searching">
+                            <input class="input_text" type="text" placeholder="검색어를 입력하세요">
+                            <input class="input_btn" type="submit" value="Search">
+                        </div>
+                    </form>
+               </div>
+               <div>
+                <table id="" class="board-table">
+                    <tr class="text-center bg-info text-white">
+                        <th class="table-header">번호</th>
+                        <th class="table-header" >지역</th>
+                        <th class="table-header">주택명</th>
+                        <th class="table-header">주택구분</th>
+                        <th class="table-header">모집공고일</th>
+                    </tr>
+                    <tr>
+                        <td class="board-content">1</td>
+                        <td class="board-content board-title">경기</td>
+                        <td class="board-content">파주연풍 양우내안애 에코하임</td>
+                        <td class="board-content">APT</td>
+                        <td class="board-content">2022-10-27</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">2</td>
+                        <td class="board-content board-title">경기</td>
+                        <td class="board-content">파주연풍 양우내안애 에코하임</td>
+                        <td class="board-content">APT</td>
+                        <td class="board-content">2022-10-27</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">3</td>
+                        <td class="board-content board-title">경기</td>
+                        <td class="board-content">파주연풍 양우내안애 에코하임</td>
+                        <td class="board-content">APT</td>
+                        <td class="board-content">2022-10-27</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">4</td>
+                        <td class="board-content board-title">경기</td>
+                        <td class="board-content">파주연풍 양우내안애 에코하임</td>
+                        <td class="board-content">APT</td>
+                        <td class="board-content">2022-10-27</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">5</td>
+                        <td class="board-content board-title">경기</td>
+                        <td class="board-content">파주연풍 양우내안애 에코하임</td>
+                        <td class="board-content">APT</td>
+                        <td class="board-content">2022-10-27</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">6</td>
+                        <td class="board-content board-title">경기</td>
+                        <td class="board-content">파주연풍 양우내안애 에코하임</td>
+                        <td class="board-content">APT</td>
+                        <td class="board-content">2022-10-27</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">7</td>
+                        <td class="board-content board-title">경기</td>
+                        <td class="board-content">파주연풍 양우내안애 에코하임</td>
+                        <td class="board-content">APT</td>
+                        <td class="board-content">2022-10-27</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">8</td>
+                        <td class="board-content board-title">경기</td>
+                        <td class="board-content">파주연풍 양우내안애 에코하임</td>
+                        <td class="board-content">APT</td>
+                        <td class="board-content">2022-10-27</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">9</td>
+                        <td class="board-content board-title">경기</td>
+                        <td class="board-content">파주연풍 양우내안애 에코하임</td>
+                        <td class="board-content">APT</td>
+                        <td class="board-content">2022-10-27</td>
+                    </tr>
+                    <tr>
+                        <td class="board-content">10</td>
+                        <td class="board-content board-title">경기</td>
+                        <td class="board-content">파주연풍 양우내안애 에코하임</td>
+                        <td class="board-content">APT</td>
+                        <td class="board-content">2022-10-27</td>
+                    </tr>
+                </table>
+                <div class="table-buttons">
+                    <button onclick="" class="table-button">&lt;&lt;</button>
+                    <button onclick="" class="table-button">&lt;</button>
+                    <button onclick="" class="table-button">1</button>
+                    <button onclick="" class="table-button">2</button>
+                    <button onclick="" class="table-button">3</button>
+                    <button onclick="" class="table-button">4</button>
+                    <button onclick="" class="table-button">5</button>
+                    <button onclick="" class="table-button">&gt;</button>
+                    <button onclick="" class="table-button">&gt;&gt;</button>
+                </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 상품 검색 끝 -->
+</main>
+<footer th:replace="~{layout/footer :: #footer}"></footer>
+<th:block th:replace="layout/scripts :: scripts"></th:block> 
+</body>
+
+</html>

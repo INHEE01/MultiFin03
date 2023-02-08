@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="layout/head :: config"></th:block>
+	<title>MultiFin:펀드</title>
+	<!-- 현재 페이지에서만 쓰는 css, script -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/stock/stockFund.css}">
+	<!--주식차트-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<header th:replace="~{layout/header :: #header}"></header>
+        <!-- Hero -->
+        <section class="section-header section-image bg-primary overlay-primary text-white"  data-background="../../assets/img/stock/earth.jpg">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10 text-center">
+                        <h1 class="mb-3 fund-mainTitle">펀드</h1>
+                        <p class="lead px-lg-5 mb-5 fund-mainSubtitle">MULTIFIN에서 국내 · 미국 주식 정보를 비교해보고 투자 전략을 세워보세요!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="fund_main mt-5 mb-5">
+            <div class="slide slide_wrap">
+                <div class="slide_item item1">
+                    <img class= "box" src="http://kim.koreainvestment.com/images/main/main_slide1.png" alt="">
+                </div>
+                <div class="slide_item item2"> 
+                    <img class= "box" src="http://kim.koreainvestment.com/images/main/main_slide2.png" alt="">
+                </div>
+                <div class="slide_item item3"> 
+                    <img  class= "box" src="http://kim.koreainvestment.com/images/main/main_slide3.png" alt="">
+                </div>
+                <div class="slide_item item4"> 
+                    <img class= "box" src="http://kim.koreainvestment.com/images/main/main_slide12.png" alt="">
+                </div>
+                <div class="slide_prev_button slide_button"><i class="fa-solid fa-angle-left fa-3x"></i></div>
+                <div class="slide_next_button slide_button"><i class="fa-solid fa-angle-right fa-3x"></i></div>
+                <ul class="slide_pagination"></ul>
+              </div>
+              <div class="fund_front">
+                <!-- 국내펀드 -->
+                <div class="fund_intro fund01">
+                    <a href="#">
+                        <h4 class="fund-title">국내 펀드</h4>
+                        <div>
+                            <div class="fund-subContainer">
+                                <a class="sub-body" href="#">
+                                    <h5 class="fund-sub">주식형펀드</h5>
+                                    <i class="fa-solid fa-angle-right fa-3x"></i>
+                                </a>
+                                <a  class="sub-body" href="#">
+                                    <h5 class="fund-sub">혼합형펀드</h5>
+                                    <i class="fa-solid fa-angle-right fa-3x"></i>
+                                </a>
+                                <a  class="sub-body" href="#">
+                                    <h5 class="fund-sub">채권형펀드</h5>
+                                    <i class="fa-solid fa-angle-right fa-3x"></i>
+                                </a>
+                                <a  class="sub-body" href="#">
+                                    <h5 class="fund-sub">유형별펀드검색</h5>
+                                    <i class="fa-solid fa-angle-right fa-3x"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- 해외펀드 -->
+                <div class="fund_intro fund02">
+                    <a href="">
+                        <h4 class="fund-title">해외 펀드</h4>
+                        <div>
+                            <div class="fund-subContainer">
+                                <a class="sub-body" href="#">
+                                    <h5 class="fund-sub">이머징펀드</h5>
+                                    <i class="fa-solid fa-angle-right fa-3x"></i>
+                                </a>
+                                <a  class="sub-body" href="#">
+                                    <h5 class="fund-sub">선진국펀드</h5>
+                                    <i class="fa-solid fa-angle-right fa-3x"></i>
+                                </a>
+                                <a  class="sub-body" href="#">
+                                    <h5 class="fund-sub">섹터펀드</h5>
+                                    <i class="fa-solid fa-angle-right fa-3x"></i>
+                                </a>
+                                <a  class="sub-body" href="#">
+                                    <h5 class="fund-sub">유형별펀드검색</h5>
+                                    <i class="fa-solid fa-angle-right fa-3x"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- 연금펀드 -->
+                <div class="fund_intro fund03">
+                   <a href="#">
+                    <h4 class="fund-title">연금 펀드</h4>
+                    <div>
+                        <div class="fund-subContainer">
+                            <a class="sub-body" href="#">
+                                <h5 class="fund-sub">TDF/TIF</h5>
+                                <i class="fa-solid fa-angle-right fa-3x"></i>
+                            </a>
+                            <a  class="sub-body" href="#">
+                                <h5 class="fund-sub">개인연금저축펀드</h5>
+                                <i class="fa-solid fa-angle-right fa-3x"></i>
+                            </a>
+                            <a  class="sub-body" href="#">
+                                <h5 class="fund-sub">퇴직연금펀드</h5>
+                                <i class="fa-solid fa-angle-right fa-3x"></i>
+                            </a>
+                            <a  class="sub-body" href="#">
+                                <h5 class="fund-sub">유형별펀드검색</h5>
+                                <i class="fa-solid fa-angle-right fa-3x"></i>
+                            </a>
+                        </div>
+                    </div>
+                   </a>
+                </div>
+                <!-- ETF -->
+                <div class="fund_intro fund04">
+                    <a href="">
+                        <h4 class="fund-title">ETF</h4>
+                    </a>
+                </div>
+            </div>
+        </section>
+           
+        <!-- 상품 검색 시작 -->
+        <section class="seasrch mb-5">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <p class="h3 font-weight-bolder m-0 search-title">상품검색</p>
+                    </div>
+                    <div class="col-sm-3 border-gray-500 text-center bankSearch fh-320 rounded">
+                        <div class="border-gray-500 border rounded mb-4">
+                            <ul class="list-style-none text-dark blSearchTap">
+                                <li>
+                                    <a href="#">주택담보대출</a>
+                                </li>
+                                <li>
+                                    <a href="#">전세자금대출</a>
+                                </li>
+                                <li class="border-0">
+                                    <a href="#">개인신용대출</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-soft text-center bankSearch fh-320 rounded">
+                            <a href="#" ><i class="fa-solid fa-comments fa-2x onlineChatBtn m-4"></i></a>
+                            <p class="font-weight-bolder">궁금한 것이 있으신가요?</p>
+                            <p>실시간 채팅을 통해 궁금한 것을<br>한 번에 해결해 보세요!</p>
+                            <p>이용 시간 : 09:00 - 18:00<br>월~금 / 주말 • 공휴일 제외</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 border-gray-500">
+                        <form autocomplete="off" class="row search" method="get" action="#">
+                            <div class="col-12 mb-3 mb-lg-4">
+                                <div class="form-group form-group-lg mb-0">
+                                    <div class="input-group">
+                                        <input id="search-location" type="text" class="form-control autocomplete border-gray-500 border-right-0 fw-280 " placeholder="금융회사명을 입력하세요" required>
+                                        <button class="bankMainSubmit border border-gray-500 border-left-0 bg-white text-dark fw-60" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <table id="tbl-board" class="board-table">
+                            <tr class="text-center table_main text-white">
+                                <th class="table-header">번호</th>
+                                <th class="table-header" >금융상품</th>
+                                <th class="table-header">이율</th>
+                                <th class="table-header">금융회사</th>
+                                <th class="table-header">가입방법</th>
+                                <th class="table-header">적립유형</th>
+                            </tr>
+                            <tr>
+                                <td class="board-content">1</td>
+                                <td class="board-content board-title">한국투자TDF알아서ETF포커스2040증권투자신탁(혼합-재간접형)(C-Pe)</td>
+                                <td class="board-content">연 2%</td>
+                                <td class="board-content">신한은행</td>
+                                <td class="board-content">영업점</td>
+                                <td class="board-content">정액적립식</td>
+                            </tr>
+                            <tr>
+                                <td class="board-content">2</td>
+                                <td class="board-content board-title">신한1.5년만기투자형증권투자신탁제2호[채권](종류A1)</td>
+                                <td class="board-content">연 2%</td>
+                                <td class="board-content">신한은행</td>
+                                <td class="board-content">영업점</td>
+                                <td class="board-content">자유적립식</td>
+                            </tr>
+                            <tr>
+                                <td class="board-content">3</td>
+                                <td class="board-content board-title">신한1.5년만기투자형증권투자신탁제2호[채권](종류C-p)</td>
+                                <td class="board-content">연 2%</td>
+                                <td class="board-content">신한은행</td>
+                                <td class="board-content">영업점</td>
+                                <td class="board-content">자유적립식</td>
+                            </tr>
+                            <tr>
+                                <td class="board-content">4</td>
+                                <td class="board-content board-title">DB지수연계증권투자신탁SEK-31호[ELS-파생형]_운용</td>
+                                <td class="board-content">연 2%</td>
+                                <td class="board-content">신한은행</td>
+                                <td class="board-content">영업점</td>
+                                <td class="board-content">자유적립식</td>
+                            </tr>
+                            <tr>
+                                <td class="board-content">5</td>
+                                <td class="board-content board-title">다올파운트1등TDF2040증권투자신탁[혼합-재간접형](공)종류S-P(퇴직)</td>
+                                <td class="board-content">연 2%</td>
+                                <td class="board-content">신한은행</td>
+                                <td class="board-content">영업점</td>
+                                <td class="board-content">자유적립식</td>
+                            </tr>
+                            <tr>
+                                <td class="board-content">6</td>
+                                <td class="board-content board-title">다올파운트1등TDF2040증권투자신탁[혼합-재간접형](공)(운)</td>
+                                <td class="board-content">연 2%</td>
+                                <td class="board-content">신한은행</td>
+                                <td class="board-content">영업점</td>
+                                <td class="board-content">자유적립식</td>
+                            </tr>
+                            <tr>
+                                <td class="board-content">7</td>
+                                <td class="board-content board-title">우리2024년12월만기증권투자신탁1호(채권) ClassC-Pe</td>
+                                <td class="board-content">연 2%</td>
+                                <td class="board-content">신한은행</td>
+                                <td class="board-content">영업점</td>
+                                <td class="board-content">자유적립식</td>
+                            </tr>
+                            <tr>
+                                <td class="board-content">8</td>
+                                <td class="board-content board-title">삼성평생알아서분할매매EMP증권투자신탁[혼합-재간접형]_O(디폴트옵션)</td>
+                                <td class="board-content">연 2%</td>
+                                <td class="board-content">신한은행</td>
+                                <td class="board-content">영업점</td>
+                                <td class="board-content">자유적립식</td>
+                            </tr>
+                            <tr>
+                                <td class="board-content">9</td>
+                                <td class="board-content board-title">삼성평생알아서분할매매EMP증권투자신탁[혼합-재간접형]_O(디폴트옵션)</td>
+                                <td class="board-content">연 2%</td>
+                                <td class="board-content">신한은행</td>
+                                <td class="board-content">영업점</td>
+                                <td class="board-content">자유적립식</td>
+                            </tr>
+                            <tr>
+                                <td class="board-content">10</td>
+                                <td class="board-content board-title">삼성평생알아서분할매매EMP증권투자신탁[혼합-재간접형]_O(디폴트옵션)</td>
+                                <td class="board-content">연 2%</td>
+                                <td class="board-content">신한은행</td>
+                                <td class="board-content">영업점</td>
+                                <td class="board-content">자유적립식</td>
+                            </tr>
+                        </table>
+                        <div class="table-buttons">
+                            <button onclick="" class="table-button">&lt;&lt;</button>
+                            <button onclick="" class="table-button">&lt;</button>
+                            <button onclick="" class="table-button">1</button>
+                            <button onclick="" class="table-button">2</button>
+                            <button onclick="" class="table-button">3</button>
+                            <button onclick="" class="table-button">4</button>
+                            <button onclick="" class="table-button">5</button>
+                            <button onclick="" class="table-button">6</button>
+                            <button onclick="" class="table-button">7</button>
+                            <button onclick="" class="table-button">8</button>
+                            <button onclick="" class="table-button">9</button>
+                            <button onclick="" class="table-button">10</button>
+                            <button onclick="" class="table-button">&gt;</button>
+                            <button onclick="" class="table-button">&gt;&gt;</button>
+                        </div>
+                    </div>
+                </div>
+        </section>
+<!-- 상품 검색 끝 -->
+<footer th:replace="~{layout/footer :: #footer}"></footer>
+<th:block th:replace="layout/scripts :: scripts"></th:block>
+</body>
+</html>

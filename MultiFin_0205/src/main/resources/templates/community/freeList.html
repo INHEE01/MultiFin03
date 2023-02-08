@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="layout/head :: config"></th:block>
+	<title>MultiFin:자유게시판</title>
+	<!-- 현재 페이지에서만 쓰는 css, script -->
+	<link type="text/css" th:href="@{/css/community/list.css}" rel="stylesheet">
+</head>
+<body>
+<header th:replace="~{layout/header :: #header}"></header>
+    <main>
+        <section class="section section-header bg-primary overlay-primary text-white pb-8" data-background="../../assets/img/board/team-hero.jpg">
+            <div class="container">
+               <div class="row justify-content-center">
+                  <div class="col-12 col-md-8 text-center">
+                        <h1 class="display-2 mb-4 title">자유게시판</h1>
+                        <p class="lead px-lg-5 mainSubtitle">MULTIFIN에서 경제 · 금융에 관한 이야기들을 자유롭게 나눠 보세요!</p>
+                    </div>
+               </div>
+            </div>
+            <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2">
+                <svg class="fill-white" enable-background="new 0 0 1504 131.3" viewBox="0 0 1504 131.3" xmlns="http://www.w3.org/2000/svg"><path d="m877.8 85c139.5 24.4 348 33.5 632.2-48.2-.2 32.5-.3 65-.5 97.4-505.9 0-1011.6 0-1517.5 0 0-33.3 0-66.7 0-100.1 54.2-11.4 129.5-23.9 220-28.2 91-4.3 173.6 1 307.4 18.6 183.2 24.2 295.2 49.4 358.4 60.5z"/></svg>
+            </figure>
+        </section>
+        <section class="board mb-6">
+            <div class="top">
+                <button class="write_btn">글쓰기</button>
+                <form action="${path}/board/list" method="get" class="search">
+                    <div style="text-align: center;">
+                        <label>
+                        <input type="radio" name="searchType" value="title"> 제목 
+                        </label>
+                        <label>
+                        <input type="radio" name="searchType" value="content"> 내용
+                        </label>
+                        <label>
+                        <input type="radio" name="searchType" value="writer" > 작성자
+                        </label>
+                    </div>
+                    <div class="group">
+                        <span class="blue_window"> 
+                            <input type="text" id="searchValue" name="searchValue" class="input_text" placeholder="검색어를 입력해주세요"/>
+                          </span>
+                          <button type="submit" class="sch_smit">검색</button>
+                    </div>
+                </form>
+            </div>
+            <table id="tbl-board" class="board-table">
+              <tr>
+                <th class="table-header">번호</th>
+                <th class="table-header" >제목</th>
+                <th class="table-header">작성자</th>
+                <th class="table-header">작성일</th>
+                <th class="table-header">첨부파일</th>
+                <th class="table-header">조회수</th>
+              </tr>
+              <tr>
+                <td class="board-content">1</td>
+                <td class="board-content board-title">청약 당첨 되어보신분 있나요? 요즘 청약 잘된다던데</td>
+                <td class="board-content"> happy </td>
+                <td class="board-content"> 2023-01-14 </td>
+                <td class="board-content"> 첨부파일 없음 </td>
+                <td class="board-content"> 32 </td>
+              </tr>
+              <tr>
+                <td class="board-content">2</td>
+                <td class="board-content board-title">삼성전자 그래도 오름세긴 하네요 </td>
+                <td class="board-content"> admin </td>
+                <td class="board-content"> 2022-12-14 </td>
+                <td class="board-content"> 첨부파일 없음 </td>
+                <td class="board-content"> 32 </td>
+              </tr>
+            </table>
+            <div class="table-buttons">
+                <button onclick="" class="table-button">&lt;&lt;</button>
+                <button onclick="" class="table-button">&lt;</button>
+                <button onclick="" class="table-button">1</button>
+                <button onclick="" class="table-button">2</button>
+                <button onclick="" class="table-button">3</button>
+                <button onclick="" class="table-button">4</button>
+                <button onclick="" class="table-button">5</button>
+                <button onclick="" class="table-button">&gt;</button>
+                <button onclick="" class="table-button">&gt;&gt;</button>
+            </div>
+        </section>
+    </main>
+<footer th:replace="~{layout/footer :: #footer}"></footer>
+<th:block th:replace="layout/scripts :: scripts"></th:block>
+</body>
+</html>

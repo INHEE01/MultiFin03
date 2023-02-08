@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//KO" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.multi.multifin.stock.model.mapper.StockPriceMapper">
+	<resultMap type="StockPrice" id="StockPriceResultMap">
+		<id property="sno" column="sno"/>
+		<result property="basDt" column="basDt"/>
+		<result property="srtnCd" column="srtnCd"/>
+		<result property="isinCd" column="isinCd"/>
+		<result property="itmsNm" column="itmsNm"/>
+		<result property="mrktCtg" column="mrktCtg"/>
+		<result property="clpr" column="clpr"/>
+		<result property="vs" column="vs"/>
+		<result property="fltRt" column="fltRt"/>
+		<result property="mkp" column="mkp"/>
+		<result property="hipr" column="hipr"/>
+		<result property="lopr" column="lopr"/>
+		<result property="trqu" column="trqu"/>
+		<result property="trPrc" column="trPrc"/>
+		<result property="lstgStCnt" column="lstgStCnt"/>
+		<result property="mrktTotAmt" column="mrktTotAmt"/>
+	</resultMap>
+	
+	<select id="KospiList"  resultMap="StockPriceResultMap">
+		select 
+			sno,basDt,srtnCd,
+			isinCd,itmsNm,mrktCtg,
+			mrktCtg,clpr,vs,
+			fltRt,mkp,hipr,lopr,
+			trqu,trPrc,lstgStCnt,mrktTotAmt
+		from(
+		   select *
+		   from stockprice s
+		   order by basDt DESC
+		)sp
+		where sp.mrktCtg like 'kospi'
+		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
+	</select>
+	
+	<select id="KosdaqList"  resultMap="StockPriceResultMap">
+		select 
+			sno,basDt,srtnCd,
+			isinCd,itmsNm,mrktCtg,
+			mrktCtg,clpr,vs,
+			fltRt,mkp,hipr,lopr,
+			trqu,trPrc,lstgStCnt,mrktTotAmt
+		from(
+		   select *
+		   from stockprice s
+		   order by basDt DESC
+		)sp
+		where sp.mrktCtg like 'kosdaq'
+		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
+	</select>
+	
+	
+	<select id="KospiRanking"  resultMap="StockPriceResultMap">
+		select 
+			sno,basDt,srtnCd,
+			isinCd,itmsNm,mrktCtg,
+			mrktCtg,clpr,vs,
+			fltRt,mkp,hipr,lopr,
+			trqu,trPrc,lstgStCnt,mrktTotAmt
+		from(
+		   select *
+		   from stockprice s
+		   order by basDt DESC
+		)sp
+		where sp.mrktCtg like 'kospi'
+		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
+		order by mrktTotAmt desc
+	</select>
+	
+	<select id="KosdaqRanking"  resultMap="StockPriceResultMap">
+		select 
+			sno,basDt,srtnCd,
+			isinCd,itmsNm,mrktCtg,
+			mrktCtg,clpr,vs,
+			fltRt,mkp,hipr,lopr,
+			trqu,trPrc,lstgStCnt,mrktTotAmt
+		from(
+		   select *
+		   from stockprice s
+		   order by basDt DESC
+		)sp
+		where sp.mrktCtg like 'kosdaq'
+		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
+		order by mrktTotAmt desc
+	</select>
+	
+	
+	<select id="KospiRankingTop"  resultMap="StockPriceResultMap">
+		select
+			sno,basDt,srtnCd,
+			isinCd,itmsNm,mrktCtg,
+			mrktCtg,clpr,vs,
+			fltRt,mkp,hipr,lopr,
+			trqu,trPrc,lstgStCnt,mrktTotAmt
+		from(
+		   select*
+		   from stockprice s
+		   order by basDt DESC
+		)sp
+		where sp.mrktCtg like 'kospi'
+		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
+		order by mrktTotAmt desc
+        LIMIT 5
+	</select>
+	
+	<select id="KosdaqRankingTop"  resultMap="StockPriceResultMap">
+		select
+			sno,basDt,srtnCd,
+			isinCd,itmsNm,mrktCtg,
+			mrktCtg,clpr,vs,
+			fltRt,mkp,hipr,lopr,
+			trqu,trPrc,lstgStCnt,mrktTotAmt
+		from(
+		   select*
+		   from stockprice s
+		   order by basDt DESC
+		)sp
+		where sp.mrktCtg like 'kosdaq'
+		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
+		order by mrktTotAmt desc
+        LIMIT 5
+	</select>
+	
+	
+	
+	<select id="selectListByno" parameterType="int" resultMap="StockPriceResultMap">
+		SELECT sno,basDt,srtnCd,
+			isinCd,itmsNm,mrktCtg,
+			mrktCtg,clpr,vs,
+			fltRt,mkp,hipr,lopr,
+			trqu,trPrc,lstgStCnt,mrktTotAmt
+		FROM stockprice
+		WHERE srtnCd = #{srtnCd}
+		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
+	</select>
+	
+	<select id="selectListByname" parameterType="String" resultMap="StockPriceResultMap">
+		SELECT sno,basDt,srtnCd,
+			isinCd,itmsNm,mrktCtg,
+			mrktCtg,clpr,vs,
+			fltRt,mkp,hipr,lopr,
+			trqu,trPrc,lstgStCnt,mrktTotAmt
+		FROM stockprice
+		WHERE itmsNm = '#{itmsNm}'
+		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
+	</select>
+	
+	
+	
+</mapper>
+
+
+
+
+

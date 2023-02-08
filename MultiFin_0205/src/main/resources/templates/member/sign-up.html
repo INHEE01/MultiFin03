@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="layout/head :: config"></th:block>
+	<title>MultiFin:회원가입</title>
+	<!-- 현재 페이지에서만 쓰는 css, script -->
+<style>
+    .overlay-soft-dark:before{height:941px; }
+    .title{  font-family: 'IBM Plex Sans KR', sans-serif;}
+    .here{font-weight: 600;}
+</style>
+</head>
+<body>
+    <main>
+        <section class="align-items-center section-image overlay-soft-dark pb-6" data-background="../../assets/img/common/form-image.jpg">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div style="height:150px" class="col-12">
+                        <div class="text-center text-md-center mb-5 mt-md-0 text-white">
+                            <h1 class="mt-6 mb-0 h3"><span class="title">회원가입</span></h1>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div class="signin-inner mt-3 mt-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                            <form action="#">
+                                <!-- Form -->
+                                <div class="form-group">
+                                    <label for="exampleInputIcon4"><span class="title"><span class="title here">ID 또는 E-mail</span></span></label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="fas fa-envelope"></span></span>
+                                        </div>
+                                        <input class="form-control" id="exampleInputIcon4" placeholder="아이디 혹은 이메일을 입력해주세요." type="text" aria-label="email adress">
+                                    </div>
+                                </div>
+                                <!-- End of Form -->
+                                <div class="form-group">
+                                    <!-- Form -->
+                                    <div class="form-group">
+                                        <label for="password"><span class="title here">Password</span></label>
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
+                                            </div>
+                                            <input class="form-control" id="password" placeholder="비밀번호를 입력해주세요." type="password" aria-label="Password" required>
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                    <!-- Form -->
+                                    <div class="form-group">
+                                        <label for="password_confirm"> <span class="title here">Confirm Password</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
+                                            </div>
+                                            <input class="form-control" id="password_confirm" placeholder="비밀번호를 다시 입력해주세요." type="password" aria-label="Password" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group"><span class="title here">문제</span></label>
+                                        <select class="form-control select2-hidden-accessible" id="country" data-toggle="select" title="Country" data-live-search="true" data-live-search-placeholder="Country" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option data-select2-id="3">비밀번호 찾기 문제</option>
+                                            <option>내가 태어난 도시 이름은?</option>
+                                            <option>어릴 때 키우던 강아지 이름은?</option>
+                                            <option>어머니 고향은?</option>
+                                            <option>가장 무서웠던 선생님 성함은?</option>
+                                            <option>기억에 남는 추억의 장소는?</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address"><span class="title here">답</span></label>
+                                        <input class="form-control" id="address" type="text" >
+                                    </div>
+                                    <!-- End of Form -->
+                                    <div class="form-check mb-4">
+                                        <input class="form-check-input" type="checkbox" value="" id="terms">
+                                        <label class="form-check-label" for="terms">
+                                            <span class="title">다음 <a class="text-secondary title" href="./terms.html"><b class="title">약관</b></a>에 동의합니다.</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-block btn-primary"><span class="title">가입하기</span></button>
+                            </form>
+                            
+                            <div class="d-block d-sm-flex justify-content-center align-items-center mt-4">
+                                <span class="font-weight-normal title">
+                                    이미 계정이 존재하나요?
+                                    <a href="./sign-in.html" class="font-weight-bold"><b>로그인</b></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+<th:block th:replace="layout/scripts :: scripts"></th:block>
+</body>
+</html>

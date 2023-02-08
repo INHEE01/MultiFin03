@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="layout/head :: config"></th:block>
+	<title>MultiFin:카드상품</title>
+	<!-- 현재 페이지에서만 쓰는 css, script -->
+	<link rel="stylesheet" th:href="@{/css/bank/bank.css}">
+</head>
+
+<body>
+<header th:replace="~{layout/header :: #header}"></header>
+<main>
+<!-- 배너 시작 -->
+    <!-- Hero -->
+    <section class="section section-header bg-soft pb-12 pt-6">
+        <div class="container">
+            <div class="row justify-content-between align-items-center bankMain">
+                <div class="col-12 col-md-5  bankMain_Title">
+                    <h1 class="main_maintitle">더 나은 금융</h1>
+                    <h5 class="font-weight-normal main_subtitle">은행별 예•적금, 대출, 카드 상품을 비교할 수 있습니다.<br>멀티핀을 통해 당신에게 맞는 상품을 선택하세요.</h5>
+                    <form autocomplete="off" class="row" method="get" action="./bankFind.html">
+                        <div class="col-12 mb-3 mb-lg-4">
+                            <div class="form-group form-group-lg mb-0">
+                                <div class="input-group">
+                                    <input id="search-bank" type="text" class="mian_form-control autocomplete" placeholder="검색어를 입력해주세요" required>
+                                    <input class="bankMainSubmit" type="submit" value="search">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="img_container">
+                   <!-- Image --> 
+                   <img th:src="@{/assets/img/ours/mobile-banking-vector-free-illustration.png}" class="img-fluid" alt="Forest Illustration">
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- 배너 끝 -->
+
+<!-- 배너쪽 은행상품 3개 시작 -->
+    <div class="section section-lg pt-0 pb-4">
+        <div class="container mt-n10">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="basic-carousel owl-carousel owl-theme">
+                        <!-- Item 1 -->
+                        <div class="item">
+                            <!-- Card -->
+                            <div class="card border-light mb-4 animate-up-5">
+                                <div class="bpcontainer">
+                                    <a th:href="@{/bank/bankFind}" class="position-relative bpbanner">
+                                        <img src="https://pds.saramin.co.kr/company/logo/201905/23/pry5ef_o0q6-2rxid6_logo.jpg" class="card-img-top rounded-xl bplogo" alt="은행 로고 이미지">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <a th:href="@{/bank/bankFind}">
+                                        <h5 class="h5 font-weight-normal">목돈 마련 상품</h5>
+                                        <h4 class="h4 font-weight-bolder">더모아 정기 적금</h4>
+                                    </a>
+                                    <div class="d-flex my-3">
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span>
+                                        <span class="badge badge-pill badge-primary ml-2">5.0</span>
+                                    </div> 
+                                </div>
+                                <div class="card-footer bg-soft border-top">
+                                    <p class="text-muted d-block mb-2 h5 font-weight-normal">세전 이율</p>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="col-10 pl-0">
+                                            <span class="h3 text-dark font-weight-bolder">4.10</span>
+                                            <span class="h5 text-dark font-weight-normal">%</span>
+                                        </div>
+                                        <div class="col pr-0">
+                                            <div class="heart h3 text-dark font-weight-bold text-right" id="heart1" value="false" onclick="onClickHeart('heart1');">♡</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Card -->
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="item">
+                            <!-- Card -->
+                            <div class="card border-light mb-4 animate-up-5">
+                                <div class="bpcontainer">
+                                    <a th:href="@{/bank/bankFind}" class="position-relative bpbanner">
+                                        <img src="https://simg.wooribank.com/img/intro/header/h1_01.png" class="card-img-top rounded-xl bplogo" alt="은행 로고 이미지">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <a th:href="@{/bank/bankFind}">
+                                        <h5 class="h5 font-weight-normal">목돈 마련 상품</h5>
+                                        <h4 class="h4 font-weight-bolder">더모아 정기 적금</h4>
+                                    </a>
+                                    <div class="d-flex my-3">
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span>
+                                        <span class="badge badge-pill badge-primary ml-2">5.0</span>
+                                    </div> 
+                                </div>
+                                <div class="card-footer bg-soft">
+                                    <p class="text-muted d-block mb-2 h5 font-weight-normal">세전 이율</p>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="col-10 pl-0">
+                                            <span class="h3 text-dark font-weight-bolder">4.10</span>
+                                            <span class="h5 text-dark font-weight-normal">%</span>
+                                        </div>
+                                        <div class="col pr-0">
+                                            <div class="heart h3 text-dark font-weight-bold text-right" id="heart2" value="false" onclick="onClickHeart('heart2');">♡</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Card -->
+                        </div>
+                        <!-- Item 3 -->
+                        <div class="item">
+                            <!-- Card -->
+                            <div class="card border-light mb-4 animate-up-5">
+                                <div class="bpcontainer">
+                                    <a th:href="@{/bank/bankFind}" class="position-relative bpbanner">
+                                        <img src="https://play-lh.googleusercontent.com/HTBCHqXZ01RhNVzIDwsA2ARURfzXeHxoWfsmgH92ieCgIG1CuPpJRWqCfJ9KgkwWStko=s128-rw" class="card-img-top rounded-xl bplogo" alt="은행 로고 이미지">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <a th:href="@{/bank/bankFind}">
+                                        <h5 class="h5 font-weight-normal">목돈 마련 상품</h5>
+                                        <h4 class="h4 font-weight-bolder">더모아 정기 적금</h4>
+                                    </a>
+                                    <div class="d-flex my-3">
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span>
+                                        <span class="badge badge-pill badge-primary ml-2">5.0</span>
+                                    </div> 
+                                </div>
+                                <div class="card-footer bg-soft border-top">
+                                    <h5 class="text-muted d-block mb-2 h5 font-weight-normal">세전 이율</h5>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="col-10 pl-0">
+                                            <span class="h4 text-dark font-weight-bolder">4.10</span>
+                                            <span class="h4 text-dark font-weight-normal">%</span>
+                                        </div>
+                                        <div class="col pr-0">
+                                            <div class="heart h3 text-dark font-weight-bold text-right" id="heart3" value="false" onclick="onClickHeart('heart3');">♡</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Card -->
+                        </div>
+                        <!-- Item 4 -->
+                        <div class="item">
+                            <!-- Card -->
+                            <div class="card border-light mb-4 animate-up-5">
+                                <div class="bpcontainer">
+                                    <a th:href="@{/bank/bankFind}" class="position-relative bpbanner">
+                                        <img src="https://pds.saramin.co.kr/company/logo/201905/23/pry5ef_o0q6-2rxid6_logo.jpg" class="card-img-top rounded-xl bplogo" alt="은행 로고 이미지">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <a th:href="@{/bank/bankFind}">
+                                        <h5 class="h5 font-weight-normal">목돈 마련 상품</h5>
+                                        <h4 class="h4 font-weight-bolder">더모아 정기 적금</h4>
+                                    </a>
+                                    <div class="d-flex my-4">
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span> 
+                                        <span class="star fas fa-star text-warning"></span>
+                                        <span class="badge badge-pill badge-primary ml-2">5.0</span>
+                                    </div> 
+                                </div>
+                                <div class="card-footer bg-soft border-top">
+                                    <p class="text-muted d-block mb-2 h5 font-weight-normal">세전 이율</p>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="col-10 pl-0">
+                                            <span class="h3 text-dark font-weight-bolder">4.10</span>
+                                            <span class="h5 text-dark font-weight-normal">%</span>
+                                        </div>
+                                        <div class="col pr-0">
+                                            <div class="heart h3 text-dark font-weight-bold text-right" id="heart4" value="false" onclick="onClickHeart('heart4');">♡</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Card -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- 배너쪽 은행상품 3개 끝 -->
+
+<!-- 이달의 추천 금융상품 TOP4 시작 -->
+    <section class="section section-lg bg-lightgray pt-6 pb-4">
+        <div class="container">
+            <div class="row d-none d-lg-block">
+                <div class="col-12">
+                    <!-- Cities -->
+                    <div class="form-row">
+                        <div class="col-4">
+                                <p class="h3 font-weight-bolder recommend-title">이달의<br> 추천 금융 상품 <span style="color:rgb(243, 156, 18);">TOP4</span></p>
+                                <p class="font-weight-normal font-medium">MULTIFIN에서 추천하는<br>이달의 금융 상품을 확인해보세요!</p>
+                                <button class="bankMainMoreBtn">더보기</button>
+                        </div>
+                        <div class="col-8">
+                            <div class="form-row">
+                                <div class="col">
+                                    <!-- Card 1행 1열 -->
+                                    <a href="#" class="card img-card fh-220 border border-gray-500 outer-bg top4-card">
+                                        <div class="d-flex align-items-center top4_inner">
+                                            <img class="bank_logo" src="https://pds.saramin.co.kr/company/logo/201905/23/pry5ef_o0q6-2rxid6_logo.jpg">
+                                            <div class="top4-text">
+                                                <h4 class="font-weight-bolder text-left top4-title">신한 쓸만해 적금</h4>
+                                                <p class="top4-memo" style="color: red;">5.5%</p>
+                                                <span class="top4-memo">12개월</span>
+                                                <span class="top4-memo">자유적립</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <!-- End of Card -->
+                                </div>
+                                <div class="col">
+                                    <!-- Card 1행 2열 -->
+                                    <a href="#" class="card img-card fh-220 border border-gray-500 outer-bg top4-card">
+                                        <div class="d-flex align-items-center top4_inner">
+                                            <img class="bank_logo" src="https://image.kebhana.com/cont/common/img/newmain2021/logo.png">
+                                            <div class="top4-text">
+                                                <h4 class="font-weight-bolder text-left top4-title">하나 정기예금</h4>
+                                                <p class="top4-memo" style="color: red;">3.4%</p>
+                                                <span class="top4-memo">12개월</span>
+                                                <span class="top4-memo">단리</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <!-- End of Card -->
+                                </div>
+                            </div> 
+                            <div class="form-row">
+                                <div class="col">
+                                    <!-- Card 2행 1열 -->
+                                    <a href="#" class="card img-card fh-220 border border-gray-500 outer-bg top4-card">
+                                        <div class="d-flex align-items-center top4_inner">
+                                            <img class="bank_logo" class="top4_logo" src="https://oimg1.kbstar.com/img/obiz/2021/kb_logo.png">
+                                            <div class="top4-text">
+                                                <h4 class="font-weight-bolder text-left top4-title">KB 마이핏 적금</h4>
+                                                <p class="top4-memo" style="color: red;">5.5%</p>
+                                                <span class="top4-memo">12개월</span>
+                                                <span class="top4-memo">자유적립</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <!-- End of Card -->
+                                </div>
+                                <div class="col">
+                                    <!-- Card 2행 2열 -->
+                                    <a href="#" class="card img-card fh-220 border border-gray-500 outer-bg top4-card">
+                                        <div class="d-flex align-items-center top4_inner">
+                                            <img class="bank_logo" src="https://pds.saramin.co.kr/company/logo/201905/23/pry5ef_o0q6-2rxid6_logo.jpg">
+                                            <div class="top4-text">
+                                                <h4 class="font-weight-bolder text-left top4-title">신한 썸통장</h4>
+                                                <p class="top4-memo" style="color: red;">5.3%</p>
+                                                <span class="top4-memo">12개월</span>
+                                                <span class="top4-memo">자유적립</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <!-- End of Card -->
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- 이달의 추천 금융상품 TOP4 끝 -->
+
+
+<!-- 카드 TOP5 시작 -->
+    <section class="section section-lg pt-6 pb-6 bank_card">
+        <div class="container" style="width: 1100px;">
+            <div class="row">
+                <div class="col-12 top5-title">
+                    <p class="h3 font-weight-bolder">카드 <span style="color:rgb(243, 156, 18);">TOP5</span></p>
+                    <div class="loan_btn_container">
+                        <a href="#" class="bankMainMore">
+                            <span class="bankMainMore_title">더보기</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="bmCard mb-4 mb-lg-0">
+                    <!-- Card -->
+                    <a href="#" class="card img-card fh-240 border-0 outer-bg">
+                        <div class="card-img-overlay d-flex align-items-center bg-dark">
+                            카드 이미지1
+                        </div>
+                    </a>
+                    <div class="real_card_title text-dark p-2 text-center">
+                        FANTastic S 체크
+                    </div>
+                    <!-- End of Card -->
+                </div>
+                <div class="bmCard mb-4 mb-lg-0">
+                    <!-- Card -->
+                    <a href="#" class="card img-card fh-240 border-0 outer-bg">
+                        <div class="card-img-overlay d-flex align-items-center bg-dark">
+                            카드 이미지2
+                        </div>
+                    </a>
+                    <div class="real_card_title text-dark p-2 text-center">
+                        신한카드 폴리
+                    </div>
+                    <!-- End of Card -->
+                </div>
+                <div class="bmCard mb-4 mb-lg-0">
+                    <!-- Card -->
+                    <a href="#" class="card img-card fh-240 border-0 outer-bg">
+                        <div class="card-img-overlay d-flex align-items-center bg-dark">
+                            카드 이미지3
+                        </div>
+                    </a>
+                    <div class="real_card_title text-dark p-2 text-center">
+                        THE PINK
+                    </div>
+                    <!-- End of Card -->
+                </div>
+                <div class="bmCard mb-4 mb-lg-0">
+                    <!-- Card -->
+                    <a href="#" class="card img-card fh-240 border-0 outer-bg">
+                        <div class="card-img-overlay d-flex align-items-center bg-dark">
+                            카드 이미지4
+                        </div>
+                    </a>
+                    <div class="real_card_title text-dark p-2 text-center">
+                        핏(Fit)
+                    </div>
+                    <!-- End of Card -->
+                </div>
+                <div class="bmCard mb-4 mb-lg-0">
+                    <!-- Card -->
+                    <a href="#" class="card img-card fh-240 border-0 outer-bg">
+                        <div class="card-img-overlay d-flex align-items-center bg-dark">
+                            카드 이미지5
+                        </div>
+                    </a>
+                    <div class="real_card_title text-dark p-2 text-center">
+                        현대카드 M BOOST
+                    </div>
+                    <!-- End of Card -->
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- 카드 TOP5 끝 -->
+
+<!-- 저금리 대출상품 시작 -->
+<section class="section section-lg pt-0 pb-6 loan_card">
+    <div class="container" style="width: 1100px;">
+        <div class="row">
+            <div class="col-12 loan-title mb-3">
+                <div class="main_loan_title">
+                    <div class="main_goods_title">
+                        <p class="h3 font-weight-bolder goods_title">저금리 대출 상품</p>
+                        <span class="pointBox pl-2 pr-2">BEST</span>
+                    </div>
+                </div>
+                <div class="loan_btn_container">
+                    <a href="#" class="bankMainMore">
+                        <span class="loanMainMore_title">더보기</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card-container">
+                <a href="#" class="card img-card fh-220 outer-bg border-gray-500 lowRateCard">
+                    <div class="align-items-center fh-220">
+                        <div class="card-body text-dark p-3">
+                            <h5 class="text-center">KB주택전세자금대출</h5>
+                            <hr style="border-color: black;margin: 0;">
+                            <p class="text-dark mt-3">
+                                * 한도 : 최대 2.22억원<br>
+                                * 상환 : 만기일시상환방식<br>
+                                * 금리 : 변동금리<br>
+                            </p>
+                            <hr style="border-color: black;margin: 0;">
+                            <h5 class="text-right mt-3">4.04%</h5>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="card img-card fh-220 outer-bg border-gray-500 lowRateCard">
+                    <div class="align-items-center fh-220">
+                            <div class="card-body text-dark p-3">
+                                <h5 class="text-center">SC전세담보대출</h5>
+                                <hr style="border-color: black;margin: 0;">
+                                <p class="text-dark mt-3">
+                                    * 한도 : 최대 2.22억원<br>
+                                    * 상환 : 만기일시상환방식<br>
+                                    * 금리 : 변동금리<br>
+                                </p>
+                                <hr style="border-color: black;margin: 0;">
+                                <h5 class="text-right mt-3">4.33%</h5>
+                            </div>
+                    </div>
+                </a>
+                <a href="#" class="card img-card fh-220 outer-bg border-gray-500 lowRateCard">
+                    <div class="align-items-center fh-220">
+                        <div class="card-body text-dark p-3">
+                            <h5 class="text-center">우리전세론(금융보증)</h5>
+                            <hr style="border-color: black;margin: 0;">
+                            <p class="text-dark mt-3">
+                                * 한도 : 최대 2.22억원<br>
+                                * 상환 : 만기일시상환방식<br>
+                                * 금리 : 변동금리<br>
+                            </p>
+                            <hr style="border-color: black;margin: 0;">
+                            <h5 class="text-right mt-3">4.04%</h5>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="card img-card fh-220 outer-bg border-gray-500 lowRateCard">
+                    <div class="align-items-center fh-220">
+                        <div class="card-body text-dark p-3">
+                            <h5 class="text-center">신한전세대출(보증)</h5>
+                            <hr style="border-color: black;margin: 0;">
+                            <p class="text-dark mt-3">
+                                * 한도 : 최대 2.22억원<br>
+                                * 상환 : 만기일시상환방식<br>
+                                * 금리 : 변동금리<br>
+                            </p>
+                            <hr style="border-color: black;margin: 0;">
+                            <h5 class="text-right mt-3">4.04%</h5>
+                        </div>
+                    </div>
+                 </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 저금리 대출상품 끝 -->
+</main>
+
+<footer th:replace="~{layout/footer :: #footer}"></footer>
+
+<th:block th:replace="layout/scripts :: scripts"></th:block>
+
+<!-- 찜하기 버튼 -->
+<script>
+    // 초기화 문구
+    $(function(){
+        // 하트 class 초기화
+        heartItems = document.getElementsByClassName('heart');
+        for(i = 0; i < heartItems.length; i++){
+            heartValue = JSON.parse(heartItems[i].getAttribute('value'));
+
+            if(heartValue == true){
+                heartItems[i].innerHTML = '♥';
+            }else{
+                heartItems[i].innerHTML = '♡';
+            }
+        }
+    });
+
+
+
+    function onClickHeart(id){
+        heartValue = JSON.parse($('#'+id).attr('value'));
+        heartValue = !heartValue;
+        // 여기에 AJAX로 DB 업데이트하는 코드 있어야함!!
+
+        $('#'+id).attr('value', ''+heartValue);
+        if(heartValue == true){
+            $('#'+id).text('♥');
+        }else{
+            $('#'+id).text('♡');
+        }
+    }
+</script>
+
+
+</body>
+
+</html>

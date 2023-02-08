@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="layout/head :: config"></th:block>
+	<title>MultiFin:주가상세</title>
+	<!-- 현재 페이지에서만 쓰는 css, script -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/stock/stockList.css}">
+	<!--주식차트-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+<header th:replace="~{layout/header :: #header}"></header>
+    <main>
+      <section class="section-header section-image bg-primary overlay-primary text-white"  data-background="../../assets/img/stock/earth.jpg">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10 text-center">
+                        <h1 class="mb-3 stock-mainTitle">국내·외 증시 동향</h1>
+                        <p class="lead px-lg-5 mb-5 stock-mainSubtitle">MULTIFIN에서 정보를 분석해보고 나만의 투자 계획을 세워보세요!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+  <section class="stock_main">
+    <div class="stock_tabs shadow-soft">
+        <ul class="tabs">
+            <li class="tab-link current first" data-tab="tab-1">
+               <div class="stock_title">
+                    <h5 class="stock-main-title font-weight-bolder">KOSPI</h5>
+                    <div class="info_sub">
+                        <h6 class="now_money increase">2,249.56</h6>
+                        <small class="now_percent increase ">▲ 14.49 (+0.65%)</small>
+                    </div>
+               </div>
+            </li>
+            <li id="tab_second" class="tab-link second" data-tab="tab-2">
+                <div class="stock_title">
+                    <h5 class="stock-main-title  font-weight-bolder">KODAQ</h5>
+                    <div class="info_sub">
+                        <h6 class="now_money increase">2,249.56</h6>
+                        <small class="now_percent increase">▲ 14.49 (+0.65%)</small>
+                    </div>
+               </div>
+            </li>
+            <li class="tab-link third" data-tab="tab-3">
+                <div class="stock_title">
+                    <h5 class="stock-main-title  font-weight-bolder">NASDAQ</h5>
+                    <div class="info_sub">
+                        <h6 class="now_money increase">2,249.56</h6>
+                        <small class="now_percent increase">▲ 14.49 (+0.65%)</small>
+                    </div>
+               </div>
+            </li>
+        </ul>
+        <div id="tab-1" class="tab-content current">
+            <div class="stock-graphes">
+                <canvas id="KOSPI" style="width:850px; height: 380px; padding-top: 15px;"></canvas>
+            </div>
+            <div class="now">
+                <div class="now-title">실시간</div>
+                <div class="now-sub">1월 20일 18:00 장마감</div>
+            </div>
+        </div>
+        <div id="tab-2" class="tab-content">
+            <div class="stock-graphes">
+                <canvas id="KOSDAQ" style="width:850px; height: 380px; padding-top: 15px;"></canvas>
+            </div>
+            <div class="now">
+                <div class="now-title">실시간</div>
+                <div class="now-sub">1월 20일 18:00 장마감</div>
+            </div>
+        </div>
+        <div id="tab-3" class="tab-content">
+            <div class="stock-graphes">
+                <canvas id="NASDAQ" style="width:850px; height: 380px; padding-top: 15px;"></canvas>
+            </div>
+            <div class="now">
+                <div class="now-title">실시간</div>
+                <div class="now-sub">1월 20일 18:00 장마감</div>
+            </div>
+        </div>
+    </div>
+    <div id="tab-12" class="stock_tab_sub shadow-soft current">
+        <h5 class="tab_sub_title">인기 <span style="color:rgb(231, 76, 60)">KOSPI</span> 종목</h5>
+        <table class="stock-ranking">
+            <tr class="stock-rank-info">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">삼성전자</h6>
+                        <small class="stock-rank-money">61,000원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent increase">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <small class="stock-rank-percent-number">+1.08%</small>
+                    </div>
+                </td>
+            </tr>
+            <tr class="stock-rank-info">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">LG에너지솔루션</h6>
+                        <small class="stock-rank-money">477,000원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent increase">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <small class="stock-rank-percent-number">+1.08%</small>
+                    </div>
+                </td>
+            </tr>
+            <tr class="stock-rank-info">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">SK하이닉스</h6>
+                        <small class="stock-rank-money">94,900원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent decrease">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                        <small class="stock-rank-percent-number">-0.09%</small>
+                    </div>
+                </td>
+            </tr>
+            <tr class="stock-rank-info">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">삼성바이오로직스</h6>
+                        <small class="stock-rank-money">807,000원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent decrease">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                        <small class="stock-rank-percent-number">-1.90%</small>
+                    </div>
+                </td>
+            </tr>
+            <tr class="fin">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">삼성전자우</h6>
+                        <small class="stock-rank-money">50,400원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent decrease">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                        <small class="stock-rank-percent-number">-2.70%</small>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="tab-22" class="stock_tab_sub shadow-soft">
+        <h5 class="tab_sub_title">인기 <span style="color:rgb(231, 76, 60)">KOSDAQ</span> 종목</h5>
+        <table class="stock-ranking">
+            <tr class="stock-rank-info">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">삼성전자</h6>
+                        <small class="stock-rank-money">61,000원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent increase">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <small class="stock-rank-percent-number">+1.08%</small>
+                    </div>
+                </td>
+            </tr>
+            <tr class="stock-rank-info">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">LG에너지솔루션</h6>
+                        <small class="stock-rank-money">477,000원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent increase">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <small class="stock-rank-percent-number">+1.08%</small>
+                    </div>
+                </td>
+            </tr>
+            <tr class="stock-rank-info">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">SK하이닉스</h6>
+                        <small class="stock-rank-money">94,900원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent decrease">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                        <small class="stock-rank-percent-number">-0.09%</small>
+                    </div>
+                </td>
+            </tr>
+            <tr class="stock-rank-info">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">삼성바이오로직스</h6>
+                        <small class="stock-rank-money">807,000원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent decrease">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                        <small class="stock-rank-percent-number">-1.90%</small>
+                    </div>
+                </td>
+            </tr>
+            <tr class="fin">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">삼성전자우</h6>
+                        <small class="stock-rank-money">50,400원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent decrease">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                        <small class="stock-rank-percent-number">-2.70%</small>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="tab-32" class="stock_tab_sub shadow-soft">
+        <h5 class="tab_sub_title">인기 <span style="color:rgb(231, 76, 60)">NASDAQ</span> 종목</h5>
+        <table class="stock-ranking">
+            <tr class="stock-rank-info">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">애플</h6>
+                        <small class="stock-rank-money">61,000원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent increase">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <small class="stock-rank-percent-number">+1.08%</small>
+                    </div>
+                </td>
+            </tr>
+            <tr class="stock-rank-info">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">테슬라</h6>
+                        <small class="stock-rank-money">477,000원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent increase">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <small class="stock-rank-percent-number">+1.08%</small>
+                    </div>
+                </td>
+            </tr>
+            <tr class="stock-rank-info">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">SK하이닉스</h6>
+                        <small class="stock-rank-money">94,900원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent decrease">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                        <small class="stock-rank-percent-number">-0.09%</small>
+                    </div>
+                </td>
+            </tr>
+            <tr class="stock-rank-info">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">삼성바이오로직스</h6>
+                        <small class="stock-rank-money">807,000원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent decrease">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                        <small class="stock-rank-percent-number">-1.90%</small>
+                    </div>
+                </td>
+            </tr>
+            <tr class="fin">
+                <td>
+                    <div class="stock-rank-titles">
+                        <h6 class="stock-rank-name">삼성전자우</h6>
+                        <small class="stock-rank-money">50,400원</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="stock-rank-percent decrease">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                        <small class="stock-rank-percent-number">-2.70%</small>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+<section class="bg-white  stock_rank_description_container">
+    <div id="tab-13" class="card shadow-soft stock_details current">     
+        <h5 class="stock_details_title"><span style="color: rgb(231, 76, 60);">KOSPI </span>상위 (시가총액기준)</h5>
+        <table class="stock-rank-table">
+          <tr class="table_row">
+            <th class="table-header">순위</th>
+            <th class="table-header" >종목명</th>
+            <th class="table-header">현재가</th>
+            <th class="table-header">전일비</th>
+            <th class="table-header">등락률</th>
+            <th class="table-header">상장주식수</th>
+            <th class="table-header">시가총액</th>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">1</td>
+            <td class="board-content board-title">삼성전자</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">2</td>
+            <td class="board-content board-title">LG애너지솔루션</td>
+            <td class="board-content"> 477,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">3</td>
+            <td class="board-content board-title">SK하이닉스</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">4</td>
+            <td class="board-content board-title">삼성바이오로직스</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">5</td>
+            <td class="board-content board-title">삼성전자우</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">6</td>
+            <td class="board-content board-title">삼성SDI</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">7</td>
+            <td class="board-content board-title">LG화학</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">8</td>
+            <td class="board-content board-title">현대차</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">9</td>
+            <td class="board-content board-title">기아</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">10</td>
+            <td class="board-content board-title">NAVER</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+        </table>
+        <div class="table-buttons">
+            <button onclick="" class="table-button">&lt;&lt;</button>
+            <button onclick="" class="table-button">&lt;</button>
+            <button onclick="" class="table-button">1</button>
+            <button onclick="" class="table-button">2</button>
+            <button onclick="" class="table-button">3</button>
+            <button onclick="" class="table-button">4</button>
+            <button onclick="" class="table-button">5</button>
+            <button onclick="" class="table-button">&gt;</button>
+            <button onclick="" class="table-button">&gt;&gt;</button>
+        </div>    
+    </div>
+    <div id="tab-23" class="card shadow-soft stock_details">     
+        <h5 class="stock_details_title"><span style="color: rgb(231, 76, 60);">KOSDAQ </span>상위 (시가총액기준)</h5>
+        <table class="stock-rank-table">
+          <tr class="table_row">
+            <th class="table-header">순위</th>
+            <th class="table-header" >종목명</th>
+            <th class="table-header">현재가</th>
+            <th class="table-header">전일비</th>
+            <th class="table-header">등락률</th>
+            <th class="table-header">상장주식수</th>
+            <th class="table-header">시가총액</th>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">1</td>
+            <td class="board-content board-title">삼성전자</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">2</td>
+            <td class="board-content board-title">LG애너지솔루션</td>
+            <td class="board-content"> 477,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">3</td>
+            <td class="board-content board-title">SK하이닉스</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">4</td>
+            <td class="board-content board-title">삼성바이오로직스</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">5</td>
+            <td class="board-content board-title">삼성전자우</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">6</td>
+            <td class="board-content board-title">삼성SDI</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">7</td>
+            <td class="board-content board-title">LG화학</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">8</td>
+            <td class="board-content board-title">현대차</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">9</td>
+            <td class="board-content board-title">기아</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+          <tr class="table_row">
+            <td class="board-content">10</td>
+            <td class="board-content board-title">NAVER</td>
+            <td class="board-content"> 61,000 </td>
+            <td class="board-content increase">▲ 600</td>
+            <td class="board-content increase">▲ 1.18%</td>
+            <td class="board-content"> 8,969,782,550 </td>
+            <td class="board-content"> 329,513,996,760,000 </td>
+          </tr>
+        </table>
+        <div class="table-buttons">
+            <button onclick="" class="table-button">&lt;&lt;</button>
+            <button onclick="" class="table-button">&lt;</button>
+            <button onclick="" class="table-button">1</button>
+            <button onclick="" class="table-button">2</button>
+            <button onclick="" class="table-button">3</button>
+            <button onclick="" class="table-button">4</button>
+            <button onclick="" class="table-button">5</button>
+            <button onclick="" class="table-button">&gt;</button>
+            <button onclick="" class="table-button">&gt;&gt;</button>
+        </div>    
+    </div>
+</section>
+<section class="bg-white">
+  <div class="stock_description_detail_container">
+    <div class="card shadow-soft stock_search">     
+        <h5 class="search-title">최근 조회</h5>
+        <h6 class="search-result"> 최근 조회 내역이 없습니다. </h6>
+    </div>
+    <div class="card shadow-soft stock_description_card">     
+       <div class="day-info">
+            <h5 class="day-info-title">일자별 정보</h5>
+            <small class="day-info-sub">거래량 단위(백) / 거래대금 단위(백만원)</small>
+       </div>
+        <table class="day-info-table">
+            <tr class="day-info-table-row">
+                <th class="day-info-header">일자</th>
+                <th class="day-info-header">시가</th>
+                <th class="day-info-header">고가</th>
+                <th class="day-info-header">저가</th>
+                <th class="day-info-header">종가</th>
+                <th class="day-info-header">전일비</th>
+                <th class="day-info-header">등락률</th>
+                <th class="day-info-header">거래량</th>
+                <th class="day-info-header">거래대금</th>
+            </tr>
+            <tr class="day-info-table-row">
+                <td class="day-info-content">01.20</td>
+                <td class="day-info-content">2240.7</td>
+                <td class="day-info-content">2258.11</td>
+                <td class="day-info-content">2234.49</td>
+                <td class="day-info-content">2249.56</td>
+                <td class="day-info-content increase">▲14.1</td>
+                <td class="day-info-content increase">+0.65</td>
+                <td class="day-info-content">563,442</td>
+                <td class="day-info-content">7,492,743</td>
+            </tr>
+            <tr class="day-info-table-row">
+                <td class="day-info-content">01.19</td>
+                <td class="day-info-content">2240.7</td>
+                <td class="day-info-content">2258.11</td>
+                <td class="day-info-content">2234.49</td>
+                <td class="day-info-content">2249.56</td>
+                <td class="day-info-content increase">▲14.1</td>
+                <td class="day-info-content increase">+0.65</td>
+                <td class="day-info-content">563,442</td>
+                <td class="day-info-content">7,492,743</td>
+            </tr>
+            <tr class="day-info-table-row">
+                <td class="day-info-content">01.18</td>
+                <td class="day-info-content">2240.7</td>
+                <td class="day-info-content">2258.11</td>
+                <td class="day-info-content">2234.49</td>
+                <td class="day-info-content">2249.56</td>
+                <td class="day-info-content increase">▲14.1</td>
+                <td class="day-info-content increase">+0.65</td>
+                <td class="day-info-content">563,442</td>
+                <td class="day-info-content">7,492,743</td>
+            </tr>
+            <tr class="day-info-table-row">
+                <td class="day-info-content">01.17</td>
+                <td class="day-info-content">2240.7</td>
+                <td class="day-info-content">2258.11</td>
+                <td class="day-info-content">2234.49</td>
+                <td class="day-info-content">2249.56</td>
+                <td class="day-info-content increase">▲14.1</td>
+                <td class="day-info-content increase">+0.65</td>
+                <td class="day-info-content">563,442</td>
+                <td class="day-info-content">7,492,743</td>
+            </tr>
+            <tr class="day-info-table-row">
+                <td class="day-info-content">01.16</td>
+                <td class="day-info-content">2240.7</td>
+                <td class="day-info-content">2258.11</td>
+                <td class="day-info-content">2234.49</td>
+                <td class="day-info-content">2249.56</td>
+                <td class="day-info-content increase">▲14.1</td>
+                <td class="day-info-content increase">+0.65</td>
+                <td class="day-info-content">563,442</td>
+                <td class="day-info-content">7,492,743</td>
+            </tr>
+            <tr class="day-info-table-row">
+                <td class="day-info-content">01.15</td>
+                <td class="day-info-content">2240.7</td>
+                <td class="day-info-content">2258.11</td>
+                <td class="day-info-content">2234.49</td>
+                <td class="day-info-content">2249.56</td>
+                <td class="day-info-content increase">▲14.1</td>
+                <td class="day-info-content increase">+0.65</td>
+                <td class="day-info-content">563,442</td>
+                <td class="day-info-content">7,492,743</td>
+            </tr>
+        </table>
+    </div>
+  </div>
+</section>
+<section id="stock-fortune" class="stock-fortune">
+    <div class="stock-fortune-container">
+        <div>
+            <h3 class="stock_info_title">주가 동향 예측</h3>
+            <div class="searching">
+                <form class="searcing-info-detail" action="" method="get">
+                    <select class="options" name="" id="">
+                        <option value="code">코드번호</option>
+                        <option value="company">회사명</option>
+                    </select>
+                    <div class="input-search">
+                        <input class="searching-keyword" type="text" placeholder="검색어를 입력하세요" >
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="stock-future-code-container">
+            <div class="mb-3">
+                <a href="./stockFuture.html" class="card border-light animate-up-3 shadow-soft p-0 p-lg-4">     
+                    <div class="card-body stock-graph">
+                        <div class="description_container">
+                            <div class="stock_information">
+                                <div class="company_name">삼성전자</div>
+                                <div class="company_code">005930</div>
+                           </div>
+                           <div class="company_values">
+                                <div class="company_money">
+                                    <div class="money">60,000원</div>
+                                    <div class="percent-money increase">▲ 100(+1.08%)</div>
+                                </div>
+                           </div>
+                           <button class="fourtne-btn"   onclick="location.href='./stockFuture.html'">동향 예측</button>
+                        </div>
+                        <div class="stock-graph-section">
+                            <canvas class="stock_graph" id="stock_graph1" style="width:240px; height: 150px;"></canvas>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="mb-3">
+                <a href="./stockFuture.html" class="card border-light animate-up-3 shadow-soft p-0 p-lg-4">     
+                    <div class="card-body stock-graph">
+                        <div class="description_container">
+                            <div class="stock_information">
+                                <div class="company_name">NAVER</div>
+                                <div class="company_code">073220</div>
+                           </div>
+                           <div class="company_values">
+                                <div class="company_money">
+                                    <div class="money">60,000원</div>
+                                    <div class="percent-money increase">▲ 100(+1.08%)</div>
+                                </div>
+                           </div>
+                           <button class="fourtne-btn"  onclick="location.href='./stockFuture.html'">동향 예측</button>
+                        </div>
+                        <div class="stock-graph-section">
+                            <canvas class="stock_graph" id="stock_graph2" style="width:240px; height: 150px;"></canvas>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="stock-future-code-container">
+            <div class="mb-3">
+                <a href="./stockFuture.html" class="card border-light animate-up-3 shadow-soft p-0 p-lg-4">     
+                    <div class="card-body stock-graph">
+                        <div class="description_container">
+                            <div class="stock_information">
+                                <div class="company_name" >SK하이닉스</div>
+                                <div class="company_code">000660</div>
+                           </div>
+                           <div class="company_values">
+                                <div class="company_money">
+                                    <div class="money">60,000원</div>
+                                    <div class="percent-money increase">▲ 100(+1.08%)</div>
+                                </div>
+                           </div>
+                           <button class="fourtne-btn"  onclick="location.href='./stockFuture.html'">동향 예측</button>
+                        </div>
+                        <div class="stock-graph-section">
+                            <canvas class="stock_graph" id="stock_graph3" style="width:240px; height: 150px;"></canvas>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="mb-3">
+                <a href="./stockFuture.html" class="card border-light animate-up-3 shadow-soft p-0 p-lg-4">     
+                    <div class="card-body stock-graph">
+                        <div class="description_container">
+                            <div class="stock_information">
+                                <div class="company_name">셀트리온</div>
+                                <div class="company_code">573220</div>
+                           </div>
+                           <div class="company_values">
+                                <div class="company_money">
+                                    <div class="money">60,000원</div>
+                                    <div class="percent-money increase">▲ 100(+1.08%)</div>
+                                </div>
+                           </div>
+                           <button class="fourtne-btn" onclick="location.href='./stockFuture.html'">동향 예측</button>
+                        </div>
+                        <div class="stock-graph-section">
+                            <canvas class="stock_graph" id="stock_graph4" style="width:240px; height: 150px; "></canvas>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:replace="~{layout/footer :: #footer}"></footer>
+<th:block th:replace="layout/scripts :: scripts"></th:block>
+
+<!--제작한  js-->
+<script th:src="@{/assets/js/stock/stockList.js}"></script>
+</body>

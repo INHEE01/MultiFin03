@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="layout/head :: config"></th:block>
+	<title>MultiFin:게시글 보기</title>
+	<!-- 현재 페이지에서만 쓰는 css, script -->
+	<link type="text/css" th:href="@{/css/community/view.css}" rel="stylesheet">
+</head>
+<body>
+<header th:replace="~{layout/header :: #header}"></header>
+    <main>
+        <section class="section section-header bg-primary overlay-primary text-white pb-8" data-background="../../assets/img/board/team-hero.jpg">
+            <div class="container">
+               <div class="row justify-content-center">
+                  <div class="col-12 col-md-8 text-center">
+                        <h1 class="display-2 mb-4 title">자유게시판</h1>
+                        <p class="lead px-lg-5 mainSubtitle">경제 · 금융에 관한 공지사항을 확인해 보세요!</p>
+                    </div>
+               </div>
+            </div>
+            <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2">
+                <svg class="fill-white" enable-background="new 0 0 1504 131.3" viewBox="0 0 1504 131.3" xmlns="http://www.w3.org/2000/svg"><path d="m877.8 85c139.5 24.4 348 33.5 632.2-48.2-.2 32.5-.3 65-.5 97.4-505.9 0-1011.6 0-1517.5 0 0-33.3 0-66.7 0-100.1 54.2-11.4 129.5-23.9 220-28.2 91-4.3 173.6 1 307.4 18.6 183.2 24.2 295.2 49.4 358.4 60.5z"/></svg>
+            </figure>
+        </section>
+        <section class="view mt-6 mb-5">
+            <div class="bnts">
+              <c:if test="${not empty loginMember && (loginMember.id == board.writerId || loginMember.role == 'ROLE_ADMIN')}">
+                <button class="board_btn" type="bnt" id="btnUpdate">수정</button>
+                <button class="board_btn" type="bnt" id="btnDelete">삭제</button>
+              </c:if>
+                <button class="board_btn" type="bnt" id="btnDelete">목록</button>
+            </div>
+            <table id="tbl-board" class="board-table">
+              <tr>
+                <td class="board-title" colspan="3">
+                    <h5 class="category mb-0">[자유게시판]  요즘 주식도 그렇고 부동산도 그렇고</h5>
+                </td>
+              </tr>
+              <tr class="board-info">
+                <td colspan="2" class="info-main"> 작성자 : happy&nbsp; <c:out value="${board.writerId}"/></td>
+                <td class="info-sub"> 
+                  등록일 : 2022-12-13<fmt:formatDate type="both" value="${board.createDate}"/> &nbsp; &nbsp;
+                  조회수 : 32<c:out value="${board.readCount}"/>&nbsp; &nbsp;
+                  첨부파일 : -
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3" >
+                  <div class="board-contents">
+                    <textarea  rows="15" cols="100" readonly class="textarea" disabled >경기가 좋지 않아서 영 재미 없네요 </textarea>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <table id="tbl-comment">
+              <tr>
+                <td class="comment-count" colspan="2" style="border-color: none;">댓글 3개</td>
+              </tr>
+              <tr class="comments">
+                    <td class="comment">
+                        <sub class="comment-writer">holla</sub>
+                        <sub class="comment-date">2022-12-13</sub><br>
+                        <span class="comment-detail font-weight-bold">동의합니다</span>
+                    </td>
+                    <td class="comment comment-btn">
+                        <div class="btn-container">
+                            <button class="btn-update mr-3 " onclick="" >수정</button>
+                            <button class="btn-delete mr-3" onclick="deleteReply('${reply.no}','${board.no}');" >삭제</button>
+                        </div>
+                    </td>
+              </tr>
+              <tr class="comments">
+                    <td class="comment">
+                    <sub class="comment-writer">zlszlqncm</sub>
+                    <sub class="comment-date">2022-12-13</sub><br>
+                    <span class="comment-detail font-weight-bold">재미가 별로 없네요 돈도 까먹기도 많이 까먹었어요</span>
+                    </td>
+                    <td class="comment comment-btn">
+                        <div class="btn-container">
+                            <button class="btn-update mr-3" onclick="" >수정</button>
+                            <button class="btn-delete mr-3" onclick="deleteReply('${reply.no}','${board.no}');" >삭제</button>
+                        </div>
+                    </td>
+              </tr>
+              <tr class="comments">
+                    <td class="comment">
+                    <sub class="comment-writer">zzang</sub>
+                    <sub class="comment-date">2022-12-18</sub><br>
+                    <span class="comment-detail font-weight-bold">저는 그거 세번 봤어요 배우별로 느낌이 다르더라고요!</span>
+                    </td>
+                    <td class="comment comment-btn">
+                        <div class="btn-container">
+                            <button class="btn-update mr-3 " onclick="" >수정</button>
+                            <button class="btn-delete mr-3" onclick="deleteReply('${reply.no}','${board.no}');" >삭제</button>
+                        </div>
+                    </td>
+              </tr>
+            </table>
+            <div id="comment-container">
+                <div class="comment-editor">
+                    <form action="${path}/board/reply" method="post" class="comment-inputer">
+                        <input type="hidden" name="boardNo" value="${board.no}" />
+                        <input type="hidden" name="writerId" value="${loginMember.id}" />
+                          <textarea name="content" id="replyContent"  cols="140" rows="3"></textarea>
+                          <button type="submit" id="btn-insert">등록</button>	  	
+                    </form>
+                </div>
+               </div>
+          </section>
+    </main>
+<footer th:replace="~{layout/footer :: #footer}"></footer>
+<th:block th:replace="layout/scripts :: scripts"></th:block>
+</body>
+</html>
