@@ -73,6 +73,12 @@ public class StockPriceService {
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
+	public List<StockPrice> stockMoreViewList(int stockNo) {
+		return  mapper.stockMoreList(stockNo);
+	}
+	
+	
+	@Transactional(rollbackFor = Exception.class)
 	public StockPrice findByName(String name) {
 		StockPrice sp = mapper.selectListByname(name);
 		return sp;

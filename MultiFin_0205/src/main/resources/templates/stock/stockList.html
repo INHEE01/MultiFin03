@@ -58,8 +58,8 @@
                 <canvas id="KOSPI" style="width:850px; height: 360px; padding-top: 15px;"></canvas>
             </div>
             <div class="now">
-                <div class="now-title">실시간</div>
-                <div class="now-sub">[[${kospiIndex.stockDate}]]</div>
+                <div class="now-title">데이터 정보</div>
+                <div class="now-sub">[[${#dates.format(kospiIndex.stockDate, 'MM/dd')}]]&nbsp; 18:00 KST 장마감</div>
             </div>
         </div>
         <div id="tab-2" class="tab-content">
@@ -67,8 +67,8 @@
                 <canvas id="KOSDAQ" style="width:850px; height: 370px; padding-top: 15px;"></canvas>
             </div>
             <div class="now">
-                <div class="now-title">실시간</div>
-                <div class="now-sub">[[${kosdaqIndex.stockDate}]]</div>
+                <div class="now-title">데이터 정보</div>
+                <div class="now-sub">[[${#dates.format(kosdaqIndex.stockDate, 'MM/dd')}]]&nbsp; 18:00 KST 장마감</div>
             </div>
         </div>
         <div id="tab-3" class="tab-content">
@@ -76,8 +76,8 @@
                 <canvas id="NASDAQ" style="width:850px; height: 370px; padding-top: 15px;"></canvas>
             </div>
             <div class="now">
-                <div class="now-title">실시간</div>
-                <div class="now-sub">[[${nasdaqIndex.stockDate}]]</div>
+                <div class="now-title">데이터 정보</div>
+                <div class="now-sub">[[${#dates.format(nasdaqIndex.stockDate, 'MM/dd')}]]&nbsp; 05:00 KST 장마감</div>
             </div>
         </div>
     </div>

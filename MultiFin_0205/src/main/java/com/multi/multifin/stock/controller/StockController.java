@@ -155,13 +155,17 @@ public class StockController {
 	}
 	
 	
-	
+
 	@RequestMapping("/stockFuture")
 	public String stockFuture(Model model,@RequestParam("no") int no) {
 		StockPrice sp = service.findByNo(no);
+		List<StockPrice> stockList=service.stockMoreViewList(no);
 		model.addAttribute("sp", sp);
+		model.addAttribute("stockList", stockList);
 		return "stock/stockFuture";
 	}
+	
+	
 	
 	
 	

@@ -92,7 +92,17 @@
         LIMIT ${limit}
 	</select>
 	
-	
+	<select id="stockMoreList" resultMap="StockPriceResultMap" parameterType="int">
+		SELECT sno,basDt,srtnCd,
+			isinCd,itmsNm,mrktCtg,
+			mrktCtg,clpr,vs,
+			fltRt,mkp,hipr,lopr,
+			trqu,trPrc,lstgStCnt,mrktTotAmt
+		FROM stockprice 
+		where srtnCd LIKE '${srtnCd}' 
+		order by mrktTotAmt desc
+        limit 7	
+	</select>
 	
 	<select id="selectListByno" parameterType="int" resultMap="StockPriceResultMap">
 		SELECT sno,basDt,srtnCd,
@@ -104,8 +114,6 @@
 		WHERE srtnCd = #{srtnCd}
 		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
 	</select>
-	
-	
 	
 	
 	
@@ -133,10 +141,5 @@
 			AND itmsNm LIKE '%${itmsNm}%' 
 		</if>			
 	</select>
-	
 </mapper>
-
-
-
-
 
