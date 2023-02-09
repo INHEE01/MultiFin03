@@ -17,7 +17,6 @@
 		<result property="curNm" column="cur_nm"/>
 	</resultMap>
 	
-		
 	<select id="exchangeRateList"  resultMap="exchangeRateResultMap">
 		select 
 			 rno,recorddate,cur_unit

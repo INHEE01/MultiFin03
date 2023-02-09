@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import com.multi.multifin.stock.model.vo.StockPriceIndex;
 
 
-
 @Mapper
 public interface StockPriceIndexMapper {
 	

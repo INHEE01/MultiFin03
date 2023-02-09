@@ -15,9 +15,7 @@
 	
 	<select id="getStockList"  parameterType="String" resultMap="StockPriceIndexResultMap">
 		select 
-			stock_type,stock_date,fin,
-			open,highLevel,lowLevel,
-			trading_volume,change_percent
+			stock_type,fin
 		from(
 		   select *
 		   from stockPriceIndex si
@@ -25,7 +23,6 @@
 		)sp
 		where sp.stock_type = '${stockType}'
 	</select>
-	
 	
 	
 	<select id="nowStockIndex" parameterType="String" resultMap="StockPriceIndexResultMap">
@@ -39,7 +36,7 @@
 		   order by stock_date DESC
 		)sp
 		where sp.stock_type = '${stockType}'
-		AND stock_date IN (SELECT MAX(stock_date) FROM stockPriceIndex)
+		limit 1
 	</select>
 	
 		

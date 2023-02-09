@@ -7,16 +7,14 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.multi.multifin.stock.model.vo.StockPrice;
 
-
 @Mapper
 public interface StockPriceMapper {
-	List<StockPrice> KospiList();
-	List<StockPrice> KosdaqList();
-	List<StockPrice> KospiRanking();
-	List<StockPrice> KospiRankingTop();
-	List<StockPrice> KosdaqRankingTop();
-	List<StockPrice> KosdaqRanking();
+	List<StockPrice> KospiList(Map<String, String> map);
+	List<StockPrice> KosdaqList(Map<String, String> map);
+	List<StockPrice> KospiRankingTop(Map<String, String> map);
+	List<StockPrice> KosdaqRankingTop(Map<String, String> map);
 	StockPrice selectListByno(int no);
 	StockPrice selectListByname(String name);
-	
+	List<StockPrice> selectStockList(Map<String, String> map);
+	int selectStockCount(Map<String, String> map);
 }

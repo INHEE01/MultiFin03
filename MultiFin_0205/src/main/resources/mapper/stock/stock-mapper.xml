@@ -21,7 +21,7 @@
 		<result property="mrktTotAmt" column="mrktTotAmt"/>
 	</resultMap>
 	
-	<select id="KospiList"  resultMap="StockPriceResultMap">
+	<select id="KospiList"  resultMap="StockPriceResultMap" parameterType="map">
 		select 
 			sno,basDt,srtnCd,
 			isinCd,itmsNm,mrktCtg,
@@ -35,9 +35,10 @@
 		)sp
 		where sp.mrktCtg like 'kospi'
 		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
+		order by mrktTotAmt desc LIMIT ${limit} OFFSET ${offset}
 	</select>
 	
-	<select id="KosdaqList"  resultMap="StockPriceResultMap">
+	<select id="KosdaqList"  resultMap="StockPriceResultMap" parameterType="map">
 		select 
 			sno,basDt,srtnCd,
 			isinCd,itmsNm,mrktCtg,
@@ -51,45 +52,11 @@
 		)sp
 		where sp.mrktCtg like 'kosdaq'
 		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
+		order by mrktTotAmt desc  LIMIT ${limit} OFFSET ${offset}
 	</select>
 	
 	
-	<select id="KospiRanking"  resultMap="StockPriceResultMap">
-		select 
-			sno,basDt,srtnCd,
-			isinCd,itmsNm,mrktCtg,
-			mrktCtg,clpr,vs,
-			fltRt,mkp,hipr,lopr,
-			trqu,trPrc,lstgStCnt,mrktTotAmt
-		from(
-		   select *
-		   from stockprice s
-		   order by basDt DESC
-		)sp
-		where sp.mrktCtg like 'kospi'
-		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
-		order by mrktTotAmt desc
-	</select>
-	
-	<select id="KosdaqRanking"  resultMap="StockPriceResultMap">
-		select 
-			sno,basDt,srtnCd,
-			isinCd,itmsNm,mrktCtg,
-			mrktCtg,clpr,vs,
-			fltRt,mkp,hipr,lopr,
-			trqu,trPrc,lstgStCnt,mrktTotAmt
-		from(
-		   select *
-		   from stockprice s
-		   order by basDt DESC
-		)sp
-		where sp.mrktCtg like 'kosdaq'
-		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
-		order by mrktTotAmt desc
-	</select>
-	
-	
-	<select id="KospiRankingTop"  resultMap="StockPriceResultMap">
+	<select id="KospiRankingTop"  resultMap="StockPriceResultMap" parameterType="map">
 		select
 			sno,basDt,srtnCd,
 			isinCd,itmsNm,mrktCtg,
@@ -104,10 +71,10 @@
 		where sp.mrktCtg like 'kospi'
 		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
 		order by mrktTotAmt desc
-        LIMIT 5
+        LIMIT ${limit}
 	</select>
 	
-	<select id="KosdaqRankingTop"  resultMap="StockPriceResultMap">
+	<select id="KosdaqRankingTop"  resultMap="StockPriceResultMap" parameterType="map">
 		select
 			sno,basDt,srtnCd,
 			isinCd,itmsNm,mrktCtg,
@@ -122,7 +89,7 @@
 		where sp.mrktCtg like 'kosdaq'
 		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
 		order by mrktTotAmt desc
-        LIMIT 5
+        LIMIT ${limit}
 	</select>
 	
 	
@@ -138,18 +105,34 @@
 		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
 	</select>
 	
-	<select id="selectListByname" parameterType="String" resultMap="StockPriceResultMap">
+	
+	
+	
+	
+	<select id="selectStockList" resultMap="StockPriceResultMap" parameterType="map">
 		SELECT sno,basDt,srtnCd,
 			isinCd,itmsNm,mrktCtg,
 			mrktCtg,clpr,vs,
 			fltRt,mkp,hipr,lopr,
 			trqu,trPrc,lstgStCnt,mrktTotAmt
-		FROM stockprice
-		WHERE itmsNm = '#{itmsNm}'
-		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
+		FROM stockprice 
+		WHERE basDt IN (SELECT MAX(basDt) FROM stockprice)
+		<if test="itmsNm != null">
+			AND itmsNm LIKE '%${itmsNm}%' 
+		</if>
+		order by mrktTotAmt desc			
 	</select>
 	
 	
+	<select id="selectStockCount" resultMap="StockPriceResultMap" parameterType="map">
+		SELECT  
+			count(itmsNm)
+		FROM stockprice 
+		WHERE basDt IN (SELECT MAX(basDt) FROM stockprice)
+		<if test="itmsNm != null">
+			AND itmsNm LIKE '%${itmsNm}%' 
+		</if>			
+	</select>
 	
 </mapper>
 

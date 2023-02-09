@@ -30,30 +30,42 @@ public class StockPriceService {
 	private FundProductInfoMapper fpMapper;
 	
 	
-	public List<StockPrice> getKospiList(){
-		return mapper.KospiList();
+	//stockList 페이지 리스트 구현
+	public List<StockPrice> getStockList(PageInfo pageInfo, Map<String, String> param){
+		param.put("limit", "" + pageInfo.getListLimit());
+		param.put("offset", "" + (pageInfo.getStartList() - 1));
+		return mapper.selectStockList(param);
 	}
 	
-	public List<StockPrice> getKosdaqList(){
-		return mapper.KosdaqList();
+	public int getStockCount(Map<String, String> param) {
+		return mapper.selectStockCount(param);
 	}
 	
-	public List<StockPrice> getKospiRanking(){
-		return mapper.KospiRanking();
+	
+	
+	
+	
+	
+	public List<StockPrice> getKospiList(PageInfo pageInfo, Map<String, String> param){
+		param.put("limit", "" + pageInfo.getListLimit());
+		param.put("offset", "" + (pageInfo.getStartList() - 1));
+		return mapper.KospiList(param);
 	}
 	
-	public List<StockPrice> getKosdaqRanking(){
-		return mapper.KosdaqRanking();
+	public List<StockPrice> getKosdaqList(PageInfo pageInfo, Map<String, String> param){
+		param.put("limit", "" + pageInfo.getListLimit());
+		param.put("offset", "" + (pageInfo.getStartList() - 1));
+		return mapper.KosdaqList(param);
 	}
 
-	public List<StockPrice> getKospiRankingTop(){
-		return mapper.KospiRankingTop();
+	public List<StockPrice> getKospiRankingTop(Map<String, String> param){
+		return mapper.KospiRankingTop(param);
 	}
 	
-	public List<StockPrice> getKosdaqRankingTop(){
-		return mapper.KosdaqRankingTop();
+	public List<StockPrice> getKosdaqRankingTop(Map<String, String> param){
+		return mapper.KosdaqRankingTop(param);
 	}
-
+	
 	@Transactional(rollbackFor = Exception.class)
 	public StockPrice findByNo(int stockNo) {
 		StockPrice sp = mapper.selectListByno(stockNo);
