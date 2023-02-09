@@ -24,6 +24,7 @@ padding-bottom: 30px;
 .stock_title{
    display: flex;
    justify-content: space-between;
+    font-size: 20px;
 }
 .stock-main-title{
   margin-top: 15px;
@@ -32,9 +33,12 @@ padding-bottom: 30px;
 .now_money{
   margin: 5px;
   text-align: right;
+  font-size: 18px;
 }
 .now_percent{
-  font-size: 14px;
+  font-size: 15px;
+  text-align: right;
+  margin-right:5px;
 }
 
 
@@ -64,7 +68,7 @@ padding-bottom: 30px;
 .tab-content{
   display: none;
 	background:white;
-  height: 450px;
+  height: 435px;
 	padding: 12px;
   border-radius: 0px 0px 10px 10px ;
 }
@@ -88,7 +92,7 @@ padding-bottom: 30px;
 /*탭 안의 내용*/
 .stock-graphes{
   width: 850px;
-  height: 370px;
+  height: 360px;
   justify-content: center;
   margin: 0 auto;
 }
@@ -162,16 +166,12 @@ padding-bottom: 30px;
 .stock-rank-name{margin-bottom: 10px; font-weight: 500;}
 .stock-rank-money{font-size: 16px; font-weight: 400;}
 /*stock kospi 종목*/
-.stock_rank_description_container{
-  margin-bottom: 15px;
-}
 .stock_details{
   background-color: white;
   width: 1230px;
-  height: 550px;
   justify-content: center;
   margin: 0 auto;
-  padding: 30px 40px;
+  padding: 40px 40px;
   display: none;
 }
 .stock_details.current{
@@ -180,13 +180,14 @@ padding-bottom: 30px;
 .stock_details_title{
   font-family: 'IBM Plex Sans KR', sans-serif;
   font-weight: 700;
-  margin-top: 10px;
   margin-bottom: 20px;
 }
 .stock-rank-percent-number{
   font-size: 16px;
+  width:45px;
+  text-align:right;
+  margin-bottom:0px;
 }
-
 /*랭킹테이블*/
 .stock-rank-table{
   margin: 0px auto;
@@ -197,7 +198,7 @@ padding-bottom: 30px;
 }
 .stock-rank-table td{font-weight: 500;}
 .table_row{
-  height: 35px;
+  height: 36px;
 }
 .stock-rank-table tr:nth-child(2n){
   background-color: rgb(248, 248, 248);
@@ -223,10 +224,13 @@ padding-bottom: 30px;
 
 /*3번째 단락 최근검색&일자별정보*/
 .stock_description_detail_container{
-  display: flex;
+  display: none;
   margin: 0 auto;
   justify-content: center;
   margin-bottom: 50px;
+}
+.stock_description_detail_container.current{
+  display: flex;
 }
 .stock_search{
   width: 265px;
@@ -268,6 +272,9 @@ padding-bottom: 30px;
 
 
 /*주가동향*/
+.description_container{
+	width:240px;
+}
 .stock-fortune{
   width: 1230px;
   justify-content: center;
@@ -295,11 +302,22 @@ padding-bottom: 30px;
 }
 .options{width: 200px;  padding-left: 10px;  font-family: 'IBM Plex Sans KR', sans-serif; }
 .input-search{
-  border: 1px solid black;
-  width: 430px;
-  height: 35px;
-  line-height: 31px;
-  border-radius: 4px;
+	display:flex;
+	justify-content:right;
+	border: 1px solid black;
+	width: 430px;
+	height: 35px;
+	line-height: 31px;
+	border-radius: 4px;
+}
+.submit-btn{
+	background-color:transparent;
+	border:none;
+	border-left: 1px solid black;
+	width:50px;
+}
+.submit-btn:hover{
+	background-color:lightgray;
 }
 .searching-keyword{  
   font-family: 'IBM Plex Sans KR', sans-serif; 
@@ -331,13 +349,13 @@ padding-bottom: 30px;
 .stock_information{ color: black;}
 .money{
   font-size: 20px; 
-  width: 90px; 
+  width: 110px; 
   font-weight: 600;
   margin-right: 10px;
 }
 .company_money{
   display: flex;
-  font-size: 22px;
+  font-size: 20px;
   margin-top: 10px;
 }
 .company_name{
@@ -347,14 +365,14 @@ padding-bottom: 30px;
   color:rgb(13, 27, 72);
 }
 .percent-money{
-  font-size: 16px;
+  font-size: 15px;
   line-height: 34px;
 }
 .company_code{
   line-height: 45px;
 }
 .stock-graph-section{
-  width: 260px;
+  width: 250px;
   height: 140px;
   margin-left: 30px;
   color: white;
@@ -371,6 +389,8 @@ padding-bottom: 30px;
   height: 40px;
   border-radius: 4px;
   margin-top: 15px;
+  text-align:center;
+  line-height:35px;
 }
 
 .fourtne-btn:hover{
