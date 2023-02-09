@@ -1,0 +1,981 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- Primary Meta Tags -->
+<title>MultiFin: 부동산</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="title" content="Spaces - All items list">
+<meta name="author" content="Themesberg">
+<meta name="description" content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
+<meta name="keywords" content="bootstrap, bootstrap 4 template, directory listing bootstrap, bootstrap 4 listing, bootstrap listing, bootstrap 4 directory listing template, vector map, leaflet js template, mapbox theme, mapbox template, dashboard, themesberg, user dashboard bootstrap, dashboard bootstrap, ui kit, bootstrap ui kit, premium bootstrap theme" />
+<link rel="canonical" href="https://themesberg.s3.us-east-2.amazonaws.com/public/products/spaces/thumbnail.jpg">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://demo.themesberg.com/pixel-pro">
+<meta property="og:title" content="Spaces - All items list">
+<meta property="og:description" content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
+<meta property="og:image" content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/spaces/thumbnail.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://demo.themesberg.com/pixel-pro">
+<meta property="twitter:title" content="Spaces - All items list">
+<meta property="twitter:description" content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
+<meta property="twitter:image" content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/spaces/thumbnail.jpg">
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="120x120" href="../../assets/img/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="../../assets/img/favicon/site.webmanifest">
+<link rel="mask-icon" href="../../assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+<style>* {  font-family: 'IBM Plex Sans KR', sans-serif;   }</style>
+<!-- Fontawesome -->
+<link type="text/css" href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/9945425c20.js" crossorigin="anonymous"></script>
+<!-- Leaflet JS -->
+<link type="text/css" href="../../assets/vendor/leaflet/dist/leaflet.css" rel="stylesheet">
+
+<!-- Fancybox -->
+<link rel="stylesheet" href="../../assets/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.css">
+
+<!-- VectorMap -->
+<link rel="stylesheet" href="../../assets/vendor/jqvmap/dist/jqvmap.min.css">
+
+<!-- Main CSS -->
+<link type="text/css" href="../../css/common.css" rel="stylesheet">
+<link rel="stylesheet" href="../../css/home/homeMain.css">
+<!--GOOGLE FONT-->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Montserrat:wght@600&family=Prompt:wght@600;900&display=swap" rel="stylesheet">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+    <main>
+     <!-- Hero -->
+     <div class="section section-header section-image bg-tertiary overlay-primary text-white overflow-hidden pb-9" data-background="../../assets/img/home/new-york-hero.jpg">
+        <div class="container z-2">
+            <div class="row justify-content-center pt-3">
+                <div class="col-12 text-center">
+                    <h1 class="home-mainTitle">쉽게 보는 부동산</span></h1>
+                    <p class="lead px-lg-5 mb-5 home-mainSubtitle">MULTIFIN에서 부동산의 모든 것을 간편하게 확인해 보세요!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="section section-md pt-0">
+            <div class="container mt-n7">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card border-light p-md-2">
+                            <div class="card-body p-4">
+                                <form autocomplete="off" method="get" action="#">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-group form-group-lg mb-lg-0">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><span class="fas fa-map-marker-alt"></span></span>
+                                                            </div>
+                                                            <input id="search-location" type="text" class="form-control autocomplete location" placeholder="지역을 입력하세요" tabindex="1" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="form-group form-group-lg mb-0">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                                            </div>
+                                                            <input class="form-control datepicker date" placeholder="날짜를 선택하세요" type="text" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-12">
+                                            <div id="collapseAdvanced" class="collapse">
+                                                <div class="row">
+                                                    <div class="col-12 col-lg-4">
+                                                        <div class="input-group input-group-lg mt-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><span class="fas fa-sliders-h"></span></span>
+                                                            </div>
+                                                            <select class="custom-select" id="exampleFormControlSelect1">
+                                                                <option>Type</option>
+                                                                <option>청약</option>
+                                                                <option>전세</option>
+                                                                <option>월세</option>
+                                                                <option>매매</option>
+                                                                <option>경매</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-4">
+                                                        <div class="card border-light mt-3 p-3">
+                                                            <a href="#" data-target="#price-1" class="accordion-panel-header w-100 d-flex align-items-center justify-content-between" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="price-1">
+                                                                <span class="icon-title h6 mb-0 font-weight-bold">Price</span>
+                                                                <span class="icon"><i class="fas fa-plus"></i></span>
+                                                            </a>
+                                                            <div id="price-1" class="collapse pt-5">
+                                                                <div id="input-slider-range" data-range-value-min="100" data-range-value-max="500"></div>
+                                                                <!-- Range slider values -->
+                                                                <div class="row d-none">
+                                                                    <div class="col-6">
+                                                                        <span class="range-slider-value value-low" data-range-value-low="200" id="input-slider-range-value-low"></span>
+                                                                    </div>
+                                                                    <div class="col-6 text-right">
+                                                                        <span class="range-slider-value value-high" data-range-value-high="400" id="input-slider-range-value-high"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <span class="font-xs small text-gray">*Prices are in KRW</span>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row align-items-center">
+                                                <div class="col-6 col-lg-4 mb-3 mb-lg-0">
+                                                    <button class="btn btn-primary btn-block animate-up-2 search_btn" type="submit">Search</button>
+                                                </div>
+                                                <div class="col-6 col-lg-4 mb-3 mb-lg-0">
+                                                    <button class="btn btn-outline-gray btn-block animate-up-2 reset_btn" type="reset">Reset</button>
+                                                </div>
+                                                <div class="col-12 col-lg-4 d-flex justify-content-between align-items-center">
+                                                    <a href="#" data-target="#collapseAdvanced" class="accordion-panel-header d-block" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseAdvanced">
+                                                        <span class="icon"><span class="fas fa-plus-circle"></span></span>
+                                                        <span class="icon-title font-weight-normal text-gray ml-2 mb-0 search_more">상세 검색</span>
+                                                    </a>
+                                                    <a href="#modal-map" data-toggle="modal" data-target="#map-listings" class="btn more btn-tertiary mr-2">
+                                                        <span class="fas fa-map-marker-alt mr-2"></span>
+                                                        <span class="map_view">지도보기</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="auction_main_container">
+            <div class="auction">
+               <div class="map_container">
+                    <div class="map_title">
+                        <i class="fa-regular fa-map"></i>
+                        <h3 class="title">청약지도</h3>
+                    </div>
+                    <div class="map">
+                    </div>
+               </div>
+               <div class="detail_container">
+                    <div class="detail_title">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <h3 class="title">경기도</h3> 
+                    </div>
+                    <div class="detail">
+                        <div class="table_table">
+                            <div class="auction_container">
+                                <div class="description_title">
+                                    대곡역 두산위브 입주자 모집
+                                </div>
+                                <div class="date">
+                                    <div class="start">청약 접수 : 2023-01-23</div>
+                                    <div class="end">청약 마감 : 2023-02-23</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="auction_container">
+                                <div class="description_title">
+                                    대곡역 두산위브 입주자 모집
+                                </div>
+                                <div class="date">
+                                    <div class="start">청약 접수 : 2023-01-23</div>
+                                    <div class="end">청약 마감 : 2023-02-23</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="auction_container">
+                                <div class="description_title">
+                                    대곡역 두산위브 입주자 모집
+                                </div>
+                                <div class="date">
+                                    <div class="start">청약 접수 : 2023-01-23</div>
+                                    <div class="end">청약 마감 : 2023-02-23</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="auction_container">
+                                <div class="description_title">
+                                    파주연풍 양우내안에 에코하임
+                                </div>
+                                <div class="date">
+                                    <div class="start">청약 접수 : 2023-01-23</div>
+                                    <div class="end">청약 마감 : 2023-02-23</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="auction_container">
+                                <div class="description_title">
+                                    파주연풍 양우내안에 에코하임
+                                </div>
+                                <div class="date">
+                                    <div class="start">청약 접수 : 2023-01-23</div>
+                                    <div class="end">청약 마감 : 2023-02-23</div>
+                                </div>
+                            </div>
+                            <button class="more_btn">더보기</button>
+                        </div>
+                    </div>
+               </div>
+            </div>
+
+        </section>
+        <section class="auction_info">
+            <div class="detail_title">
+                <i class="fa-regular fa-calendar"></i>
+                <h3 class="title">이번주 청약 일정</h4> 
+            </div>
+            <div class="auction_calendar">
+                <table id="" class="board-table">
+                    <tr class="text-center bg-info text-white">
+                        <th class="table-header">공급유형</th>
+                        <th class="table-header" >주택명</th>
+                        <th class="table-header">모집공고일</th>
+                        <th class="table-header">홈페이지</th>
+                    </tr>
+                    <tr>
+                        <td class="board-content board_type">APT</td>
+                        <td class="board-content board_title">빌리브 헤리티지</td>
+                        <td class="board-content">2022-10-27</td>
+                        <td class="board-content">
+                            <a class="address" href="#">
+                                <span class="adress_decription"> 
+                                    <i style="padding-top: 3px; margin-right: 10px;" class="fas fa-home"></i>
+                                    https://heritage.villiv.co.kr
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="board-content board_type">APT</td>
+                        <td class="board-content board_title">빌리브 헤리티지</td>
+                        <td class="board-content">2022-10-27</td>
+                        <td class="board-content"> 
+                            <a class="address" href="#">
+                                <span class="adress_decription"> 
+                                    <i style="padding-top: 3px; margin-right: 10px;" class="fas fa-home"></i>
+                                    https://heritage.villiv.co.kr
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="board-content board_type">APT</td>
+                        <td class="board-content board_title">성남판교대장 A-10블록 신촌희망타운</td>
+                        <td class="board-content">2022-10-27</td>
+                        <td class="board-content">
+                            <a class="address" href="#">
+                                <span class="adress_decription"> 
+                                    <i style="padding-top: 3px; margin-right: 10px;" class="fas fa-home"></i>
+                                    https://www.villiv.co.kr
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="board-content board_type">APT</td>
+                        <td class="board-content board_title">빌리브 헤리티지</td>
+                        <td class="board-content">2022-10-27</td>
+                        <td class="board-content">
+                            <a class="address" href="#">
+                                <span class="adress_decription"> 
+                                    <i style="padding-top: 3px; margin-right: 10px;" class="fas fa-home"></i>
+                                    https://heritage.villiv.villiv.co.kr
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr> 
+                        <td class="board-content board_type">APT</td>
+                        <td class="board-content board_title">빌리브 헤리티지</td>
+                        <td class="board-content">2022-10-27</td>
+                        <td class="board-content">
+                            <a class="address" href="#">
+                                <span class="adress_decription"> 
+                                    <i style="padding-top: 3px; margin-right: 10px;" class="fas fa-home"></i>
+                                    -
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section class="sell-info-section">
+            <div class="sell-info-container">
+                <h2 class="sell-title font-weight-bolder">전·월세 & 매매 정보</h2>
+                <h5 class="sub_title">Multifin에서 우리 동네 전·월세 및 매매 정보를 확인해 보세요</h5> 
+                <div class="sell-cards">
+                    <div class="basic-carousel owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="card border-light mb-4 animate-up-5">
+                                <a href="./single-space.html" class="position-relative">
+                                    <img src="../../assets/img/home/image-office.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office">
+                                </a>
+                                <div class="card-body">
+                                    <a href="#"> 
+                                        <h5 class="h4 sell_description_title">동인천역 파크 푸르지오</h5>
+                                    </a>
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item p-0 sell-location">
+                                            <span class="fas fa-map-marker-alt mr-2"></span>
+                                            인천광역시 동구 송림동
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-footer bg-gradient-light border-top">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="col pl-0">
+                                            <span class="now text-muted font-small d-block mb-2">세대수</span>
+                                            <span class="h5 text-dark font-weight-bold info">500가구</span>
+                                        </div>
+                                        <div class="col pl-0">
+                                            <span class="now text-muted font-small d-block mb-2">면적</span>
+                                            <span class="h5 text-dark font-weight-bold info">135㎡</span>
+                                        </div>
+                                        <div class="col pl-0">
+                                            <span class="now text-muted font-small d-block mb-2">가격</span>
+                                            <span class="h5 text-dark font-weight-bold info">41,641만원</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Card -->
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="item">
+                            <div class="card border-light mb-4 animate-up-5">
+                                <a href="./single-space.html" class="position-relative">
+                                    <img src="../../assets/img/home/image-office.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office">
+                                </a>
+                                <div class="card-body">
+                                    <a href="#"> 
+                                        <h5 class="h4 sell_description_title">수원 빛마루 APT</h5>
+                                    </a>
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item p-0 sell-location">
+                                            <span class="fas fa-map-marker-alt mr-2"></span>
+                                            인천광역시 동구 송림동
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-footer bg-gradient-light border-top">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="col pl-0">
+                                            <span class="now text-muted font-small d-block mb-2">세대수</span>
+                                            <span class="h5 text-dark font-weight-bold info">500가구</span>
+                                        </div>
+                                        <div class="col pl-0">
+                                            <span class="now text-muted font-small d-block mb-2">면적</span>
+                                            <span class="h5 text-dark font-weight-bold info">135㎡</span>
+                                        </div>
+                                        <div class="col pl-0">
+                                            <span class="now text-muted font-small d-block mb-2">가격</span>
+                                            <span class="h5 text-dark font-weight-bold info">41,641만원</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Card -->
+                        </div>
+                        <!-- Item 3 -->
+                        <div class="item">
+                            <div class="card border-light mb-4 animate-up-5">
+                                <a href="./single-space.html" class="position-relative">
+                                    <img src="../../assets/img/home/image-office.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office">
+                                </a>
+                                <div class="card-body">
+                                    <a href="#"> 
+                                        <h5 class="h4 sell_description_title">일산 유보라 APT</h5>
+                                    </a>
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item p-0 sell-location">
+                                            <span class="fas fa-map-marker-alt mr-2"></span>
+                                            인천광역시 동구 송림동
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-footer bg-gradient-light border-top">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="col pl-0">
+                                            <span class="now text-muted font-small d-block mb-2">세대수</span>
+                                            <span class="h5 text-dark font-weight-bold info">500가구</span>
+                                        </div>
+                                        <div class="col pl-0">
+                                            <span class="now text-muted font-small d-block mb-2">면적</span>
+                                            <span class="h5 text-dark font-weight-bold info">135㎡</span>
+                                        </div>
+                                        <div class="col pl-0">
+                                            <span class="now text-muted font-small d-block mb-2">가격</span>
+                                            <span class="h5 text-dark font-weight-bold info">41,641만원</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Card -->
+                        </div>
+                        <!-- Item 4 -->
+                        <div class="item">
+                            <div class="card border-light mb-4 animate-up-5">
+                                <a href="./single-space.html" class="position-relative">
+                                    <img src="../../assets/img/home/image-office.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office">
+                                </a>
+                                <div class="card-body">
+                                    <a href="#"> 
+                                        <h5 class="h4 sell_description_title">서울 사당동 자이APT</h5>
+                                    </a>
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item p-0 sell-location">
+                                            <span class="fas fa-map-marker-alt mr-2"></span>
+                                            인천광역시 동구 송림동
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-footer bg-gradient-light border-top">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="col pl-0">
+                                            <span class="now text-muted font-small d-block mb-2">세대수</span>
+                                            <span class="h5 text-dark font-weight-bold info">500가구</span>
+                                        </div>
+                                        <div class="col pl-0">
+                                            <span class="now text-muted font-small d-block mb-2">면적</span>
+                                            <span class="h5 text-dark font-weight-bold info">135㎡</span>
+                                        </div>
+                                        <div class="col pl-0">
+                                            <span class="now text-muted font-small d-block mb-2">가격</span>
+                                            <span class="h5 text-dark font-weight-bold info">41,641만원</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Card -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 뉴스와 커뮤니티 시작 -->
+<section id="news_commu" class="section pt-5 pb-5">
+    <div class="mainFinalSec">
+        <div class="pl-3 pr-3 noticeBox">
+            <div class="notice_title">
+                <span class="title">NOTICE</span>
+            </div>
+            <div class="nocie-container">
+                <a href="#">
+                    <div class="notice">
+                        <div class="notice_logo">공지</div>
+                        <div class="notice_body">
+                            <h5 class="notice-title">성남금광1 e편한 세상 금빛 메랑메종 보류지 입찰공고</h5>
+                            <h6 class="notice-date">2023.01.13</h6>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="notice">
+                        <div class="notice_logo">공지</div>
+                        <div class="notice_body">
+                            <h5 class="notice-title">수원 유보라APT 201동 1201호 경매 공고</h5>
+                            <h6 class="notice-date">2023.01.13</h6>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="notice">
+                        <div class="notice_logo">공지</div>
+                        <div class="notice_body">
+                            <h5 class="notice-title">서울 서대문구 푸르지오 보류지 입찰 공고</h5>
+                            <h6 class="notice-date">2023.01.13</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+        </div>
+        <div class="comuBox">
+            <div class="commu_title">
+                <span class="title">COMUNITY</span>
+                <div class="moreview">
+                    <a href="#">
+                        <span class="More_title">더보기</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+            <table class="home-notice-table">
+				<tr class="table_content">
+                    <td>
+                        <a class="c_title" href="">
+                            <h6 class="board_c_title"> 핀테크 기업 대상, 해외진출 설명회 개최 핀테크 기업 대상, 해외진출 설명회 개최 </h6>
+                        </a>
+                    </td>
+                    <td>
+                        <span>2022-12-19</span>
+                    </td>
+				</tr>
+                <tr class="table_content">
+                    <td>
+                        <a class="c_title" href="">
+                            <h6 class="board_c_title">한 눈에 보는 규제 in 서울</h6>
+                        </a>
+                    </td>
+                    <td>
+                        <span>2022-12-15</span>
+                    </td>
+				</tr>
+                <tr class="table_content">
+                    <td>
+                        <a class="c_title" href="">
+                            <h6 class="board_c_title"> 핀테크 기업 대상, 해외진출 설명회 개최 핀테크 기업 대상, 해외진출 설명회 개최 </h6>
+                        </a>
+                    </td>
+                    <td>
+                        <span>2022-12-19</span>
+                    </td>
+				</tr>
+                <tr class="table_content">
+                    <td>
+                        <a class="c_title" href="">
+                            <h6 class="board_c_title">한 눈에 보는 규제 in 서울</h6>
+                        </a>
+                    </td>
+                    <td>
+                        <span>2022-12-15</span>
+                    </td>
+				</tr>
+                <tr class="table_content">
+                    <td>
+                        <a class="c_title" href="">
+                            <h6 class="board_c_title"> 핀테크 기업 대상, 해외진출 설명회 개최 핀테크 기업 대상, 해외진출 설명회 개최 </h6>
+                        </a>
+                    </td>
+                    <td>
+                        <span>2022-12-19</span>
+                    </td>
+				</tr>
+                <tr class="table_content">
+                    <td>
+                        <a class="c_title" href="">
+                            <h6 class="board_c_title">한 눈에 보는 규제 in 서울</h6>
+                        </a>
+                    </td>
+                    <td>
+                        <span>2022-12-15</span>
+                    </td>
+				</tr>
+            </table><!-- home-notice-list -->
+        </div>
+    </div>
+</section>
+    </main>
+    
+    <!-- Modal Content -->
+<div class="modal fade" id="map-listings" tabindex="-1" role="dialog" aria-labelledby="map-listings"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-full" role="document">
+        <div class="modal-content position-relative">
+            <div class="preloadermap flex-column justify-content-center align-items-center">
+            </div>
+            <div class="modal-header border-0 pb-1 d-block">
+                <div class="d-flex justify-content-end d-lg-none mb-2">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                </div>
+                <form action="#" class="row align-items-center">
+                    <div class="col-12 col-lg-3">
+                        <div class="form-group m-lg-0">
+                            <div class="input-group input-group-md mb-2 m-lg-0">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                </div>
+                                <input id="search-location-map" type="text" class="form-control autocomplete"
+                                    placeholder="지역을 입력하세요" tabindex="1" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <div class="input-group input-group-md mb-3 m-lg-0">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                            <input class="form-control datepicker" placeholder="날짜를 선택해주세요" type="text" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-2 mb-2 mb-lg-0">
+                        <button class="btn btn-primary btn-block m-0 animate-up-2" type="submit">Search</button>
+                    </div>
+                    <div class="col-lg-2 d-flex align-items-center">
+                        <p class="m-0 search_result">검색결과 13 건</p>
+                    </div>
+                    <div class="d-none col-lg-2 d-lg-block">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-body overflow-hidden d-flex py-4">
+                <div class="row h-100">
+                    <div class="d-none d-xl-block col-12 col-lg-5 overflow-auto h-100">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card border-light mb-4 animate-up-5">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-12 col-lg-6 col-xl-5">
+                                            <a href="./single-space.html">
+                                                <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-lg-6 col-xl-7">
+                                            <div class="card-body px-3 py-2">
+                                                <a href="./single-space.html">
+                                                    <h4 class="h6 more_title">대곡역 두산위브</h4>
+                                                </a>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="more_container">
+                                                        <h5 class="more_body">세대수</h5>
+                                                        <h5 class="more_body">234가구</h5>
+                                                    </div>
+                                                    <div class="more_container">
+                                                        <h5 class="more_body">면적</h5>
+                                                        <h5 class="more_body">135㎡</h5>
+                                                    </div>
+                                                    <div class="more_container">
+                                                        <h5 class="more_body">가격</h5>
+                                                        <h5 class="more_body">41,641만원</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card border-light mb-4 animate-up-5">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-12 col-lg-6 col-xl-5">
+                                            <a href="./single-space.html">
+                                                <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-lg-6 col-xl-7">
+                                            <div class="card-body px-3 py-2">
+                                                <a href="./single-space.html">
+                                                    <h4 class="h6 more_title">대곡역 두산위브</h4>
+                                                </a>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="more_container">
+                                                        <h5 class="more_body">세대수</h5>
+                                                        <h5 class="more_body">234가구</h5>
+                                                    </div>
+                                                    <div class="more_container">
+                                                        <h5 class="more_body">면적</h5>
+                                                        <h5 class="more_body">135㎡</h5>
+                                                    </div>
+                                                    <div class="more_container">
+                                                        <h5 class="more_body">가격</h5>
+                                                        <h5 class="more_body">41,641만원</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card border-light mb-4 animate-up-5">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-12 col-lg-6 col-xl-5">
+                                            <a href="./single-space.html">
+                                                <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-lg-6 col-xl-7">
+                                            <div class="card-body px-3 py-2">
+                                                <a href="./single-space.html">
+                                                    <h4 class="h6 more_title">대곡역 두산위브</h4>
+                                                </a>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="more_container">
+                                                        <h5 class="more_body">세대수</h5>
+                                                        <h5 class="more_body">234가구</h5>
+                                                    </div>
+                                                    <div class="more_container">
+                                                        <h5 class="more_body">면적</h5>
+                                                        <h5 class="more_body">135㎡</h5>
+                                                    </div>
+                                                    <div class="more_container">
+                                                        <h5 class="more_body">가격</h5>
+                                                        <h5 class="more_body">41,641만원</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card border-light mb-4 animate-up-5">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-12 col-lg-6 col-xl-5">
+                                            <a href="./single-space.html">
+                                                <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-lg-6 col-xl-7">
+                                            <div class="card-body px-3 py-2">
+                                                <a href="./single-space.html">
+                                                    <h4 class="h6 more_title">대곡역 두산위브</h4>
+                                                </a>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="more_container">
+                                                        <h5 class="more_body">세대수</h5>
+                                                        <h5 class="more_body">234가구</h5>
+                                                    </div>
+                                                    <div class="more_container">
+                                                        <h5 class="more_body">면적</h5>
+                                                        <h5 class="more_body">135㎡</h5>
+                                                    </div>
+                                                    <div class="more_container">
+                                                        <h5 class="more_body">가격</h5>
+                                                        <h5 class="more_body">41,641만원</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="extraContent" style="display: none">
+                                <div class="col-12">
+                                    <div class="card border-light mb-4 animate-up-5">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-12 col-lg-6 col-xl-5">
+                                                <a href="./single-space.html">
+                                                    <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
+                                                </a>
+                                            </div>
+                                            <div class="col-12 col-lg-6 col-xl-7">
+                                                <div class="card-body px-3 py-2">
+                                                    <a href="./single-space.html">
+                                                        <h4 class="h6 more_title">대곡역 두산위브</h4>
+                                                    </a>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="more_container">
+                                                            <h5 class="more_body">세대수</h5>
+                                                            <h5 class="more_body">234가구</h5>
+                                                        </div>
+                                                        <div class="more_container">
+                                                            <h5 class="more_body">면적</h5>
+                                                            <h5 class="more_body">135㎡</h5>
+                                                        </div>
+                                                        <div class="more_container">
+                                                            <h5 class="more_body">가격</h5>
+                                                            <h5 class="more_body">41,641만원</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="card border-light mb-4 animate-up-5">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-12 col-lg-6 col-xl-5">
+                                                <a href="./single-space.html">
+                                                    <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
+                                                </a>
+                                            </div>
+                                            <div class="col-12 col-lg-6 col-xl-7">
+                                                <div class="card-body px-3 py-2">
+                                                    <a href="./single-space.html">
+                                                        <h4 class="h6 more_title">대곡역 두산위브</h4>
+                                                    </a>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="more_container">
+                                                            <h5 class="more_body">세대수</h5>
+                                                            <h5 class="more_body">234가구</h5>
+                                                        </div>
+                                                        <div class="more_container">
+                                                            <h5 class="more_body">면적</h5>
+                                                            <h5 class="more_body">135㎡</h5>
+                                                        </div>
+                                                        <div class="more_container">
+                                                            <h5 class="more_body">가격</h5>
+                                                            <h5 class="more_body">41,641만원</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="card border-light mb-4 animate-up-5">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-12 col-lg-6 col-xl-5">
+                                                <a href="./single-space.html">
+                                                    <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
+                                                </a>
+                                            </div>
+                                            <div class="col-12 col-lg-6 col-xl-7">
+                                                <div class="card-body px-3 py-2">
+                                                    <a href="./single-space.html">
+                                                        <h4 class="h6 more_title">대곡역 두산위브</h4>
+                                                    </a>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="more_container">
+                                                            <h5 class="more_body">세대수</h5>
+                                                            <h5 class="more_body">234가구</h5>
+                                                        </div>
+                                                        <div class="more_container">
+                                                            <h5 class="more_body">면적</h5>
+                                                            <h5 class="more_body">135㎡</h5>
+                                                        </div>
+                                                        <div class="more_container">
+                                                            <h5 class="more_body">가격</h5>
+                                                            <h5 class="more_body">41,641만원</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-2 mb-4 text-center">
+                                <button id="loadOnClick" class="btn btn-primary shadow-soft border-soft btn-loading-overlay mr-2 mb-2" type="button">
+                                <span class="spinner">
+                                    <span class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
+                                </span>
+                                <span class="ml-1 btn-inner-text">더보기</span>
+                                </button>
+                                <p id="allLoadedText" style="display: none;">검색이 완료되었습니다!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-7">
+                        <div id="mapListings"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--footer-->
+    <!-- 푸터 시작 -->
+    <footer class="footer pb-3 bg-primary text-white pt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-2 mb-3 mb-xl-0">
+                    <img src="../../assets/img/ours/logo01_white.png" height="80" class="mb-3" alt="Spaces logo">
+                </div>
+                <div class="col-6 mb-5 mb-xl-0">
+                    <span class="h5">MULTIFIN</span>
+                    <ul class="footer-links mt-2">
+                        <li><a target="_blank" href="https://www.notion.so/1612e95890584ef8b4854804e7c2356c">멀티핀</a></li>
+                        <li><a target="_blank" href="#">서울특별시 강남구 언주로 508(역삼동 701번지) 서울상록빌딩 12~17층</a></li>
+                        <li><a target="_blank" href="#">왕예빈 박원철 박지나 안종호 이인희 정우성 최지유</a></li>
+                    </ul>
+                </div>
+                <div class="col-xl-4 mb-5 mb-xl-0 text-right footer_snsicon">
+                    <div>
+                        <button class="btn btn-sm btn-white mb-xl-0 mr-2 mr-lg-2">
+                            <span class="icon icon-brand"><i class="fa-brands fa-twitter"></i></span>
+                        </button>
+                        <button class="btn btn-sm btn-white mb-xl-0 mr-2 mr-lg-2">
+                            <span class="icon icon-brand"><i class="fa-brands fa-google-drive"></i></span>
+                        </button>
+                        <button class="btn btn-sm btn-white mb-xl-0 mr-2 mr-lg-2">
+                            <span class="icon icon-brand"><i class="fa-brands fa-facebook-f"></i></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <p class="font-weight-normal font-small text-right mb-0 mt-4">Copyright © Themesberg
+                <span class="current-year">2020</span>. All rights reserved.</p>
+        </div>
+    </footer>
+        <!-- 푸터 끝 -->
+        
+<!-- End of Modal Content -->
+
+
+<!-- Core -->
+<script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="../../assets/vendor/popper.js/dist/umd/popper.min.js"></script>
+<script src="../../assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../assets/vendor/headroom.js/dist/headroom.min.js"></script>
+<script src="../../assets/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+
+<!-- NoUISlider -->
+<script src="../../assets/vendor/nouislider/distribute/nouislider.min.js"></script>
+
+<!-- Bootstrap Datepicker -->
+<script src="../../vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<!-- Owl acrousel -->
+<script src="../../assets/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
+
+<!-- Smooth scroll -->
+<script src="../../assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+<!-- Fancybox -->
+<script src="../../assets/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
+
+<!-- Sticky sidebar -->
+<script src="../../assets/vendor/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
+
+<!-- Mapbox & Leaflet.js -->
+<script src="../../assets/vendor/leaflet/dist/leaflet.js"></script>
+
+<!-- Chartist -->
+<script src="../../assets/vendor/chartist/dist/chartist.min.js"></script>
+<script src="../../assets/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+
+<!-- Vector Maps -->
+<script src="../../assets/vendor/jqvmap/dist/jquery.vmap.min.js"></script>
+<script src="../../assets/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
+
+<!-- Sliderform -->
+<script src="../../assets/assets/js/jquery.slideform.js"></script>
+
+<!-- Spaces custom Javascript -->
+<script src="../../assets/js/spaces.js"></script>
+
+<!-- Spaces custom Javascript -->
+<script src="../../assets/js/spaces.js"></script>
+</body>
+
+</html>

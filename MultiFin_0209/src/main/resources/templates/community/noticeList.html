@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- Primary Meta Tags -->
+<title>MultiFin:자유게시판</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="title" content="Spaces - About">
+<meta name="author" content="Themesberg">
+<meta name="description" content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
+<meta name="keywords" content="bootstrap, bootstrap 4 template, directory listing bootstrap, bootstrap 4 listing, bootstrap listing, bootstrap 4 directory listing template, vector map, leaflet js template, mapbox theme, mapbox template, dashboard, themesberg, user dashboard bootstrap, dashboard bootstrap, ui kit, bootstrap ui kit, premium bootstrap theme" />
+<link rel="canonical" href="https://themesberg.s3.us-east-2.amazonaws.com/public/products/spaces/thumbnail.jpg">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://demo.themesberg.com/pixel-pro">
+<meta property="og:title" content="Spaces - About">
+<meta property="og:description" content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
+<meta property="og:image" content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/spaces/thumbnail.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://demo.themesberg.com/pixel-pro">
+<meta property="twitter:title" content="Spaces - About">
+<meta property="twitter:description" content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
+<meta property="twitter:image" content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/spaces/thumbnail.jpg">
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="120x120" href="../assets/img/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="../assets/img/favicon/site.webmanifest">
+<link rel="mask-icon" href="../assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Fontawesome -->
+<link type="text/css" href="../vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/9945425c20.js" crossorigin="anonymous"></script>
+<!-- Leaflet JS -->
+<link type="text/css" href="../vendor/leaflet/dist/leaflet.css" rel="stylesheet">
+
+<!-- Fancybox -->
+<link rel="stylesheet" href="../vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.css">
+
+<!-- VectorMap -->
+<link rel="stylesheet" href="../vendor/jqvmap/dist/jqvmap.min.css">
+
+<!--GOOGLE FONT-->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Montserrat:wght@600&family=Prompt:wght@600;900&display=swap" rel="stylesheet">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- Main CSS -->
+<link type="text/css" href="../../css/common.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../../css/community/list.css">
+<!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+
+</head>
+<body>
+    <main>
+        <section class="section section-header bg-primary overlay-primary text-white pb-8" data-background="../../assets/img/board/team-hero.jpg">
+            <div class="container">
+               <div class="row justify-content-center">
+                  <div class="col-12 col-md-8 text-center">
+                        <h1 class="display-2 mb-4 title">공지사항</h1>
+                        <p class="lead px-lg-5 mainSubtitle">경제 · 금융에 관한 공지사항을 확인해 보세요!</p>
+                    </div>
+               </div>
+            </div>
+            <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2">
+                <svg class="fill-white" enable-background="new 0 0 1504 131.3" viewBox="0 0 1504 131.3" xmlns="http://www.w3.org/2000/svg"><path d="m877.8 85c139.5 24.4 348 33.5 632.2-48.2-.2 32.5-.3 65-.5 97.4-505.9 0-1011.6 0-1517.5 0 0-33.3 0-66.7 0-100.1 54.2-11.4 129.5-23.9 220-28.2 91-4.3 173.6 1 307.4 18.6 183.2 24.2 295.2 49.4 358.4 60.5z"/></svg>
+            </figure>
+        </section>
+        <section class="board mb-6">
+            <div class="top">
+                <button class="write_btn">글쓰기</button>
+                <form action="${path}/board/list" method="get" class="search">
+                    <div style="text-align: center;">
+                        <label>
+                        <input type="radio" name="searchType" value="title"> 제목 
+                        </label>
+                        <label>
+                        <input type="radio" name="searchType" value="content"> 내용
+                        </label>
+                        <label>
+                        <input type="radio" name="searchType" value="writer" > 작성자
+                        </label>
+                    </div>
+                    <div class="group">
+                        <span class="blue_window"> 
+                            <input type="text" id="searchValue" name="searchValue" class="input_text" placeholder="검색어를 입력해주세요"/>
+                          </span>
+                          <button type="submit" class="sch_smit">검색</button>
+                    </div>
+                </form>
+            </div>
+            <table id="tbl-board" class="board-table">
+              <tr>
+                <th class="table-header">번호</th>
+                <th class="table-header" >제목</th>
+                <th class="table-header">작성자</th>
+                <th class="table-header">작성일</th>
+                <th class="table-header">첨부파일</th>
+                <th class="table-header">조회수</th>
+              </tr>
+              <tr>
+                <td class="board-content">1</td>
+                <td class="board-content board-title">청약 당첨 되어보신분 있나요? 요즘 청약 잘된다던데</td>
+                <td class="board-content"> happy </td>
+                <td class="board-content"> 2023-01-14 </td>
+                <td class="board-content"> 첨부파일 없음 </td>
+                <td class="board-content"> 32 </td>
+              </tr>
+              <tr>
+                <td class="board-content">2</td>
+                <td class="board-content board-title">삼성전자 그래도 오름세긴 하네요 </td>
+                <td class="board-content"> admin </td>
+                <td class="board-content"> 2022-12-14 </td>
+                <td class="board-content"> 첨부파일 없음 </td>
+                <td class="board-content"> 32 </td>
+              </tr>
+            </table>
+            <div class="table-buttons">
+                <button onclick="" class="table-button">&lt;&lt;</button>
+                <button onclick="" class="table-button">&lt;</button>
+                <button onclick="" class="table-button">1</button>
+                <button onclick="" class="table-button">2</button>
+                <button onclick="" class="table-button">3</button>
+                <button onclick="" class="table-button">4</button>
+                <button onclick="" class="table-button">5</button>
+                <button onclick="" class="table-button">&gt;</button>
+                <button onclick="" class="table-button">&gt;&gt;</button>
+            </div>
+        </section>
+        <!-- 푸터 시작 -->
+<footer class="footer pb-3 bg-primary text-white pt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-2 mb-3 mb-xl-0">
+                <img src="../../assets/img/ours/logo01_white.png" height="80" class="mb-3" alt="Spaces logo">
+            </div>
+            <div class="col-6 mb-5 mb-xl-0">
+                <span class="h5">MULTIFIN</span>
+                <ul class="footer-links mt-2">
+                    <li><a target="_blank" href="https://www.notion.so/1612e95890584ef8b4854804e7c2356c">멀티핀</a></li>
+                    <li><a target="_blank" href="#">서울특별시 강남구 언주로 508(역삼동 701번지) 서울상록빌딩 12~17층</a></li>
+                    <li><a target="_blank" href="#">왕예빈 박원철 박지나 안종호 이인희 정우성 최지유</a></li>
+                </ul>
+            </div>
+            <div class="col-xl-4 mb-5 mb-xl-0 text-right footer_snsicon">
+                <div>
+                    <button class="btn btn-sm btn-white mb-xl-0 mr-2 mr-lg-2">
+                        <span class="icon icon-brand"><i class="fa-brands fa-twitter"></i></span>
+                    </button>
+                    <button class="btn btn-sm btn-white mb-xl-0 mr-2 mr-lg-2">
+                        <span class="icon icon-brand"><i class="fa-brands fa-google-drive"></i></span>
+                    </button>
+                    <button class="btn btn-sm btn-white mb-xl-0 mr-2 mr-lg-2">
+                        <span class="icon icon-brand"><i class="fa-brands fa-facebook-f"></i></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <p class="font-weight-normal font-small text-right mb-0 mt-2 pr-0">Copyright © Themesberg
+            <span class="current-year">2023</span>. All rights reserved.</p>
+    </div>
+</footer>
+<!-- 푸터 끝 -->
+    </main>
+        <!-- Core -->
+        <script src="../../vendor/jquery/dist/jquery.min.js"></script>
+        <script src="../../vendor/popper.js/dist/umd/popper.min.js"></script>
+        <script src="../../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../vendor/headroom.js/dist/headroom.min.js"></script>
+        <script src="../../vendor/onscreen/dist/on-screen.umd.min.js"></script>
+        
+        
+        <!-- Spaces custom Javascript -->
+        <script src="../../assets/js/spaces.js"></script>
+</body>
+
+</html>
