@@ -15,12 +15,18 @@
 	</resultMap>
 	
 	<!-- 펀드 상품 조회(주식형, 채권형, 혼합형, MMF) -->
-	<select id="selectFundProduct" resultMap="FundProductInfoResultMap">
+	<select id="selectFundProduct" parameterType="map" resultMap="FundProductInfoResultMap">
 		SELECT * 
 		FROM FundProductInfo AS f
-		WHERE f.fndTp=#{fndTp}
+		WHERE f.fndTp='주식형'
+		ORDER BY F.FPINO ASC LIMIT ${limit} OFFSET ${offset}
 	</select>
 	
+	<select id="selectFundCount" parameterType="map" resultType="int">
+		SELECT 
+		COUNT(DISTINCT F.FPINO) 
+		FROM FUNDPRODUCTINFO F
+	</select>
 	
 </mapper>
 

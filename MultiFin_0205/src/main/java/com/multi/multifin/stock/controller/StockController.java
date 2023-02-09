@@ -1,13 +1,20 @@
 package com.multi.multifin.stock.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.multi.multifin.common.util.PageInfo;
 import com.multi.multifin.stock.model.service.StockPriceService;
 import com.multi.multifin.stock.model.vo.ExchangeRate;
+import com.multi.multifin.stock.model.vo.FundProductInfo;
 import com.multi.multifin.stock.model.vo.StockPrice;
 import com.multi.multifin.stock.model.vo.StockPriceIndex;
 
@@ -113,9 +120,32 @@ public class StockController {
 		return "stock/stockBuying";
 	}
 	
-	@RequestMapping("/stockFund")
-	public String stockFund() {
+	@GetMapping("/stockFund")
+	public String stockFund(Model model, @RequestParam Map<String, String> paramMap) {
+		int page = 1;
+
+		// 탐색할 맵을 선언
+		Map<String, String> searchMap = new HashMap<String, String>();
+		try {
+			String searchValue = paramMap.get("searchValue");
+			if (searchValue != null && searchValue.length() > 0) {
+				String searchType = paramMap.get("searchType");
+				searchMap.put(searchType, searchValue);
+			} else {
+				paramMap.put("searchType", "all");
+			}
+			
+			page = Integer.parseInt(paramMap.get("page"));
+			 
+		} catch (Exception e) {}
 		
+		int fundCount = service.getFundCount(searchMap);
+		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
+		List<FundProductInfo> list = service.getFundList(pageInfo, searchMap);	
+		
+		model.addAttribute("list", list);
+		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("pageInfo", pageInfo);
 		
 		return "stock/stockFund";
 	}

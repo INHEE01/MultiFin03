@@ -1,11 +1,13 @@
 package com.multi.multifin.stock.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.multi.multifin.common.util.PageInfo;
 import com.multi.multifin.stock.model.mapper.ExchangeRateMapper;
 import com.multi.multifin.stock.model.mapper.FundProductInfoMapper;
 import com.multi.multifin.stock.model.mapper.StockPriceIndexMapper;
@@ -86,8 +88,16 @@ public class StockPriceService {
 	}
 	
 	// 펀드 리스트 출력
-	public List<FundProductInfo> getFundList() {
-		return fpMapper.selectFundProduct();
+	public List<FundProductInfo> getFundList(PageInfo pageInfo, Map<String, String> param) {
+		param.put("limit", "" + pageInfo.getListLimit());
+		param.put("offset", "" + (pageInfo.getStartList() - 1));
+		
+		return fpMapper.selectFundProduct(param);
+	}
+	
+	// 펀드 리스트의 개수
+	public int getFundCount(Map<String, String> param) {
+		return fpMapper.selectFundCount(param);
 	}
 
 }
