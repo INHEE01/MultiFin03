@@ -334,6 +334,15 @@ button:hover{
     color:black;
     border: 1px solid black;
 }
+.img-card{box-shadow: 0 40px 80px rgb(0 0 0 / 16%);}
+.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.tapMenu{display:none;}
 /* 라벨 스타일 지정 */
 .radioBtn{display: none;}
 .radioLabel{
@@ -351,7 +360,7 @@ button:hover{
 }
 
 /* 슬라이드 : 탭 선택 시 표시할 요소(div) 정의(1번 탭 선택 시 첫 번째 div 요소 표시) */
-#css_tabs input:nth-of-type(1), #css_tabs input:nth-of-type(1) + div:nth-of-type(1),
+/* #css_tabs input:nth-of-type(1), #css_tabs input:nth-of-type(1) + div:nth-of-type(1),
 #css_tabs input:nth-of-type(2), #css_tabs input:nth-of-type(2) + div:nth-of-type(2),
 #css_tabs input:nth-of-type(3), #css_tabs input:nth-of-type(3) + div:nth-of-type(3) {
     display:none
@@ -360,7 +369,7 @@ button:hover{
 #css_tabs input:nth-of-type(2):checked + div:nth-of-type(2),
 #css_tabs input:nth-of-type(3):checked + div:nth-of-type(3) {
     display:block
-}
+} */
 
 /*main_container*/
 .slide_card {display: flex; justify-content: center;align-items: center;}

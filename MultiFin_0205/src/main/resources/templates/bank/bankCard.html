@@ -42,7 +42,7 @@
                     </tr>
                     <tr>
                         <td><input type="radio" name="radioBtn" class="radioBtn" data-tab="slide3" id="radio3"><label for="radio3" class="radioLabel">삼성카드</label></td>
-                        <td><input type="radio" name="radioBtn" class="radioBtn" data-tab="slide4" id="radio4"><label for="radio4" class="radioLabel">NH농협카드</label></td>
+                        <td><input type="radio" name="radioBtn" class="radioBtn" data-tab="slide4" id="radio4"><label for="radio4" class="radioLabel">비씨카드</label></td>
                     </tr>
                     <tr>
                         <td><input type="radio" name="radioBtn" class="radioBtn" data-tab="slide5" id="radio5"><label for="radio5" class="radioLabel">신한카드</label></td>
@@ -58,75 +58,28 @@
                 <!-- 슬라이드 1 s -->
                 <div class="slide first mb-4 mb-lg-0 slideOpen" id="slide1">
                     <div class="row mb1">
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="debitHyundai : ${debitHyundai}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    슬라이드1
+                            <!-- @@@@@@@@@@@@@@@ 이미지 회전하는 방법 다시 생각하기 23.02.09 14:22 -->
+                            <a th:href="${debitHyundai.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${debitHyundai.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                FANTastic S 체크
+                                [[${debitHyundai.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="creditHyundai : ${creditHyundai}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지2
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold ">
-                                신한카드 폴리
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지3
+                            <a th:href="${creditHyundai.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${creditHyundai.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                THE PINK
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지4
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                핏(Fit)
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
+                                [[${creditHyundai.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
@@ -135,75 +88,27 @@
                 <!-- 슬라이드 2 s -->
                 <div class="slide first mb-4 mb-lg-0" id="slide2">
                     <div class="row mb1">
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="debitKb : ${debitKb}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    슬라이드1
+                            <a th:href="${debitKb.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${debitKb.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                FANTastic S 체크
+                                [[${debitKb.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="creditKb : ${creditKb}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지2
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold ">
-                                신한카드 폴리
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지3
+                            <a th:href="${creditKb.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${creditKb.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                THE PINK
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지4
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                핏(Fit)
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
+                                [[${creditKb.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
@@ -212,75 +117,27 @@
                 <!-- 슬라이드 3 s -->
                 <div class="slide first mb-4 mb-lg-0" id="slide3">
                     <div class="row mb1">
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="debitSamsung : ${debitSamsung}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    슬라이드1
+                            <a th:href="${debitSamsung.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${debitSamsung.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                FANTastic S 체크
+                                [[${debitSamsung.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="creditSamsung : ${creditSamsung}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지2
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold ">
-                                신한카드 폴리
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지3
+                            <a th:href="${creditSamsung.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${creditSamsung.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                THE PINK
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지4
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                핏(Fit)
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
+                                [[${creditSamsung.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
@@ -289,75 +146,27 @@
                 <!-- 슬라이드 4 s -->
                 <div class="slide first mb-4 mb-lg-0" id="slide4">
                     <div class="row mb1">
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="debitBC : ${debitBC}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    슬라이드1
+                            <a th:href="${debitBC.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${debitBC.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                FANTastic S 체크
+                                [[${debitBC.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="creditBC : ${creditBC}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지2
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold ">
-                                신한카드 폴리
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지3
+                            <a th:href="${creditBC.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${creditBC.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                THE PINK
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지4
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                핏(Fit)
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
+                                [[${creditBC.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
@@ -366,75 +175,27 @@
                 <!-- 슬라이드 5 s -->
                 <div class="slide first mb-4 mb-lg-0" id="slide5">
                     <div class="row mb1">
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="debitSinhan : ${debitSinhan}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    슬라이드1
+                            <a th:href="${debitSinhan.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${debitSinhan.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                FANTastic S 체크
+                                [[${debitSinhan.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="creditSinhan : ${creditSinhan}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지2
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold ">
-                                신한카드 폴리
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지3
+                            <a th:href="${creditSinhan.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${creditSinhan.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                THE PINK
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지4
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                핏(Fit)
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
+                                [[${creditSinhan.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
@@ -443,75 +204,27 @@
                 <!-- 슬라이드 6 s -->
                 <div class="slide first mb-4 mb-lg-0" id="slide6">
                     <div class="row mb1">
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="debitWoori : ${debitWoori}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    슬라이드1
+                            <a th:href="${debitWoori.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${debitWoori.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                FANTastic S 체크
+                                [[${debitWoori.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="creditWoori : ${creditWoori}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지2
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold ">
-                                신한카드 폴리
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지3
+                            <a th:href="${creditWoori.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${creditWoori.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                THE PINK
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지4
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                핏(Fit)
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
+                                [[${creditWoori.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
@@ -520,152 +233,56 @@
                 <!-- 슬라이드 7 s -->
                 <div class="slide first mb-4 mb-lg-0" id="slide7">
                     <div class="row mb1">
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="debitLotte : ${debitLotte}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    슬라이드1
+                            <a th:href="${debitLotte.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${debitLotte.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                FANTastic S 체크
+                                [[${debitLotte.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="creditLotte : ${creditLotte}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지2
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold ">
-                                신한카드 폴리
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지3
+                            <a th:href="${creditLotte.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${creditLotte.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                THE PINK
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지4
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                핏(Fit)
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
+                                [[${creditLotte.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
                     </div>
                 </div>
                 <!-- 슬라이드 8 s -->
-                <div class="slide first mb-4 mb-lg-0 border-gray-500" id="slide8">
+                <div class="slide first mb-4 mb-lg-0" id="slide8">
                     <div class="row mb1">
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="debitHana : ${debitHana}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    슬라이드1
+                            <a th:href="${debitHana.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${debitHana.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                FANTastic S 체크
+                                [[${debitHana.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
-                        <div class="bmCard mb-4">
+                        <div class="bmCard mb-4" th:each="creditHana : ${creditHana}">
                             <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지2
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold ">
-                                신한카드 폴리
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지3
+                            <a th:href="${creditHana.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                                <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
+                                    <img th:src="${creditHana.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                THE PINK
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지4
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                핏(Fit)
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
-                            </div>
-                            <!-- End of Card -->
-                        </div>
-                        <div class="bmCard mb-4">
-                            <!-- Card -->
-                            <a href="#" class="card img-card fh-240 border-0 outer-bg">
-                                <div class="card-img-overlay d-flex align-items-center bg-dark">
-                                    카드 이미지5
-                                </div>
-                            </a>
-                            <div class="text-dark p-2 text-center font-weight-bold">
-                                현대카드 M BOOST
+                                [[${creditHana.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
@@ -690,10 +307,10 @@
                     <div class="border-gray-500 border rounded">
                         <ul class="list-style-none text-dark blSearchTap">
                             <li>
-                                <a href="#debitcard">신용카드</a>
+                                <a href="#debitcard" class="tapbtnDebit">신용카드</a>
                             </li>
                             <li>
-                                <a href="#creditcard">체크카드
+                                <a href="#creditcard" class="tapbtnCredit">체크카드
                                 </a>
                             </li>
                         </ul>
@@ -703,14 +320,14 @@
                     <div class="col-12 mb-3 mb-lg-4">
                         <div class="form-group form-group-lg mb-0">
                             <div class="input-group">
-                                <input id="search-bank" type="text" class="form-control autocomplete border-gray-500 border-right-0" placeholder="금융회사명을 입력하세요" required="">
+                                <input id="search-bank" type="text" class="form-control autocomplete border-gray-500 border-right-0" placeholder="카드사명을 입력하세요" required="">
                                 <button class="bankMainSubmit border border-gray-500 border-left-0 bg-white text-dark fw-60 fh-60" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="col-sm-12" id="debitcard">
+            <div class="col-sm-12 tapMenu slideOpen" id="debitcard">
                 <table id="tbl-board" class="board-table">
                     <tr class="text-center bg-info text-white">
                         <th class="table-header">번호</th>
@@ -720,195 +337,44 @@
                         <th class="table-header">주요혜택</th>
                         <th class="table-header">상세정보</th>
                     </tr>
-                    <tr>
-                        <td class="board-content">1</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">2</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">3</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">4</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">5</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">6</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">7</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">8</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">9</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">10</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">11</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">12</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
+                    <th:block th:if="${debitList == null}">
+						<tr>
+							<td colspan="6">조회된 상품이 없습니다.</td>
+						</tr>
+					</th:block>
+                    <th:block th:if="${debitList != null}">
+						<tr th:each="debitList, number : ${debitList}">
+	                        <td class="board-content">[[${number.index}+1]]</td>
+	                        <td class="board-content board-title board-logoimg">
+	                            <img th:src="${debitList.companyImg}">
+	                        </td>
+	                        <td class="board-content board-cardimg">
+	                            <img th:src="${debitList.productImg}">
+	                            [[${debitList.productNm}]]
+	                        </td>
+	                        <td class="board-content">[[${debitList.productChar}]]</td>
+	                        <td class="board-content text-left">
+	                        	[[${debitList.keyBenefit}]]
+	                        <td class="board-content"><a th:href="${debitList.detailUrl}">바로가기</a></td>
+	                    </tr>
+					</th:block>
                 </table>
                 <div class="table-buttons">
-                    <button onclick="" class="table-button">&lt;</button>
-                    <button onclick="" class="table-button">1</button>
-                    <button onclick="" class="table-button">2</button>
-                    <button onclick="" class="table-button">&gt;</button>
+                    <button th:onclick="|movePage('/bank/bankCard?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
+                    <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+						<th:block th:if="${status.current == pageInfo.currentPage}">
+							<button class="table-button" disabled >[[${status.current}]]</button>
+						</th:block>
+						<th:block th:if="${status.current != pageInfo.currentPage}">
+							<button th:onclick="|movePage('/bank/bankCard?page=${status.current}');|" class="table-button">
+								[[${status.current}]]
+							</button>
+						</th:block>
+					</th:block>
+                    <button th:onclick="|movePage('/bank/bankCard?page=${pageInfo.nextPage}');|" class="table-button">&gt;</button>
                 </div>
             </div>
-            <div class="col-sm-12" id="creditcard">
+            <div class="col-sm-12 tapMenu" id="creditcard">
                 <table id="tbl-board" class="board-table">
                     <tr class="text-center bg-info text-white">
                         <th class="table-header">번호</th>
@@ -1124,11 +590,11 @@
 
     /* 라디오 버튼 클릭하면 함수 실행 */
     radioBtn.forEach((item) => {
-        item.addEventListener("click", tabMenu);
+        item.addEventListener("click", slideMenu);
     });
 
     /* 탭메뉴 함수 */
-    function tabMenu(item){
+    function slideMenu(item){
         const tabTarget = item.currentTarget;
         const checked = tabTarget.dataset.tab; // 선택된 라디오버튼의 data-tab 가져오기
         slide.forEach((target) => {
@@ -1137,10 +603,40 @@
 
         document.querySelector("#" + checked).classList.add("slideOpen");
     }
-    
 </script>
 
+<!-- 카드 테이블 탭 -->
+<script>
+    const tapbtnDebit = document.querySelector('.tapbtnDebit');
+    const tapbtnCredit = document.querySelector('.tapbtnCredit');
+	const debitcard = document.querySelector('#debitcard');
+    const creditcard = document.querySelector('#creditcard');
+    /* 메뉴 클릭하면 함수 실행 */
+    tapbtnDebit.addEventListener("click",()=>{
+    	creditcard.classList.remove("slideOpen");
+        debitcard.classList.add("slideOpen");
+    });
+    tapbtnCredit.addEventListener("click",()=>{
+    	debitcard.classList.remove("slideOpen");
+        creditcard.classList.add("slideOpen");
+    });
+</script>
+<!-- 테이블 페이징 -->
+<script type="text/javascript">
+	function movePage(pageUrl){
+		var searchValue = document.getElementById("searchValue"); // 갤럭시
+		var searchType = 'title';
+		if(searchValue.value.length > 0){
+			for(var i = 0; i <searchTypes.length; i++){
+				if(searchTypes[i].checked == true){
+					searchType = searchTypes[i].value;
+				}
+			}
+			pageUrl = pageUrl + '?searchValue=' + searchValue.value; 
+		}
+		location.href = encodeURI(pageUrl);	
+	}
+</script>
 
 </body>
-
 </html>

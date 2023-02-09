@@ -7,7 +7,7 @@ window.addEventListener('load', function(){
     //     navbar.classList.remove('navbar-dark');
     //     navbar.classList.add('navbar-light');
     // }
-    if(windowMode[0].classList.contains('bg-dark') || windowMode[0].classList.contains('bg-primary')){
+    if(windowMode[0].classList.contains('bg-dark') || windowMode[0].classList.contains('bg-primary') || windowMode[0].classList.contains('bg-tertiary')){
         navbar.classList.remove('navbar-light');
         navbar.classList.add('navbar-dark');
     } else{
