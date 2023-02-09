@@ -31,7 +31,7 @@ public class StockController {
 	@GetMapping("/stockMain")
 	public String stockMainPage(Model model) {
 		log.info("증권 메인 페이지 요청 성공");
-		log.info("지수 정보 요청");
+		log.info("지수 정보");
 		StockPriceIndex kospiIndex = service.getnowStockIndex("KOSPI");
 		StockPriceIndex kosdaqIndex = service.getnowStockIndex("KOSDAQ");
 		model.addAttribute("kospiIndex", kospiIndex);

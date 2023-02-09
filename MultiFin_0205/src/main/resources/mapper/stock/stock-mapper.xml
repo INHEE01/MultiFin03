@@ -55,6 +55,7 @@
 		order by mrktTotAmt desc  LIMIT ${limit} OFFSET ${offset}
 	</select>
 	
+	
 	<select id="KospiRankingTop"  resultMap="StockPriceResultMap" parameterType="map">
 		select
 			sno,basDt,srtnCd,

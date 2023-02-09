@@ -30,7 +30,7 @@ public class StockPriceService {
 	private FundProductInfoMapper fpMapper;
 	
 	
-
+	//stockList 페이지 리스트 구현
 	public List<StockPrice> getStockList(PageInfo pageInfo, Map<String, String> param){
 		param.put("limit", "" + pageInfo.getListLimit());
 		param.put("offset", "" + (pageInfo.getStartList() - 1));

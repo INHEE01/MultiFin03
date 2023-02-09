@@ -25,7 +25,6 @@
 	</select>
 	
 	
-	
 	<select id="nowStockIndex" parameterType="String" resultMap="StockPriceIndexResultMap">
 		select 
 			stock_type,stock_date,fin,

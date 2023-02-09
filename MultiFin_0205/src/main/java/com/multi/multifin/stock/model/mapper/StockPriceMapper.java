@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.multi.multifin.stock.model.vo.StockPrice;
 
-
 @Mapper
 public interface StockPriceMapper {
 	List<StockPrice> KospiList(Map<String, String> map);
