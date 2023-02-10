@@ -50,10 +50,10 @@ public class StockController {
 		log.info("주가동향 요청");
 		StockPrice ss = service.findByNo(5930);
 		StockPrice sk = service.findByNo(660);
-		StockPrice hd = service.findByNo(5380);
+		StockPrice lg = service.findByNo(373220);
 		model.addAttribute("ss", ss);
 		model.addAttribute("sk", sk);
-		model.addAttribute("hd", hd);
+		model.addAttribute("lg", lg);
 		
 		log.info("환율 테이블 요청: 원하는 국가만 가져옴");
 		ExchangeRate USD = service.findExchangeRate("USD");
@@ -143,16 +143,6 @@ public class StockController {
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("stockPageInfo", pageInfo);
 		
-		log.info("주가동향 요청");
-		StockPrice ss = service.findByNo(5930);
-		StockPrice sk = service.findByNo(660);
-		StockPrice hd = service.findByNo(5380);
-		StockPrice cj = service.findByNo(1040);
-		model.addAttribute("ss", ss);
-		model.addAttribute("sk", sk);
-		model.addAttribute("hd", hd);
-		model.addAttribute("cj", cj);
-		
 		return "stock/stockList";	
 	}
 	
@@ -172,6 +162,9 @@ public class StockController {
 	public String stockBuying() {
 		return "stock/stockBuying";
 	}
+	
+	
+	
 	
 	@GetMapping("/stockFund")
 	public String stockFund(Model model, @RequestParam Map<String, String> paramMap) {

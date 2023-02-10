@@ -100,7 +100,7 @@
 			trqu,trPrc,lstgStCnt,mrktTotAmt
 		FROM stockprice 
 		where srtnCd LIKE '${srtnCd}' 
-		order by mrktTotAmt desc
+		order by basDt desc
         limit 7	
 	</select>
 	

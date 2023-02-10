@@ -31,8 +31,14 @@
                     <h3 class="stock-title">[[${sp.itmsNm}]]</h3>
                 </div>
                 <div class="money_info">
-                    <h4 class="money">[[${#numbers.formatInteger(sp.clpr, 0, 'COMMA')}]] 원</h4>
-                    <h6 class="money-description increase">▲ [[${sp.vs}]] (+[[${sp.fltRt}]]%)</h6>
+                    <th:block th:if="${#strings.contains(sp.fltRt, '-') == true } ">
+                    	<h4 class="money decrease">[[${#numbers.formatInteger(sp.clpr, 0, 'COMMA')}]] 원</h4>
+		                <h6 class="money-description decrease">▼ [[${sp.vs}]] ([[${sp.fltRt}]]%)</h6>
+					</th:block>
+					<th:block th:if="${#strings.contains(sp.fltRt, '-') == false } ">
+						<h4 class="money increase">[[${#numbers.formatInteger(sp.clpr, 0, 'COMMA')}]] 원</h4>
+		                <h6 class="money-description increase">▲ [[${sp.vs}]] (+[[${sp.fltRt}]]%)</h6>
+					</th:block>		                                    
                 </div>
         </div>
         <div class="stock_info_container">
@@ -49,32 +55,40 @@
             <div class="card shadow-soft stock_info_card">     
                 <div class="stock_detail_info">
                     <div class="stock_detail_infoes">
-                        <h6 class="stock_detail_info_title increase">1일 최고가</h6>
-                        <h6 class="stock_detail_info_sub increase">[[${#numbers.formatInteger(sp.hipr, 0, 'COMMA')}]] 원</h6>
+                        <h6 class="stock_detail_info_title">1일 최고가</h6>
+                        <h6 class="stock_detail_info_sub">[[${#numbers.formatInteger(sp.hipr, 0, 'COMMA')}]] 원</h6>
                     </div>
                     <div class="stock_detail_infoes">
-                        <h6 class="stock_detail_info_title decrease">1일 최저가</h6>
-                        <h6 class="stock_detail_info_sub decrease">[[${#numbers.formatInteger(sp.lopr, 0, 'COMMA')}]] 원</h6>
+                        <h6 class="stock_detail_info_title">1일 최저가</h6>
+                        <h6 class="stock_detail_info_sub">[[${#numbers.formatInteger(sp.lopr, 0, 'COMMA')}]] 원</h6>
                     </div>
                     <div class="stock_detail_infoes">
                         <h6 class="stock_detail_info_title">상장 주식수</h6>
                         <h6 class="stock_detail_info_sub">[[${#numbers.formatInteger(sp.lstgStCnt, 0, 'COMMA')}]]  주</h6>
                     </div>
-                     <div class="stock_detail_infoes">
-                        <h6 class="stock_detail_info_title">전일대비등락</h6>
-                        <h6 class="stock_detail_info_sub">[[${#numbers.formatInteger(sp.vs, 0, 'COMMA')}]]원</h6>
-                    </div>
-                     <div class="stock_detail_infoes">
-                        <h6 class="stock_detail_info_title">전일비</h6>
-                        <h6 class="stock_detail_info_sub">▲ [[${sp.fltRt}]]</h6>
-                    </div>
-                    <div class="stock_detail_infoes">
-                        <h6 class="stock_detail_info_title">일반배당금액</h6>
-                        <h6 class="stock_detail_info_sub">3,700원</h6>
-                    </div>
-                    <div class="stock_detail_infoes">
-                        <h6 class="stock_detail_info_title">일반배당률</h6>
-                        <h6 class="stock_detail_info_sub">2.3%</h6>
+                    <th:block th:if="${#strings.contains(sp.fltRt, '-') == true } ">
+						<div class="stock_detail_infoes">
+	                        <h6 class="stock_detail_info_title decrease">전일대비등락</h6>
+	                        <h6 class="stock_detail_info_sub decrease">[[${#numbers.formatInteger(sp.vs, 0, 'COMMA')}]]원</h6>
+	                    </div>
+	                     <div class="stock_detail_infoes">
+	                        <h6 class="stock_detail_info_title decrease">전일비</h6>
+	                        <h6 class="stock_detail_info_sub decrease">▼ [[${sp.fltRt}]] %</h6>
+	                    </div>
+					</th:block>
+					<th:block th:if="${#strings.contains(sp.fltRt, '-') == false } ">
+						<div class="stock_detail_infoes">
+	                        <h6 class="stock_detail_info_title increase">전일대비등락</h6>
+	                        <h6 class="stock_detail_info_sub increase">[[${#numbers.formatInteger(sp.vs, 0, 'COMMA')}]]원</h6>
+	                    </div>
+	                     <div class="stock_detail_infoes">
+	                        <h6 class="stock_detail_info_title increase">전일비</h6>
+	                        <h6 class="stock_detail_info_sub increase">▲ [[${sp.fltRt}]]</h6>
+	                    </div>
+					</th:block>
+					<div class="stock_detail_infoes">
+                        <h6 class="stock_detail_info_title">오픈가</h6>
+                        <h6 class="stock_detail_info_sub">[[${#numbers.formatInteger(sp.mkp, 0, 'COMMA')}]] 원</h6>
                     </div>
                 </div>
             </div>
@@ -101,8 +115,14 @@
             <td class="board-content">[[${#numbers.formatInteger(stockList.hipr, 0, 'COMMA')}]]</td>
             <td class="board-content">[[${#numbers.formatInteger(stockList.lopr, 0, 'COMMA')}]]</td>
             <td class="board-content">[[${#numbers.formatInteger(stockList.clpr, 0, 'COMMA')}]]</td>
-            <td class="board-content increase"> [[${stockList.fltRt}]]</td>
-            <td class="board-content increase"> [[${#numbers.formatInteger(stockList.vs, 0, 'COMMA')}]]</td>
+            <th:block th:if="${#strings.contains(stockList.fltRt, '-') == true } ">
+            	<td class="board-content decrease">▼ [[${stockList.fltRt}]] %</td>
+           		<td class="board-content decrease">▼ [[${#numbers.formatInteger(stockList.vs, 0, 'COMMA')}]] 원</td>
+			</th:block>
+            <th:block th:if="${#strings.contains(stockList.fltRt, '-') == false } ">
+                 <td class="board-content increase">▲ [[${stockList.fltRt}]] %</td>
+           		 <td class="board-content increase">▲ [[${#numbers.formatInteger(stockList.vs, 0, 'COMMA')}]] 원</td>
+			</th:block>
             <td class="board-content">[[${#numbers.formatInteger(stockList.trqu, 0, 'COMMA')}]]</td>
             <td class="board-content">[[${#numbers.formatInteger(stockList.trPrc, 0, 'COMMA')}]]</td>
           </tr>
