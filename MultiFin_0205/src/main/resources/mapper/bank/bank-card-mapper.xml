@@ -36,7 +36,7 @@
 	</select>
 	
 	<select id="selectCreditCount" resultType="int" parameterType="map">
-		SELECT COUNT(DISTINCT COMPANY_NM)
+		SELECT COUNT(PRODUCT_NM)
 		FROM CREDITCARD C
 		WHERE 1=1
 		<if test="companyNm != null">

@@ -311,11 +311,20 @@
                     <div class="border-gray-500 border rounded">
                         <ul class="list-style-none text-dark blSearchTap">
                             <li>
-                                <a href="#debitcard" class="tapbtnDebit checkedMenu">신용카드</a>
+                            	<th:block th:if="${check} == '0'">
+	                                <a href="#debitcard" class="tapbtnDebit checkedMenu">신용카드</a>
+                            	</th:block>
+                            	<th:block th:if="${check} != '0'">
+	                                <a href="#debitcard" class="tapbtnDebit">신용카드</a>
+                            	</th:block>
                             </li>
                             <li>
-                                <a href="#creditcard" class="tapbtnCredit">체크카드
-                                </a>
+                            	<th:block th:if="${check} == '1'">
+                             	   <a href="#creditcard" class="tapbtnCredit checkedMenu">체크카드</a>
+                                </th:block>
+                            	<th:block th:if="${check} != '1'">
+                             	   <a href="#creditcard" class="tapbtnCredit ">체크카드</a>
+                                </th:block>
                             </li>
                         </ul>
                     </div>
@@ -331,7 +340,12 @@
                     </div>
                 </form>
             </div>
+          <th:block th:if="${check} == '0'">
             <div class="col-sm-12 tapMenu slideOpen" id="debitcard">
+          </th:block>
+          <th:block th:if="${check} != '0'">
+            <div class="col-sm-12 tapMenu" id="debitcard">
+          </th:block>
                 <table id="tbl-board" class="board-table">
                     <tr class="text-center bg-info text-white">
                         <th class="table-header" style="width: 45px;">번호</th>
@@ -348,7 +362,7 @@
 					</th:block>
                     <th:block th:if="${debitList != null}">
 						<tr th:each="debitList, number : ${debitList}">
-	                        <td class="board-content">[[(${pageInfo.currentPage}-1)*12+${number.index}+1]]</td>
+	                        <td class="board-content">[[(${pageDebitInfo.currentPage}-1)*12+${number.index}+1]]</td>
 	                        <td class="board-content board-logoimg">
 	                            <img th:src="${debitList.companyImg}">
 	                        </td>
@@ -364,21 +378,26 @@
 					</th:block>
                 </table>
                 <div class="table-buttons">
-                    <button th:onclick="|movePage('/bank/bankCard?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
-                    <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
-						<th:block th:if="${status.current == pageInfo.currentPage}">
+                    <button th:onclick="|movePage('/bank/bankCard?pageDebit=${pageDebitInfo.prevPage}','0');|" class="table-button">&lt;</button>
+                    <th:block th:each="num, status : ${#numbers.sequence(pageDebitInfo.startPage, pageDebitInfo.endPage)}">
+						<th:block th:if="${status.current == pageDebitInfo.currentPage}">
 							<button class="table-button" disabled >[[${status.current}]]</button>
 						</th:block>
-						<th:block th:if="${status.current != pageInfo.currentPage}">
-							<button th:onclick="|movePage('/bank/bankCard?page=${status.current}');|" class="table-button">
+						<th:block th:if="${status.current != pageDebitInfo.currentPage}">
+							<button th:onclick="|movePage('/bank/bankCard?pageDebit=${status.current}','0');|" class="table-button">
 								[[${status.current}]]
 							</button>
 						</th:block>
 					</th:block>
-                    <button th:onclick="|movePage('/bank/bankCard?page=${pageInfo.nextPage}');|" class="table-button">&gt;</button>
+                    <button th:onclick="|movePage('/bank/bankCard?pageDebit=${pageDebitInfo.nextPage}','0');|" class="table-button">&gt;</button>
                 </div>
             </div>
+          <th:block th:if="${check} == '1'">
+            <div class="col-sm-12 tapMenu slideOpen" id="creditcard">
+          </th:block>
+          <th:block th:if="${check} != '1'">
             <div class="col-sm-12 tapMenu" id="creditcard">
+          </th:block>
                 <table id="tbl-board" class="board-table">
                     <tr class="text-center bg-info text-white">
                         <th class="table-header" style="width: 45px;">번호</th>
@@ -395,7 +414,7 @@
 					</th:block>
                     <th:block th:if="${creditList != null}">
 						<tr th:each="creditList, number : ${creditList}">
-	                        <td class="board-content">[[${number.index}+1]]</td>
+	                        <td class="board-content">[[(${pageCreditInfo.currentPage}-1)*12+${number.index}+1]]</td>
 	                        <td class="board-content board-logoimg">
 	                            <img th:src="${creditList.companyImg}">
 	                        </td>
@@ -411,10 +430,18 @@
 					</th:block>
                 </table>
                 <div class="table-buttons">
-                    <button onclick="" class="table-button">&lt;</button>
-                    <button onclick="" class="table-button">1</button>
-                    <button onclick="" class="table-button">2</button>
-                    <button onclick="" class="table-button">&gt;</button>
+                    <button th:onclick="|movePage('/bank/bankCard?pageCredit=${pageCreditInfo.prevPage}','1');|" class="table-button table-button-credit">&lt;</button>
+                    <th:block th:each="num, status : ${#numbers.sequence(pageCreditInfo.startPage, pageCreditInfo.endPage)}">
+						<th:block th:if="${status.current == pageCreditInfo.currentPage}">
+							<button class="table-button table-button-credit" disabled >[[${status.current}]]</button>
+						</th:block>
+						<th:block th:if="${status.current != pageCreditInfo.currentPage}">
+							<button th:onclick="|movePage('/bank/bankCard?pageCredit=${status.current}','1');|" class="table-button table-button-credit">
+								[[${status.current}]]
+							</button>
+						</th:block>
+					</th:block>
+                    <button th:onclick="|movePage('/bank/bankCard?pageCredit=${pageCreditInfo.nextPage}','1');|" class="table-button table-button-credit">&gt;</button>
                 </div>
             </div>
         </div>
@@ -469,15 +496,27 @@
         creditcard.classList.add("slideOpen");
         tapbtnCredit.classList.add("checkedMenu");
     });
+    
+    /* 체크카드페이지 display: block으로 해주기 */
+    const tableButtonCredit = document.querySelector('.table-button-credit');
+    tableButtonCredit.addEventListener("click",()=>{
+    	window.onload() = function(){
+	    	debitcard.classList.remove("slideOpen");
+	    	tapbtnDebit.classList.remove("checkedMenu");
+	        creditcard.classList.add("slideOpen");
+	        tapbtnCredit.classList.add("checkedMenu");
+    	};
+    });
 </script>
 <!-- 테이블 페이징 -->
 <script type="text/javascript">
-	function movePage(pageUrl){
+	function movePage(pageUrl, isCheck){
 		var searchValue = document.getElementById("search-bank"); // 갤럭시
 		if(searchValue.value.length != 0){
 			pageUrl = pageUrl + '&searchValue=' + searchValue.value; 
 		}
-		location.href = encodeURI(pageUrl);	
+		pageUrl = pageUrl + '&check='+isCheck;
+		location.href = encodeURI(pageUrl);
 	}
 </script>
 

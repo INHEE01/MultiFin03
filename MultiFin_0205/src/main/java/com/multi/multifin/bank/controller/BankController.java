@@ -74,29 +74,42 @@ public class BankController {
 		
 		log.info("카드 테이블 요청");
 		log.info("신용카드 전체 요청");
-		int page = 1;
+		int pageDebit = 1;
 		try {
 			String searchValue = paramMap.get("searchValue");
 			if(searchValue != null && searchValue.length() > 0) {
 				paramMap.put("companyNm", searchValue);
 			}else {
 			}
-			page = Integer.parseInt(paramMap.get("page"));
+			pageDebit = Integer.parseInt(paramMap.get("pageDebit"));
+		} catch (Exception e) {
+		}
+		
+		try {
+			String check = paramMap.getOrDefault("check", "0");
+			model.addAttribute("check",check);
 		} catch (Exception e) {
 		}
 		
 		int debitCount = cardService.getDebitCount(paramMap);
-		System.out.println(debitCount);
-		PageInfo pageInfo = new PageInfo(page, 5, debitCount, 12);
-		List<BankDebitCard> debitList = cardService.selectDebitList(pageInfo, paramMap);
+		PageInfo pageDebitInfo = new PageInfo(pageDebit, 5, debitCount, 12);
+		List<BankDebitCard> debitList = cardService.selectDebitList(pageDebitInfo, paramMap);
 		model.addAttribute("debitList", debitList);
 		model.addAttribute("paramMap", paramMap);
-		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("pageDebitInfo", pageDebitInfo);
 		
 		
 		log.info("체크카드 전체 요청");
-		List<BankCreditCard> creditList = cardService.selectCreditList(pageInfo, paramMap);
+		int pageCredit = 1;
+		try {
+			pageCredit = Integer.parseInt(paramMap.get("pageCredit"));
+		} catch (Exception e) {
+		}
+		int creditCount = cardService.getCreditCount(paramMap);
+		PageInfo pageCreditInfo = new PageInfo(pageCredit, 5, creditCount, 12);
+		List<BankCreditCard> creditList = cardService.selectCreditList(pageCreditInfo, paramMap);
 		model.addAttribute("creditList", creditList);
+		model.addAttribute("pageCreditInfo", pageCreditInfo);
 		
 		return "bank/bankCard";
 	}
