@@ -273,7 +273,7 @@ padding-bottom: 30px;
 
 /*주가동향*/
 .description_container{
-	width:240px;
+	width:260px;
 }
 .stock-fortune{
   width: 1230px;
@@ -374,7 +374,7 @@ padding-bottom: 30px;
 .stock-graph-section{
   width: 250px;
   height: 140px;
-  margin-left: 30px;
+  margin-left: 10px;
   color: white;
 }
 

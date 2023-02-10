@@ -42,10 +42,6 @@ public class StockPriceService {
 	}
 	
 	
-	
-	
-	
-	
 	public List<StockPrice> getKospiList(PageInfo pageInfo, Map<String, String> param){
 		param.put("limit", "" + pageInfo.getListLimit());
 		param.put("offset", "" + (pageInfo.getStartList() - 1));

@@ -292,31 +292,28 @@ for(i = 1 ; i <= graphItems.length; i++){ /* 그래프 그릴 부분에 id 붙�
             },
             
             scales: {
-                xAxes: [{
-                    gridLines: { //A축 gridLines 지우는 옵션
-                        display: false,
-                        drawBorder: false,
-                    },
-                    ticks: {
-                        fontSize: 0,
-                        fontColor: 'rgba(0,0,0,0)'
-                    }
-                    
-                }],
-                yAxes: [{
-                    gridLines: { //Y축 gridLines 지우는 옵션
-                        drawBorder: false,
-                        display: false,
-                    },
-                    ticks: {
-                        beginAtZero: true,
-                        fontSize: 0,
-                        fontColor: 'rgba(0,0,0,0)',
-                        maxTicksLimit: 5,
-                        padding: 25,
-                    }
-                }]
-            },
+                  xAxes: [{
+			          gridLines: { //A축 gridLines 지우는 옵션
+			            display: false,
+			            drawBorder: false,
+			          },
+			          ticks: {
+			            fontSize: 0,
+			            fontColor: 'rgba(0,0,0,0)'
+			    	    }
+		      	 	}],
+			        yAxes: [{
+			          display: false,
+			          gridLines: { //Y축 gridLines 지우는 옵션
+			            drawBorder: false,
+			            display: false,
+			          },
+			          ticks: {
+			            beginAtZero: true,
+			            fontSize: 0,
+			          }
+		       		}]
+		      	},
             tooltips: {
                 backgroundColor: '#1e90ff'
             }

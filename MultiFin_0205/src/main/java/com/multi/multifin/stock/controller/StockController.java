@@ -125,21 +125,23 @@ public class StockController {
 		
 		
 		log.info("주가 동향 요청");
-		/*
 		int page = 1;
-		Map<String, String> searchMap = new HashMap<String, String>();
 		try {
 			String searchValue = paramMap.get("searchValue");
+			if (searchValue != null && searchValue.length() > 0) {
+				paramMap.put("itmsNm", searchValue);
+			}
 			page = Integer.parseInt(paramMap.get("page"));
 		} catch (Exception e) {}
 		
-		int stockCount = service.getStockCount(searchMap);
-		PageInfo pageInfo = new PageInfo(page, 2, 21, 5);
-		List<StockPrice> list = service.getStockList(pageInfo, searchMap);
+		int stockCount = service.getStockCount(paramMap);
+		PageInfo pageInfo = new PageInfo(page, 4, stockCount, 4);
+		List<StockPrice> list = service.getStockList(pageInfo, paramMap);
 		
-		model.addAttribute("list", list);
+		System.out.println(list);
+		model.addAttribute("stockList", list);
 		model.addAttribute("paramMap", paramMap);
-		model.addAttribute("pageInfo", pageInfo);*/
+		model.addAttribute("stockPageInfo", pageInfo);
 		
 		log.info("주가동향 요청");
 		StockPrice ss = service.findByNo(5930);
@@ -158,22 +160,13 @@ public class StockController {
 
 	@RequestMapping("/stockFuture")
 	public String stockFuture(Model model,@RequestParam("no") int no) {
+		
 		StockPrice sp = service.findByNo(no);
 		List<StockPrice> stockList=service.stockMoreViewList(no);
 		model.addAttribute("sp", sp);
 		model.addAttribute("stockList", stockList);
 		return "stock/stockFuture";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@RequestMapping("/stockBuying")
 	public String stockBuying() {

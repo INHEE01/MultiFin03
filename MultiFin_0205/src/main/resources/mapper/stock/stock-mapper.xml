@@ -128,11 +128,11 @@
 		<if test="itmsNm != null">
 			AND itmsNm LIKE '%${itmsNm}%' 
 		</if>
-		order by mrktTotAmt desc			
+		order by mrktTotAmt desc  LIMIT ${limit} OFFSET ${offset}	
 	</select>
 	
 	
-	<select id="selectStockCount" resultMap="StockPriceResultMap" parameterType="map">
+	<select id="selectStockCount" resultType="int" parameterType="map">
 		SELECT  
 			count(itmsNm)
 		FROM stockprice 
