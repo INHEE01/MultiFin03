@@ -541,6 +541,8 @@ FROM DEBITCARD;
 SELECT COMPANY_IMG, COMPANY_NM, PRODUCT_IMG, PRODUCT_NM, PRODUCT_CHAR, KEY_BENEFIT, DETAIL_URL
 FROM DEBITCARD
 WHERE COMPANY_NM='롯데카드';
+SELECT COUNT(DISTINCT PRODUCT_NM)
+		FROM DEBITCARD;
 -- ----------------------------------------------
 -- ------------- 신용카드 테이블 ------------------
 -- ----------------------------------------------
@@ -591,7 +593,7 @@ VALUES ('https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-sams
 CGV 3,000원 현장할인 또는 캐시백<br>
 놀이공원 자유이용권 50%ㆍ워터파크 입장권 30% 현장할인', 'https://www.samsungcard.com/personal/card/cardfinder/UHPPCA0102M0.jsp?code=ABP1383');  
   INSERT INTO CREDITCARD(COMPANY_IMG, COMPANY_NM, PRODUCT_IMG, PRODUCT_NM, PRODUCT_CHAR, KEY_BENEFIT, DETAIL_URL)
-VALUES ('https://gongsi.crefia.or.kr/common/imageView?fileName=Deep_Dream[20171117151833114].jpg&fileType=carddamoa', '신한카드', 'https://gongsi.crefia.or.kr/common/imageView?fileName=Deep_Dream_%EC%B2%B4%ED%81%AC[20171117180406143].jpg&fileType=carddamoa', '신한카드 Deep Dream 체크', '한도없이 0.2% 적립, 많이 쓴 곳 5배 자동 적립 체크', '전월실적 제한 및 적립한도 없이 기본 0.2% 적립<br>
+VALUES ('https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-shinhan.jpg', '신한카드', 'https://gongsi.crefia.or.kr/common/imageView?fileName=Deep_Dream_%EC%B2%B4%ED%81%AC[20171117180406143].jpg&fileType=carddamoa', '신한카드 Deep Dream 체크', '한도없이 0.2% 적립, 많이 쓴 곳 5배 자동 적립 체크', '전월실적 제한 및 적립한도 없이 기본 0.2% 적립<br>
 자주가는 DREAM 영역 기본의 3배(0.6%) 적립<br>
 가장 많이 쓴 DREAM 영역 기본의 5배(1.0%) 자동 적립', 'https://www.shinhancard.com/conts/person/card_info/rookie/benefit/large/1463216_13353.jsp');  
   INSERT INTO CREDITCARD(COMPANY_IMG, COMPANY_NM, PRODUCT_IMG, PRODUCT_NM, PRODUCT_CHAR, KEY_BENEFIT, DETAIL_URL)

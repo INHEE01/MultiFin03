@@ -24,55 +24,50 @@ import lombok.extern.slf4j.Slf4j;
 public class BankController {
 
 	@Autowired
-	private BankCardService cardSerive;
+	private BankCardService cardService;
 	
 	@GetMapping("/bankCard")
 	public String bankCard(Model model, @RequestParam Map<String, String> paramMap) {
 		log.info("은행 카드상품 페이지 요청 성공");
-		log.info("체크카드 전체 요청");
-		List<BankCreditCard> creditList = cardSerive.selectCreditList();
-		model.addAttribute("creditList", creditList);
-		
-		
 		
 		log.info("롯데카드 요청");
-		List<BankCreditCard> creditLotte = cardSerive.selectCreditLotte();
-		List<BankDebitCard> debitLotte = cardSerive.selectDebitLotte();
+		List<BankCreditCard> creditLotte = cardService.selectCreditLotte();
+		List<BankDebitCard> debitLotte = cardService.selectDebitLotte();
 		model.addAttribute("creditLotte", creditLotte);
 		model.addAttribute("debitLotte", debitLotte);
 		log.info("비씨카드 요청");
-		List<BankCreditCard> creditBC = cardSerive.selectCreditBC();
-		List<BankDebitCard> debitBC = cardSerive.selectDebitBC();
+		List<BankCreditCard> creditBC = cardService.selectCreditBC();
+		List<BankDebitCard> debitBC = cardService.selectDebitBC();
 		model.addAttribute("creditBC", creditBC);
 		model.addAttribute("debitBC", debitBC);
 		log.info("삼성카드 요청");
-		List<BankCreditCard> creditSamsung = cardSerive.selectCreditSamsung();
-		List<BankDebitCard> debitSamsung = cardSerive.selectDebitSamsung();
+		List<BankCreditCard> creditSamsung = cardService.selectCreditSamsung();
+		List<BankDebitCard> debitSamsung = cardService.selectDebitSamsung();
 		model.addAttribute("creditSamsung", creditSamsung);
 		model.addAttribute("debitSamsung", debitSamsung);
 		log.info("신한카드 요청");
-		List<BankCreditCard> creditSinhan = cardSerive.selectCreditSinhan();
-		List<BankDebitCard> debitSinhan = cardSerive.selectDebitSinhan();
+		List<BankCreditCard> creditSinhan = cardService.selectCreditSinhan();
+		List<BankDebitCard> debitSinhan = cardService.selectDebitSinhan();
 		model.addAttribute("creditSinhan", creditSinhan);
 		model.addAttribute("debitSinhan", debitSinhan);
 		log.info("우리카드 요청");
-		List<BankCreditCard> creditWoori = cardSerive.selectCreditWoori();
-		List<BankDebitCard> debitWoori = cardSerive.selectDebitWoori();
+		List<BankCreditCard> creditWoori = cardService.selectCreditWoori();
+		List<BankDebitCard> debitWoori = cardService.selectDebitWoori();
 		model.addAttribute("creditWoori", creditWoori);
 		model.addAttribute("debitWoori", debitWoori);
 		log.info("하나카드 요청");
-		List<BankCreditCard> creditHana = cardSerive.selectCreditHana();
-		List<BankDebitCard> debitHana = cardSerive.selectDebitHana();
+		List<BankCreditCard> creditHana = cardService.selectCreditHana();
+		List<BankDebitCard> debitHana = cardService.selectDebitHana();
 		model.addAttribute("creditHana", creditHana);
 		model.addAttribute("debitHana", debitHana);
 		log.info("현대카드 요청");
-		List<BankCreditCard> creditHyundai = cardSerive.selectCreditHyundai();
-		List<BankDebitCard> debitHyundai = cardSerive.selectDebitHyundai();
+		List<BankCreditCard> creditHyundai = cardService.selectCreditHyundai();
+		List<BankDebitCard> debitHyundai = cardService.selectDebitHyundai();
 		model.addAttribute("creditHyundai", creditHyundai);
 		model.addAttribute("debitHyundai", debitHyundai);
 		log.info("국민카드 요청");
-		List<BankCreditCard> creditKb = cardSerive.selectCreditKb();
-		List<BankDebitCard> debitKb = cardSerive.selectDebitKb();
+		List<BankCreditCard> creditKb = cardService.selectCreditKb();
+		List<BankDebitCard> debitKb = cardService.selectDebitKb();
 		model.addAttribute("creditKb", creditKb);
 		model.addAttribute("debitKb", debitKb);
 		
@@ -80,25 +75,29 @@ public class BankController {
 		log.info("카드 테이블 요청");
 		log.info("신용카드 전체 요청");
 		int page = 1;
-		Map<String, String> searchMap = new HashMap<>();
 		try {
 			String searchValue = paramMap.get("searchValue");
 			if(searchValue != null && searchValue.length() > 0) {
-				String searchType = paramMap.get("searchType");
-				searchMap.put(searchType, searchValue);
+				paramMap.put("companyNm", searchValue);
 			}else {
-				paramMap.put("searchType", "all");
 			}
 			page = Integer.parseInt(paramMap.get("page"));
 		} catch (Exception e) {
 		}
 		
-		int debitCount = 24;
-		PageInfo pageInfo = new PageInfo(page, 12, debitCount, 10);
-		List<BankDebitCard> debitList = cardSerive.selectDebitList(pageInfo, searchMap);
+		int debitCount = cardService.getDebitCount(paramMap);
+		System.out.println(debitCount);
+		PageInfo pageInfo = new PageInfo(page, 5, debitCount, 12);
+		List<BankDebitCard> debitList = cardService.selectDebitList(pageInfo, paramMap);
 		model.addAttribute("debitList", debitList);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("pageInfo", pageInfo);
+		
+		
+		log.info("체크카드 전체 요청");
+		List<BankCreditCard> creditList = cardService.selectCreditList(pageInfo, paramMap);
+		model.addAttribute("creditList", creditList);
+		
 		return "bank/bankCard";
 	}
 	

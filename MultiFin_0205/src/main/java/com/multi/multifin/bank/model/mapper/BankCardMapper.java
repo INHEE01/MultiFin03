@@ -10,7 +10,8 @@ import com.multi.multifin.bank.model.vo.BankDebitCard;
 
 @Mapper
 public interface BankCardMapper {
-	List<BankCreditCard> selectCreditList();
+	List<BankCreditCard> selectCreditList(Map<String, String> map);
+	int selectCreditCount(Map<String, String> map);
 	List<BankCreditCard> selectCreditLotte();
 	List<BankCreditCard> selectCreditBC();
 	List<BankCreditCard> selectCreditSamsung();
@@ -21,6 +22,7 @@ public interface BankCardMapper {
 	List<BankCreditCard> selectCreditKb();
 	
 	List<BankDebitCard> selectDebitList(Map<String, String> map);
+	int selectDebitCount(Map<String, String> map);
 	List<BankDebitCard> selectDebitLotte();
 	List<BankDebitCard> selectDebitBC();
 	List<BankDebitCard> selectDebitSamsung();

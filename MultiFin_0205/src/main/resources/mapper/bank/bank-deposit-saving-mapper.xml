@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//KO" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.multi.multifin.bank.model.mapper.BankDepsitSavingMapper">
+	<resultMap type="BankDeposit" id="depositResultMap">
+		<id property="bankDepositNo" column="bankDepositNo"/>
+		<result property="dclsMonth" column="dcls_month"/>
+		<result property="finCoNo" column="fin_co_no"/>
+		<result property="korCoNm" column="kor_co_nm"/>
+		<result property="finPrdtCd" column="fin_prdt_cd"/>
+		<result property="finPrdtNm" column="fin_prdt_nm"/>
+		<result property="joinWay" column="join_way"/>
+		<result property="mtrtInt" column="mtrt_int"/>
+		<result property="spclCnd" column="spcl_cnd"/>
+		<result property="joinDeny" column="join_deny"/>
+		<result property="joinMember" column="join_member"/>
+		<result property="etcNote" column="etc_note"/>
+		<result property="maxLimit" column="max_limit"/>
+		<result property="dclsStrtDay" column="dcls_strt_day"/>
+		<result property="dclsEndDay" column="dcls_end_day"/>
+		<result property="finCoSubmDay" column="fin_co_subm_day"/>
+		
+		<result property="intrRateType" column="intr_rate_type"/>
+		<result property="intrRateTypeNm" column="intr_rate_type_nm"/>
+		<result property="saveTrm" column="save_trm"/>
+		<result property="intrRate" column="intr_rate"/>
+		<result property="intrRate2" column="intr_rate2"/>
+	</resultMap>
+	
+	<resultMap type="BankSaving" id="savingResultMap">
+		<id property="bankSavingNo" column="bankDepositNo"/>
+		<result property="dclsMonth" column="dcls_month"/>
+		<result property="finCoNo" column="fin_co_no"/>
+		<result property="korCoNm" column="kor_co_nm"/>
+		<result property="finPrdtCd" column="fin_prdt_cd"/>
+		<result property="finPrdtNm" column="fin_prdt_nm"/>
+		<result property="joinWay" column="join_way"/>
+		<result property="mtrtInt" column="mtrt_int"/>
+		<result property="spclCnd" column="spcl_cnd"/>
+		<result property="joinDeny" column="join_deny"/>
+		<result property="joinMember" column="join_member"/>
+		<result property="etcNote" column="etc_note"/>
+		<result property="maxLimit" column="max_limit"/>
+		<result property="dclsStrtDay" column="dcls_strt_day"/>
+		<result property="dclsEndDay" column="dcls_end_day"/>
+		<result property="finCoSubmDay" column="fin_co_subm_day"/>
+		
+		<result property="intrRateType" column="intr_rate_type"/>
+		<result property="intrRateTypeNm" column="intr_rate_type_nm"/>
+		<result property="rsrvType" column="rsrv_type"/>
+		<result property="rsrvTypeNm" column="rsrv_type_nm"/>
+		<result property="saveTrm" column="save_trm"/>
+		<result property="intrRate" column="intr_rate"/>
+		<result property="intrRate2" column="intr_rate2"/>
+	</resultMap>
+	
+	
+	
+</mapper>

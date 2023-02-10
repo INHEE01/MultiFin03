@@ -25,7 +25,25 @@
 	<!-- 체크카드 전체 -->
 	<select id="selectCreditList" resultMap="creditCardResultMap" parameterType="map">
 		SELECT COMPANY_IMG, COMPANY_NM, PRODUCT_IMG, PRODUCT_NM, PRODUCT_CHAR, KEY_BENEFIT, DETAIL_URL
-		FROM CREDITCARD
+		FROM CREDITCARD C
+		WHERE 1=1
+		<if test="companyNm != null">
+			AND(
+				C.COMPANY_NM like '%${companyNm}%' 
+			)
+		</if>
+		LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<select id="selectCreditCount" resultType="int" parameterType="map">
+		SELECT COUNT(DISTINCT COMPANY_NM)
+		FROM CREDITCARD C
+		WHERE 1=1
+		<if test="companyNm != null">
+			AND(
+				C.COMPANY_NM like '%${companyNm}%' 
+			)
+		</if>
 	</select>
 	
 	<select id="selectCreditLotte" resultMap="creditCardResultMap">
@@ -77,9 +95,27 @@
 	</select>
 	
 	<!-- 신용카드 전체 -->
-	<select id="selectDebitList" resultMap="debitCardResultMap">
+	<select id="selectDebitList" resultMap="debitCardResultMap" parameterType="map">
 		SELECT COMPANY_IMG, COMPANY_NM, PRODUCT_IMG, PRODUCT_NM, PRODUCT_CHAR, KEY_BENEFIT, DETAIL_URL
-		FROM DEBITCARD
+		FROM DEBITCARD D
+		WHERE 1=1
+		<if test="companyNm != null">
+			AND(
+				D.COMPANY_NM like '%${companyNm}%' 
+			)
+		</if>
+		LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<select id="selectDebitCount" resultType="int" parameterType="map">
+		SELECT COUNT(PRODUCT_NM)
+		FROM DEBITCARD D
+		WHERE 1=1
+		<if test="companyNm != null">
+			AND(
+				D.COMPANY_NM like '%${companyNm}%' 
+			)
+		</if>
 	</select>
 	
 	<select id="selectDebitLotte" resultMap="debitCardResultMap">
