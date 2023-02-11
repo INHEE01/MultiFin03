@@ -16,8 +16,6 @@ public class RealEstate {
 	private String Jibun; // 
 	private String Regional_Code; 	// 
 	private String Floor; 	//
-	private double x;
-	private double y;
 	
 	
 	public RealEstate() {

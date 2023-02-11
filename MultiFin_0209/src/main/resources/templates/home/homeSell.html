@@ -115,7 +115,8 @@
    	        	/*[# th:each="name : ${nameList}"]*/
 	   	        	{ Apartment_Name: /*[[${name.Apartment_Name}]]*/,   
 	   	        		Build_Year: /*[[${name.Build_Year}]]*/,
-	   	        		getArea: /*[[${name.getArea}]]*/
+	   	        		Area: /*[[${name.Area}]]*/,
+	   	        		Floor: /*[[${name.Floor}]]*/
 	   	        	},
    	        	/*[/]*/
    	        ];
@@ -127,6 +128,8 @@
 	   	        	},
    	        	/*[/]*/
    	        ];
+   	        
+   	        var content=[];
    	     const infowindow = new google.maps.InfoWindow();
 
             for (var i = 0; i < locations.length; i++) {
@@ -137,10 +140,25 @@
                     title:locations[i].place,
                     position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
                 });
+                content [i]= 
+		            '        <div class="info_title">' + 
+		            '          <img src="../../assets/img/home/apart.png" width="22" height="22" margin-bottom="10px" margin-right="5px" > &nbsp;' + 
+		            			locations2[i].Apartment_Name+ 
+		            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+		            '        </div>' + 
+		            '        <p> <div class="body">' + 
+		            
+		            '            <div class="desc">' + 
+		            '                <div> 위치 : '+locations[i].place+'&nbsp;'+ locations2[i].Floor+'층 </div>' + 
+		            '                <div> 건축년도 : '+locations2[i].Build_Year+'</div>' + 
+		            '                <div> 평수 : '+(locations2[i].Area/3.3).toFixed(0)+'㎡</div>' + 
+		            '                <div><a href="#" target="_blank" class="link">매물 보러가기</a></div>' + 
+		            '            </div>' + 
+		            '        </div>'; 
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     return function() {
                         //html로 표시될 인포 윈도우의 내용
-                        infowindow.setContent(locations2[i].Apartment_Name);
+                        infowindow.setContent(content[i]);
                         //인포윈도우가 표시될 위치
                         infowindow.open(map, marker);
                     }
@@ -151,7 +169,7 @@
                         //중심 위치를 클릭된 마커의 위치로 변경
                         map.setCenter(this.getPosition());
                         //마커 클릭 시의 줌 변화
-                        map.setZoom(14);
+                        map.setZoom(18);
                     });
                 }
             }
@@ -175,14 +193,14 @@
     <section class="home_container mt-6">
 			<div class="bg-white input-box">
 				<div class="card shadow-soft pt-3 pb-3">
-					<form action="#" class="input-container">
+					<form th:action="@{/home/homeSell}" method="get"class="input-container">
 						<div>
 								<div class="form-group m-lg-0">
 										<div class="input-group input-group-md mb-2 m-lg-0">
 												<div class="input-group-prepend">
 													<span class="input-group-text"><span class="fas fa-map-marker-alt"></span></span>
 												</div>
-												<input id="" type="text" class="form-control autocomplete"
+												<input name="searchValue" type="text" class="form-control autocomplete" value="searchValue" th:value="${searchValue}"
 														placeholder="지역을 입력하세요" tabindex="1" required style="width: 300px;">
 										</div>
 								</div>
@@ -194,18 +212,17 @@
 <!-- 									 <h1 th:text="${data.selectAllName.get(0).getApartment_Name}"></h1>									<table>
  -->										<tr>
 											<td>&nbsp; 
-												<input id="search-activity"type="checkbox"/>
+												<input id="search-activity"type="checkbox"  value="deal_year" name="searchType" th:checked="${searchType == 'deal_year'} ? 'checked' : null "/>&nbsp;
 												<span class="type">전세</span>											
 											</td>
 											<td>&nbsp;</td>
 											<td>&nbsp;</td>
-											<td>&nbsp; <input id="search-activity"type="checkbox" />
+											<td>&nbsp; <input id="search-activity"type="checkbox"  value="deal_monthly" name="searchType" th:checked="${searchType == 'deal_monthly'} ? 'checked' : null " /> &nbsp;
 												<span class="type">월세</span>
 											</td>
 											<td>&nbsp;</td>
 											<td>&nbsp;</td>
-											<td>&nbsp;
-												<input id="search-activity" type="checkbox" />
+											<td>&nbsp;	<input id="search-activity" type="checkbox" value="deal_all" name="searchType" th:checked="${searchType == 'deal_all'} ? 'checked' : null " />&nbsp;
 												<span class="type">매매</span>
 											</td>
 										</tr>
@@ -256,90 +273,7 @@
 										</div>
 									</div>
 								</div>
-								<div>
-									<div class="card pr-4 pl-4 mt-3 animate-up-5 sell-card">
-										<div class="row align-items-center">
-											<a href="./single-space.html"> <img
-												src="../../assets/img/home/image-office.jpg"
-												alt="loft space" class="card-img p-1 rounded-xl"
-												style="height: 200px; width: 200px;">
-											</a>
-											<div>
-												<div class="card-body p-3">
-													<a href="./single-space.html">
-														<h4 class="type-money font-weight-bolder mb-2">매매 3억5천</h4>
-														<h5 class="type-sell mb-3">아파트</h5>
-													</a> 
-													<div class="ex1">
-														<h6 style="color: red; text-align: center;" class="type-selling">매매</h6>
-													</div>
-													<p></p>
-													<ul class="list-group mb-3">
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">3층 20.51 관리비 10만</h6></li>
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">사당역 도보 5분</h6></li>
-													</ul>
-				
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div>
-									<div class="card pr-4 pl-4  mt-3 animate-up-5 sell-card">
-										<div class="row align-items-center">
-											<a href="./single-space.html"> <img
-												src="../../assets/img/home/image-office.jpg"
-												alt="loft space" class="card-img p-1 rounded-xl"
-												style="height: 200px; width: 200px;">
-											</a>
-											<div>
-												<div class="card-body p-3">
-													<a href="./single-space.html">
-														<h4 class="type-money font-weight-bolder mb-2">매매 3억5천</h4>
-														<h5 class="type-sell mb-3">아파트</h5>
-													</a> 
-													<div class="ex1">
-														<h6 style="color: red; text-align: center;" class="type-selling">매매</h6>
-													</div>
-													<p></p>
-													<ul class="list-group mb-3">
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">3층 20.51 관리비 10만</h6></li>
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">사당역 도보 5분</h6></li>
-													</ul>
-				
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div>
-									<div class="card pr-4 pl-4 mt-3 animate-up-5 sell-card">
-										<div class="row align-items-center">
-											<a href="./single-space.html"> <img
-												src="../../assets/img/home/image-office.jpg"
-												alt="loft space" class="card-img p-1 rounded-xl"
-												style="height: 200px; width: 200px;">
-											</a>
-											<div>
-												<div class="card-body p-3">
-													<a href="./single-space.html">
-														<h4 class="type-money font-weight-bolder mb-2">매매 3억5천</h4>
-														<h5 class="type-sell mb-3">아파트</h5>
-													</a> 
-													<div class="ex1">
-														<h6 style="color: red; text-align: center;" class="type-selling">매매</h6>
-													</div>
-													<p></p>
-													<ul class="list-group mb-3">
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">3층 20.51 관리비 10만</h6></li>
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">사당역 도보 5분</h6></li>
-													</ul>
-				
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								
 								<div>
 									<div class="card pr-4 pl-4 mt-3 animate-up-5 sell-card">
 										<div class="row align-items-center">

@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="ko">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- Primary Meta Tags -->
@@ -51,6 +50,7 @@
 <!-- Main CSS -->
 <link type="text/css" href="../../css/common.css" rel="stylesheet">
 <link rel="stylesheet" href="../../css/home/homeMain.css">
+ <link rel="stylesheet" href="../../css/korea.css" />
 <!--GOOGLE FONT-->
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Montserrat:wght@600&family=Prompt:wght@600;900&display=swap" rel="stylesheet">
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -175,6 +175,113 @@
                 </div>
             </div>
         </div>
+        
+        <script>
+ window.onload = function() {
+	    drawMap('#container');
+	};
+
+	//지도 그리기
+	function drawMap(target) {
+	    var width = 1000; //지도의 넓이
+	    var height = 800; //지도의 높이
+	    var initialScale = 5555; //확대시킬 값
+	    var initialX = -12100; //초기 위치값 X
+	    var initialY = 4040; //초기 위치값 Y
+	    var labels;
+
+	    var projection = d3.geo
+	        .mercator()
+	        .scale(initialScale)
+	        .translate([initialX, initialY]);
+	    var path = d3.geo.path().projection(projection);
+	    var zoom = d3.behavior
+	        .zoom()
+	        .translate(projection.translate())
+	        .scale(projection.scale())
+	        .scaleExtent([height, 800 * height])
+	        .on('zoom', zoom);
+
+	    var svg = d3
+	        .select(target)
+	        .append('svg')
+	        .attr('width', width + 'px')
+	        .attr('height', height + 'px')
+	        .attr('id', 'map')
+	        .attr('class', 'map');
+
+	    var states = svg
+	        .append('g')
+	        .attr('id', 'states')
+	        .call(zoom);
+
+	    states
+	        .append('rect')
+	        .attr('class', 'background')
+	        .attr('width', width + 'px')
+	        .attr('height', height + 'px');
+
+	    //geoJson데이터를 파싱하여 지도그리기
+	    d3.json('../../assets/json/korea.json', function(json) {
+	        states
+	            .selectAll('path') //지역 설정
+	            .data(json.features)
+	            .enter()
+	            .append('path')
+	            .attr('d', path)
+	            .attr('id', function(d) {
+	                return 'path-' + d.properties.name_eng;
+	            });
+
+	        labels = states
+	            .selectAll('text')
+	            .data(json.features) //라벨표시
+	            .enter()
+	            .append('text')
+	            .attr('transform', translateTolabel)
+	            .attr('id', function(d) {
+	                return 'label-' + d.properties.name_eng;
+	            })
+	            .attr('text-anchor', 'middle')
+	            .attr('dy', '.35em')
+	            .text(function(d) {
+	                return d.properties.name;
+	            });
+	    });
+
+	    //텍스트 위치 조절 - 하드코딩으로 위치 조절을 했습니다.
+	    function translateTolabel(d) {
+	        var arr = path.centroid(d);
+	        if (d.properties.code == 31) {
+	            //서울 경기도 이름 겹쳐서 경기도 내리기
+	            arr[1] +=
+	                d3.event && d3.event.scale
+	                    ? d3.event.scale / height + 20
+	                    : initialScale / height + 20;
+	        } else if (d.properties.code == 34) {
+	            //충남은 조금 더 내리기
+	            arr[1] +=
+	                d3.event && d3.event.scale
+	                    ? d3.event.scale / height + 10
+	                    : initialScale / height + 10;
+	        } else if (d.properties.code == 21) {
+	            //부산 조금 더 내리기
+	            arr[1] +=
+	                d3.event && d3.event.scale
+	                    ? d3.event.scale / height + 10
+	                    : initialScale / height + 10;
+	        } 
+	        return 'translate(' + arr + ')';
+	    }
+
+	    function zoom() {
+	        projection.translate(d3.event.translate).scale(d3.event.scale);
+	        states.selectAll('path').attr('d', path);
+	        labels.attr('transform', translateTolabel);
+	    }
+	}
+ </script>
+ 
         <section class="auction_main_container">
             <div class="auction">
                <div class="map_container">
@@ -182,7 +289,8 @@
                         <i class="fa-regular fa-map"></i>
                         <h3 class="title">청약지도</h3>
                     </div>
-                    <div class="map">
+                    <div id=container style="width:600px; height:400px;">
+                    
                     </div>
                </div>
                <div class="detail_container">
@@ -337,7 +445,7 @@
                     <div class="basic-carousel owl-carousel owl-theme">
                         <div class="item">
                             <div class="card border-light mb-4 animate-up-5">
-                                <a href="./single-space.html" class="position-relative">
+                                <a href="../../single-space.html" class="position-relative">
                                     <img src="../../assets/img/home/image-office.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office">
                                 </a>
                                 <div class="card-body">
@@ -373,7 +481,7 @@
                         <!-- Item 2 -->
                         <div class="item">
                             <div class="card border-light mb-4 animate-up-5">
-                                <a href="./single-space.html" class="position-relative">
+                                <a href="../../single-space.html" class="position-relative">
                                     <img src="../../assets/img/home/image-office.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office">
                                 </a>
                                 <div class="card-body">
@@ -409,7 +517,7 @@
                         <!-- Item 3 -->
                         <div class="item">
                             <div class="card border-light mb-4 animate-up-5">
-                                <a href="./single-space.html" class="position-relative">
+                                <a href="../../single-space.html" class="position-relative">
                                     <img src="../../assets/img/home/image-office.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office">
                                 </a>
                                 <div class="card-body">
@@ -445,7 +553,7 @@
                         <!-- Item 4 -->
                         <div class="item">
                             <div class="card border-light mb-4 animate-up-5">
-                                <a href="./single-space.html" class="position-relative">
+                                <a href="../../single-space.html" class="position-relative">
                                     <img src="../../assets/img/home/image-office.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office">
                                 </a>
                                 <div class="card-body">
@@ -651,13 +759,13 @@
                                 <div class="card border-light mb-4 animate-up-5">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-12 col-lg-6 col-xl-5">
-                                            <a href="./single-space.html">
+                                            <a href="../../single-space.html">
                                                 <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
                                             </a>
                                         </div>
                                         <div class="col-12 col-lg-6 col-xl-7">
                                             <div class="card-body px-3 py-2">
-                                                <a href="./single-space.html">
+                                                <a href="../../single-space.html">
                                                     <h4 class="h6 more_title">대곡역 두산위브</h4>
                                                 </a>
                                                 <div class="d-flex justify-content-between">
@@ -683,13 +791,13 @@
                                 <div class="card border-light mb-4 animate-up-5">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-12 col-lg-6 col-xl-5">
-                                            <a href="./single-space.html">
+                                            <a href="../../single-space.html">
                                                 <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
                                             </a>
                                         </div>
                                         <div class="col-12 col-lg-6 col-xl-7">
                                             <div class="card-body px-3 py-2">
-                                                <a href="./single-space.html">
+                                                <a href="../../single-space.html">
                                                     <h4 class="h6 more_title">대곡역 두산위브</h4>
                                                 </a>
                                                 <div class="d-flex justify-content-between">
@@ -715,13 +823,13 @@
                                 <div class="card border-light mb-4 animate-up-5">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-12 col-lg-6 col-xl-5">
-                                            <a href="./single-space.html">
+                                            <a href="../../single-space.html">
                                                 <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
                                             </a>
                                         </div>
                                         <div class="col-12 col-lg-6 col-xl-7">
                                             <div class="card-body px-3 py-2">
-                                                <a href="./single-space.html">
+                                                <a href="../../single-space.html">
                                                     <h4 class="h6 more_title">대곡역 두산위브</h4>
                                                 </a>
                                                 <div class="d-flex justify-content-between">
@@ -747,13 +855,13 @@
                                 <div class="card border-light mb-4 animate-up-5">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-12 col-lg-6 col-xl-5">
-                                            <a href="./single-space.html">
+                                            <a href="../../single-space.html">
                                                 <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
                                             </a>
                                         </div>
                                         <div class="col-12 col-lg-6 col-xl-7">
                                             <div class="card-body px-3 py-2">
-                                                <a href="./single-space.html">
+                                                <a href="../../single-space.html">
                                                     <h4 class="h6 more_title">대곡역 두산위브</h4>
                                                 </a>
                                                 <div class="d-flex justify-content-between">
@@ -780,13 +888,13 @@
                                     <div class="card border-light mb-4 animate-up-5">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-12 col-lg-6 col-xl-5">
-                                                <a href="./single-space.html">
+                                                <a href="../../single-space.html">
                                                     <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
                                                 </a>
                                             </div>
                                             <div class="col-12 col-lg-6 col-xl-7">
                                                 <div class="card-body px-3 py-2">
-                                                    <a href="./single-space.html">
+                                                    <a href="../../single-space.html">
                                                         <h4 class="h6 more_title">대곡역 두산위브</h4>
                                                     </a>
                                                     <div class="d-flex justify-content-between">
@@ -812,13 +920,13 @@
                                     <div class="card border-light mb-4 animate-up-5">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-12 col-lg-6 col-xl-5">
-                                                <a href="./single-space.html">
+                                                <a href="../../single-space.html">
                                                     <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
                                                 </a>
                                             </div>
                                             <div class="col-12 col-lg-6 col-xl-7">
                                                 <div class="card-body px-3 py-2">
-                                                    <a href="./single-space.html">
+                                                    <a href="../../single-space.html">
                                                         <h4 class="h6 more_title">대곡역 두산위브</h4>
                                                     </a>
                                                     <div class="d-flex justify-content-between">
@@ -844,13 +952,13 @@
                                     <div class="card border-light mb-4 animate-up-5">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-12 col-lg-6 col-xl-5">
-                                                <a href="./single-space.html">
+                                                <a href="../../single-space.html">
                                                     <img src="../../assets/img/home/image-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
                                                 </a>
                                             </div>
                                             <div class="col-12 col-lg-6 col-xl-7">
                                                 <div class="card-body px-3 py-2">
-                                                    <a href="./single-space.html">
+                                                    <a href="../../single-space.html">
                                                         <h4 class="h6 more_title">대곡역 두산위브</h4>
                                                     </a>
                                                     <div class="d-flex justify-content-between">
@@ -886,7 +994,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-lg-7">
-                        <div id="mapListings"></div>
+                        <div id="container"></div>
                     </div>
                 </div>
             </div>
@@ -940,10 +1048,10 @@
 <script src="../../assets/vendor/onscreen/dist/on-screen.umd.min.js"></script>
 
 <!-- NoUISlider -->
-<script src="../../assets/vendor/nouislider/distribute/nouislider.min.js"></script>
+<script src="../../vendor/nouislider/distribute/nouislider.min.js"></script>
 
 <!-- Bootstrap Datepicker -->
-<script src="../../vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="../../assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
 <!-- Owl acrousel -->
 <script src="../../assets/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
@@ -976,6 +1084,10 @@
 
 <!-- Spaces custom Javascript -->
 <script src="../../assets/js/spaces.js"></script>
+
+<!-- 지도 -->
+<script type="text/javascript" src="../../assets/js/d3.js"></script>
+ <script type="text/javascript" src="../../assets/js/korea.js"></script>
 </body>
 
 </html>
