@@ -27,6 +27,6 @@ public class MemberForm {
 	private String hobby;
 	
 	public Member toMember(){
-		return new Member(0, memberId, password, null, name, phone, email, address, hobby, null, null);
+		return new Member(0, memberId, password, memberId, name, phone, email, address, hobby, address, null, null);
 	}
 }

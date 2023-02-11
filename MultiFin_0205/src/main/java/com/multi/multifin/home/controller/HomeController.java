@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.multifin.home.model.service.HomeService;
 import com.multi.multifin.home.model.vo.Home;
-import com.multifin.model.service.RealEstateParsingService;
 
 import org.springframework.ui.Model;
 
@@ -41,13 +40,6 @@ public class HomeController {
 	
 	@GetMapping("/homeSell")
 	public String homeSellSearch(Model model) {
-		RealEstateParsingService rps= new RealEstateParsingService();
-		
-		
-		
-		model.addAttribute("xyList", rps.selectAllXY());	
-		model.addAttribute("nameList", rps.selectAllName());	
-	
 		return "home/homeSell";
 	}
 	
@@ -59,7 +51,7 @@ public class HomeController {
 		if(searchValue != null) {
 			map.put("searchValue", searchValue);
 		}else if(searchValue==null) {
-		//	model.addAttribute("msg", "Á¦¸ñÀ» Àû¾îÁÖ¼¼¿ä.");
+		//	model.addAttribute("msg", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
 		//	model.addAttribute("location", "/");
 		//	return "common/msg"; 
 		}

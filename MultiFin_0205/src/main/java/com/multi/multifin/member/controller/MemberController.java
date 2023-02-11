@@ -94,11 +94,10 @@ public class MemberController {
 		}
 
 		Member member = memberForm.toMember();
-		
 
-		Member result = service.save(member);
+		int result = service.save(member);
 		
-		if(result != null) { // 성공
+		if(result > 0) { // 성공
 			model.addAttribute("msg", "회원가입에 성공하였습니다.");
 			model.addAttribute("location", "/");
 		}else { // 실패
@@ -136,10 +135,10 @@ public class MemberController {
 		
 		updateMember.setMNo(loginMember.getMNo());
 		updateMember.setPassword(loginMember.getPassword());
-		Member result = service.save(updateMember);
+		int result = service.save(updateMember);
 		
-		if(result != null) {
-			model.addAttribute("loginMember", service.findById(loginMember.getMemberId())); // DB에서 있는 값을 다시 세션에 넣어주는 코드
+		if(result > 0) {
+			model.addAttribute("loginMember", service.findById(loginMember.getId())); // DB에서 있는 값을 다시 세션에 넣어주는 코드
 			model.addAttribute("msg", "회원정보를 수정하였습니다.");
 			model.addAttribute("location", "/member/view");
 		}else {
@@ -166,9 +165,9 @@ public class MemberController {
 			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
 			String userPwd
 			) {
-		Member result = service.updatePwd(loginMember, userPwd);
+		int result = service.updatePwd(loginMember, userPwd);
 		
-		if(result != null) {
+		if(result > 0) {
 			model.addAttribute("msg", "비밀번호 수정에 성공하였습니다.");
 		}else {
 			model.addAttribute("msg", "비밀번호 변경에 실패했습니다.");
