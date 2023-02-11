@@ -8,12 +8,16 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.multi.multifin.bank.controller.BankController;
 import com.multi.multifin.home.model.service.HomeService;
 import com.multi.multifin.home.model.vo.Home;
+import com.multi.multifin.home.model.vo.MarkerParsing;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.ui.Model;
-
+@Slf4j
 @RequestMapping("/home")
 @org.springframework.stereotype.Controller
 public class HomeController {
@@ -39,7 +43,12 @@ public class HomeController {
 	
 	
 	@GetMapping("/homeSell")
-	public String homeSellSearch(Model model) {
+	public String homeSellSearch(Model model,@RequestParam Map<String, Object> paramMap) {
+		log.info("부동산 매물 페이지 요청 성공");
+		List<MarkerParsing> markerParsing = homeService.selectHomeByXY();
+		List<Home> home = homeService.searchHomeList(paramMap);
+		model.addAttribute("markerParsing", markerParsing);
+		model.addAttribute("home", home);
 		return "home/homeSell";
 	}
 	
@@ -60,7 +69,7 @@ public class HomeController {
 		}else {
 			searchType = new String[] {};
 		}
-		List<Home> list = homeService.searchRealEstateByDong(map);
+		List<Home> list = homeService.searchHomeByDong(map);
 
 		model.addAttribute("list", list); 
 		model.addAttribute("searchValue", searchValue);

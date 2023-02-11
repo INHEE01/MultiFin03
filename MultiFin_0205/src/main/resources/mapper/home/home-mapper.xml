@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//KO" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.multi.multifin.home.model.mapper.HomeMapper">
+	<resultMap type="Home" id="HomeResultMap">
+		<id property="RealEstateDealNo" column="RealEstateDealNo"/>
+		<result property="Build_Year" column="build_Year"/>         
+		<result property="Contract_Type" column="contract_Type"/>
+		<result property="Term_Contract" column="term_Contract"/>
+		<result property="Offi_Name" column="offi_Name"/>
+		<result property="Deal_Year" column="deal_Year"/>
+		<result property="Dong" column="dong"/>
+		<result property="Deposit" column="deposit"/>
+		<result property="Sigungu" column="sigungu"/>
+		<result property="Apartment_Name" column="apartment_Name"/>
+		<result property="Deal_Month" column="deal_Month"/>
+		<result property="Monthly_Rent" column="monthly_Rent"/>
+		<result property="Deal_Day" column="deal_Day"/>
+		<result property="Area" column="area"/>
+		<result property="Jibun" column="jibun"/>
+		<result property="Regional_Code" column="regional_Code"/>
+		<result property="Floor" column="floor"/>
+	</resultMap>
+	
+		<resultMap type="MarkerParsing" id="MarkerParsingResultMap">
+		<id property="RealEstateDealNo" column="rno"/>
+		<result property="searchAddr" column="text"/>
+		<result property="x" column="x"/>
+		<result property="y" column="y"/>
+	</resultMap>
+	
+	<select id="selectHomeList"  resultMap="HomeResultMap" parameterType="map">
+		SELECT Build_Year,Contract_Type,Term_Contract,Offi_Name,Deal_Year,Dong,Deposit,Sigungu,Apartment_Name,
+		Deal_Month,Monthly_Rent,Deal_Day,Area,Jibun,Regional_Code,Floor
+		FROM REALESTATE
+		WHERE 1=1
+	</select>
+	<select id="selectHomeByXY"  resultMap="MarkerParsingResultMap">
+		SELECT realEstateDealNo,searchAddr,x,y 
+		FROM Marker
+	</select>
+	
+
+</mapper>

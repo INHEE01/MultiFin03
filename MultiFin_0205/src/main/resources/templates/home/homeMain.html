@@ -5,6 +5,8 @@
 	<title>MultiFin:부동산 경매</title>
 	<!-- 현재 페이지에서만 쓰는 css, script -->
 	<link type="text/css" th:href="@{/css/home/homeMain.css}" rel="stylesheet">
+	 <link rel="stylesheet" href="../../css/korea.css" />
+	
 </head>
 <body>
 <header th:replace="~{layout/header :: #header}"></header>
@@ -127,7 +129,8 @@
                 </div>
             </div>
         </div>
-        
+        <script type="text/javascript" src="../../assets/js/d3.js"></script>
+ 		<script type="text/javascript" src="../../assets/js/korea.js"></script>
         <script>
  window.onload = function() {
 	    drawMap('#container');

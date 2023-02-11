@@ -48,22 +48,11 @@
                 center: { lat: 37.5407622, lng: 127.0706095 },
                 
             });
-           //     var dataLength="[(${nameList.size})]";
-            	
-    	   //     var dataApartment_Name="[(${nameList.get(0).getApartment_Name})]";
-    	   //     var dataBuild_Year="[(${nameList.get(0).getBuild_Year})]";
-    	   //     var dataArea="[(${nameList.get(0).getArea})]";
-    	   //     var dataFloor="[(${nameList.get(0).getFloor})]";
+         
     	        
-    	        
-   	 //       const locations = [ 
-   	  //          { place:"어린이대공원역", lat: 37.547263, lng: 127.074181 },
-   	   //         { place: dataText, lat: dataY, lng: dataX },
-   	    //    ];
-   	 
    			 const locations2 = [ 
-   	        	/*[# th:each="name : ${nameList}"]*/
-	   	        	{ Apartment_Name: /*[[${name.Apartment_Name}]]*/,   
+   	        	/*[# th:each="name : ${home}"]*/
+	   	        	{ Apartment_Name: /*[[${name.Apartment_Name}]]*/,   //, 에러 신경안쓰셔도 됩니다!
 	   	        		Build_Year: /*[[${name.Build_Year}]]*/,
 	   	        		Area: /*[[${name.Area}]]*/,
 	   	        		Floor: /*[[${name.Floor}]]*/
@@ -71,7 +60,7 @@
    	        	/*[/]*/
    	        ];
    	        const locations = [ 
-   	        	/*[# th:each="map : ${xyList}"]*/
+   	        	/*[# th:each="map : ${markerParsing}"]*/
 	   	        	{ place: '[(${map.text})]',   
 	   	        		lat: /*[[${map.y}]]*/,
 	   	        		lng: /*[[${map.x}]]*/
@@ -338,10 +327,8 @@
 							</div>
 						</div>
 				</div>
-				<div class="map">
-					<iframe class="sell_map" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC1aON48lqcS91l_x_GJblY_kXTcrUk_ZI&q=멀티캠퍼스&region=KR&language=ko">
-					</iframe>
-				</div>
+			<div id="map" class="sell_map"></div>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1aON48lqcS91l_x_GJblY_kXTcrUk_ZI&callback=initMap&libraries=&v=weekly" async></script>
 			</div>
 		</section>
         <!-- End of section -->
