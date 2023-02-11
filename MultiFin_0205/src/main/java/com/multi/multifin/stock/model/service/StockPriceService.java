@@ -42,10 +42,6 @@ public class StockPriceService {
 	}
 	
 	
-	
-	
-	
-	
 	public List<StockPrice> getKospiList(PageInfo pageInfo, Map<String, String> param){
 		param.put("limit", "" + pageInfo.getListLimit());
 		param.put("offset", "" + (pageInfo.getStartList() - 1));
@@ -71,6 +67,12 @@ public class StockPriceService {
 		StockPrice sp = mapper.selectListByno(stockNo);
 		return sp;
 	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public List<StockPrice> stockMoreViewList(int stockNo) {
+		return  mapper.stockMoreList(stockNo);
+	}
+	
 	
 	@Transactional(rollbackFor = Exception.class)
 	public StockPrice findByName(String name) {

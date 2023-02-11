@@ -30,7 +30,12 @@
                     <h5 class="stock-main-title font-weight-bolder">[[${kospiIndex.stockType}]]</h5>
                     <div class="info_sub">
                         <h6 class="now_money increase mb-2">[[${kospiIndex.fin}]]</h6>
-                        <h5 class="now_percent increase ">▲ [[${kospiIndex.changePercent}]]</h5>
+                        <th:block th:if="${#strings.contains(kospiIndex.changePercent, '-') == true } ">
+		                      <h5 class="now_percent decrease font-weight-bolder">▼ [[${kospiIndex.changePercent}]]</h5>
+						</th:block>	                                    
+						<th:block th:if="${#strings.contains(kospiIndex.changePercent, '-') == false } ">
+		                     <h5 class="now_percent increase ">▲ [[${kospiIndex.changePercent}]]</h5>
+						</th:block>	 
                     </div>
                </div>
             </li>
@@ -39,7 +44,12 @@
                     <h5 class="stock-main-title  font-weight-bolder">[[${kosdaqIndex.stockType}]]</h5>
                     <div class="info_sub">
                         <h6 class="now_money increase mb-2">[[${kosdaqIndex.fin}]]</h6>
-                        <h5 class="now_percent increase">▲ [[${kosdaqIndex.changePercent}]]</h5>
+                        <th:block th:if="${#strings.contains(kosdaqIndex.changePercent, '-') == true } ">
+		                      <h5 class="now_percent decrease ">▼ [[${kosdaqIndex.changePercent}]]</h5>
+						</th:block>	                                    
+						<th:block th:if="${#strings.contains(kosdaqIndex.changePercent, '-') == false } ">
+		                     <h5 class="now_percent increase ">▲ [[${kosdaqIndex.changePercent}]]</h5>
+						</th:block>	 
                     </div>
                </div>
             </li>
@@ -48,7 +58,12 @@
                     <h5 class="stock-main-title  font-weight-bolder">[[${nasdaqIndex.stockType}]]</h5>
                     <div class="info_sub">
                         <h6 class="now_money increase mb-2">[[${nasdaqIndex.fin}]]</h6>
-                        <h5 class="now_percent increase">▲ [[${nasdaqIndex.changePercent}]]</h5>
+                        <th:block th:if="${#strings.contains(nasdaqIndex.changePercent, '-') == true } ">
+		                     <h5 class="now_percent decrease">▼ [[${nasdaqIndex.changePercent}]]</h5>
+						</th:block>	                                    
+						<th:block th:if="${#strings.contains(nasdaqIndex.changePercent, '-') == false } ">
+		                  	 <h5 class="now_percent increase">▲ [[${nasdaqIndex.changePercent}]]</h5>
+						</th:block>	 
                     </div>
                </div>
             </li>
@@ -58,8 +73,8 @@
                 <canvas id="KOSPI" style="width:850px; height: 360px; padding-top: 15px;"></canvas>
             </div>
             <div class="now">
-                <div class="now-title">실시간</div>
-                <div class="now-sub">[[${kospiIndex.stockDate}]]</div>
+                <div class="now-title">데이터 정보</div>
+                <div class="now-sub">[[${#dates.format(kospiIndex.stockDate, 'MM/dd')}]]&nbsp; 18:00 KST 장마감</div>
             </div>
         </div>
         <div id="tab-2" class="tab-content">
@@ -67,8 +82,8 @@
                 <canvas id="KOSDAQ" style="width:850px; height: 370px; padding-top: 15px;"></canvas>
             </div>
             <div class="now">
-                <div class="now-title">실시간</div>
-                <div class="now-sub">[[${kosdaqIndex.stockDate}]]</div>
+                <div class="now-title">데이터 정보</div>
+                <div class="now-sub">[[${#dates.format(kosdaqIndex.stockDate, 'MM/dd')}]]&nbsp; 18:00 KST 장마감</div>
             </div>
         </div>
         <div id="tab-3" class="tab-content">
@@ -76,8 +91,8 @@
                 <canvas id="NASDAQ" style="width:850px; height: 370px; padding-top: 15px;"></canvas>
             </div>
             <div class="now">
-                <div class="now-title">실시간</div>
-                <div class="now-sub">[[${nasdaqIndex.stockDate}]]</div>
+                <div class="now-title">데이터 정보</div>
+                <div class="now-sub">[[${#dates.format(nasdaqIndex.stockDate, 'MM/dd')}]]&nbsp; 05:00 KST 장마감</div>
             </div>
         </div>
     </div>
@@ -92,19 +107,19 @@
                     </div>
                 </td>
                 <td>
-                    <div class="stock-rank-percent increase">
-                        <i class="fa-solid fa-arrow-trend-up"></i>
-                        <h6 class="stock-rank-percent-number increase">[[${kospiRanking.fltRt}]]%</h6>
-                    </div>
+                    <th:block th:if="${#strings.contains(kospiRanking.fltRt, '-') == true } ">
+        	            <div class="stock-rank-percent decrease">
+                        	<i class="fa-solid fa-arrow-trend-down decrease"></i>
+		                    <h6 class="stock-rank-percent-number decrease">[[${kospiRanking.fltRt}]]%</h6>
+		                </div>
+					</th:block>	                                    
+					<th:block th:if="${#strings.contains(kospiRanking.fltRt, '-') == false } ">
+						<div class="stock-rank-percent increase">
+	                       	<i class="fa-solid fa-arrow-trend-up"></i>
+			                <h6 class="stock-rank-percent-number increase">[[${kospiRanking.fltRt}]]%</h6>
+			            </div>
+					</th:block>	 
                 </td>
-                <!-- 
-                <td>
-                    <div class="stock-rank-percent decrease">
-                        <i class="fa-solid fa-arrow-trend-down"></i>
-                        <small class="stock-rank-percent-number">-0.09%</small>
-                    </div>
-                </td>
-                 -->
             </tr>
         </table>
     </div>
@@ -119,19 +134,19 @@
                     </div>
                 </td>
                 <td>
-                    <div class="stock-rank-percent increase">
-                        <i class="fa-solid fa-arrow-trend-up"></i>
-                        <h6 class="stock-rank-percent-number increase">[[${kosdaqRanking.fltRt}]]%</h6>
-                    </div>
+                    <th:block th:if="${#strings.contains(kosdaqRanking.fltRt, '-') == true } ">
+        	            <div class="stock-rank-percent decrease">
+                        	<i class="fa-solid fa-arrow-trend-down decrease"></i>
+		                    <h6 class="stock-rank-percent-number decrease">[[${kosdaqRanking.fltRt}]]%</h6>
+		                </div>
+					</th:block>	                                    
+					<th:block th:if="${#strings.contains(kosdaqRanking.fltRt, '-') == false } ">
+						<div class="stock-rank-percent increase">
+	                       	<i class="fa-solid fa-arrow-trend-up"></i>
+			                <h6 class="stock-rank-percent-number increase">[[${kosdaqRanking.fltRt}]]%</h6>
+			            </div>
+					</th:block>	
                 </td>
-                <!-- 
-                <td>
-                    <div class="stock-rank-percent decrease">
-                        <i class="fa-solid fa-arrow-trend-down"></i>
-                        <small class="stock-rank-percent-number">-0.09%</small>
-                    </div>
-                </td>
-                 -->
             </tr>
         </table>
     </div>
@@ -161,8 +176,14 @@
 	         	<td class="stock__rank" th:text="${numbering.index}+1"></td>
 				<td class="table_row">[[${kospiBoard.itmsNm}]]</td>
 				<td class="table_row">[[${#numbers.formatInteger(kospiBoard.clpr, 0, 'COMMA')}]]</td>
-				<td class="table_row increase">▲ [[${#numbers.formatInteger(kospiBoard.vs, 0, 'COMMA')}]]</td>
-				<td class="table_row increase">▲ [[${kospiBoard.fltRt}]] %</td>
+				 <th:block th:if="${#strings.contains(kospiBoard.vs, '-') == true } ">
+        	            <td class="table_row decrease">▼ [[${#numbers.formatInteger(kospiBoard.vs, 0, 'COMMA')}]] 원</td>
+						<td class="table_row decrease">▼ [[${kospiBoard.fltRt}]] %</td>
+				 </th:block>	                                    
+				 <th:block th:if="${#strings.contains(kospiBoard.vs, '-') == false } ">
+						<td class="table_row increase">▲ [[${#numbers.formatInteger(kospiBoard.vs, 0, 'COMMA')}]] 원</td>
+						<td class="table_row increase">▲ [[${kospiBoard.fltRt}]] %</td>
+				 </th:block>	 
 				<td class="table_row">[[${#numbers.formatInteger(kospiBoard.lstgStCnt, 0, 'COMMA')}]]</td>
 				<td class="table_row">[[${#numbers.formatInteger(kospiBoard.mrktTotAmt, 0, 'COMMA')}]]</td>
 			</tr>
@@ -184,8 +205,14 @@
 		        <td class="stock__rank" th:text="${numbering2.index}+1"></td>
 				<td class="table_row">[[${kosdaqBoard.itmsNm}]]</td>
 				<td class="table_row">[[${#numbers.formatInteger(kosdaqBoard.clpr, 0, 'COMMA')}]]</td>
-				<td class="table_row increase">▲ [[${#numbers.formatInteger(kosdaqBoard.vs, 0, 'COMMA')}]]</td>
-				<td class="table_row increase">▲ [[${kosdaqBoard.fltRt}]] %</td>
+			 	<th:block th:if="${#strings.contains(kosdaqBoard.vs, '-') == true } ">
+        	            <td class="table_row decrease">▼ [[${#numbers.formatInteger(kosdaqBoard.vs, 0, 'COMMA')}]] 원</td>
+						<td class="table_row decrease">▼ [[${kosdaqBoard.fltRt}]] %</td>
+				 </th:block>	                                    
+				 <th:block th:if="${#strings.contains(kosdaqBoard.vs, '-') == false } ">
+						<td class="table_row increase">▲ [[${#numbers.formatInteger(kosdaqBoard.vs, 0, 'COMMA')}]] 원</td>
+						<td class="table_row increase">▲ [[${kosdaqBoard.fltRt}]] %</td>
+				 </th:block>
 				<td class="table_row">[[${#numbers.formatInteger(kosdaqBoard.lstgStCnt, 0, 'COMMA')}]]</td>
 				<td class="table_row">[[${#numbers.formatInteger(kosdaqBoard.mrktTotAmt, 0, 'COMMA')}]]</td>
 			</tr>
@@ -219,7 +246,7 @@
                 <td class="day-info-content">[[${kospiIndexList.highLevel}]]</td>
                 <td class="day-info-content">[[${kospiIndexList.lowLevel}]]</td>
                 <td class="day-info-content">[[${kospiIndexList.fin}]]</td>
-                <td class="day-info-content">[[${kospiIndexList.changePercent}]]</td>
+        	    <td class="day-info-content">[[${kospiIndexList.changePercent}]]</td>
                 <td class="day-info-content">[[${kospiIndexList.tradingVolume}]]</td>
             </tr>
        </table>
@@ -300,62 +327,72 @@
                         <option value="company">회사명</option>
                     </select>
                     <div class="input-search">
-                        <input class="searching-keyword" type="text" placeholder="검색어를 입력하세요"  name="searchValue"  id="searchValue" >
+                        <input class="searching-keyword" type="text" placeholder="검색어를 입력하세요"  th:value="${param.searchValue}"  name="searchValue"  id="searchValue" >
                         <button class="submit-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </form>
             </div>
         </div>
-        
-        
-        <div class="stock-future-code-container">
-            <div class="mb-3">
-                <a class="card border-light animate-up-3 shadow-soft p-0 p-lg-4" th:href="|/stock/stockFuture?no=${ss.srtnCd}|">     
-                    <div class="card-body stock-graph">
-                        <div class="description_container">
-                            <div class="stock_information">
-                                <div class="company_name">[[${ss.itmsNm}]]</div>
-                           </div>
-                           <div class="company_values">
-                                <div class="company_money">
-                                    <div class="money">[[${#numbers.formatInteger(ss.clpr, 0, 'COMMA')}]] 원</div>
-                                    <div class="percent-money increase">▲ [[${ss.vs}]](+[[${ss.fltRt}]]%)</div>
-                                </div>
-                           </div>
-                           <div class="fourtne-btn" th:href="|/stock/stockFuture?no=${ss.srtnCd}|">동향 예측</div>
-                        </div>
-                        <div class="stock-graph-section">
-                            <canvas class="stock_graph" id="stock_graph1" style="width:240px; height: 150px;"></canvas>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="mb-3">
-                   <a class="card border-light animate-up-3 shadow-soft p-0 p-lg-4" th:href="|/stock/stockFuture?no=${cj.srtnCd}|">     
-                    <div class="card-body stock-graph">
-                        <div class="description_container">
-                            <div class="stock_information">
-                                <div class="company_name">[[${cj.itmsNm}]]</div>
-                           </div>
-                           <div class="company_values">
-                                <div class="company_money">
-                                    <div class="money">[[${#numbers.formatInteger(cj.clpr, 0, 'COMMA')}]] 원</div>
-                                    <div class="percent-money increase">▲ [[${cj.vs}]](+[[${cj.fltRt}]]%)</div>
-                                </div>
-                           </div>
-                           <div class="fourtne-btn" th:href="|/stock/stockFuture?no=${cj.srtnCd}|">동향 예측</div>
-                        </div>
-                        <div class="stock-graph-section">
-                            <canvas class="stock_graph" id="stock_graph2" style="width:240px; height: 150px;"></canvas>
-                        </div>
-                    </div>
-                </a>
-            </div>
+		<div class="stock-future-code-container"> 
+	        <th:block  th:each="num : ${#numbers.sequence(0,1)}">
+				 <div class="mb-3">
+	                <a class="card border-light animate-up-3 shadow-soft p-0 p-lg-4" th:href="|/stock/stockFuture?no=${stockList[num].srtnCd}|">     
+	                    <div class="card-body stock-graph">
+	                        <div class="description_container">
+	                            <div class="stock_information">
+	                                <div class="company_name">[[${stockList[num].itmsNm}]]</div>
+	                           </div>
+	                           <div class="company_values">
+	                                   <div class="company_money">
+	                                    <div class="money">[[${#numbers.formatInteger(stockList[num].clpr, 0, 'COMMA')}]] 원</div>
+										<th:block th:if="${#strings.contains(stockList[num].vs, '-') == true } ">
+		                                    <div class="percent-money decrease font-weight-bolder">▼ [[${#numbers.formatInteger(stockList[num].vs, 0, 'COMMA')}]] ([[${stockList[num].fltRt}]]%)</div>
+										</th:block>	                                    
+										<th:block th:if="${#strings.contains(stockList[num].vs, '-') == false } ">
+		                                    <div class="percent-money increase font-weight-bolder">▲ [[${#numbers.formatInteger(stockList[num].vs, 0, 'COMMA')}]] (+[[${stockList[num].fltRt}]]%)</div>
+										</th:block>	                                    
+	                                </div>
+	                           </div>
+	                           <div class="fourtne-btn">동향 예측</div>
+	                        </div>
+	                        <div class="stock-graph-section">
+	                            <canvas class="stock_graph" id="stock_graph1" style="width:240px; height: 150px;"></canvas>
+	                        </div>
+	                    </div>
+	                </a>
+	             </div>
+	        </th:block>
         </div>
-        
-        
-    </div>
+        <div class="stock-future-code-container"> 
+	        <th:block  th:each="num : ${#numbers.sequence(2,3)}">
+				 <div class="mb-3">
+	                <a class="card border-light animate-up-3 shadow-soft p-0 p-lg-4" th:href="|/stock/stockFuture?no=${stockList[num].srtnCd}|">     
+	                    <div class="card-body stock-graph">
+	                        <div class="description_container">
+	                            <div class="stock_information">
+	                                <div class="company_name">[[${stockList[num].itmsNm}]]</div>
+	                           </div>
+	                           <div class="company_values">
+	                                <div class="company_money">
+	                                    <div class="money">[[${#numbers.formatInteger(stockList[num].clpr, 0, 'COMMA')}]] 원</div>
+										<th:block th:if="${#strings.contains(stockList[num].vs, '-') == true } ">
+		                                    <div class="percent-money decrease font-weight-bolder">▼ [[${#numbers.formatInteger(stockList[num].vs, 0, 'COMMA')}]] ([[${stockList[num].fltRt}]]%)</div>
+										</th:block>	                                    
+										<th:block th:if="${#strings.contains(stockList[num].vs, '-') == false } ">
+		                                    <div class="percent-money increase font-weight-bolder">▲ [[${#numbers.formatInteger(stockList[num].vs, 0, 'COMMA')}]] (+[[${stockList[num].fltRt}]]%)</div>
+										</th:block>	                                    
+	                                </div>
+	                           </div>
+	                           <div class="fourtne-btn">동향 예측</div>
+	                        </div>
+	                        <div class="stock-graph-section">
+	                            <canvas class="stock_graph" id="stock_graph" style="width:240px; height: 150px;"></canvas>
+	                        </div>
+	                    </div>
+	                </a>
+	             </div>
+	        </th:block>
+        </div>
 </section>
 <footer th:replace="~{layout/footer :: #footer}"></footer>
 <th:block th:replace="layout/scripts :: scripts"></th:block>

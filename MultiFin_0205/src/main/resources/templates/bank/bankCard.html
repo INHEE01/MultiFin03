@@ -5,6 +5,10 @@
 	<title>MultiFin:카드상품</title>
 	<!-- 현재 페이지에서만 쓰는 css, script -->
 	<link rel="stylesheet" th:href="@{/css/bank/bank.css}">
+	<style>
+	.img-card{box-shadow: 0 40px 80px rgb(0 0 0 / 16%);}
+	.checkedMenu{background-color: #0d1b48; color: white !important;}
+	</style>
 </head>
 <body>
 <header th:replace="~{layout/header :: #header}"></header>
@@ -41,7 +45,7 @@
                         <td><input type="radio" name="radioBtn" class="radioBtn" data-tab="slide2" id="radio2"><label for="radio2" class="radioLabel">KB국민카드</label></td>
                     </tr>
                     <tr>
-                        <td><input type="radio" name="radioBtn" class="radioBtn" data-tab="slide3" id="radio3"><label for="radio3" class="radioLabel">삼성카드</label></td>
+                        <td><input type="radio" name="radioBtn" class="radioBtn" data-tab="slide3" id="radio3"><label for="radio3" class="radioLabel">하나카드</label></td>
                         <td><input type="radio" name="radioBtn" class="radioBtn" data-tab="slide4" id="radio4"><label for="radio4" class="radioLabel">비씨카드</label></td>
                     </tr>
                     <tr>
@@ -50,7 +54,7 @@
                     </tr>
                     <tr>
                         <td><input type="radio" name="radioBtn" class="radioBtn" data-tab="slide7" id="radio7"><label for="radio7" class="radioLabel">롯데카드</label></td>
-                        <td><input type="radio" name="radioBtn" class="radioBtn" data-tab="slide8" id="radio8"><label for="radio8" class="radioLabel">하나카드</label></td>
+                        <td><input type="radio" name="radioBtn" class="radioBtn" data-tab="slide8" id="radio8"><label for="radio8" class="radioLabel">삼성카드</label></td>
                     </tr>
                 </table>
             </div>
@@ -63,7 +67,7 @@
                             <!-- @@@@@@@@@@@@@@@ 이미지 회전하는 방법 다시 생각하기 23.02.09 14:22 -->
                             <a th:href="${debitHyundai.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
                                 <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
-                                    <img th:src="${debitHyundai.productImg}" class="width > height ? rotate90 : ">
+                                    <img th:src="${debitHyundai.productImg}">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
@@ -75,7 +79,7 @@
                             <!-- Card -->
                             <a th:href="${creditHyundai.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
                                 <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
-                                    <img th:src="${creditHyundai.productImg}" class="width > height ? rotate90 : ">
+                                    <img th:src="${creditHyundai.productImg}">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
@@ -92,7 +96,7 @@
                             <!-- Card -->
                             <a th:href="${debitKb.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
                                 <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
-                                    <img th:src="${debitKb.productImg}" class="width > height ? rotate90 : ">
+                                    <img th:src="${debitKb.productImg}" class="rotate90" style="width: 240px;height: 160px;max-width: 240px;margin-left: -40px;">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
@@ -104,7 +108,7 @@
                             <!-- Card -->
                             <a th:href="${creditKb.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
                                 <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
-                                    <img th:src="${creditKb.productImg}" class="width > height ? rotate90 : ">
+                                    <img th:src="${creditKb.productImg}" class="rotate90" style="width: 240px;height: 160px;max-width: 240px;margin-left: -40px;">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
@@ -117,27 +121,27 @@
                 <!-- 슬라이드 3 s -->
                 <div class="slide first mb-4 mb-lg-0" id="slide3">
                     <div class="row mb1">
-                        <div class="bmCard mb-4" th:each="debitSamsung : ${debitSamsung}">
+                        <div class="bmCard mb-4" th:each="debitHana : ${debitHana}">
                             <!-- Card -->
-                            <a th:href="${debitSamsung.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                            <a th:href="${debitHana.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
                                 <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
-                                    <img th:src="${debitSamsung.productImg}" class="width > height ? rotate90 : ">
+                                    <img th:src="${debitHana.productImg}">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                [[${debitSamsung.productNm}]]
+                                [[${debitHana.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
-                        <div class="bmCard mb-4" th:each="creditSamsung : ${creditSamsung}">
+                        <div class="bmCard mb-4" th:each="creditHana : ${creditHana}">
                             <!-- Card -->
-                            <a th:href="${creditSamsung.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                            <a th:href="${creditHana.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
                                 <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
-                                    <img th:src="${creditSamsung.productImg}" class="width > height ? rotate90 : ">
+                                    <img th:src="${creditHana.productImg}" class="rotate90" style="width: 240px;height: 160px;max-width: 240px;margin-left: -40px;">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                [[${creditSamsung.productNm}]]
+                                [[${creditHana.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
@@ -262,27 +266,27 @@
                 <!-- 슬라이드 8 s -->
                 <div class="slide first mb-4 mb-lg-0" id="slide8">
                     <div class="row mb1">
-                        <div class="bmCard mb-4" th:each="debitHana : ${debitHana}">
+                        <div class="bmCard mb-4" th:each="debitSamsung : ${debitSamsung}">
                             <!-- Card -->
-                            <a th:href="${debitHana.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                            <a th:href="${debitSamsung.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
                                 <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
-                                    <img th:src="${debitHana.productImg}" class="width > height ? rotate90 : ">
+                                    <img th:src="${debitSamsung.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                [[${debitHana.productNm}]]
+                                [[${debitSamsung.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
-                        <div class="bmCard mb-4" th:each="creditHana : ${creditHana}">
+                        <div class="bmCard mb-4" th:each="creditSamsung : ${creditSamsung}">
                             <!-- Card -->
-                            <a th:href="${creditHana.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
+                            <a th:href="${creditSamsung.detailUrl}" target="_blank" class="card img-card fh-240 border-0 outer-bg">
                                 <div class="card-img-overlay d-flex align-items-center bg-dark p-0">
-                                    <img th:src="${creditHana.productImg}" class="width > height ? rotate90 : ">
+                                    <img th:src="${creditSamsung.productImg}" class="width > height ? rotate90 : ">
                                 </div>
                             </a>
                             <div class="text-dark p-2 text-center font-weight-bold">
-                                [[${creditHana.productNm}]]
+                                [[${creditSamsung.productNm}]]
                             </div>
                             <!-- End of Card -->
                         </div>
@@ -307,35 +311,49 @@
                     <div class="border-gray-500 border rounded">
                         <ul class="list-style-none text-dark blSearchTap">
                             <li>
-                                <a href="#debitcard" class="tapbtnDebit">신용카드</a>
+                            	<th:block th:if="${check} == '0'">
+	                                <a href="#debitcard" class="tapbtnDebit checkedMenu">신용카드</a>
+                            	</th:block>
+                            	<th:block th:if="${check} != '0'">
+	                                <a href="#debitcard" class="tapbtnDebit">신용카드</a>
+                            	</th:block>
                             </li>
                             <li>
-                                <a href="#creditcard" class="tapbtnCredit">체크카드
-                                </a>
+                            	<th:block th:if="${check} == '1'">
+                             	   <a href="#creditcard" class="tapbtnCredit checkedMenu">체크카드</a>
+                                </th:block>
+                            	<th:block th:if="${check} != '1'">
+                             	   <a href="#creditcard" class="tapbtnCredit ">체크카드</a>
+                                </th:block>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <form autocomplete="off" class="search align-items-end" method="get" action="#">
+                <form autocomplete="off" class="search align-items-end" method="get" th:action="@{/bank/bankCard}">
                     <div class="col-12 mb-3 mb-lg-4">
                         <div class="form-group form-group-lg mb-0">
                             <div class="input-group">
-                                <input id="search-bank" type="text" class="form-control autocomplete border-gray-500 border-right-0" placeholder="카드사명을 입력하세요" required="">
+                                <input id="search-bank" type="text" class="form-control autocomplete border-gray-500 border-right-0" placeholder="카드사명을 입력하세요"  th:value="${param.searchValue}" name="searchValue">
                                 <button class="bankMainSubmit border border-gray-500 border-left-0 bg-white text-dark fw-60 fh-60" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
+          <th:block th:if="${check} == '0'">
             <div class="col-sm-12 tapMenu slideOpen" id="debitcard">
+          </th:block>
+          <th:block th:if="${check} != '0'">
+            <div class="col-sm-12 tapMenu" id="debitcard">
+          </th:block>
                 <table id="tbl-board" class="board-table">
                     <tr class="text-center bg-info text-white">
-                        <th class="table-header">번호</th>
-                        <th class="table-header">카드사명</th>
-                        <th class="table-header" style="width: 100px;">상품명</th>
-                        <th class="table-header">상품특징</th>
+                        <th class="table-header" style="width: 45px;">번호</th>
+                        <th class="table-header" style="width: 100px;">카드사명</th>
+                        <th class="table-header" style="width: 180px;">상품명</th>
+                        <th class="table-header" style="width: 240px;">상품특징</th>
                         <th class="table-header">주요혜택</th>
-                        <th class="table-header">상세정보</th>
+                        <th class="table-header" style="width: 100px;">상세정보</th>
                     </tr>
                     <th:block th:if="${debitList == null}">
 						<tr>
@@ -344,8 +362,8 @@
 					</th:block>
                     <th:block th:if="${debitList != null}">
 						<tr th:each="debitList, number : ${debitList}">
-	                        <td class="board-content">[[${number.index}+1]]</td>
-	                        <td class="board-content board-title board-logoimg">
+	                        <td class="board-content">[[(${pageDebitInfo.currentPage}-1)*12+${number.index}+1]]</td>
+	                        <td class="board-content board-logoimg">
 	                            <img th:src="${debitList.companyImg}">
 	                        </td>
 	                        <td class="board-content board-cardimg">
@@ -354,222 +372,76 @@
 	                        </td>
 	                        <td class="board-content">[[${debitList.productChar}]]</td>
 	                        <td class="board-content text-left">
-	                        	[[${debitList.keyBenefit}]]
-	                        <td class="board-content"><a th:href="${debitList.detailUrl}">바로가기</a></td>
+	                        	[(${debitList.keyBenefit})]
+	                        <td class="board-content"><a th:href="${debitList.detailUrl}" target="_blank">바로가기</a></td>
 	                    </tr>
 					</th:block>
                 </table>
                 <div class="table-buttons">
-                    <button th:onclick="|movePage('/bank/bankCard?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
-                    <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
-						<th:block th:if="${status.current == pageInfo.currentPage}">
+                    <button th:onclick="|movePage('/bank/bankCard?pageDebit=${pageDebitInfo.prevPage}','0');|" class="table-button">&lt;</button>
+                    <th:block th:each="num, status : ${#numbers.sequence(pageDebitInfo.startPage, pageDebitInfo.endPage)}">
+						<th:block th:if="${status.current == pageDebitInfo.currentPage}">
 							<button class="table-button" disabled >[[${status.current}]]</button>
 						</th:block>
-						<th:block th:if="${status.current != pageInfo.currentPage}">
-							<button th:onclick="|movePage('/bank/bankCard?page=${status.current}');|" class="table-button">
+						<th:block th:if="${status.current != pageDebitInfo.currentPage}">
+							<button th:onclick="|movePage('/bank/bankCard?pageDebit=${status.current}','0');|" class="table-button">
 								[[${status.current}]]
 							</button>
 						</th:block>
 					</th:block>
-                    <button th:onclick="|movePage('/bank/bankCard?page=${pageInfo.nextPage}');|" class="table-button">&gt;</button>
+                    <button th:onclick="|movePage('/bank/bankCard?pageDebit=${pageDebitInfo.nextPage}','0');|" class="table-button">&gt;</button>
                 </div>
             </div>
+          <th:block th:if="${check} == '1'">
+            <div class="col-sm-12 tapMenu slideOpen" id="creditcard">
+          </th:block>
+          <th:block th:if="${check} != '1'">
             <div class="col-sm-12 tapMenu" id="creditcard">
+          </th:block>
                 <table id="tbl-board" class="board-table">
                     <tr class="text-center bg-info text-white">
-                        <th class="table-header">번호</th>
-                        <th class="table-header">카드사명</th>
-                        <th class="table-header" style="width: 100px;">상품명</th>
-                        <th class="table-header">상품특징</th>
+                        <th class="table-header" style="width: 45px;">번호</th>
+                        <th class="table-header" style="width: 100px;">카드사명</th>
+                        <th class="table-header" style="width: 180px;">상품명</th>
+                        <th class="table-header" style="width: 240px;">상품특징</th>
                         <th class="table-header">주요혜택</th>
-                        <th class="table-header">상세정보</th>
+                        <th class="table-header" style="width: 100px;">상세정보</th>
                     </tr>
-                    <tr>
-                        <td class="board-content">1</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%ED%8F%AC%EC%9D%B8%ED%8A%B8%ED%94%8C%EB%9F%AC%EC%8A%A4%EC%B2%B4%ED%81%AC[20170118183638503].png&fileType=carddamoa">
-                            롯데 포인트플러스 체크카드
-                        </td>
-                        <td class="board-content">더블 포인트 적립 서비스</td>
-                        <td class="board-content text-left">
-                            L.POINT 제휴사에서 결제 시 제휴사 현장에서 적립받은 L.POINT를 한 번 더 적립!
-                        </td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">2</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">3</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">4</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">5</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">6</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">7</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">8</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">9</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">10</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">11</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
-                    <tr>
-                        <td class="board-content">12</td>
-                        <td class="board-content board-title board-logoimg">
-                            <img src="https://gongsi.crefia.or.kr/assets/portal/images/content/card-logo-lotte.jpg">
-                        </td>
-                        <td class="board-content board-cardimg">
-                            <img src="https://gongsi.crefia.or.kr/common/imageView?fileName=%EB%A1%9C%EC%B9%B4%ED%81%B4%EB%9E%98%EC%8B%9D[20220718162432112].png&fileType=carddamoa">
-                            LOCA CLASSIC 카드
-                        </td>
-                        <td class="board-content">전가맹점 최대 1% 할인</td>
-                        <td class="board-content text-left">
-                            전가맹점 최대 1% 할인<br>
-                            ※ LOCA for/in 카드와 Set로 이용 시 혜택과 실적이 합산</td>
-                        <td class="board-content"><a href="#">바로가기</a></td>
-                    </tr>
+                    <th:block th:if="${debitList == null}">
+						<tr>
+							<td colspan="6">조회된 상품이 없습니다.</td>
+						</tr>
+					</th:block>
+                    <th:block th:if="${creditList != null}">
+						<tr th:each="creditList, number : ${creditList}">
+	                        <td class="board-content">[[(${pageCreditInfo.currentPage}-1)*12+${number.index}+1]]</td>
+	                        <td class="board-content board-logoimg">
+	                            <img th:src="${creditList.companyImg}">
+	                        </td>
+	                        <td class="board-content board-cardimg">
+	                            <img th:src="${creditList.productImg}">
+	                            [[${creditList.productNm}]]
+	                        </td>
+	                        <td class="board-content">[[${creditList.productChar}]]</td>
+	                        <td class="board-content text-left">
+	                        	[(${creditList.keyBenefit})]
+	                        <td class="board-content"><a th:href="${creditList.detailUrl}" target="_blank">바로가기</a></td>
+	                    </tr>
+					</th:block>
                 </table>
                 <div class="table-buttons">
-                    <button onclick="" class="table-button">&lt;</button>
-                    <button onclick="" class="table-button">1</button>
-                    <button onclick="" class="table-button">2</button>
-                    <button onclick="" class="table-button">&gt;</button>
+                    <button th:onclick="|movePage('/bank/bankCard?pageCredit=${pageCreditInfo.prevPage}','1');|" class="table-button table-button-credit">&lt;</button>
+                    <th:block th:each="num, status : ${#numbers.sequence(pageCreditInfo.startPage, pageCreditInfo.endPage)}">
+						<th:block th:if="${status.current == pageCreditInfo.currentPage}">
+							<button class="table-button table-button-credit" disabled >[[${status.current}]]</button>
+						</th:block>
+						<th:block th:if="${status.current != pageCreditInfo.currentPage}">
+							<button th:onclick="|movePage('/bank/bankCard?pageCredit=${status.current}','1');|" class="table-button table-button-credit">
+								[[${status.current}]]
+							</button>
+						</th:block>
+					</th:block>
+                    <button th:onclick="|movePage('/bank/bankCard?pageCredit=${pageCreditInfo.nextPage}','1');|" class="table-button table-button-credit">&gt;</button>
                 </div>
             </div>
         </div>
@@ -614,27 +486,37 @@
     /* 메뉴 클릭하면 함수 실행 */
     tapbtnDebit.addEventListener("click",()=>{
     	creditcard.classList.remove("slideOpen");
+    	tapbtnCredit.classList.remove("checkedMenu");
         debitcard.classList.add("slideOpen");
+        tapbtnDebit.classList.add("checkedMenu");
     });
     tapbtnCredit.addEventListener("click",()=>{
     	debitcard.classList.remove("slideOpen");
+    	tapbtnDebit.classList.remove("checkedMenu");
         creditcard.classList.add("slideOpen");
+        tapbtnCredit.classList.add("checkedMenu");
+    });
+    
+    /* 체크카드페이지 display: block으로 해주기 */
+    const tableButtonCredit = document.querySelector('.table-button-credit');
+    tableButtonCredit.addEventListener("click",()=>{
+    	window.onload() = function(){
+	    	debitcard.classList.remove("slideOpen");
+	    	tapbtnDebit.classList.remove("checkedMenu");
+	        creditcard.classList.add("slideOpen");
+	        tapbtnCredit.classList.add("checkedMenu");
+    	};
     });
 </script>
 <!-- 테이블 페이징 -->
 <script type="text/javascript">
-	function movePage(pageUrl){
-		var searchValue = document.getElementById("searchValue"); // 갤럭시
-		var searchType = 'title';
-		if(searchValue.value.length > 0){
-			for(var i = 0; i <searchTypes.length; i++){
-				if(searchTypes[i].checked == true){
-					searchType = searchTypes[i].value;
-				}
-			}
-			pageUrl = pageUrl + '?searchValue=' + searchValue.value; 
+	function movePage(pageUrl, isCheck){
+		var searchValue = document.getElementById("search-bank"); // 갤럭시
+		if(searchValue.value.length != 0){
+			pageUrl = pageUrl + '&searchValue=' + searchValue.value; 
 		}
-		location.href = encodeURI(pageUrl);	
+		pageUrl = pageUrl + '&check='+isCheck;
+		location.href = encodeURI(pageUrl);
 	}
 </script>
 

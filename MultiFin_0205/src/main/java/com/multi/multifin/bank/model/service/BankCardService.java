@@ -16,8 +16,14 @@ public class BankCardService {
 	@Autowired
 	private BankCardMapper mapper;
 	
-	public List<BankCreditCard> selectCreditList(){
-		return mapper.selectCreditList();
+	public List<BankCreditCard> selectCreditList(PageInfo pageInfo, Map<String, String> param){
+		param.put("limit", "" + pageInfo.getListLimit());
+		param.put("offset", "" + (pageInfo.getStartList() - 1));
+		return mapper.selectCreditList(param);
+	}
+	
+	public int getCreditCount(Map<String, String> param) {
+		return mapper.selectCreditCount(param);
 	}
 	
 	public List<BankCreditCard> selectCreditLotte(){
@@ -56,6 +62,10 @@ public class BankCardService {
 		param.put("limit", "" + pageInfo.getListLimit());
 		param.put("offset", "" + (pageInfo.getStartList() - 1));
 		return mapper.selectDebitList(param);
+	}
+	
+	public int getDebitCount(Map<String, String> param) {
+		return mapper.selectDebitCount(param);
 	}
 	
 	public List<BankDebitCard> selectDebitLotte(){

@@ -92,7 +92,17 @@
         LIMIT ${limit}
 	</select>
 	
-	
+	<select id="stockMoreList" resultMap="StockPriceResultMap" parameterType="int">
+		SELECT sno,basDt,srtnCd,
+			isinCd,itmsNm,mrktCtg,
+			mrktCtg,clpr,vs,
+			fltRt,mkp,hipr,lopr,
+			trqu,trPrc,lstgStCnt,mrktTotAmt
+		FROM stockprice 
+		where srtnCd LIKE '${srtnCd}' 
+		order by basDt desc
+        limit 7	
+	</select>
 	
 	<select id="selectListByno" parameterType="int" resultMap="StockPriceResultMap">
 		SELECT sno,basDt,srtnCd,
@@ -107,8 +117,6 @@
 	
 	
 	
-	
-	
 	<select id="selectStockList" resultMap="StockPriceResultMap" parameterType="map">
 		SELECT sno,basDt,srtnCd,
 			isinCd,itmsNm,mrktCtg,
@@ -120,11 +128,11 @@
 		<if test="itmsNm != null">
 			AND itmsNm LIKE '%${itmsNm}%' 
 		</if>
-		order by mrktTotAmt desc			
+		order by mrktTotAmt desc  LIMIT ${limit} OFFSET ${offset}	
 	</select>
 	
 	
-	<select id="selectStockCount" resultMap="StockPriceResultMap" parameterType="map">
+	<select id="selectStockCount" resultType="int" parameterType="map">
 		SELECT  
 			count(itmsNm)
 		FROM stockprice 
@@ -133,10 +141,5 @@
 			AND itmsNm LIKE '%${itmsNm}%' 
 		</if>			
 	</select>
-	
 </mapper>
-
-
-
-
 
