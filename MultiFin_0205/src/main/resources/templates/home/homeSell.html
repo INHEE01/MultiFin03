@@ -5,6 +5,127 @@
 	<title>MultiFin:부동산 매물</title>
 	<!-- 현재 페이지에서만 쓰는 css, script -->
 	<link type="text/css" th:href="@{/css/home/homeSell.css}" rel="stylesheet">
+	<style>
+      .info_title {
+        color: blue;
+        font-size: 1.5em;
+        font-weight: 700;
+      }
+      .img_size {
+		width:20px;
+		height:20px;
+		margin-bottom:10px;
+		margin-right:5px;
+		
+      }
+    </style>
+	<!--GOOGLE FONT-->
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Montserrat:wght@600&family=Prompt:wght@600;900&display=swap" rel="stylesheet">
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+   <style type="text/css">
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 800px;
+            /* The height is 400 pixels */
+            width: 700px;
+            /* The width is the width of the web page */
+        }
+    </style>
+  <script th:inline="javascript">
+  /*<![CDATA[*/
+  
+        function initMap() {
+        	 
+        	const myIcon = {
+        		      url: "../../assets/img/home/home_marker.png",
+        		      size: new google.maps.Size(50, 50),
+        		      origin: new google.maps.Point(0, 0),
+        		      anchor: new google.maps.Point(20, 40),
+        		      scaledSize: new google.maps.Size(50, 50),
+        		    };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: { lat: 37.5407622, lng: 127.0706095 },
+                
+            });
+           //     var dataLength="[(${nameList.size})]";
+            	
+    	   //     var dataApartment_Name="[(${nameList.get(0).getApartment_Name})]";
+    	   //     var dataBuild_Year="[(${nameList.get(0).getBuild_Year})]";
+    	   //     var dataArea="[(${nameList.get(0).getArea})]";
+    	   //     var dataFloor="[(${nameList.get(0).getFloor})]";
+    	        
+    	        
+   	 //       const locations = [ 
+   	  //          { place:"어린이대공원역", lat: 37.547263, lng: 127.074181 },
+   	   //         { place: dataText, lat: dataY, lng: dataX },
+   	    //    ];
+   	 
+   			 const locations2 = [ 
+   	        	/*[# th:each="name : ${nameList}"]*/
+	   	        	{ Apartment_Name: /*[[${name.Apartment_Name}]]*/,   
+	   	        		Build_Year: /*[[${name.Build_Year}]]*/,
+	   	        		Area: /*[[${name.Area}]]*/,
+	   	        		Floor: /*[[${name.Floor}]]*/
+	   	        	},
+   	        	/*[/]*/
+   	        ];
+   	        const locations = [ 
+   	        	/*[# th:each="map : ${xyList}"]*/
+	   	        	{ place: '[(${map.text})]',   
+	   	        		lat: /*[[${map.y}]]*/,
+	   	        		lng: /*[[${map.x}]]*/
+	   	        	},
+   	        	/*[/]*/
+   	        ];
+   	        
+   	        var content=[];
+   	     const infowindow = new google.maps.InfoWindow();
+
+            for (var i = 0; i < locations.length; i++) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    icon: myIcon,
+                    optimized: true,
+                    title:locations[i].place,
+                    position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
+                });
+                content [i]= 
+		            '        <div class="info_title">' + 
+		            '          <img src="../../assets/img/home/apart.png" width="22" height="22" margin-bottom="10px" margin-right="5px" > &nbsp;' + 
+		            			locations2[i].Apartment_Name+ 
+		            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+		            '        </div>' + 
+		            '        <p> <div class="body">' + 
+		            
+		            '            <div class="desc">' + 
+		            '                <div> 위치 : '+locations[i].place+'&nbsp;'+ locations2[i].Floor+'층 </div>' + 
+		            '                <div> 건축년도 : '+locations2[i].Build_Year+'</div>' + 
+		            '                <div> 평수 : '+(locations2[i].Area/3.3).toFixed(0)+'㎡</div>' + 
+		            '                <div><a href="#" target="_blank" class="link">매물 보러가기</a></div>' + 
+		            '            </div>' + 
+		            '        </div>'; 
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        //html로 표시될 인포 윈도우의 내용
+                        infowindow.setContent(content[i]);
+                        //인포윈도우가 표시될 위치
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+                
+                if (marker) {
+                    marker.addListener('click', function() {
+                        //중심 위치를 클릭된 마커의 위치로 변경
+                        map.setCenter(this.getPosition());
+                        //마커 클릭 시의 줌 변화
+                        map.setZoom(18);
+                    });
+                }
+            }
+  }
+        /*]]>*/
+    </script>
 </head>
 <body>
 <header th:replace="~{layout/header :: #header}"></header>
