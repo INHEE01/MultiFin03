@@ -23,22 +23,22 @@
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="signin-inner mt-3 mt-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-                            <form action="#">
+                            <form th:action="@{/member/login}" method="post"> <!-- 여기까지 -->
                                 <!-- Form -->
                                 <div class="form-group">
-                                    <label for="email"><sapn class="title here">ID 또는 E-mail</sapn></label>
+                                    <label for="email"><span class="title here">E-mail</span></label>
                                     <div class="input-group mb-4">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
                                         </div>
-                                        <input class="form-control" id="email" placeholder="아이디 혹은 이메일을 입력해주세요." type="text" aria-label="email address">
+                                        <input class="form-control" id="email" placeholder="이메일을 입력해주세요." type="text" aria-label="email address">
                                     </div>
                                 </div>
                                 <!-- End of Form -->
                                 <div class="form-group">
                                     <!-- Form -->
                                     <div class="form-group">
-                                        <label for="password"><sapn class="title here">Password</sapn></label>
+                                        <label for="password"><span class="title here">Password</span></label>
                                         <div class="input-group mb-4">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
@@ -51,10 +51,10 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="remember">
                                             <label class="form-check-label" for="remember">
-                                                <sapn class="title">아이디 기억하기</sapn>
+                                                <span class="title">아이디 기억하기</span>
                                             </label>
                                         </div>
-                                        <div><a href="../../html/member/forgot-password.html" class="text-right"><b class="title_sub">비밀번호를 잊으셨나요?</b></a></div>
+                                        <div><a th:href="@{/member/forgot-password}" class="text-right"><b class="title_sub">비밀번호를 잊으셨나요?</b></a></div>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-block btn-primary"><span class="title">로그인</span></button>
@@ -68,7 +68,7 @@
                             <div class="d-block d-sm-flex justify-content-center align-items-center mt-4">
                                 <span class="title font-weight-normal">
                                     아이디가 없으신가요?
-                                    <a href="./sign-up.html" class="font-weight-bold"><b>가입하기</b></a>
+                                    <a href="./sign-up.html" class="font-weight-bold" th:href="@{/member/sign-up}"><b>가입하기</b></a>
                                 </span>
                             </div>
                         </div>
