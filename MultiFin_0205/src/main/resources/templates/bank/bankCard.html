@@ -333,7 +333,7 @@
                     <div class="col-12 mb-3 mb-lg-4">
                         <div class="form-group form-group-lg mb-0">
                             <div class="input-group">
-                                <input id="search-bank" type="text" class="form-control autocomplete border-gray-500 border-right-0" placeholder="카드사명을 입력하세요"  th:value="${param.searchValue}" name="searchValue">
+                                <input id="search-bank" type="text" class="form-control autocomplete border-gray-500 border-right-0" placeholder="카드사명을 입력하세요" th:value="${param.searchValue}" name="searchValue">
                                 <button class="bankMainSubmit border border-gray-500 border-left-0 bg-white text-dark fw-60 fh-60" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
                         </div>
@@ -495,17 +495,6 @@
     	tapbtnDebit.classList.remove("checkedMenu");
         creditcard.classList.add("slideOpen");
         tapbtnCredit.classList.add("checkedMenu");
-    });
-    
-    /* 체크카드페이지 display: block으로 해주기 */
-    const tableButtonCredit = document.querySelector('.table-button-credit');
-    tableButtonCredit.addEventListener("click",()=>{
-    	window.onload() = function(){
-	    	debitcard.classList.remove("slideOpen");
-	    	tapbtnDebit.classList.remove("checkedMenu");
-	        creditcard.classList.add("slideOpen");
-	        tapbtnCredit.classList.add("checkedMenu");
-    	};
     });
 </script>
 <!-- 테이블 페이징 -->

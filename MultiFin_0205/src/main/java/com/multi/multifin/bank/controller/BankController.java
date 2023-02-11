@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.multi.multifin.bank.model.service.BankCardService;
+import com.multi.multifin.bank.model.service.BankDepsitSavingService;
 import com.multi.multifin.bank.model.vo.BankCreditCard;
 import com.multi.multifin.bank.model.vo.BankDebitCard;
+import com.multi.multifin.bank.model.vo.BankDeposit;
+import com.multi.multifin.bank.model.vo.BankSaving;
 import com.multi.multifin.common.util.PageInfo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +28,9 @@ public class BankController {
 
 	@Autowired
 	private BankCardService cardService;
+	
+	@Autowired
+	private BankDepsitSavingService bankbookService;
 	
 	@GetMapping("/bankCard")
 	public String bankCard(Model model, @RequestParam Map<String, String> paramMap) {
@@ -114,8 +120,44 @@ public class BankController {
 		return "bank/bankCard";
 	}
 	
-	@RequestMapping("/bankDeposit")
-	public String bankDeposit() {
+	@GetMapping("/bankDeposit")
+	public String bankDeposit(Model model, @RequestParam Map<String, String> paramMap) {
+		log.info("예금상품 전체 요청");
+		int pageDeposit = 1;
+		try {
+			String searchValue = paramMap.get("searchValue");
+			if(searchValue != null && searchValue.length() > 0) {
+				paramMap.put("korCoNm", searchValue);
+			}else {
+			}
+			pageDeposit = Integer.parseInt(paramMap.get("pageDeposit"));
+		} catch (Exception e) {
+		}
+		
+		try {
+			String check = paramMap.getOrDefault("check", "0");
+			model.addAttribute("check",check);
+		} catch (Exception e) {
+		}
+		
+		int depositCount = bankbookService.getDepositCountUnique(paramMap);
+		PageInfo pageDepositInfo = new PageInfo(pageDeposit, 5, depositCount, 10);
+		List<BankDeposit> depositList = bankbookService.selectDepositListUnique(pageDepositInfo, paramMap);
+		model.addAttribute("depositList", depositList);
+		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("pageDepositInfo", pageDepositInfo);
+		
+		log.info("적금상품 전체 요청");
+		int pageSaving = 1;
+		try {
+			pageSaving = Integer.parseInt(paramMap.get("pageSaving"));
+		} catch (Exception e) {
+		}
+		int savingCount = cardService.getCreditCount(paramMap);
+		PageInfo pageSavingInfo = new PageInfo(pageSaving, 5, savingCount, 10);
+		List<BankSaving> savingList = bankbookService.selectSavingListUnique(pageSavingInfo, paramMap);
+		model.addAttribute("savingList", savingList);
+		model.addAttribute("pageSavingInfo", pageSavingInfo);
 		return "bank/bankDeposit";
 	}
 	
