@@ -22,7 +22,18 @@
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="signin-inner mt-3 mt-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-                            <form action="#">
+                            <form action="/member/sign-up" method="post">
+                                <!-- Form -->
+                                <div class="form-group">
+                                    <label for="exampleInputIcon4"><span class="title"><span class="title here">ID</span></span></label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="fas fa-envelope"></span></span>
+                                        </div>
+                                        <input class="form-control" id="exampleInputIcon4" placeholder="아이디 입력해주세요." name="id" type="text" aria-label="text">
+                                    </div>
+                                </div>
+                                <!-- End of Form -->
                                 <!-- Form -->
                                 <div class="form-group">
                                     <label for="exampleInputIcon4"><span class="title"><span class="title here">E-mail</span></span></label>
@@ -30,9 +41,23 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
                                         </div>
-                                        <input class="form-control" id="exampleInputIcon4" placeholder="아이디 혹은 이메일을 입력해주세요." type="text" aria-label="email adress">
+                                        <input class="form-control" id="exampleInputIcon4" placeholder="이메일을 입력해주세요." name="email" type="email" aria-label="email adress">
                                     </div>
                                 </div>
+                                
+                                <!-- End of Form -->
+                                <!-- Form -->
+                                <div class="form-group">
+                                    <label for="exampleInputIcon4"><span class="title"><span class="title here">Name</span></span></label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="fas fa-envelope"></span></span>
+                                        </div>
+                                        <input class="form-control" id="exampleInputIcon4" placeholder="이름을 입력해주세요." name="name" type="text" aria-label="text">
+                                    </div>
+                                </div>
+                                
+                                
                                 <!-- End of Form -->
                                 <div class="form-group">
                                     <!-- Form -->
@@ -42,7 +67,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
                                             </div>
-                                            <input class="form-control" id="password" placeholder="비밀번호를 입력해주세요." type="password" aria-label="Password" required>
+                                            <input class="form-control" id="password" placeholder="비밀번호를 입력해주세요." type="password" name="password" aria-label="Password" required>
                                         </div>
                                     </div>
                                     <!-- End of Form -->

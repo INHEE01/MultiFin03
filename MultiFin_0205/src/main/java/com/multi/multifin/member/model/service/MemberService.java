@@ -20,8 +20,8 @@ public class MemberService {
 	
 	private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 	
-	public Member login(String id, String pw) {
-		Member member = mapper.selectMember(id);
+	public Member login(String email, String pw) {
+		Member member = mapper.selectMember(email);
 		if(member == null) {
 			return null;
 		}
@@ -31,7 +31,7 @@ public class MemberService {
 		System.out.println(pwEncoder.encode(pw)); // encode를 통해 평문에서 hash 코드로 변환
 		System.out.println(pwEncoder.matches(pw, member.getPassword())); // 평문 변환하고 비교까지
 		
-		if(id.equals("admin")) { // admin 테스트를 위한 코드
+		if(email.equals("admin")) { // admin 테스트를 위한 코드
 			return member;
 		}
 		

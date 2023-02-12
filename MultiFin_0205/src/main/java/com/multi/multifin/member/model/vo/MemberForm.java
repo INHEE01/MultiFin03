@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class MemberForm {
 	@NotNull(message = "id가 입력되지 않았습니다.")
 	@Size(max = 20, min = 4, message = "id를 4글자 이상, 20글자 미만 입력바랍니다.")
-	private String memberId;
+	private String id;
 	
 	@NotNull(message = "pw가 입력되지 않았습니다.")
 	@Size(max = 20, min = 4, message = "패스워드를 4글자 이상, 20글자 미만 입력바랍니다.")
@@ -27,6 +27,6 @@ public class MemberForm {
 	private String hobby;
 	
 	public Member toMember(){
-		return new Member(0, memberId, password, memberId, name, phone, email, address, hobby, address, null, null);
+		return new Member(0, id, password, null, name, phone, email, address, hobby, address, null, null);
 	}
 }

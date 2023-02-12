@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j // 
 @SessionAttributes("loginMember") // loginMember를 Model 취급할때 세션으로 처리하도록 도와주는 어노테이션
- @RequestMapping("/member")
+@RequestMapping("/member")
 @Controller
 public class MemberController {
 
@@ -49,15 +49,10 @@ public class MemberController {
 		return "member/sign-in";
 	}
 	
-	@GetMapping("/sign-up")
-	public String signUp() {
-		return "member/sign-up";
-	}
-	
-	@PostMapping("/memberlogin")
-	String login(Model model, String userId, String userPwd) {
-		log.info("id : " + userId + ", pwd : " + userPwd);
-		Member loginMember = service.login(userId, userPwd);
+	@PostMapping("/login")
+	String login(Model model, String email, String userPwd) {
+		log.info("id : " + email + ", pwd : " + userPwd);
+		Member loginMember = service.login(email, userPwd);
 		
 		if(loginMember != null) { // 성공
 			model.addAttribute("loginMember", loginMember);
@@ -77,19 +72,19 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/member/enroll")
-	public String enrollPage() {
+	@GetMapping("/sign-up")
+	public String signupPage() {
 		log.info("가입 페이지 요청");
-		return "member/enroll";
+		return "member/sign-up";
 	}
 	
-	@PostMapping("/member/enroll")
-	public String enroll(Model model, @Validated MemberForm memberForm, BindingResult bindingResult) { // @ModelAttribute 생각가능
+	@PostMapping("/sign-up")
+	public String enroll(Model model, @Validated MemberForm memberForm, BindingResult bindingResult) {
 		log.info("회원가입, MemberForm : " + memberForm.toString());
 
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("msg","회원가입 실패 : " + bindingResult.getAllErrors().get(0).getDefaultMessage());
-			model.addAttribute("location", "/member/enroll");
+			model.addAttribute("location", "/member/sign-up");
 			return "common/msg";
 		}
 
