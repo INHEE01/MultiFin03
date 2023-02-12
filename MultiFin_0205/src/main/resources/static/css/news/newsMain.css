@@ -1,0 +1,38 @@
+.mainTitle,.mainSubtitle,.form-control,.search_btn{
+    font-family: 'IBM Plex Sans KR', sans-serif;
+  }
+.section-header{padding-bottom: 50px;}
+.main_select,.movie-info{
+    width: 1200px;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+.section1 {
+    padding-top: 80px;
+}
+
+/* 주요 기사*/
+.logo {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.news-img {
+    float: left;
+}
+
+/* 영상기사 */
+.slides li{list-style: none;}
+.movie-info-title{
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-weight:600;
+}
+
+/* 많이본 기사*/
+.news-head{
+    font-family: 'IBM Plex Sans KR', sans-serif;
+}
+.news-head>h2 {
+    float: left;
+}

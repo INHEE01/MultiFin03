@@ -8,9 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LawController {
 
+	@RequestMapping("/lawMain")
+	public String lawMain() {
+		return "law/lawMain";
+	}
+	
 	@RequestMapping("/lawSearch")
 	public String lawSearch() {
 		return "law/lawSearch";
+	}
+	@RequestMapping("/lawFAQ")
+	public String lawFAQ() {
+		return "law/lawFAQ";
 	}
 	
 }
