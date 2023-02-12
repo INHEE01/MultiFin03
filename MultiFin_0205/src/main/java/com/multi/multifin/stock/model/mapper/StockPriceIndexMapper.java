@@ -13,4 +13,6 @@ public interface StockPriceIndexMapper {
 	List<StockPriceIndex> getStockList(String name);
 	StockPriceIndex nowStockIndex(String name);
 	List<StockPriceIndex> currentStockList(String name);
+	/*추가*/
+	List<String> stockGraphList(String name);
 }

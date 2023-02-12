@@ -1,13 +1,17 @@
 package com.multi.multifin.stock.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -210,4 +214,31 @@ public class StockController {
 	public String stockTest() {
 		return "stock/stockTest";
 	}
+	
+	@GetMapping("/stockRest/{id}")
+	public ResponseEntity<List<String>> getStockInfo(@PathVariable("id") String id)
+	{		
+		List<String> list =service.stockGraphList("KOSPI");
+		System.out.println(list.toString());
+	
+		/* 강사님께서 예시로 넣은 데이터
+		List<Integer> list = new ArrayList<>();
+		if(id.equals("kospi")) {
+			for(int i = 0; i <100; i++) {
+				list.add(i*3 + 1000);
+			}
+		}
+		else if(id.equals("kospi")) {
+			for(int i = 0; i <100; i++) {
+				list.add(i*3 + 300);
+			}
+		}
+		for(int i = 0; i <100; i++) {
+			list.add(i*3 + 300);
+		}*/
+		
+		return ResponseEntity.status(HttpStatus.OK).body(list);
+	}
+	
+	
 }

@@ -15,7 +15,7 @@
 	
 	<select id="getStockList"  parameterType="String" resultMap="StockPriceIndexResultMap">
 		select 
-			stock_type,fin
+			stock_type,fin,stock_date
 		from(
 		   select *
 		   from stockPriceIndex si
@@ -52,6 +52,15 @@
 		)sp
 		where sp.stock_type = '${stockType}'
 		limit 6
+	</select>
+	
+	
+	
+	<select id="stockGraphList" parameterType="String" resultMap="StockPriceIndexResultMap">
+		select fin
+			from stockPriceIndex
+	        where stock_type = '${stockType}'
+	        order by stock_date
 	</select>
 	
 	

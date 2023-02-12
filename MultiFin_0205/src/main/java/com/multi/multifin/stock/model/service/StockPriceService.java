@@ -101,6 +101,20 @@ public class StockPriceService {
 		return spiMapper.currentStockList(name);
 	}
 	
+	public List<String> stockGraphList(String name){
+		return spiMapper.stockGraphList(name);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 펀드 리스트 출력
 	public List<FundProductInfo> getFundList(PageInfo pageInfo, Map<String, String> param) {
 		param.put("limit", "" + pageInfo.getListLimit());
