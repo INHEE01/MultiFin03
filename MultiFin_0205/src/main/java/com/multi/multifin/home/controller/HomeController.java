@@ -17,63 +17,81 @@ import com.multi.multifin.home.model.vo.MarkerParsing;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.ui.Model;
+
 @Slf4j
 @RequestMapping("/home")
 @org.springframework.stereotype.Controller
 public class HomeController {
-	
+
 	@Autowired
 	private HomeService homeService;
-	
+
 	@GetMapping("/homeAuction")
 	public String homeAuction() {
 		return "home/homeAuction";
 	}
-	
+
 	@GetMapping("/homeBlue")
 	public String homeBlue() {
 		return "home/homeBlue";
 	}
-	
+
 	@GetMapping("/homeMain")
 	public String homeMain(Model model) {
-		
+
 		return "home/homeMain";
 	}
-	
-	
+
 	@GetMapping("/homeSell")
-	public String homeSellSearch(Model model,@RequestParam Map<String, Object> paramMap) {
+	public String homeSellSearch(Model model, @RequestParam Map<String, Object> paramMap) {
 		log.info("부동산 매물 페이지 요청 성공");
-		List<MarkerParsing> markerParsing = homeService.selectHomeByXY();
-		List<Home> home = homeService.searchHomeList(paramMap);
-		model.addAttribute("markerParsing", markerParsing);
-		model.addAttribute("home", home);
-		return "home/homeSell";
-	}
-	
-	
-	@GetMapping("/homeSellDetail")
-	public String homeSellDetial(Model model, String searchValue,String[] searchType) {
-		
-		Map<String, Object> map = new HashMap<>();
-		if(searchValue != null) {
-			map.put("searchValue", searchValue);
-		}else if(searchValue==null) {
-		//	model.addAttribute("msg", "������ �����ּ���.");
-		//	model.addAttribute("location", "/");
-		//	return "common/msg"; 
+
+		String searchValue = (String)(paramMap.get("searchValue"));
+		if (searchValue != null && searchValue.length() > 0) {
+			paramMap.put("searchValue", searchValue);
+		} else {
+//			model.addAttribute("msg", "제목을 적어주세요.");
+//			model.addAttribute("location", "/");
+//			return "common/msg";
 		}
-		if(searchType != null && searchType.length > 0) {
-			map.put("searchType", searchType);
-		}else {
+		String[] searchType = (String[])paramMap.get("searchType");
+		if (searchType != null  && searchType.length > 0) {
+			paramMap.put("searchType", searchType);
+		} else {
 			searchType = new String[] {};
 		}
-		List<Home> list = homeService.searchHomeByDong(map);
+		List<MarkerParsing> markerParsing = homeService.selectHomeByXY(paramMap);
+		List<Home> list = homeService.searchHomeBylocatin(paramMap);
+		List<Home> home = homeService.searchHomeList(paramMap);
+		int homeCount = homeService.getHomeCount(paramMap);
+		model.addAttribute("markerParsing", markerParsing);
+		model.addAttribute("homeCount", homeCount);
+		model.addAttribute("list", list);
+		model.addAttribute("home", home);
+		System.out.println(paramMap.toString());
 
-		model.addAttribute("list", list); 
-		model.addAttribute("searchValue", searchValue);
-		model.addAttribute("genre", Arrays.asList(searchType));
+		return "home/homeSell";
+	}
+
+	@GetMapping("/homeSellDetail")
+	public String homeSellDetail(Model model,  @RequestParam("RealEstateDealNo") String param) {
+		log.info("부동산 매물 상세 페이지 요청 성공");
+		System.out.println(param); // OK
+
+//			String RealEstateDealNo = (String)(paramMap.get("RealEstateDealNo"));
+//			if (RealEstateDealNo != null && RealEstateDealNo.length() > 0) {
+//				paramMap.put("RealEstateDealNo", RealEstateDealNo);
+//			} else {
+//				model.addAttribute("msg", "제목을 적어주세요.");
+//				model.addAttribute("location", "/");
+//				return "common/msg";
+//			}
+		List<Home> homeInfo = homeService.selectHomeInfo(param);
+		String dong= homeInfo.get(0).getDong();
+		String jibun= homeInfo.get(0).getJibun();
+		model.addAttribute("homeInfo", homeInfo);
+		model.addAttribute("mainAddress", "https://www.google.com/maps/embed/v1/place?key=AIzaSyC1aON48lqcS91l_x_GJblY_kXTcrUk_ZI&region=KR&language=ko&q="+dong+jibun);
+
 		return "home/homeSellDetail";
 	}
 

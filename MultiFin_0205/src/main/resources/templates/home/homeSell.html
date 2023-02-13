@@ -35,7 +35,6 @@
   /*<![CDATA[*/
   
         function initMap() {
-        	 
         	const myIcon = {
         		      url: "../../assets/img/home/home_marker.png",
         		      size: new google.maps.Size(50, 50),
@@ -51,8 +50,9 @@
          
     	        
    			 const locations2 = [ 
-   	        	/*[# th:each="name : ${home}"]*/
-	   	        	{ Apartment_Name: /*[[${name.Apartment_Name}]]*/,   //, 에러 신경안쓰셔도 됩니다!
+   	        	/*[# th:each="name : ${list}"]*/
+	   	        	{ RealEstateDealNo: /*[[${name.RealEstateDealNo}]]*/,   //, 에러 신경안쓰셔도 됩니다!
+	   	        		Apartment_Name: /*[[${name.Apartment_Name}]]*/,
 	   	        		Build_Year: /*[[${name.Build_Year}]]*/,
 	   	        		Area: /*[[${name.Area}]]*/,
 	   	        		Floor: /*[[${name.Floor}]]*/
@@ -60,7 +60,7 @@
    	        	/*[/]*/
    	        ];
    	        const locations = [ 
-   	        	/*[# th:each="map : ${markerParsing}"]*/
+   	        	/*[# th:each="map : ${markerParsing}"]*/ 
 	   	        	{ place: '[(${map.text})]',   
 	   	        		lat: /*[[${map.y}]]*/,
 	   	        		lng: /*[[${map.x}]]*/
@@ -71,7 +71,7 @@
    	        var content=[];
    	     const infowindow = new google.maps.InfoWindow();
 
-            for (var i = 0; i < locations.length; i++) {
+            for (var i = 0; i < locations2.length; i++) {
                 var marker = new google.maps.Marker({
                     map: map,
                     icon: myIcon,
@@ -91,7 +91,7 @@
 		            '                <div> 위치 : '+locations[i].place+'&nbsp;'+ locations2[i].Floor+'층 </div>' + 
 		            '                <div> 건축년도 : '+locations2[i].Build_Year+'</div>' + 
 		            '                <div> 평수 : '+(locations2[i].Area/3.3).toFixed(0)+'㎡</div>' + 
-		            '                <div><a href="#" target="_blank" class="link">매물 보러가기</a></div>' + 
+		            '                <div><a href="homeSellDetail?RealEstateDealNo='+locations2[i].RealEstateDealNo+' target="_blank" class="link">매물 보러가기</a></div>' + 
 		            '            </div>' + 
 		            '        </div>'; 
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -132,14 +132,14 @@
     <section class="home_container mt-6">
 			<div class="bg-white input-box">
 				<div class="card shadow-soft pt-3 pb-3">
-					<form action="#" class="input-container">
+					<form th:action="@{/home/homeSell}" class="input-container">
 						<div>
 								<div class="form-group m-lg-0">
 										<div class="input-group input-group-md mb-2 m-lg-0">
 												<div class="input-group-prepend">
 													<span class="input-group-text"><span class="fas fa-map-marker-alt"></span></span>
 												</div>
-												<input id="" type="text" class="form-control autocomplete"
+												<input name="searchValue" type="text" class="form-control autocomplete" value="searchValue" th:value="${searchValue}"
 														placeholder="지역을 입력하세요" tabindex="1" required style="width: 300px;">
 										</div>
 								</div>
@@ -151,19 +151,13 @@
 									<table>
 										<tr>
 											<td>&nbsp; 
-												<input id="search-activity"type="checkbox"/>
+												<input id="search-activity"type="checkbox" value="deal_year" name="searchType" th:checked="${searchType == 'deal_year'} ? 'checked' : null "/>
 												<span class="type">전세</span>											
 											</td>
 											<td>&nbsp;</td>
 											<td>&nbsp;</td>
-											<td>&nbsp; <input id="search-activity"type="checkbox" />
+											<td>&nbsp; <input id="search-activity"type="checkbox" value="deal_monthly" name="searchType" th:checked="${searchType == 'deal_monthly'} ? 'checked' : null " />
 												<span class="type">월세</span>
-											</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;
-												<input id="search-activity" type="checkbox" />
-												<span class="type">매매</span>
 											</td>
 										</tr>
 									</table>
@@ -181,143 +175,33 @@
 			<div class="bg-white selling_house_resultbox">
 				<div class="card shadow-soft pt-4 pb-4 pr-4 pl-4 selling-box">
 					<div>
-						<h3 class="search_result"> 검색결과 33건 </h4>
+						<div class="search_result" th:if="${homeCount}>1000"></div>
+						<div class="search_result" th:unless="${homeCount}>1000">검색결과 [[${homeCount}]] 건</div>
 					</div>
 						<div class="overflow-auto h-100">
 							<div class="row mr-0 ml-0">
-								<div>
+								<div th:each="homelist : ${list}"  th:if="${homelistStat.index} < 20">
 									<div class="card pr-4 pl-4 mt-3 animate-up-5 sell-card">
 										<div class="row align-items-center">
-											<a href="./single-space.html"> 
+											<a th:href="@{/home/homeSellDetail(RealEstateDealNo=${homelist.RealEstateDealNo})}"> 
 												<img src="../../assets/img/home/image-office.jpg"
 												alt="loft space" class="card-img p-1 rounded-xl"
-												style="height: 200px; width: 200px;">
+												style="height: 250px; width: 200px;">
 											</a>
 											<div>
-												<div class="card-body p-3">
-													<a href="./single-space.html">
-														<h4 class="type-money font-weight-bolder mb-2">매매 3억5천</h4>
+												<div class="card-body p-3" style="width:200px;">
+													<a th:href="@{/home/homeSellDetail(RealEstateDealNo=${homelist.RealEstateDealNo})}"> 
+														<h4 class="type-money font-weight-bolder mb-2">[[${homelist.apartment_Name}]]</h4>
 														<h5 class="type-sell mb-3">아파트</h5>
 													</a> 
 													<div class="ex1">
-														<h6 style="color: red; text-align: center;" class="type-selling">매매</h6>
+														<h6 style="color: red; text-align: center;" class="type-selling">전세</h6>
 													</div>
 													<p></p>
 													<ul class="list-group mb-3">
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">3층 20.51 관리비 10만</h6></li>
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">사당역 도보 5분</h6></li>
-													</ul>
-				
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div>
-									<div class="card pr-4 pl-4 mt-3 animate-up-5 sell-card">
-										<div class="row align-items-center">
-											<a href="./single-space.html"> <img
-												src="../../assets/img/home/image-office.jpg"
-												alt="loft space" class="card-img p-1 rounded-xl"
-												style="height: 200px; width: 200px;">
-											</a>
-											<div>
-												<div class="card-body p-3">
-													<a href="./single-space.html">
-														<h4 class="type-money font-weight-bolder mb-2">매매 3억5천</h4>
-														<h5 class="type-sell mb-3">아파트</h5>
-													</a> 
-													<div class="ex1">
-														<h6 style="color: red; text-align: center;" class="type-selling">매매</h6>
-													</div>
-													<p></p>
-													<ul class="list-group mb-3">
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">3층 20.51 관리비 10만</h6></li>
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">사당역 도보 5분</h6></li>
-													</ul>
-				
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div>
-									<div class="card pr-4 pl-4  mt-3 animate-up-5 sell-card">
-										<div class="row align-items-center">
-											<a href="./single-space.html"> <img
-												src="../../assets/img/home/image-office.jpg"
-												alt="loft space" class="card-img p-1 rounded-xl"
-												style="height: 200px; width: 200px;">
-											</a>
-											<div>
-												<div class="card-body p-3">
-													<a href="./single-space.html">
-														<h4 class="type-money font-weight-bolder mb-2">매매 3억5천</h4>
-														<h5 class="type-sell mb-3">아파트</h5>
-													</a> 
-													<div class="ex1">
-														<h6 style="color: red; text-align: center;" class="type-selling">매매</h6>
-													</div>
-													<p></p>
-													<ul class="list-group mb-3">
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">3층 20.51 관리비 10만</h6></li>
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">사당역 도보 5분</h6></li>
-													</ul>
-				
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div>
-									<div class="card pr-4 pl-4 mt-3 animate-up-5 sell-card">
-										<div class="row align-items-center">
-											<a href="./single-space.html"> <img
-												src="../../assets/img/home/image-office.jpg"
-												alt="loft space" class="card-img p-1 rounded-xl"
-												style="height: 200px; width: 200px;">
-											</a>
-											<div>
-												<div class="card-body p-3">
-													<a href="./single-space.html">
-														<h4 class="type-money font-weight-bolder mb-2">매매 3억5천</h4>
-														<h5 class="type-sell mb-3">아파트</h5>
-													</a> 
-													<div class="ex1">
-														<h6 style="color: red; text-align: center;" class="type-selling">매매</h6>
-													</div>
-													<p></p>
-													<ul class="list-group mb-3">
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">3층 20.51 관리비 10만</h6></li>
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">사당역 도보 5분</h6></li>
-													</ul>
-				
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div>
-									<div class="card pr-4 pl-4 mt-3 animate-up-5 sell-card">
-										<div class="row align-items-center">
-											<a href="./single-space.html"> <img
-												src="../../assets/img/home/image-office.jpg"
-												alt="loft space" class="card-img p-1 rounded-xl"
-												style="height: 200px; width: 200px;">
-											</a>
-											<div>
-												<div class="card-body p-3">
-													<a href="./single-space.html">
-														<h4 class="type-money font-weight-bolder mb-2">매매 3억5천</h4>
-														<h5 class="type-sell mb-3">아파트</h5>
-													</a> 
-													<div class="ex1">
-														<h6 style="color: red; text-align: center;" class="type-selling">매매</h6>
-													</div>
-													<p></p>
-													<ul class="list-group mb-3">
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">3층 20.51 관리비 10만</h6></li>
-														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">사당역 도보 5분</h6></li>
+														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">[[${homelist.build_Year}]]년 건축</h6></li>
+														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">[[${homelist.area}]]㎡ [[${homelist.floor}]]층</h6></li>
+														<li class="list-group-item p-0"><h6 class="font-weight-bold mb-2">[[${homelist.deposit}]]만원</h6></li>
 													</ul>
 												</div>
 											</div>
