@@ -9,5 +9,6 @@ import com.multi.multifin.stock.model.vo.ExchangeRate;
 @Mapper
 public interface ExchangeRateMapper {
 	List<ExchangeRate> KosdaqRanking();
+	List<ExchangeRate> StockPricefindByName(String name);
 	ExchangeRate findByName(String name);
 }

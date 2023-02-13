@@ -79,7 +79,7 @@
         </div>
         <div id="tab-2" class="tab-content">
             <div class="stock-graphes">
-                <canvas id="KOSDAQ" style="width:850px; height: 370px; padding-top: 15px;"></canvas>
+                <canvas id="KOSDAQ" style="width:850px; height: 360px; padding-top: 15px;"></canvas>
             </div>
             <div class="now">
                 <div class="now-title">데이터 정보</div>
@@ -88,7 +88,7 @@
         </div>
         <div id="tab-3" class="tab-content">
             <div class="stock-graphes">
-                <canvas id="NASDAQ" style="width:850px; height: 370px; padding-top: 15px;"></canvas>
+                <canvas id="NASDAQ" style="width:850px; height: 360px; padding-top: 15px;"></canvas>
             </div>
             <div class="now">
                 <div class="now-title">데이터 정보</div>
@@ -356,7 +356,8 @@
 	                           <div class="fourtne-btn">동향 예측</div>
 	                        </div>
 	                        <div class="stock-graph-section">
-	                            <canvas class="stock_graph" id="stock_graph1" style="width:240px; height: 150px;"></canvas>
+	                           <canvas class="stock_graph" th:id="${stockList[num].itmsNm}" th:value="${stockList[num].itmsNm}" style="width:240px; height: 150px;">
+	                           </canvas>
 	                        </div>
 	                    </div>
 	                </a>
@@ -380,14 +381,13 @@
 										</th:block>	                                    
 										<th:block th:if="${#strings.contains(stockList[num].vs, '-') == false } ">
 		                                    <div class="percent-money increase font-weight-bolder">▲ [[${#numbers.formatInteger(stockList[num].vs, 0, 'COMMA')}]] (+[[${stockList[num].fltRt}]]%)</div>
-										</th:block>	                                    
+										</th:block>	    
 	                                </div>
 	                           </div>
 	                           <div class="fourtne-btn">동향 예측</div>
 	                        </div>
 	                        <div class="stock-graph-section">
-	                            <canvas class="stock_graph" id="stock_graph" value="" style="width:240px; height: 150px;">
-	                            
+	                            <canvas class="stock_graph" th:id="${stockList[num].itmsNm}"  th:value="${stockList[num].itmsNm}" style="width:240px; height: 150px;">
 	                            </canvas>
 	                        </div>
 	                    </div>

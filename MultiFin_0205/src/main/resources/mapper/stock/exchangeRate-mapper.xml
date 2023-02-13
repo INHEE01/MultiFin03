@@ -39,4 +39,11 @@
 		AND recorddate IN (SELECT MAX(recorddate) FROM exchangeRate)
 	</select>
 	
+	
+	
+	<select id="StockPricefindByName" parameterType="String"  resultMap="exchangeRateResultMap">
+		SELECT  *
+		FROM exchangeRate
+		WHERE cur_unit like '${curUnit}%'
+	</select>
 </mapper>

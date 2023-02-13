@@ -57,7 +57,7 @@
 								</th:block>	 
                               </div>
                               <div class="main_graph">
-                                <canvas id="KOSPI" style="width: 220px; height: 80px;"></canvas>
+                                <canvas id="KOSPI" style="width: 220px; height: 85px;"></canvas>
                               </div>
                             </div>
                         </a>
@@ -77,7 +77,7 @@
 								</th:block>	 
                               </div>
                               <div class="main_graph">
-                                <canvas id="KOSDAQ" style="width: 220px; height: 80px;"></canvas>
+                                <canvas id="KOSDAQ" style="width: 220px; height: 85px;"></canvas>
                               </div>
                             </div>
                         </a>
@@ -88,10 +88,11 @@
                             <div class="card-body">
                               <h5 class="text-gray card-name font-weight-bolder">$ USD/KRW</h5>
                               <div class="card-numbers">
+                                <h6 class="text-gray number">[[${#dates.format(USD.recorddate, 'YY/MM/dd')}]]</h6>
                                 <h6 class="text-gray number">[[${USD.dealBasR}]] 원</h6>
                               </div>
                               <div class="main_graph">
-                                <canvas id="USD" style="width: 220px; height: 80px;"></canvas>
+                                <canvas id="USD" style="width: 220px; height: 85px;"></canvas>
                               </div>
                             </div>
                         </a>
@@ -102,10 +103,11 @@
                             <div class="card-body">
                               <h5 class="text-gray card-name font-weight-bolder">￥ JPY/KRW</h5>
                               <div class="card-numbers">
+                                <h6 class="text-gray number">[[${#dates.format(JPY.recorddate, 'YY/MM/dd')}]]</h6>
                                 <h6 class="text-gray number">[[${JPY.dealBasR}]] 원</h6>
                               </div>
                               <div class="main_graph">
-                                <canvas id="JPY" style="width: 220px; height: 80px;"></canvas>
+                                <canvas id="JPY" style="width: 220px; height: 85px;"></canvas>
                               </div>
                             </div>
                         </a>
@@ -116,7 +118,7 @@
   </main>
   <section class="funds">
    <div class="fund_section">
-      <h3 class="fund_main_title">MULTIPIN에서 <span style="color: orange;">펀드 상품</span>을 확인해 보세요</h3>
+      <h3 class="fund_main_title">MULTIFIN에서 <span style="color: orange;">펀드 상품</span>을 확인해 보세요</h3>
       <h5 class="fund_main_subtitle"> <a class="fund_main_subtitle" href="/stock/stockFund">더 많은 펀드상품 &nbsp;  ></a></h5>
       <div class="fund__container">
         <div class="fund__info shadow-soft">
@@ -146,10 +148,10 @@
                 <h3 class="stock_info_title">주가 동향 예측</h3>
                 <div class="stock__description">
                   <h5 class="stock__description">
-                    MULTIPIN 에서는 내가 보고 싶은 주식의 주가 동향 예측을 확인할 수 있습니다. <br>
+                    MULTIFIN 에서는 내가 보고 싶은 주식의 주가 동향 예측을 확인할 수 있습니다. <br>
                     동향 예측 프로그램을 확인하며 안전한 투자 생활을 즐겨보세요.
                   </h5>
-                  <button class="stock_btns shadow-soft" onclick="location.href='/stock/stockList #stock-fortune'"> 더보기 </button>
+                  <button class="stock_btns shadow-soft" onclick="location.href='/stock/stockList'"> 더보기 </button>
                 </div>
             </div>
             <div class="col-lg-10 mb-3">
@@ -179,7 +181,7 @@
                            </div>
                         </div>
                         <div class="stock-graph-section">
-                            <canvas id="SAMSUNG" style="width:500px; height: 150px; padding-top: 20px;"></canvas>
+                            <canvas id="SS" style="width:500px; height: 150px; padding-top: 20px;"></canvas>
                         </div>
                     </div>
                 </a>

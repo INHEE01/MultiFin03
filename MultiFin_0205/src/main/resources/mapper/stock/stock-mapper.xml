@@ -141,5 +141,16 @@
 			AND itmsNm LIKE '%${itmsNm}%' 
 		</if>			
 	</select>
+	
+	
+	<select id="stockPriceList"  parameterType="String" resultMap="StockPriceResultMap">
+		select * from stockprice 
+		where itmsNm like '${itmsNm}'	
+	</select>
+	
+	
+	
+	
+	
 </mapper>
 

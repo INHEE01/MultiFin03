@@ -15,7 +15,7 @@ public interface StockPriceMapper {
 	List<StockPrice> KosdaqRankingTop(Map<String, String> map);
 	StockPrice selectListByno(int no);
 	List<StockPrice> stockMoreList(int no);
-	StockPrice selectListByname(String name);
 	List<StockPrice> selectStockList(Map<String, String> map);
 	int selectStockCount(Map<String, String> map);
+	List<StockPrice>stockPriceList(String name);
 }

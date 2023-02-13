@@ -25,7 +25,6 @@ public class StockPriceService {
 	private ExchangeRateMapper erMapper;
 	@Autowired
 	private StockPriceIndexMapper spiMapper;
-	
 	@Autowired
 	private FundProductInfoMapper fpMapper;
 	
@@ -40,6 +39,8 @@ public class StockPriceService {
 	public int getStockCount(Map<String, String> param) {
 		return mapper.selectStockCount(param);
 	}
+	
+	
 	
 	
 	public List<StockPrice> getKospiList(PageInfo pageInfo, Map<String, String> param){
@@ -75,12 +76,6 @@ public class StockPriceService {
 	
 	
 	@Transactional(rollbackFor = Exception.class)
-	public StockPrice findByName(String name) {
-		StockPrice sp = mapper.selectListByname(name);
-		return sp;
-	}
-	
-	@Transactional(rollbackFor = Exception.class)
 	public ExchangeRate findExchangeRate(String name) {
 		ExchangeRate er = erMapper.findByName(name);
 		return er;
@@ -106,10 +101,14 @@ public class StockPriceService {
 	}
 	
 	
+	//stockList stock그래프 구현
+	public List<StockPrice> stockPriceList(String name){
+		return mapper.stockPriceList(name);
+	}
 	
-	
-	
-	
+	public List<ExchangeRate> StockPricefindByName(String name){
+		return erMapper.StockPricefindByName(name);
+	}
 	
 	
 	

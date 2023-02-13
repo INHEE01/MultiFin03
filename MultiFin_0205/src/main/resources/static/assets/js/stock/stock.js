@@ -1,37 +1,37 @@
 
-/*stock-graph(주가동향)*/
-const ctx = document.getElementById('KOSPI').getContext('2d');
-const gradientFill = ctx.createLinearGradient(0,0,0,80);
-gradientFill.addColorStop(0, 'rgba(225,116,116,0.5)');
-gradientFill.addColorStop(1, 'rgba(225,255,255,0)');
-var lds=[];
-//create time span
-for (var i=0; i<30; i++){lds.push(i);}
-//console.log(lds);
-var data = {
-            labels : lds,
-            datasets: [
-              { label: '현재주가',
-                spanGaps: true,
-			    borderColor: 'rgb(231, 76, 60)',
-			    backgroundColor: gradientFill,
-			    borderWidth: 2,
-			    fill:true,
-                lineTension: 0,  
-                pointRadius: 0,
-                data: [163, 164, 151, 153,143,144,154,156,153,
-                  143,146,148,146,135,146,136,138,136,146,149,
-                  156,153,156,156,159,149,149,149,139,139,135,
-                  135,135,134,130,132,125,122,123,123,123,124,126,125,
-                  123,146,148,156,150,151,152,158,156,156,149,
-                  156,153,156,150,159,160,159,165,167,165,165,
-                  153, 154, 153, 153,143,124,164,156,123,
-                  123,156,178,156,145,156,156,178,156,146,189
-               ],
-                }
-            ]
-        };
-let options = {
+/*main_KOSPI*/
+$.ajax({
+	method: 'get',
+	url:'/stock/stockRest/kospi',
+	contentType: 'application/json',
+	dataType: 'json',
+	success: (result) => {
+		var lds = [];
+		var dataList = [];
+		dataList = result;
+
+		var KOSPI = document.getElementById('KOSPI').getContext('2d');
+		const gradientFill = KOSPI.createLinearGradient(0, 0, -5, 85);
+		gradientFill.addColorStop(0, 'rgba(231,76,60,0.5)');
+		gradientFill.addColorStop(1, 'rgba(225,255,255,0)');
+		for (var i = 0; i < dataList.length; i++) {
+			lds.push(i);
+		}
+		var data = {
+			labels: lds,
+			datasets: [
+				{
+					backgroundColor: gradientFill,
+					borderColor: 'rgb(255,150,150)',
+					data: dataList,
+					lineTension: 0,
+					fill: origin,
+					borderWidth: 2,
+					pointRadius: 0,
+				}
+			]
+		};
+		let options = {
                 scales: {
                   xAxes: [{
 			          gridLines: { //A축 gridLines 지우는 옵션
@@ -51,73 +51,63 @@ let options = {
 			          },
 			          ticks: {
 			            beginAtZero: true,
-			            fontSize: 0,
+			            min:2100
 			          }
 		       		}]
 		      	},
                 legend: {
                   display: false,
               	},
-		              
 		     	tooltips: {
 		       	 	backgroundColor: '#1e90ff'
-		      	},
-              plugins: {
-                tooltip:{
-                  mode:'y',
-                  enabled:true,
-                  intersect:false
-                },
-                zoom: {
-                  pan: { // 마우스로 잡아서 그래프 이동
-                      enabled: true,
-                      mode: 'x'
-                  },
-                  zoom: {
-                      wheel: { enabled: true }
-                  }
-              	}
-              },
+		      	}
             }
-            
-            
-            
-var myChart = new Chart(ctx, {
-        type: 'line',
-        data: data,
-        options: options
-});
-   
-   
-   
+			var myStock = new Chart(KOSPI, {
+				type: 'line',
+				data: data,
+				options: options
+			});
+		},
+		error: (e) => {
+			alert('전송 실패!!');
+		}
+	});
 
-/*kosdaq*/
-const ctx2 = document.getElementById('KOSDAQ').getContext('2d');
-var lds=[];
-//create time span
-for (var i=0; i<30; i++){lds.push(i);}
-//console.log(lds);
-var data_KOSDAQ = {
-            labels : lds,
-            datasets: [
-              { label: '현재주가',
-                spanGaps: true,
-			    borderColor: 'rgb(231, 76, 60)',
-			    backgroundColor: gradientFill,
-			    borderWidth: 2,
-			    fill:true,
-                lineTension: 0,  
-                pointRadius: 0,
-                data: [
-                  123,146,151,152,158,156,156,149,110,
-                  156,153,156,150,159,160,159,165,167,165,165,
-                  153, 154, 153, 153,143,124,164,156,123,
-                  123,156,178,156,145,156,156,178,156,146,189
-               ],
-                }
-            ]
-        };
-let options_KOSDAQ = {
+
+
+/*main_KOSPI*/
+$.ajax({
+	method: 'get',
+	url:'/stock/stockRest/kosdaq',
+	contentType: 'application/json',
+	dataType: 'json',
+	success: (result) => {
+		var lds = [];
+		var dataList = [];
+		dataList = result;
+
+		var KOSDAQ = document.getElementById('KOSDAQ').getContext('2d');
+		const kosdaq_fill = KOSDAQ.createLinearGradient(0, 0, -5, 85);
+		kosdaq_fill.addColorStop(0, 'rgba(231,76,60,0.5)');
+		kosdaq_fill.addColorStop(1, 'rgba(225,255,255,0)');
+		for (var i = 0; i < dataList.length; i++) {
+			lds.push(i);
+		}
+		var data = {
+			labels: lds,
+			datasets: [
+				{
+					backgroundColor: kosdaq_fill,
+					borderColor: 'rgb(255,150,150)',
+					data: dataList,
+					lineTension: 0,
+					fill: origin,
+					borderWidth: 2,
+					pointRadius: 0,
+				}
+			]
+		};
+		let options = {
                 scales: {
                   xAxes: [{
 			          gridLines: { //A축 gridLines 지우는 옵션
@@ -137,79 +127,63 @@ let options_KOSDAQ = {
 			          },
 			          ticks: {
 			            beginAtZero: true,
-			            fontSize: 0,
+			            min:650
 			          }
 		       		}]
 		      	},
                 legend: {
                   display: false,
               	},
-		              
 		     	tooltips: {
 		       	 	backgroundColor: '#1e90ff'
-		      	},
-              plugins: {
-                tooltip:{
-                  mode:'y',
-                  enabled:true,
-                  intersect:false
-                },
-                zoom: {
-                  pan: { // 마우스로 잡아서 그래프 이동
-                      enabled: true,
-                      mode: 'x'
-                  },
-                  zoom: {
-                      wheel: { enabled: true }
-                  }
-              	}
-              },
+		      	}
             }
-            
-            
-            
-var myChart = new Chart(ctx2, {
-        type: 'line',
-        data: data_KOSDAQ,
-        options: options_KOSDAQ
+		var myStock = new Chart(KOSDAQ, {
+			type: 'line',
+			data: data,
+			options: options
+		});
+	},
+	error: (e) => {
+		alert('전송 실패!!');
+	}
 });
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
 
-/*USD*/
-const ctx3 = document.getElementById('USD').getContext('2d');
-var lds=[];
-//create time span
-for (var i=0; i<30; i++){lds.push(i);}
-//console.log(lds);
-var data_USD = {
-            labels : lds,
-            datasets: [
-              { label: '현재주가',
-                spanGaps: true,
-			    borderColor: 'rgb(231, 76, 60)',
-			    backgroundColor: gradientFill,
-			    borderWidth: 2,
-			    fill:true,
-                lineTension: 0,  
-                pointRadius: 0,
-                data: [
-                  111,183,156,156,145,155,178,165,145,123,145,144,111,132,131,156,145,189,177,156,
-                  156,141,111,123,101,101,98,123,156,148
-               ],
-                }
-            ]
-        };
-let options_USD = {
+
+
+/*main_USD*/
+$.ajax({
+	method: 'get',
+	url:'/stock/stockRest/USD',
+	contentType: 'application/json',
+	dataType: 'json',
+	success: (result) => {
+		var lds = [];
+		var dataList = [];
+		dataList = result;
+
+		var USD = document.getElementById('USD').getContext('2d');
+		const USD_fill = USD.createLinearGradient(0, 0, -5, 85);
+		USD_fill.addColorStop(0, 'rgba(231,76,60,0.5)');
+		USD_fill.addColorStop(1, 'rgba(225,255,255,0)');
+		for (var i = 0; i < dataList.length; i++) {
+			lds.push(i);
+		}
+		var data = {
+			labels: lds,
+			datasets: [
+				{
+					backgroundColor: USD_fill,
+					borderColor: 'rgb(255,150,150)',
+					data: dataList,
+					lineTension: 0,
+					fill: origin,
+					borderWidth: 2,
+					pointRadius: 0,
+				}
+			]
+		};
+		let options = {
                 scales: {
                   xAxes: [{
 			          gridLines: { //A축 gridLines 지우는 옵션
@@ -229,73 +203,62 @@ let options_USD = {
 			          },
 			          ticks: {
 			            beginAtZero: true,
-			            fontSize: 0,
+			            min:1200
 			          }
 		       		}]
 		      	},
                 legend: {
                   display: false,
               	},
-		              
 		     	tooltips: {
 		       	 	backgroundColor: '#1e90ff'
-		      	},
-              plugins: {
-                tooltip:{
-                  mode:'y',
-                  enabled:true,
-                  intersect:false
-                },
-                zoom: {
-                  pan: { // 마우스로 잡아서 그래프 이동
-                      enabled: true,
-                      mode: 'x'
-                  },
-                  zoom: {
-                      wheel: { enabled: true }
-                  }
-              	}
-              },
+		      	}
             }
-            
-            
-            
-var myChart = new Chart(ctx3, {
-        type: 'line',
-        data: data_USD,
-        options: options_USD
+		var myStock = new Chart(USD, {
+			type: 'line',
+			data: data,
+			options: options
+		});
+	},
+	error: (e) => {
+		alert('전송 실패!!');
+	}
 });
-   
-   
-   
-   
-   
 
-/*JPY*/
-const ctx4 = document.getElementById('JPY').getContext('2d');
-var lds=[];
-//create time span
-for (var i=0; i<30; i++){lds.push(i);}
-//console.log(lds);
-var data_JPY = {
-            labels : lds,
-            datasets: [
-              { label: '현재주가',
-                spanGaps: true,
-			    borderColor: 'rgb(231, 76, 60)',
-			    backgroundColor: gradientFill,
-			    borderWidth: 2,
-			    fill:true,
-                lineTension: 0,  
-                pointRadius: 0,
-                data: [
-                  156,141,111,123,101,101,98,123,156,148,
-                   111,183,156,156,145,155,178,165,145,123,145,144,111,132,131,156,145,189,177,156,
-               ],
-                }
-            ]
-        };
-let options_JPY = {
+
+/*main_JPY*/
+$.ajax({
+	method: 'get',
+	url:'/stock/stockRest/JPY',
+	contentType: 'application/json',
+	dataType: 'json',
+	success: (result) => {
+		var lds = [];
+		var dataList = [];
+		dataList = result;
+
+		var JPY = document.getElementById('JPY').getContext('2d');
+		const JPY_fill = JPY.createLinearGradient(0, 0, -5, 85);
+		JPY_fill.addColorStop(0, 'rgba(231,76,60,0.5)');
+		JPY_fill.addColorStop(1, 'rgba(225,255,255,0)');
+		for (var i = 0; i < dataList.length; i++) {
+			lds.push(i);
+		}
+		var data = {
+			labels: lds,
+			datasets: [
+				{
+					backgroundColor: JPY_fill,
+					borderColor: 'rgb(255,150,150)',
+					data: dataList,
+					lineTension: 0,
+					fill: origin,
+					borderWidth: 2,
+					pointRadius: 0,
+				}
+			]
+		};
+		let options = {
                 scales: {
                   xAxes: [{
 			          gridLines: { //A축 gridLines 지우는 옵션
@@ -315,225 +278,275 @@ let options_JPY = {
 			          },
 			          ticks: {
 			            beginAtZero: true,
-			            fontSize: 0,
+			            min:920
 			          }
 		       		}]
 		      	},
                 legend: {
                   display: false,
               	},
-		              
 		     	tooltips: {
 		       	 	backgroundColor: '#1e90ff'
-		      	},
-              plugins: {
-                tooltip:{
-                  mode:'y',
-                  enabled:true,
-                  intersect:false
-                },
-                zoom: {
-                  pan: { // 마우스로 잡아서 그래프 이동
-                      enabled: true,
-                      mode: 'x'
-                  },
-                  zoom: {
-                      wheel: { enabled: true }
-                  }
-              	}
-              },
+		      	}
             }
-            
-            
-            
-var myChart = new Chart(ctx4, {
-        type: 'line',
-        data: data_JPY,
-        options: options_JPY
-});
-   
-
-
-
-
-
-
-
-/*SAMSUNG*/
-const SAMSUNG = document.getElementById('SAMSUNG').getContext('2d');
-const gradientFill_SAMSUNG = SAMSUNG.createLinearGradient(0,0,0,150);
-gradientFill_SAMSUNG.addColorStop(0, 'rgba(110, 184, 110,0.5)');
-gradientFill_SAMSUNG.addColorStop(1, 'rgba(110, 184, 110,0)');
-var myChart = new Chart(SAMSUNG, {
-  type: 'line',
-    options: {
-      legend: {
-        display: false,
-      },
-      scales: {
-        xAxes: [{
-          gridLines: { //A축 gridLines 지우는 옵션
-            display: false,
-            drawBorder: false,
-          },
-          ticks: {
-            fontSize: 0,
-            fontColor:  'lightgray'
-        }
-
-        }],
-        yAxes: [{
-          display: false,
-          gridLines: { //Y축 gridLines 지우는 옵션
-            drawBorder: false,
-            display: false,
-          },
-          ticks: {
-            beginAtZero: true,
-            fontSize: 10,
-            fontColor: 'lightgray',
-          }
-        }]
-      },
-      tooltips: {
-        backgroundColor: '#1e90ff'
-      }
-    },
-    data: {
-      labels: ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12'],
-    datasets: [{
-      data: [18,16,17,20,18,17,11,12,15,11,13,11],
-      tension: 0.0,
-      borderColor: 'rgb(110, 184, 110)',
-      backgroundColor: gradientFill_SAMSUNG,
-      pointRadius:0, //포인터 반경 범위 ,
-      borderWidth: 2,
-      fill:true,
-    }]
-  },
-  axis: {
-    y: {
-        show: false
-    }
-}
-});
-
-/*SK*/
-const SK = document.getElementById('SK').getContext('2d');
-const gradientFill_SK = SK.createLinearGradient(0,0,0,150);
-gradientFill_SK.addColorStop(0, 'rgba(110, 184, 110,0.5)');
-gradientFill_SK.addColorStop(1, 'rgba(110, 184, 110,0)');
-var myChart = new Chart(SK, {
-  type: 'line',
-    options: {
-      legend: {
-        display: false,
-      },
-      scales: {
-        xAxes: [{
-          gridLines: { //A축 gridLines 지우는 옵션
-            display: false,
-            drawBorder: false,
-          },
-          ticks: {
-            fontSize: 0,
-            fontColor:  'lightgray'
-        }
-
-        }],
-        yAxes: [{
-          display: false,
-          gridLines: { //Y축 gridLines 지우는 옵션
-            drawBorder: false,
-            display: false,
-          },
-          ticks: {
-            beginAtZero: true,
-            fontSize: 10,
-            fontColor: 'lightgray',
-          }
-        }]
-      },
-      tooltips: {
-        backgroundColor: '#1e90ff'
-      }
-    },
-    data: {
-      labels: ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12'],
-    datasets: [{
-      data: [18,16,17,20,18,17,11,12,15,11,13,11],
-      tension: 0.0,
-      borderColor: 'rgb(110, 184, 110)',
-      backgroundColor: gradientFill_SK,
-      pointRadius:0, //포인터 반경 범위 ,
-      borderWidth: 2,
-      fill:true,
-    }]
-  },
-  axis: {
-    y: {
-        show: false
-    }
-}
+		var myStock = new Chart(JPY, {
+			type: 'line',
+			data: data,
+			options: options
+		});
+	},
+	error: (e) => {
+		alert('전송 실패!!');
+	}
 });
 
 
 
-/*LG*/
-const LG = document.getElementById('LG').getContext('2d');
-const gradientFill_LG = LG.createLinearGradient(0,0,0,150);
-gradientFill_LG.addColorStop(0, 'rgba(110, 184, 110,0.5)');
-gradientFill_LG.addColorStop(1, 'rgba(110, 184, 110,0)');
-var myChart = new Chart(LG, {
-  type: 'line',
-    options: {
-      legend: {
-        display: false,
-      },
-      scales: {
-        xAxes: [{
-          gridLines: { //A축 gridLines 지우는 옵션
-            display: false,
-            drawBorder: false,
-          },
-          ticks: {
-            fontSize: 0,
-            fontColor:  'lightgray'
-        }
+/*main_SS*/
+$.ajax({
+	method:'get',
+	url:'/stock/stockRest/SS',
+	contentType: 'application/json',
+	dataType: 'json',
+	success: (result) => {
+		var lds = [];
+		var dataList = [];
+		dataList = result;
 
-        }],
-        yAxes: [{
-          display: false,
-          gridLines: { //Y축 gridLines 지우는 옵션
-            drawBorder: false,
-            display: false,
-          },
-          ticks: {
-            beginAtZero: true,
-            fontSize: 10,
-            fontColor: 'lightgray',
-          }
-        }]
-      },
-      tooltips: {
-        backgroundColor: '#1e90ff'
-      }
-    },
-    data: {
-      labels: ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12'],
-    datasets: [{
-      data: [18,16,17,20,18,17,11,12,15,11,13,11],
-      tension: 0.0,
-      borderColor: 'rgb(110, 184, 110)',
-      backgroundColor: gradientFill_LG,
-      pointRadius:0, //포인터 반경 범위 ,
-      borderWidth: 2,
-      fill:true,
-    }]
-  },
-  axis: {
-    y: {
-        show: false
-    }
-}
+		var SS = document.getElementById('SS').getContext('2d');
+		const gradientFill_SAMSUNG = SS.createLinearGradient(0,0,0,150);
+		gradientFill_SAMSUNG.addColorStop(0, 'rgba(110, 184, 110,0.5)');
+		gradientFill_SAMSUNG.addColorStop(1, 'rgba(110, 184, 110,0)');
+				for (var i = 0; i < dataList.length; i++) {
+			lds.push(i);
+		}
+		var data = {
+			labels: lds,
+			datasets: [
+				{
+					backgroundColor: gradientFill_SAMSUNG,
+					borderColor: 'rgb(110, 184, 110)',
+					data: dataList,
+					lineTension: 0,
+					fill: origin,
+					borderWidth: 3,
+					pointRadius: 0,
+				}
+			]
+		};
+		let options = {
+                scales: {
+                  xAxes: [{
+			          gridLines: { //A축 gridLines 지우는 옵션
+			            display: false,
+			            drawBorder: false,
+			          },
+			          ticks: {
+			            fontSize: 0,
+			            fontColor: 'rgba(0,0,0,0)'
+			    	    }
+		      	 	}],
+			        yAxes: [{
+			          display: false,
+			          gridLines: { //Y축 gridLines 지우는 옵션
+			            drawBorder: false,
+			            display: false,
+			          },
+			          ticks: {
+			            beginAtZero: true,
+			            min:44000
+			          }
+		       		}]
+		      	},
+                legend: {
+                  display: false,
+              	},
+		     	tooltips: {
+		       	 	backgroundColor: '#1e90ff'
+		      	}
+            }
+		var myStock = new Chart(SS, {
+			type: 'line',
+			data: data,
+			options: options
+		});
+	},
+	error: (e) => {
+		alert('전송 실패!!');
+	}
 });
+
+
+
+
+
+/*main_SK*/
+$.ajax({
+	method:'get',
+	url:'/stock/stockRest/SK',
+	contentType: 'application/json',
+	dataType: 'json',
+	success: (result) => {
+		var lds = [];
+		var dataList = [];
+		dataList = result;
+
+		var SK = document.getElementById('SK').getContext('2d');
+		const sk_fill = SK.createLinearGradient(0,0,0,150);
+		sk_fill.addColorStop(0, 'rgba(110, 184, 110,0.5)');
+		sk_fill.addColorStop(1, 'rgba(110, 184, 110,0)');
+				for (var i = 0; i < dataList.length; i++) {
+			lds.push(i);
+		}
+		var data = {
+			labels: lds,
+			datasets: [
+				{
+					backgroundColor: sk_fill,
+					borderColor: 'rgb(110, 184, 110)',
+					data: dataList,
+					lineTension: 0,
+					fill: origin,
+					borderWidth: 3,
+					pointRadius: 0,
+				}
+			]
+		};
+		let options = {
+                scales: {
+                  xAxes: [{
+			          gridLines: { //A축 gridLines 지우는 옵션
+			            display: false,
+			            drawBorder: false,
+			          },
+			          ticks: {
+			            fontSize: 0,
+			            fontColor: 'rgba(0,0,0,0)'
+			    	    }
+		      	 	}],
+			        yAxes: [{
+			          display: false,
+			          gridLines: { //Y축 gridLines 지우는 옵션
+			            drawBorder: false,
+			            display: false,
+			          },
+			          ticks: {
+			            beginAtZero: true,
+			            min:72000
+			          }
+		       		}]
+		      	},
+                legend: {
+                  display: false,
+              	},
+		     	tooltips: {
+		       	 	backgroundColor: '#1e90ff'
+		      	}
+            }
+		var myStock = new Chart(SK, {
+			type: 'line',
+			data: data,
+			options: options
+		});
+	},
+	error: (e) => {
+		alert('전송 실패!!');
+	}
+});
+
+
+/*main_LG*/
+$.ajax({
+	method:'get',
+	url:'/stock/stockRest/LG',
+	contentType: 'application/json',
+	dataType: 'json',
+	success: (result) => {
+		var lds = [];
+		var dataList = [];
+		dataList = result;
+
+		var LG = document.getElementById('LG').getContext('2d');
+		const LG_fill = LG.createLinearGradient(0,0,0,150);
+		LG_fill.addColorStop(0, 'rgba(110, 184, 110,0.5)');
+		LG_fill.addColorStop(1, 'rgba(110, 184, 110,0)');
+				for (var i = 0; i < dataList.length; i++) {
+			lds.push(i);
+		}
+		var data = {
+			labels: lds,
+			datasets: [
+				{
+					backgroundColor: LG_fill,
+					borderColor: 'rgb(110, 184, 110)',
+					data: dataList,
+					lineTension: 0,
+					fill: origin,
+					borderWidth: 3,
+					pointRadius: 0,
+				}
+			]
+		};
+		let options = {
+                scales: {
+                  xAxes: [{
+			          gridLines: { //A축 gridLines 지우는 옵션
+			            display: false,
+			            drawBorder: false,
+			          },
+			          ticks: {
+			            fontSize: 0,
+			            fontColor: 'rgba(0,0,0,0)'
+			    	    }
+		      	 	}],
+			        yAxes: [{
+			          display: false,
+			          gridLines: { //Y축 gridLines 지우는 옵션
+			            drawBorder: false,
+			            display: false,
+			          },
+			          ticks: {
+			            beginAtZero: true,
+			            min:400000
+			          }
+		       		}]
+		      	},
+                legend: {
+                  display: false,
+              	},
+		     	tooltips: {
+		       	 	backgroundColor: '#1e90ff'
+		      	}
+            }
+		var myStock = new Chart(LG, {
+			type: 'line',
+			data: data,
+			options: options
+		});
+	},
+	error: (e) => {
+		alert('전송 실패!!');
+	}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

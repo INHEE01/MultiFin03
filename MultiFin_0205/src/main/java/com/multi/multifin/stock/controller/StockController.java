@@ -61,7 +61,6 @@ public class StockController {
 		
 		log.info("환율 테이블 요청: 원하는 국가만 가져옴");
 		ExchangeRate USD = service.findExchangeRate("USD");
-		log.info("-: " + USD.toString());
 		ExchangeRate JPY = service.findExchangeRate("JPY(100)");
 		ExchangeRate GBP = service.findExchangeRate("GBP");
 		ExchangeRate HKD = service.findExchangeRate("HKD");
@@ -215,27 +214,85 @@ public class StockController {
 		return "stock/stockTest";
 	}
 	
-	@GetMapping("/stockRest/{id}")
-	public ResponseEntity<List<String>> getStockInfo(@PathVariable("id") String id)
-	{		
-		List<String> list =service.stockGraphList("KOSPI");
-		System.out.println(list.toString());
 	
-		/* 강사님께서 예시로 넣은 데이터
-		List<Integer> list = new ArrayList<>();
-		if(id.equals("kospi")) {
-			for(int i = 0; i <100; i++) {
-				list.add(i*3 + 1000);
+	
+	
+
+	@GetMapping("/stockRest/{id}")
+	public ResponseEntity<List<Double>> getStockInfo(@PathVariable("id") String id)
+	{		
+		List<Double> list = new ArrayList<>();
+		if(id.equalsIgnoreCase("KOSPI")) {
+			List<StockPriceIndex> kospi =service.getStockList("KOSPI");
+			for (int i = 0; i < kospi.size(); i++) {
+				String realNum = (kospi.get(i).getFin()).replaceAll(",", "");
+				double stockNum = Double.parseDouble(realNum);
+				list.add(stockNum);
+			}
+		}else if (id.equalsIgnoreCase("KOSDAQ")) {
+			List<StockPriceIndex> kosdaq =service.getStockList("KOSDAQ");
+			for (int i = 0; i < kosdaq.size(); i++) {
+				String realNum = (kosdaq.get(i).getFin()).replaceAll(",", "");
+				double stockNum = Double.parseDouble(realNum);
+				list.add(stockNum);
+			}
+		}else if (id.equalsIgnoreCase("NASDAQ")) {
+			List<StockPriceIndex> nasdaq =service.getStockList("NASDAQ");
+			for (int i = 0; i < nasdaq.size(); i++) {
+				String realNum = (nasdaq.get(i).getFin()).replaceAll(",", "");
+				double stockNum = Double.parseDouble(realNum);
+				list.add(stockNum);
+			}
+		}else if (id.equalsIgnoreCase("USD")) {
+			List<ExchangeRate> USD =service.StockPricefindByName("USD");
+			for (int i = 0; i < USD.size(); i++) {
+				String realNum = (USD.get(i).getDealBasR()).replaceAll(",", "");
+				double stockNum = Double.parseDouble(realNum);
+				list.add(stockNum);
+			}
+		}else if (id.equalsIgnoreCase("JPY")) {
+			List<ExchangeRate> JPY =service.StockPricefindByName("JPY");
+			for (int i = 0; i < JPY.size(); i++) {
+				String realNum = (JPY.get(i).getDealBasR()).replaceAll(",", "");
+				double stockNum = Double.parseDouble(realNum);
+				list.add(stockNum);
+			}
+		}else if (id.equalsIgnoreCase("SS")) {
+			List<StockPrice> SS =service.stockPriceList("삼성전자");
+			for (int i = 0; i < SS.size(); i++) {
+				String realNum = (SS.get(i).getClpr()).replaceAll(",", "");
+				double stockNum = Double.parseDouble(realNum);
+				list.add(stockNum);
+			}
+		}else if (id.equalsIgnoreCase("SK")) {
+			List<StockPrice> SK =service.stockPriceList("SK하이닉스");
+			for (int i = 0; i < SK.size(); i++) {
+				String realNum = (SK.get(i).getClpr()).replaceAll(",", "");
+				double stockNum = Double.parseDouble(realNum);
+				list.add(stockNum);
+			}
+		}else if (id.equalsIgnoreCase("LG")) {
+			List<StockPrice> LG =service.stockPriceList("LG에너지솔루션");
+			for (int i = 0; i < LG.size(); i++) {
+				String realNum = (LG.get(i).getClpr()).replaceAll(",", "");
+				double stockNum = Double.parseDouble(realNum);
+				list.add(stockNum);
+			}
+		}else if(id!=null) {
+			List<StockPrice> stockGraph =service.stockPriceList(id);
+			for (int i = 0; i < stockGraph.size(); i++) {
+				String realNum = (stockGraph.get(i).getClpr()).replaceAll(",", "");
+				double stockNum = Double.parseDouble(realNum);
+				list.add(stockNum);
 			}
 		}
-		else if(id.equals("kospi")) {
-			for(int i = 0; i <100; i++) {
-				list.add(i*3 + 300);
-			}
-		}
-		for(int i = 0; i <100; i++) {
-			list.add(i*3 + 300);
-		}*/
+		
+		
+		
+		
+		
+		
+		
 		
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
