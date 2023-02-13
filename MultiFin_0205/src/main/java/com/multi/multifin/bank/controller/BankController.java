@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.multi.multifin.bank.model.service.BankCardService;
+import com.multi.multifin.bank.model.service.BankCompanyService;
 import com.multi.multifin.bank.model.service.BankDepsitSavingService;
+import com.multi.multifin.bank.model.vo.BankCompany;
 import com.multi.multifin.bank.model.vo.BankCreditCard;
 import com.multi.multifin.bank.model.vo.BankDebitCard;
 import com.multi.multifin.bank.model.vo.BankDeposit;
@@ -31,6 +33,9 @@ public class BankController {
 	
 	@Autowired
 	private BankDepsitSavingService bankbookService;
+	
+	@Autowired
+	private BankCompanyService companyService;
 	
 	@GetMapping("/bankCard")
 	public String bankCard(Model model, @RequestParam Map<String, String> paramMap) {
@@ -122,6 +127,22 @@ public class BankController {
 	
 	@GetMapping("/bankDeposit")
 	public String bankDeposit(Model model, @RequestParam Map<String, String> paramMap) {
+		log.info("예적금 페이지 요청 성공");
+		int pageCompany = 1;
+		try {
+			pageCompany = Integer.parseInt(paramMap.get("pageCompany"));
+		} catch (Exception e) {
+		}
+		int companyCount = companyService.getCompanyCount(paramMap);
+		PageInfo pageCompanyInfo = new PageInfo(pageCompany, 5, companyCount, 10);
+		List<BankCompany> comList = companyService.selectCompanyList(pageCompanyInfo, paramMap);
+		List<BankCompany> logoList = companyService.selectLogoList(paramMap);
+	
+		model.addAttribute("comList", comList);
+		model.addAttribute("logoList", logoList);
+		model.addAttribute("pageCompanyInfo", pageCompanyInfo);
+		
+		
 		log.info("예금상품 전체 요청");
 		int pageDeposit = 1;
 		try {
@@ -143,6 +164,15 @@ public class BankController {
 		int depositCount = bankbookService.getDepositCountUnique(paramMap);
 		PageInfo pageDepositInfo = new PageInfo(pageDeposit, 5, depositCount, 10);
 		List<BankDeposit> depositList = bankbookService.selectDepositListUnique(pageDepositInfo, paramMap);
+		for(BankDeposit deposit : depositList) {
+			String coName = deposit.getKorCoNm();
+			for(BankCompany logoInfo :  logoList) {
+				if(logoInfo.getKorCoNm().equals(coName)) {
+					deposit.setLogoUrl(logoInfo.getLogoUrl());
+					break;
+				}
+			}
+		}
 		model.addAttribute("depositList", depositList);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("pageDepositInfo", pageDepositInfo);
@@ -156,6 +186,15 @@ public class BankController {
 		int savingCount = cardService.getCreditCount(paramMap);
 		PageInfo pageSavingInfo = new PageInfo(pageSaving, 5, savingCount, 10);
 		List<BankSaving> savingList = bankbookService.selectSavingListUnique(pageSavingInfo, paramMap);
+		for(BankSaving saving : savingList) {
+			String coName = saving.getKorCoNm();
+			for(BankCompany logoInfo :  logoList) {
+				if(logoInfo.getKorCoNm().equals(coName)) {
+					saving.setLogoUrl(logoInfo.getLogoUrl());
+					break;
+				}
+			}
+		}
 		model.addAttribute("savingList", savingList);
 		model.addAttribute("pageSavingInfo", pageSavingInfo);
 		return "bank/bankDeposit";
@@ -167,7 +206,18 @@ public class BankController {
 	}
 	
 	@RequestMapping("/bankFind")
-	public String bankFind() {
+	public String bankFind(Model model, @RequestParam("no") String param) {
+		log.info("상품상세 페이지 요청 성공");
+		System.out.println(param); // OK
+		List<BankDeposit> depositList = bankbookService.selectDepositListAll(param);
+		System.out.println(depositList.size());
+		model.addAttribute("depositList", depositList);
+		
+		List<BankSaving> savingList = bankbookService.selectSavingListAll(param);
+		System.out.println(savingList.size());
+		model.addAttribute("savingList", savingList);
+		
+		
 		return "bank/bankFind";
 	}
 	

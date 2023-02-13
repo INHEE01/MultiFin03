@@ -16,9 +16,7 @@ public class BankDepsitSavingService {
 	@Autowired
 	private BankDepsitSavingMapper mapper;
 	
-	public List<BankDeposit> selectDepositListAll(PageInfo pageInfo, Map<String, String> param){
-		param.put("limit", "" + pageInfo.getListLimit());
-		param.put("offset", "" + (pageInfo.getStartList() - 1));
+	public List<BankDeposit> selectDepositListAll(String param){
 		return mapper.selectDepositListAll(param);
 	}
 	
@@ -36,9 +34,7 @@ public class BankDepsitSavingService {
 		return mapper.selectDepositCountUnique(param);
 	}
 	
-	public List<BankSaving> selectSavingListAll(PageInfo pageInfo, Map<String, String> param){
-		param.put("limit", "" + pageInfo.getListLimit());
-		param.put("offset", "" + (pageInfo.getStartList() - 1));
+	public List<BankSaving> selectSavingListAll(String param){
 		return mapper.selectSavingListAll(param);
 	}
 	

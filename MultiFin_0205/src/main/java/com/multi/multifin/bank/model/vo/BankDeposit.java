@@ -23,7 +23,7 @@ public class BankDeposit {
 	private char 		joinDeny;					 // char(1), -- 가입제한 Ex) 1:제한없음, 2:서민전용, 3:일부제한"
 	private String 		joinMember;				 // varchar(100), -- 가입대상
 	private String 		etcNote;					 // varchar(300), -- 기타 유의사항
-	private BigInteger 	maxLimit;					 // bigint, -- 최고한도
+	private double 		maxLimit;					 // bigint, -- 최고한도
 	private Date 		dclsStrtDay; 				 // DATETIME, -- 공시 시작일
 	private String 		dclsEndDay; 				 // varchar(11), -- 공시 종료일
 	private Date 		finCoSubmDay;			 // DATETIME, -- 금융회사 제출일 [YYYYMMDDHH24MI]
@@ -31,6 +31,7 @@ public class BankDeposit {
 	private String 		intrRateType; 			 // char(1), -- 저축 금리 유형
 	private String 		intrRateTypeNm; 			 // varchar(5), -- 저축 금리 유형명
 	private String 		saveTrm;					 // varchar(3), -- 저축 기간 [단위: 개월]
-	private BigInteger 	intrRate; 					 // bigint, -- 저축 금리 [소수점 2자리]
-	private BigInteger 	intrRate2; 				 // bigint -- 최고 우대금리 [소수점 2자리]
+	private double 		intrRate; 					 // bigint, -- 저축 금리 [소수점 2자리]
+	private double 		intrRate2; 				 // bigint -- 최고 우대금리 [소수점 2자리]
+	private String 		logoUrl; 
 }

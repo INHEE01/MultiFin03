@@ -55,7 +55,7 @@
                 <!-- Card -->
                 <div href="#" class="card img-card fh-290 outer-bg border-gray-500 lowRateCard">
                     <div class="align-items-center fh-290 card-body text-dark p-3">
-                        <img src="https://pds.saramin.co.kr/company/logo/201905/23/pry5ef_o0q6-2rxid6_logo.jpg" class="bdHotProductLogo">
+                        <img th:src="${depositList[0].logoUrl}" class="bdHotProductLogo">
                         <div class="mt-5 goods_card">
                             <h5 class="font-weight-bolder text-left top4-title">[[${depositList[0].finPrdtNm}]]</h5>
                             <span style="font-weight: 500;">[[${depositList[0].saveTrm}]]개월</span>
@@ -64,7 +64,7 @@
                             <p class="text-gray-600 mt-3 font-weight-normal">
                                 [[${depositList[0].etcNote}]]
                             </p>
-                            <button class="goods_btn" onclick="location.href='#'">상세보기</button>
+                            <button class="goods_btn" th:onclick="|location.href='/bank/bankFind?no=@{${depositList[0].finPrdtCd}}'|">상세보기</button>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                 <!-- Card -->
                 <div href="#" class="card img-card fh-290 outer-bg border-gray-500 lowRateCard">
                     <div class="align-items-center fh-290 card-body text-dark p-3">
-                        <img src="https://pds.saramin.co.kr/company/logo/201905/23/pry5ef_o0q6-2rxid6_logo.jpg" class="bdHotProductLogo">
+                       	<img th:src="${depositList[4].logoUrl}" class="bdHotProductLogo">
                         <div class="mt-5 goods_card">
                             <h5 class="font-weight-bolder text-left top4-title">[[${depositList[4].finPrdtNm}]]</h5>
                             <span style="font-weight: 500;">[[${depositList[4].saveTrm}]]개월</span>
@@ -83,7 +83,7 @@
                             <p class="text-gray-600 mt-3 font-weight-normal">
                                 [[${depositList[4].etcNote}]]
                             </p>
-                            <button class="goods_btn" onclick="location.href='#'">상세보기</button>
+                            <button class="goods_btn" th:onclick="|location.href='/bank/bankFind?no=@{${depositList[4].finPrdtCd}}'|">상세보기</button>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                 <!-- Card -->
                 <div href="#" class="card img-card fh-290 outer-bg border-gray-500 lowRateCard">
                     <div class="align-items-center fh-290 card-body text-dark p-3">
-                        <img src="https://pds.saramin.co.kr/company/logo/201905/23/pry5ef_o0q6-2rxid6_logo.jpg" class="bdHotProductLogo">
+                        <img th:src="${savingList[1].logoUrl}" class="bdHotProductLogo">
                         <div class="mt-5 goods_card">
                             <h5 class="font-weight-bolder text-left top4-title">[[${savingList[1].finPrdtNm}]]</h5>
                             <span style="font-weight: 500;">[[${savingList[1].saveTrm}]]개월</span>
@@ -102,7 +102,7 @@
                             <p class="text-gray-600 mt-3 font-weight-normal">
                                 [[${savingList[1].etcNote}]]
                             </p>
-                            <button class="goods_btn" onclick="location.href='#'">상세보기</button>
+                            <button class="goods_btn" th:onclick="|location.href='/bank/bankFind?no=@{${savingList[1].finPrdtCd}}'|">상세보기</button>
                         </div>
                     </div>
                 </div>
@@ -112,16 +112,16 @@
                 <!-- Card -->
                 <div href="#" class="card img-card fh-290 outer-bg border-gray-500 lowRateCard">
                     <div class="align-items-center fh-290 card-body text-dark p-3">
-                        <img src="https://pds.saramin.co.kr/company/logo/201905/23/pry5ef_o0q6-2rxid6_logo.jpg" class="bdHotProductLogo">
+                        <img th:src="${savingList[6].logoUrl}" class="bdHotProductLogo">
                         <div class="mt-5 goods_card">
-                            <h5 class="font-weight-bolder text-left top4-title">[[${savingList[2].finPrdtNm}]]</h5>
-                            <span style="font-weight: 500;">[[${savingList[2].saveTrm}]]개월</span>
-                            <span style="font-weight: 500;">[[${savingList[2].intrRateTypeNm}]]</span>
-                            <span style="font-weight: 500; color: red;">[[${savingList[2].intrRate2}]]%</span>
+                            <h5 class="font-weight-bolder text-left top4-title">[[${savingList[6].finPrdtNm}]]</h5>
+                            <span style="font-weight: 500;">[[${savingList[6].saveTrm}]]개월</span>
+                            <span style="font-weight: 500;">[[${savingList[6].intrRateTypeNm}]]</span>
+                            <span style="font-weight: 500; color: red;">[[${savingList[6].intrRate2}]]%</span>
                             <p class="text-gray-600 mt-3 font-weight-normal">
-                                [[${savingList[2].etcNote}]]
+                                [[${savingList[6].etcNote}]]
                             </p>
-                            <button class="goods_btn" onclick="location.href='#'">상세보기</button>
+                            <button class="goods_btn" th:onclick="|location.href='/bank/bankFind?no=@{${savingList[6].finPrdtCd}}'|">상세보기</button>
                         </div>
                     </div>
                 </div>
@@ -144,21 +144,21 @@
                 <div class="border-gray-500 border rounded selector">
                     <ul class="list-style-none text-dark blSearchTap">
                         <li>
-                            	<th:block th:if="${check} == '0'">
-	                                <a href="#deposit" class="tapbtnDeposit checkedMenu">정기예금</a>
-                            	</th:block>
-                            	<th:block th:if="${check} != '0'">
-	                                <a href="#deposit" class="tapbtnDeposit">정기예금</a>
-                            	</th:block>
-                            </li>
-                            <li>
-                            	<th:block th:if="${check} == '1'">
-                             	   <a href="#" class="tapbtnSaving checkedMenu">적금</a>
-                                </th:block>
-                            	<th:block th:if="${check} != '1'">
-                             	   <a href="#" class="tapbtnSaving ">적금</a>
-                                </th:block>
-                            </li>
+                          	<th:block th:if="${check} == '0'">
+                               <a href="#deposit" class="tapbtnDeposit checkedMenu">정기예금</a>
+                          	</th:block>
+                          	<th:block th:if="${check} != '0'">
+                               <a href="#deposit" class="tapbtnDeposit">정기예금</a>
+                          	</th:block>
+                          </li>
+                          <li>
+                          	<th:block th:if="${check} == '1'">
+                           	   <a href="#" class="tapbtnSaving checkedMenu">적금</a>
+                              </th:block>
+                          	<th:block th:if="${check} != '1'">
+                           	   <a href="#" class="tapbtnSaving ">적금</a>
+                              </th:block>
+                          </li>
                     </ul>
                 </div>
                 <div class="bg-soft text-center bankSearch fh-320 rounded">
@@ -200,13 +200,13 @@
 							</tr>
 						</th:block>
 						<th:block th:if="${depositList != null}">
-		                    <tr th:each="depositList, number : ${depositList}">
+		                    <tr th:each="depositList, number : ${depositList}" th:onclick="|location.href='/bank/bankFind?no=@{${depositList.finPrdtCd}}'|">
 		                        <td class="board-content">[[(${pageDepositInfo.currentPage}-1)*10+${number.index}+1]]</td>
-		                        <td class="board-content board-title">[[${depositList.finPrdtNm}]]</td>
+		                        <td class="board-content board-title" style="width:240px;">[[${depositList.finPrdtNm}]]</td>
 		                        <td class="board-content">[[${depositList.intrRate2}]]</td>
 		                        <td class="board-content">[[${depositList.korCoNm}]]</td>
 		                        <td class="board-content">[[${depositList.joinWay}]]</td>
-		                        <td class="board-content">[[${depositList.intrRateTypeNm}]]</td>
+		                        <td class="board-content" style="width:72px;">[[${depositList.intrRateTypeNm}]]</td>
 		                    </tr>
 	                    </th:block>
 	                </table>
@@ -249,7 +249,7 @@
 							</tr>
 						</th:block>
 						<th:block th:if="${savingList != null}">
-		                    <tr th:each="savingList, number : ${savingList}">
+		                    <tr th:each="savingList, number : ${savingList}" th:onclick="|location.href='/bank/bankFind?no=@{${savingList.finPrdtCd}}'|">
 		                        <td class="board-content">[[(${pageSavingInfo.currentPage}-1)*10+${number.index}+1]]</td>
 		                        <td class="board-content board-title">[[${savingList.finPrdtNm}]]</td>
 		                        <td class="board-content">[[${savingList.intrRate2}]]</td>

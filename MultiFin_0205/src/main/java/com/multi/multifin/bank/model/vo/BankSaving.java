@@ -33,8 +33,8 @@ public class BankSaving {
 	private String rsrvType; // char(1), -- 적립 유형
 	private String rsrvTypeNm; // varchar(5), -- 적립 유형명
 	private String saveTrm; // varchar(3), -- 저축 기간 [단위: 개월]
-	private String intrRate; // int, -- 저축 금리 [소수점 2자리]
-	private String intrRate2; // int -- 최고 우대금리 [소수점 2자리]
-	
+	private double intrRate; // int, -- 저축 금리 [소수점 2자리]
+	private double intrRate2; // int -- 최고 우대금리 [소수점 2자리]
+	private String logoUrl; 
 	
 }

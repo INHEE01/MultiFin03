@@ -10,11 +10,11 @@ import com.multi.multifin.bank.model.vo.BankSaving;
 
 @Mapper
 public interface BankDepsitSavingMapper {
-	List<BankDeposit> selectDepositListAll(Map<String, String> map);
+	List<BankDeposit> selectDepositListAll(String map);
 	int selectDepositCountAll(Map<String, String> map);
 	List<BankDeposit> selectDepositListUnique(Map<String, String> map);
 	int selectDepositCountUnique(Map<String, String> map);
-	List<BankSaving> selectSavingListAll(Map<String, String> map);
+	List<BankSaving> selectSavingListAll(String map);
 	int selectSavingCountAll(Map<String, String> map);
 	List<BankSaving> selectSavingListUnique(Map<String, String> map);
 	int selectSavingCountUnique(Map<String, String> map);
