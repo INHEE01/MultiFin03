@@ -15,25 +15,21 @@
             </figure>
         </section>
         <section class="board-write mt-5 mb-6">
-            <form action="${path}/board/write" method="post" enctype="multipart/form-data">
+            <form action="/community/write" method="post" enctype="multipart/form-data">
               <table id="tbl-board" class="wirter">
                 <tr>
                   <td colspan="2"  class="title-area">
                     <input type="text" name="title" placeholder="제목을 입력해주세요" class="title">
                   </td>
                 </tr>
-                <tr>
-                  <td colspan="2" hidden>
-                    <input type="text" name="writerId" value="${loginMember.id}" readonly>
-                  </td>
-                </tr>
+                
                 <tr class="filing">
                   <td class="file">
                     <div class="filebox bs3-primary">
                       <span class="file-header">첨부파일</span>
                       <input class="upload-name" value="파일선택" disabled="disabled"></input>
-                      <label class="in" for="ex_filename">파일 올리기</label> 
-                      <input type="file" id="ex_filename" class="upload-hidden"></input>
+                      <label class="in" for="ex_filename" name="upfile" type="file">파일 올리기</label> 
+                      <input type="file" id="ex_filename" name="upfile" class="upload-hidden"></input>
                     </div>
                   </td>
                 </tr>
@@ -48,7 +44,7 @@
                   <th colspan="2" class="btns">
                     <input type="submit" value="등록" class="write_btn">
                     <input type="reset" value="초기화" class="write_btn">
-                    <input type="button" value="취소" onclick="location.href='board3.html'" class="write_btn">
+                    <input type="button" value="취소"  onclick="location.href='/community/freeList'" class="write_btn">
                   </th>
                 </tr>
               </table>
