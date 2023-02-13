@@ -168,7 +168,7 @@ public class StockController {
 	
 	
 	
-	
+	// 펀드 페이지 요청 (주식형)
 	@GetMapping("/stockFund")
 	public String stockFund(Model model, @RequestParam Map<String, String> paramMap) {
 		int page = 1;
@@ -197,6 +197,96 @@ public class StockController {
 		model.addAttribute("pageInfo", pageInfo);
 		
 		return "stock/stockFund";
+	}
+	// 펀드 페이지 요청 (채권형)
+	@GetMapping("/stockFund02")
+	public String stockFund02(Model model, @RequestParam Map<String, String> paramMap) {
+		int page = 1;
+
+		// 탐색할 맵을 선언
+		Map<String, String> searchMap = new HashMap<String, String>();
+		try {
+			String searchValue = paramMap.get("searchValue");
+			if (searchValue != null && searchValue.length() > 0) {
+				String searchType = paramMap.get("searchType");
+				searchMap.put(searchType, searchValue);
+			} else {
+				paramMap.put("searchType", "all");
+			}
+			
+			page = Integer.parseInt(paramMap.get("page"));
+			 
+		} catch (Exception e) {}
+		
+		int fundCount = service.getFundCount02(searchMap);
+		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
+		List<FundProductInfo> list = service.getFundList02(pageInfo, searchMap);	
+		
+		model.addAttribute("list", list);
+		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("pageInfo", pageInfo);
+		
+		return "stock/stockFund02";
+	}	
+	// 펀드 페이지 요청 (혼합형)
+	@GetMapping("/stockFund03")
+	public String stockFund03(Model model, @RequestParam Map<String, String> paramMap) {
+		int page = 1;
+
+		// 탐색할 맵을 선언
+		Map<String, String> searchMap = new HashMap<String, String>();
+		try {
+			String searchValue = paramMap.get("searchValue");
+			if (searchValue != null && searchValue.length() > 0) {
+				String searchType = paramMap.get("searchType");
+				searchMap.put(searchType, searchValue);
+			} else {
+				paramMap.put("searchType", "all");
+			}
+			
+			page = Integer.parseInt(paramMap.get("page"));
+			 
+		} catch (Exception e) {}
+		
+		int fundCount = service.getFundCount03(searchMap);
+		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
+		List<FundProductInfo> list = service.getFundList03(pageInfo, searchMap);	
+		
+		model.addAttribute("list", list);
+		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("pageInfo", pageInfo);
+		
+		return "stock/stockFund03";
+	}
+	// 펀드 페이지 요청 (재간접형)
+	@GetMapping("/stockFund04")
+	public String stockFund04(Model model, @RequestParam Map<String, String> paramMap) {
+		int page = 1;
+
+		// 탐색할 맵을 선언
+		Map<String, String> searchMap = new HashMap<String, String>();
+		try {
+			String searchValue = paramMap.get("searchValue");
+			if (searchValue != null && searchValue.length() > 0) {
+				String searchType = paramMap.get("searchType");
+				searchMap.put(searchType, searchValue);
+			} else {
+				paramMap.put("searchType", "all");
+			}
+			
+			page = Integer.parseInt(paramMap.get("page"));
+			 
+		} catch (Exception e) {}
+		
+		int fundCount = service.getFundCount04(searchMap);
+		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
+		List<FundProductInfo> list = service.getFundList04(pageInfo, searchMap);	
+		
+		model.addAttribute("list", list);
+		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("pageInfo", pageInfo);
+		
+		return "stock/stockFund04";
 	}
 	
 	@RequestMapping("/stockFundDetail")
