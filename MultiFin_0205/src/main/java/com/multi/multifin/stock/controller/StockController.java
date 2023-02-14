@@ -178,10 +178,8 @@ public class StockController {
 		try {
 			String searchValue = paramMap.get("searchValue");
 			if (searchValue != null && searchValue.length() > 0) {
-				String searchType = paramMap.get("searchType");
-				searchMap.put(searchType, searchValue);
+				paramMap.put("fndNm", searchValue);
 			} else {
-				paramMap.put("searchType", "all");
 			}
 			
 			page = Integer.parseInt(paramMap.get("page"));
@@ -190,7 +188,7 @@ public class StockController {
 		
 		int fundCount = service.getFundCount(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
-		List<FundProductInfo> list = service.getFundList(pageInfo, searchMap);	
+		List<FundProductInfo> list = service.getFundList(pageInfo, paramMap);	
 		
 		model.addAttribute("list", list);
 		model.addAttribute("paramMap", paramMap);
@@ -208,10 +206,8 @@ public class StockController {
 		try {
 			String searchValue = paramMap.get("searchValue");
 			if (searchValue != null && searchValue.length() > 0) {
-				String searchType = paramMap.get("searchType");
-				searchMap.put(searchType, searchValue);
+				paramMap.put("fndNm", searchValue);
 			} else {
-				paramMap.put("searchType", "all");
 			}
 			
 			page = Integer.parseInt(paramMap.get("page"));
@@ -220,7 +216,7 @@ public class StockController {
 		
 		int fundCount = service.getFundCount02(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
-		List<FundProductInfo> list = service.getFundList02(pageInfo, searchMap);	
+		List<FundProductInfo> list = service.getFundList02(pageInfo, paramMap);	
 		
 		model.addAttribute("list", list);
 		model.addAttribute("paramMap", paramMap);
@@ -238,10 +234,8 @@ public class StockController {
 		try {
 			String searchValue = paramMap.get("searchValue");
 			if (searchValue != null && searchValue.length() > 0) {
-				String searchType = paramMap.get("searchType");
-				searchMap.put(searchType, searchValue);
+				paramMap.put("fndNm", searchValue);
 			} else {
-				paramMap.put("searchType", "all");
 			}
 			
 			page = Integer.parseInt(paramMap.get("page"));
@@ -250,7 +244,7 @@ public class StockController {
 		
 		int fundCount = service.getFundCount03(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
-		List<FundProductInfo> list = service.getFundList03(pageInfo, searchMap);	
+		List<FundProductInfo> list = service.getFundList03(pageInfo, paramMap);	
 		
 		model.addAttribute("list", list);
 		model.addAttribute("paramMap", paramMap);
@@ -268,10 +262,8 @@ public class StockController {
 		try {
 			String searchValue = paramMap.get("searchValue");
 			if (searchValue != null && searchValue.length() > 0) {
-				String searchType = paramMap.get("searchType");
-				searchMap.put(searchType, searchValue);
+				paramMap.put("fndNm", searchValue);
 			} else {
-				paramMap.put("searchType", "all");
 			}
 			
 			page = Integer.parseInt(paramMap.get("page"));
@@ -280,7 +272,7 @@ public class StockController {
 		
 		int fundCount = service.getFundCount04(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
-		List<FundProductInfo> list = service.getFundList04(pageInfo, searchMap);	
+		List<FundProductInfo> list = service.getFundList04(pageInfo, paramMap);	
 		
 		model.addAttribute("list", list);
 		model.addAttribute("paramMap", paramMap);

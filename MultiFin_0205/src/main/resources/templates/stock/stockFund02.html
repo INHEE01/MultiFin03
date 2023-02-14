@@ -172,13 +172,13 @@
 				</div>
 			</div>
 			<div class="col-sm-9 border-gray-500">
-				<form autocomplete="off" class="row search" method="get" action="#">
+				<form autocomplete="off" class="row search" method="get" th:action="@{/stock/stockFund02}">
 					<div class="col-12 mb-3 mb-lg-4">
 						<div class="form-group form-group-lg mb-0">
 							<div class="input-group">
-								<input id="search-location" type="text"
+								<input id="searchValue" type="text"
 									class="form-control autocomplete border-gray-500 border-right-0 fw-280 "
-									placeholder="금융회사명을 입력하세요" required>
+									placeholder="검색어 입력" th:value="${param.searchValue}" name="searchValue">
 								<button
 									class="bankMainSubmit border border-gray-500 border-left-0 bg-white text-dark fw-60"
 									type="submit">
@@ -246,10 +246,10 @@
 
 <script type="text/javascript">
 	function movePage(pageUrl) {
-//	var searchValue = document.getElementById("category");
-//		if (searchValue.value.length > 0) {
-//			pageUrl = pageUrl + '&category=' + searchValue.value;
-//		} 
+		var searchValue = document.getElementById("searchValue");
+		if (searchValue.value.length > 0) {
+			pageUrl = pageUrl + '&searchValue=' + searchValue.value;
+		} 
 		
 		location.href = encodeURI(pageUrl);
 	}
