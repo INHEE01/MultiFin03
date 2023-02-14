@@ -19,6 +19,9 @@
 		SELECT * 
 		FROM FundProductInfo AS f
 		WHERE f.fndTp='주식형'
+		<if test="fndNm != null">
+		 AND f.fndNm LIKE '%${fndNm}%'
+		</if>
 		ORDER BY F.FPINO ASC LIMIT ${limit} OFFSET ${offset}
 	</select>
 	
@@ -27,12 +30,18 @@
 		COUNT(DISTINCT F.FPINO) 
 		FROM FUNDPRODUCTINFO F
 		WHERE f.fndTp='주식형'
+		<if test="fndNm != null">
+		 AND f.fndNm LIKE '%${fndNm}%'
+		</if>
 	</select>
 	<!-- 채권형 조회 -->
 	<select id="selectFundProduct02" parameterType="map" resultMap="FundProductInfoResultMap">
 		SELECT * 
 		FROM FundProductInfo AS f
 		WHERE f.fndTp='채권형'
+		<if test="fndNm != null">
+		 AND f.fndNm LIKE '%${fndNm}%'
+		</if>
 		ORDER BY F.FPINO ASC LIMIT ${limit} OFFSET ${offset}
 	</select>
 	
@@ -41,12 +50,18 @@
 		COUNT(DISTINCT F.FPINO) 
 		FROM FUNDPRODUCTINFO F
 		WHERE f.fndTp='채권형'
+		<if test="fndNm != null">
+		 AND f.fndNm LIKE '%${fndNm}%'
+		</if>
 	</select>
 	<!--  혼합형 조회  -->
 	<select id="selectFundProduct03" parameterType="map" resultMap="FundProductInfoResultMap">
 		SELECT * 
 		FROM FundProductInfo AS f
 		WHERE f.fndTp='혼합채권형' or f.fndTp='혼합자산'
+		<if test="fndNm != null">
+		 AND f.fndNm LIKE '%${fndNm}%'
+		</if>
 		ORDER BY F.FPINO ASC LIMIT ${limit} OFFSET ${offset}
 	</select>
 	
@@ -55,12 +70,18 @@
 		COUNT(DISTINCT F.FPINO) 
 		FROM FUNDPRODUCTINFO F
 		WHERE f.fndTp='혼합채권형' or f.fndTp='혼합자산'
+		<if test="fndNm != null">
+		 AND f.fndNm LIKE '%${fndNm}%'
+		</if>
 	</select>
 	<!-- 재간접 조회 -->
 	<select id="selectFundProduct04" parameterType="map" resultMap="FundProductInfoResultMap">
 		SELECT * 
 		FROM FundProductInfo AS f
 		WHERE f.fndTp='재간접'
+		<if test="fndNm != null">
+		 AND f.fndNm LIKE '%${fndNm}%'
+		</if>
 		ORDER BY F.FPINO ASC LIMIT ${limit} OFFSET ${offset}
 	</select>
 	
@@ -69,11 +90,10 @@
 		COUNT(DISTINCT F.FPINO) 
 		FROM FUNDPRODUCTINFO F
 		WHERE f.fndTp='재간접'
+		<if test="fndNm != null">
+		 AND f.fndNm LIKE '%${fndNm}%'
+		</if>
 	</select>
-
-	
-	
-	
 </mapper>
 
 
