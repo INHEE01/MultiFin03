@@ -101,10 +101,6 @@
   white-space: nowrap;
 }
 
-
-.board-title>a{color:black;}
-.board-title>a:hover{color:#C33C54;}
-
 /*테이블 버튼*/
 .table-buttons{
   text-align: center;

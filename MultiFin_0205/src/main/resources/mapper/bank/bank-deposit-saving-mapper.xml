@@ -55,13 +55,6 @@
 	</resultMap>
 	
 	<!-- 예금전체 -->
-	<select id="selectDepositList" resultMap="depositResultMap">
-		SELECT dcls_month,kor_co_nm,fin_prdt_nm,fin_prdt_cd,save_trm,join_way,join_member,etc_note,join_deny,dcls_strt_day,intr_rate_type,intr_rate_type_nm, MAX(intr_rate) as intr_rate, MAX(intr_rate2) as intr_rate2
-		FROM  BankDeposit BD
-		WHERE save_trm in (SELECT MAX(save_trm) FROM BankDeposit)
-		GROUP BY kor_co_nm,fin_prdt_nm,fin_prdt_cd,save_trm,dcls_month,join_way,join_member,etc_note,join_deny,dcls_strt_day,intr_rate_type,intr_rate_type_nm
-	</select>
-	
 	<select id="selectDepositListAll" resultMap="depositResultMap" parameterType="string">
 		SELECT * FROM BankDeposit BD
 		WHERE BD.fin_prdt_cd = #{finPrdtCd}
@@ -104,13 +97,6 @@
 
 
 	<!-- 적금전체 -->
-	<select id="selectSavingList" resultMap="savingResultMap">
-		SELECT dcls_month,kor_co_nm,fin_prdt_nm,fin_prdt_cd,save_trm,join_way,join_member,etc_note,join_deny,dcls_strt_day,intr_rate_type,intr_rate_type_nm, MAX(intr_rate) as intr_rate, MAX(intr_rate2) as intr_rate2
-		FROM  BankSaving BS
-		WHERE save_trm in (SELECT MAX(save_trm) FROM BankSaving)
-		GROUP BY kor_co_nm,fin_prdt_nm,fin_prdt_cd,save_trm,dcls_month,join_way,join_member,etc_note,join_deny,dcls_strt_day,intr_rate_type,intr_rate_type_nm
-	</select>
-	
 	<select id="selectSavingListAll" resultMap="savingResultMap" parameterType="string">
 		SELECT * FROM BankSaving BS
 		WHERE BS.fin_prdt_cd  = #{finPrdtCd} 
@@ -133,7 +119,7 @@
 		WHERE save_trm in (SELECT MAX(save_trm) FROM BankSaving)
 		<if test="korCoNm != null">
 			AND(
-				BS.kor_co_nm like '%${korCoNm}%' 
+				BD.kor_co_nm like '%${korCoNm}%' 
 			)
 		</if>
 		GROUP BY kor_co_nm,fin_prdt_nm,fin_prdt_cd,save_trm,dcls_month,join_way,join_member,etc_note,join_deny,dcls_strt_day,intr_rate_type,intr_rate_type_nm

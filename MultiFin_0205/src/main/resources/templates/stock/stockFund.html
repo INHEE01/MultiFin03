@@ -150,14 +150,12 @@
 			<div
 				class="col-sm-3 border-gray-500 text-center bankSearch fh-320 rounded">
 				<div class="border-gray-500 border rounded mb-4">
-					<form action="stock/stockFund" method="get">
-						<ul class="list-style-none text-dark blSearchTap">
-							<li><a href="stockFund">주식형</a></li>
-							<li><a href="stockFund02">채권형</a></li>
-							<li><a href="stockFund03">혼합형</a></li>
-						<li class="border-0"><a href="stockFund04">재간접</a></li>
+					<ul class="list-style-none text-dark blSearchTap">
+						<li><a href="#">주식형</a></li>
+						<li><a href="#">채권형</a></li>
+						<li><a href="#">혼합형</a></li>
+						<li class="border-0"><a href="#">MMF</a></li>
 					</ul>
-					</form>
 				</div>
 				<div class="bg-soft text-center bankSearch fh-320 rounded">
 					<a href="#"><i
@@ -172,13 +170,13 @@
 				</div>
 			</div>
 			<div class="col-sm-9 border-gray-500">
-				<form autocomplete="off" class="row search" method="get" th:action="@{/stock/stockFund}">
+				<form autocomplete="off" class="row search" method="get" action="#">
 					<div class="col-12 mb-3 mb-lg-4">
 						<div class="form-group form-group-lg mb-0">
 							<div class="input-group">
-								<input id="searchValue" type="text"
+								<input id="search-location" type="text"
 									class="form-control autocomplete border-gray-500 border-right-0 fw-280 "
-									placeholder="검색어 입력" th:value="${param.searchValue}" name="searchValue">
+									placeholder="금융회사명을 입력하세요" required>
 								<button
 									class="bankMainSubmit border border-gray-500 border-left-0 bg-white text-dark fw-60"
 									type="submit">
@@ -188,7 +186,6 @@
 						</div>
 					</div>
 				</form>
-				<!-- 펀드상품 조회 부분 시작 -->
 				<table id="tbl-board" class="board-table">
 					<tr class="text-center table_main text-white">
 						<th class="table-header">번호</th>
@@ -210,29 +207,41 @@
 
 
 				</table>
-				<!-- 펀드상품 조회 부분 끝 -->
 
 				<!-- page 부 시작 -->
-				<div class="table-buttons" align="center">
+				<div align="center">
 					<!--처음 페이지 -->
-					<button onclick="movePage('/stock/stockFund?page=1');" class="table-button">&lt;&lt;</button>
+					<button onclick="movePage('/stock/stockFund?page=1');"
+						class="table-button">&lt;&lt;</button>
 					<!--이전 페이지 -->
-					<button th:onclick="|movePage('/stock/stockFund?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
+					<button
+						th:onclick="|movePage('/stock/stockFund?page=${pageInfo.prevPage}');|"
+						class="table-button">&lt;</button>
+
 					<!-- 10개 페이지 -->
-					<th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}" class="table-button">
-						<th:block th:if="${status.current == pageInfo.currentPage}" class="table-button">
-							<button class="table-button" disabled>[[${status.current}]]</button>
+					<th:block
+						th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}"
+						class="table-button">
+						<th:block th:if="${status.current == pageInfo.currentPage}"
+							class="table-button">
+							<button disabled>[[${status.current}]]</button>
 						</th:block>
-						<th:block th:if="${status.current != pageInfo.currentPage}" class="table-button">
-							<button th:onclick="|movePage('/stock/stockFund?page=${status.current}');|" class="table-button">[[${status.current}]]</button>
+						<th:block th:if="${status.current != pageInfo.currentPage}"
+							class="table-button">
+							<button
+								th:onclick="|movePage('/stock/stockFund?page=${status.current}');|"
+								class="table-button">[[${status.current}]]</button>
 						</th:block>
 					</th:block>
+
 					<!--다음 페이지 -->
 					<button
 						th:onclick="|movePage('/stock/stockFund?page=${pageInfo.nextPage}');|"
 						class="table-button">&gt;</button>
 					<!-- 마지막 페이지 -->
-					<button th:onclick="|movePage('/stock/stockFund?page=${pageInfo.maxPage}');|" class="table-button">&gt;&gt;</button>
+					<button
+						th:onclick="|movePage('/stock/stockFund?page=${pageInfo.maxPage}');|"
+						class="table-button">&gt;&gt;</button>
 				</div>
 
 			</div>
@@ -246,11 +255,18 @@
 
 <script type="text/javascript">
 	function movePage(pageUrl) {
-		var searchValue = document.getElementById("searchValue");
+		var searchValue = document.getElementById("searchValue"); // 갤럭시
+		var searchTypes = document.getElementsByName("searchType"); // title
+		var searchType = 'title';
 		if (searchValue.value.length > 0) {
-			pageUrl = pageUrl + '&searchValue=' + searchValue.value;
-		} 
-		
+			for (var i = 0; i < searchTypes.length; i++) {
+				if (searchTypes[i].checked == true) {
+					searchType = searchTypes[i].value;
+				}
+			}
+			pageUrl = pageUrl + '&searchType=' + searchType + '&searchValue='
+					+ searchValue.value;
+		}
 		location.href = encodeURI(pageUrl);
 	}
 </script>

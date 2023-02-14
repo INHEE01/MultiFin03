@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j // 
-@SessionAttributes("loginMember")
+@SessionAttributes("loginMember") // loginMember를 Model 취급할때 세션으로 처리하도록 도와주는 어노테이션
 @RequestMapping("/member")
 @Controller
 public class MemberController {
@@ -39,24 +39,10 @@ public class MemberController {
 		return "member/forgot-password";
 	}
 	
-	@PostMapping("/forgot-password")
-	public String updatePwd(Model model,
-			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
-			String userPwd
-			) {
-		int result = service.updatePwd(loginMember, userPwd);
-		
-		if(result > 0) {
-			model.addAttribute("msg", "비밀번호 수정에 성공하였습니다.");
-		}else {
-			model.addAttribute("msg", "비밀번호 변경에 실패했습니다.");
-		}
-		return "/common/msg";
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "member/mypage";
 	}
-	
-	
-	
-	
 	
 	@GetMapping("/sign-in")
 	public String signIn() {
@@ -118,7 +104,7 @@ public class MemberController {
 	
 
 	// AJAX 회원아이디 중복 검사부
-	@GetMapping("/idCheck")
+	@GetMapping("/member/idCheck")
 	public ResponseEntity<Map<String, Object>> idCheck(String id){
 		log.info("아이디 중복 확인 : " + id);
 		
@@ -130,23 +116,10 @@ public class MemberController {
 	}
 	
 	
-	
-	
-	//회원정보 수정 
-	@GetMapping("/mypage")
-	public String mypage() {
-		return "member/mypage";
-	}
-	
-	@GetMapping("/update")
-	public String update() {
-		return "member/mypage";
-	}
-	
-	@PostMapping("/update")
+	@PostMapping("/member/update")
 	public String update(Model model, 
-			@ModelAttribute Member updateMember,
-			@SessionAttribute(name = "loginMember", required = false) Member loginMember 
+			@ModelAttribute Member updateMember, // request에서 온 값
+			@SessionAttribute(name = "loginMember", required = false) Member loginMember // 세션 값
 			) {
 		log.info("update 요청, updateMember : " + updateMember);
 		if(loginMember == null) {
@@ -160,32 +133,51 @@ public class MemberController {
 		int result = service.save(updateMember);
 		
 		if(result > 0) {
+			model.addAttribute("loginMember", service.findById(loginMember.getId())); // DB에서 있는 값을 다시 세션에 넣어주는 코드
 			model.addAttribute("msg", "회원정보를 수정하였습니다.");
-			model.addAttribute("loginMember", service.findById(loginMember.getEmail()));
-			log.info("세션: " + loginMember.toString());
-			model.addAttribute("location", "/member/update");
+			model.addAttribute("location", "/member/view");
 		}else {
 			model.addAttribute("msg", "회원정보 수정에 실패하였습니다.");
-			model.addAttribute("location", "/member/update");
+			model.addAttribute("location", "/member/view");
 		}
 		return "common/msg";
 	}
 	
 	
-	@RequestMapping("/delete")
+	@GetMapping("/member/view")
+	public String memberView() {
+		log.info("회원 정보 페이지 요청");
+		return "member/view";
+	}
+	
+	@GetMapping("/member/updatePwd")
+	public String updatePwdPage() {
+		return "/member/updatePwd";
+	}
+	
+	@PostMapping("/member/updatePwd")
+	public String updatePwd(Model model,
+			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
+			String userPwd
+			) {
+		int result = service.updatePwd(loginMember, userPwd);
+		
+		if(result > 0) {
+			model.addAttribute("msg", "비밀번호 수정에 성공하였습니다.");
+		}else {
+			model.addAttribute("msg", "비밀번호 변경에 실패했습니다.");
+		}
+		model.addAttribute("script", "self.close()");
+		return "/common/msg";
+	}
+	
+	@GetMapping("/member/delete")
 	public String delete(Model model,
 			@SessionAttribute(name = "loginMember", required = false) Member loginMember) {
-		log.info("페이지 전송됨");
-		log.info("체크"+ loginMember.getMNo());
-		int result = service.delete(loginMember.getMNo());
-		if(result > 0) {
-			model.addAttribute("msg", "회원탈퇴에 성공하였습니다.");
-			model.addAttribute("location","/member/logout");
-		}else {
-			model.addAttribute("msg", "회원탈퇴에 실패하였습니다.");
-			model.addAttribute("location","/member/update");
-		}
-		return  "common/msg";
+		service.delete(loginMember.getMNo());
+		model.addAttribute("msg", "회원탈퇴에 성공하였습니다.");
+		model.addAttribute("location","/logout");
+		return  "/common/msg";
 	}
 }
 

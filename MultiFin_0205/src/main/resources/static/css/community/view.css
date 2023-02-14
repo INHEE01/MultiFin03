@@ -22,7 +22,7 @@
   margin-bottom: 15px;
   line-height: 16px;
 }
-.board_btn:hover{
+.bboard_btn:hover{
   background-color: transparent;
   color:rgb(13, 27, 72);
   transition:all .1s ease-in;

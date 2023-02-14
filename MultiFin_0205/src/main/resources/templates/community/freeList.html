@@ -24,28 +24,18 @@
         </section>
         <section class="board mb-6">
             <div class="top">
-            
-            	<th:block th:if="${session.loginMember != null}">
-                	<button class="write_btn" type="button" id="btn-add" onclick="location.href='/community/write'">글쓰기</button>
-                </th:block>
-				<th:block th:if="${session.loginMember == null}">
-                	<button class="write_btn" type="button" id="btn-add" onclick="location.href='/member/sign-in'">글쓰기</button>
-                </th:block>                
-                <!-- 검색창 시작 -->
-                <form action="@{/community/freeList}" method="get" class="search">
+                <button class="write_btn">글쓰기</button>
+                <form action="${path}/board/list" method="get" class="search">
                     <div style="text-align: center;">
                         <label>
-						<input type="radio" name="searchType" value="all" th:checked="${paramMap.searchType == 'all'} ? 'checked' : null "> 전체
-						</label>
-						<label>
-						<input type="radio" name="searchType" value="title" th:checked="${paramMap.searchType == 'title'} ? 'checked' : null "> 제목
-						</label>
-						<label>
-						<input type="radio" name="searchType" value="content" th:checked="${paramMap.searchType == 'content'} ? 'checked' : null "> 내용
-						</label>
-						<label>
-						<input type="radio" name="searchType" value="writer" th:checked="${paramMap.searchType == 'writer'} ? 'checked' : null "> 작성자
-						</label>
+                        <input type="radio" name="searchType" value="title"> 제목 
+                        </label>
+                        <label>
+                        <input type="radio" name="searchType" value="content"> 내용
+                        </label>
+                        <label>
+                        <input type="radio" name="searchType" value="writer" > 작성자
+                        </label>
                     </div>
                     <div class="group">
                         <span class="blue_window"> 
@@ -55,9 +45,6 @@
                     </div>
                 </form>
             </div>
-            <!-- 검색창 종료 -->
-            
-            <!-- 게시판 리스트 시작 -->
             <table id="tbl-board" class="board-table">
               <tr>
                 <th class="table-header">번호</th>
@@ -67,78 +54,37 @@
                 <th class="table-header">첨부파일</th>
                 <th class="table-header">조회수</th>
               </tr>
-              <th:block th:if="${list == null}">
-				<tr>
-					<td colspan="6" style="text-align: center;">조회된 글이 없습니다.</td>
-				</tr>
-			</th:block>
-			<th:block th:if="${list != null}">
-					<tr th:each="board : ${list}">
-						<td class="board-content" th:text="${board.bNo}"></td>
-						<td class="board-content board-title">
-							<a th:href="|/community/view?no=${board.bNo}|">
-								[[${board.title}]]
-							</a>
-						</td>
-						<td class="board-content" th:text="${board.id}"></td>
-						<td class="board-content" th:text="${#dates.format(board.createDate, 'yyyy/MM/dd')}"/></td>
-						<td class="board-content">
-							<th:block th:if="${board.originalFileName != null }">
-								<span>📁</span>
-							</th:block>
-							<th:block th:if="${board.originalFileName == null }">
-								<span>-</span>
-							</th:block>
-						</td>
-						<td class="board-content">[[${board.readCount}]]</td>
-					</tr>
-			</th:block>
+              <tr>
+                <td class="board-content">1</td>
+                <td class="board-content board-title">청약 당첨 되어보신분 있나요? 요즘 청약 잘된다던데</td>
+                <td class="board-content"> happy </td>
+                <td class="board-content"> 2023-01-14 </td>
+                <td class="board-content"> 첨부파일 없음 </td>
+                <td class="board-content"> 32 </td>
+              </tr>
+              <tr>
+                <td class="board-content">2</td>
+                <td class="board-content board-title">삼성전자 그래도 오름세긴 하네요 </td>
+                <td class="board-content"> admin </td>
+                <td class="board-content"> 2022-12-14 </td>
+                <td class="board-content"> 첨부파일 없음 </td>
+                <td class="board-content"> 32 </td>
+              </tr>
             </table>
-            <!-- 게시판 리스트 종료 -->
-            
-            <!-- page부 시작 -->
-            <div class="table-buttons" align="center">
-            	<!--처음 페이지 -->
-                <button onclick="movePage('/community/freeList?page=1');" class="table-button">&lt;&lt;</button>
-                <!--이전 페이지 -->
-                <button th:onclick="|movePage('/community/freeList?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
-                
-                <!-- 10개 페이지 -->
-                <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
-					<th:block th:if="${status.current == pageInfo.currentPage}">
-                		<button class="table-button" disabled>[[${status.current}]]</button>
-                	</th:block>
-                	<th:block th:if="${status.current != pageInfo.currentPage}">
-                		<button class="table-button" th:onclick="|movePage('/community/freeList?page=${status.current}');|">[[${status.current}]]</button>
-                	</th:block>
-                </th:block>
-                
-                <!--다음 페이지 -->
-                <button th:onclick="|movePage('/community/freeList?page=${pageInfo.nextPage}');|" class="table-button">&gt;</button>
-                <!-- 마지막 페이지 -->
-                <button th:onclick="|movePage('/community/freeList?page=${pageInfo.maxPage}');|" class="table-button">&gt;&gt;</button>
+            <div class="table-buttons">
+                <button onclick="" class="table-button">&lt;&lt;</button>
+                <button onclick="" class="table-button">&lt;</button>
+                <button onclick="" class="table-button">1</button>
+                <button onclick="" class="table-button">2</button>
+                <button onclick="" class="table-button">3</button>
+                <button onclick="" class="table-button">4</button>
+                <button onclick="" class="table-button">5</button>
+                <button onclick="" class="table-button">&gt;</button>
+                <button onclick="" class="table-button">&gt;&gt;</button>
             </div>
-            <!-- page부 종료 -->
         </section>
     </main>
 <footer th:replace="~{layout/footer :: #footer}"></footer>
 <th:block th:replace="layout/scripts :: scripts"></th:block>
 </body>
 </html>
-
-<script type="text/javascript">
-	function movePage(pageUrl){
-		var searchValue = document.getElementById("searchValue"); // 갤럭시
-		var searchTypes = document.getElementsByName("searchType"); // title
-		var searchType = 'title';
-		if(searchValue.value.length > 0){
-			for(var i = 0; i <searchTypes.length; i++){
-				if(searchTypes[i].checked == true){
-					searchType = searchTypes[i].value;
-				}
-			}
-			pageUrl = pageUrl + '&searchType=' + searchType + '&searchValue=' + searchValue.value; 
-		}
-		location.href = encodeURI(pageUrl);	
-	}
-</script>

@@ -44,7 +44,8 @@ public class MemberService {
 		}
 	}
 	
-
+	// @Transactional : DB 트랜잭션 관리를 위한 AOP 어노테이션. 만일 오류가 발생하면 롤백. 아니면 커밋
+	// (rollbackFor = Exception.class) : 사용하지 않은 경우 트랜잭션 코드가 정상적으로 작동하지 않을수 있다.
 	@Transactional(rollbackFor = Exception.class)
 	public int save(Member member) {
 		int result = 0;
