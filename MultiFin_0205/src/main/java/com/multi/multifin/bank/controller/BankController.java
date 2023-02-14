@@ -14,11 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.multi.multifin.bank.model.service.BankCardService;
 import com.multi.multifin.bank.model.service.BankCompanyService;
 import com.multi.multifin.bank.model.service.BankDepsitSavingService;
+import com.multi.multifin.bank.model.service.LoanCreditService;
+import com.multi.multifin.bank.model.service.LoanMortgageService;
+import com.multi.multifin.bank.model.service.LoanRentHouseService;
 import com.multi.multifin.bank.model.vo.BankCompany;
 import com.multi.multifin.bank.model.vo.BankCreditCard;
 import com.multi.multifin.bank.model.vo.BankDebitCard;
 import com.multi.multifin.bank.model.vo.BankDeposit;
 import com.multi.multifin.bank.model.vo.BankSaving;
+import com.multi.multifin.bank.model.vo.LoanCredit;
+import com.multi.multifin.bank.model.vo.LoanMortgage;
+import com.multi.multifin.bank.model.vo.LoanRentHouse;
 import com.multi.multifin.common.util.PageInfo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +42,15 @@ public class BankController {
 	
 	@Autowired
 	private BankCompanyService companyService;
+	
+	@Autowired
+	private LoanCreditService lcService;
+	
+	@Autowired
+	private LoanMortgageService lmService;
+	
+	@Autowired
+	private LoanRentHouseService lrhService;
 	
 	@GetMapping("/bankCard")
 	public String bankCard(Model model, @RequestParam Map<String, String> paramMap) {
@@ -128,19 +143,13 @@ public class BankController {
 	@GetMapping("/bankDeposit")
 	public String bankDeposit(Model model, @RequestParam Map<String, String> paramMap) {
 		log.info("예적금 페이지 요청 성공");
-		int pageCompany = 1;
-		try {
-			pageCompany = Integer.parseInt(paramMap.get("pageCompany"));
-		} catch (Exception e) {
-		}
-		int companyCount = companyService.getCompanyCount(paramMap);
-		PageInfo pageCompanyInfo = new PageInfo(pageCompany, 5, companyCount, 10);
-		List<BankCompany> comList = companyService.selectCompanyList(pageCompanyInfo, paramMap);
+		List<BankDeposit> depositList0 = bankbookService.selectDepositList();
+		List<BankSaving> savingList0 = bankbookService.selectSavingList();
+		model.addAttribute("depositList0", depositList0);
+		model.addAttribute("savingList0", savingList0);
+		
 		List<BankCompany> logoList = companyService.selectLogoList(paramMap);
-	
-		model.addAttribute("comList", comList);
 		model.addAttribute("logoList", logoList);
-		model.addAttribute("pageCompanyInfo", pageCompanyInfo);
 		
 		
 		log.info("예금상품 전체 요청");
@@ -164,7 +173,7 @@ public class BankController {
 		int depositCount = bankbookService.getDepositCountUnique(paramMap);
 		PageInfo pageDepositInfo = new PageInfo(pageDeposit, 5, depositCount, 10);
 		List<BankDeposit> depositList = bankbookService.selectDepositListUnique(pageDepositInfo, paramMap);
-		for(BankDeposit deposit : depositList) {
+		for(BankDeposit deposit : depositList0) {
 			String coName = deposit.getKorCoNm();
 			for(BankCompany logoInfo :  logoList) {
 				if(logoInfo.getKorCoNm().equals(coName)) {
@@ -186,7 +195,7 @@ public class BankController {
 		int savingCount = cardService.getCreditCount(paramMap);
 		PageInfo pageSavingInfo = new PageInfo(pageSaving, 5, savingCount, 10);
 		List<BankSaving> savingList = bankbookService.selectSavingListUnique(pageSavingInfo, paramMap);
-		for(BankSaving saving : savingList) {
+		for(BankSaving saving : savingList0) {
 			String coName = saving.getKorCoNm();
 			for(BankCompany logoInfo :  logoList) {
 				if(logoInfo.getKorCoNm().equals(coName)) {
@@ -201,20 +210,26 @@ public class BankController {
 	}
 	
 	@RequestMapping("/bankDetail")
-	public String bankDetail() {
+	public String bankDetail(Model model, @RequestParam("no") String param) {
+		log.info("대출 상세페이지 요청 성공");
+		System.out.println(param); // OK
+		List<LoanCredit> lcList = lcService.selectLoanCreditListAll(param);
+		model.addAttribute("lcList", lcList);
+		List<LoanMortgage> lmList = lmService.selectLoanMortgageListAll(param);
+		model.addAttribute("lmList", lmList);
+		List<LoanRentHouse> lrhList = lrhService.selectLoanRentHouseListAll(param);
+		model.addAttribute("lrhList", lrhList);
 		return "bank/bankDetail";
 	}
 	
 	@RequestMapping("/bankFind")
 	public String bankFind(Model model, @RequestParam("no") String param) {
-		log.info("상품상세 페이지 요청 성공");
+		log.info("예적금 상품상세 페이지 요청 성공");
 		System.out.println(param); // OK
 		List<BankDeposit> depositList = bankbookService.selectDepositListAll(param);
-		System.out.println(depositList.size());
 		model.addAttribute("depositList", depositList);
 		
 		List<BankSaving> savingList = bankbookService.selectSavingListAll(param);
-		System.out.println(savingList.size());
 		model.addAttribute("savingList", savingList);
 		
 		
@@ -222,7 +237,63 @@ public class BankController {
 	}
 	
 	@RequestMapping("/bankLoan")
-	public String bankLoan() {
+	public String bankLoan(Model model, @RequestParam Map<String, String> paramMap) {
+		log.info("대출 페이지 요청 성공");
+		List<LoanCredit> loanCreditList0 = lcService.selectLoanCreditList();
+		model.addAttribute("loanCreditList0", loanCreditList0);
+		List<LoanMortgage> loanMortgageList0 = lmService.selectLoanMortgageList();
+		model.addAttribute("loanMortgageList0", loanMortgageList0);
+		List<LoanRentHouse> loanRentHoustList0 = lrhService.selectLoanRentHouseList();
+		model.addAttribute("loanRentHoustList0", loanRentHoustList0);
+		
+		log.info("개인신용대출 전체 요청");
+		int pageLc = 1;
+		try {
+			String searchValue = paramMap.get("searchValue");
+			if(searchValue != null && searchValue.length() > 0) {
+				paramMap.put("korCoNm", searchValue);
+			}else {
+			}
+			pageLc = Integer.parseInt(paramMap.get("pageLc"));
+		} catch (Exception e) {
+		}
+		
+		try {
+			String check = paramMap.getOrDefault("check", "0");
+			model.addAttribute("check",check);
+		} catch (Exception e) {
+		}
+		
+		int lcCount = lcService.selectLoanCreditCountUnique(paramMap);
+		PageInfo pageLcInfo = new PageInfo(pageLc, 5, lcCount, 10);
+		List<LoanCredit> lcList = lcService.selectLoanCreditListUnique(pageLcInfo, paramMap);
+		model.addAttribute("lcList", lcList);
+		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("pageLcInfo", pageLcInfo);
+		
+		log.info("주택담보대출 전체 요청");
+		int pageLm = 1;
+		try {
+			pageLm = Integer.parseInt(paramMap.get("pagdLm"));
+		} catch (Exception e) {
+		}
+		int lmCount = lmService.selectLoanMortgageCountUnique(paramMap);
+		PageInfo pageLmInfo = new PageInfo(pageLm, 5, lmCount, 10);
+		List<LoanMortgage> lmList = lmService.selectLoanMortgageListUnique(pageLmInfo, paramMap);
+		model.addAttribute("lmList", lmList);
+		model.addAttribute("pageLmInfo", pageLmInfo);
+		
+		log.info("전세자금대출 전체 요청");
+		int pageLrh = 1;
+		try {
+			pageLrh = Integer.parseInt(paramMap.get("pageLrh"));
+		} catch (Exception e) {
+		}
+		int lrhCount = lrhService.selectLoanRentHouseCountUnique(paramMap);
+		PageInfo pageLrhInfo = new PageInfo(pageLrh, 5, lrhCount, 10);
+		List<LoanRentHouse> lrhList = lrhService.selectLoanRentHouseListUnique(pageLmInfo, paramMap);
+		model.addAttribute("lrhList", lrhList);
+		model.addAttribute("pageLrhInfo", pageLrhInfo);
 		return "bank/bankLoan";
 	}
 

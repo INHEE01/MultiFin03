@@ -40,6 +40,7 @@
 		WHERE EMAIL = #{email} AND STATUS = 'Y'
 	</select>	
 	
+	
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER(
 			MNO, ID, PASSWORD, 	
