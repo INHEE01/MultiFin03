@@ -188,10 +188,10 @@
         	        <th:block th:if="${lcList != null}">
         	            <tr th:each="lcList, number : ${lcList}" th:onclick="|location.href='/bank/bankDetail?no=@{${lcList.finPrdtCd}}'|">
             	           <td class="board-content">[[(${pageLcInfo.currentPage}-1)*10+${number.index}+1]]</td>
-	                        <td class="board-content board-title" style="width:240px;">[[${lcList.finPrdtNm}]]</td>
-	                        <td class="board-content">[[${lcList.crdtPrdtTypeNm}]]</td>
-	                        <td class="board-content">[[${lcList.crdtLendRateTypeNm}]]</td>
-	                        <td class="board-content" style="width:72px;">[[${lcList.crdtGradAvg}]]</td>
+		                        <td class="board-content board-title" style="width:240px;">[[${lcList.finPrdtNm}]]</td>
+		                        <td class="board-content">[[${lcList.crdtPrdtTypeNm}]]</td>
+		                        <td class="board-content">[[${lcList.crdtLendRateTypeNm}]]</td>
+		                        <td class="board-content" style="width:72px;">[[${lcList.crdtGradAvg}]]</td>
                     	</tr>
                 </table>
                 <div class="table-buttons">
