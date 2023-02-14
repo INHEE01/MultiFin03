@@ -52,10 +52,11 @@
 	 		<if test="searchValue != null">
 	 			AND concat(dong,' ',jibun) like '%${searchValue}%'
 			</if>
-			<if test="searchType == 'deal_year'">
+			<if test="searchType == 'deal_year' ">
 			AND  Monthly_Rent = 0
 			</if>
-			<if test="searchType == 'deal_monthly'">
+			
+			<if test="searchType == 'deal_monthly' ">
 			AND  Monthly_Rent  <![CDATA[>]]> 0
 			</if>
 	</select>

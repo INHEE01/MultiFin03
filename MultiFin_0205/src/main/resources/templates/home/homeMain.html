@@ -69,8 +69,6 @@
                                                                 <option>청약</option>
                                                                 <option>전세</option>
                                                                 <option>월세</option>
-                                                                <option>매매</option>
-                                                                <option>경매</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -81,14 +79,14 @@
                                                                 <span class="icon"><i class="fas fa-plus"></i></span>
                                                             </a>
                                                             <div id="price-1" class="collapse pt-5">
-                                                                <div id="input-slider-range" data-range-value-min="100" data-range-value-max="500"></div>
+                                                                <div id="input-slider-range" data-range-value-min="1000" data-range-value-max="100000"></div>
                                                                 <!-- Range slider values -->
                                                                 <div class="row d-none">
                                                                     <div class="col-6">
-                                                                        <span class="range-slider-value value-low" data-range-value-low="200" id="input-slider-range-value-low"></span>
+                                                                        <span class="range-slider-value value-low" data-range-value-low="10000" id="input-slider-range-value-low"></span>
                                                                     </div>
                                                                     <div class="col-6 text-right">
-                                                                        <span class="range-slider-value value-high" data-range-value-high="400" id="input-slider-range-value-high"></span>
+                                                                        <span class="range-slider-value value-high" data-range-value-high="50000" id="input-slider-range-value-high"></span>
                                                                     </div>
                                                                 </div>
                                                                 <span class="font-xs small text-gray">*Prices are in KRW</span>
@@ -113,10 +111,6 @@
                                                     <a href="#" data-target="#collapseAdvanced" class="accordion-panel-header d-block" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseAdvanced">
                                                         <span class="icon"><span class="fas fa-plus-circle"></span></span>
                                                         <span class="icon-title font-weight-normal text-gray ml-2 mb-0 search_more">상세 검색</span>
-                                                    </a>
-                                                    <a href="#modal-map" data-toggle="modal" data-target="#map-listings" class="btn more btn-tertiary mr-2">
-                                                        <span class="fas fa-map-marker-alt mr-2"></span>
-                                                        <span class="map_view">지도보기</span>
                                                     </a>
                                                 </div>
                                             </div>
@@ -320,10 +314,6 @@
  </script>
  <script>
 	//지도 부분 클릭 시 이벤트 
-	
-
-	
-	
 	</script>
         <section class="auction_main_container">
             <div class="auction">
@@ -489,17 +479,17 @@
                     <div class="basic-carousel owl-carousel owl-theme">
                         <div class="item">
                             <div class="card border-light mb-4 animate-up-5">
-                                <a href="./single-space.html" class="position-relative">
-                                    <img src="../../assets/img/home/image-office.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office">
+                                <a th:href=@{homeSellDetail?RealEstateDealNo=932} class="position-relative">
+                                    <img src="../../assets/img/home/apt20.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office" style="width:400px; height:300px;">
                                 </a>
                                 <div class="card-body">
                                     <a href="#"> 
-                                        <h5 class="h4 sell_description_title">동인천역 파크 푸르지오</h5>
+                                        <h5 class="h4 sell_description_title">마포래미안푸르지오 APT</h5>
                                     </a>
                                     <ul class="list-group mb-3">
                                         <li class="list-group-item p-0 sell-location">
                                             <span class="fas fa-map-marker-alt mr-2"></span>
-                                            인천광역시 동구 송림동
+                                            서울특별시 마포구 아현동
                                         </li>
                                     </ul>
                                 </div>
@@ -507,15 +497,15 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="col pl-0">
                                             <span class="now text-muted font-small d-block mb-2">세대수</span>
-                                            <span class="h5 text-dark font-weight-bold info">500가구</span>
+                                            <span class="h5 text-dark font-weight-bold info">3,885 세대</span>
                                         </div>
                                         <div class="col pl-0">
                                             <span class="now text-muted font-small d-block mb-2">면적</span>
-                                            <span class="h5 text-dark font-weight-bold info">135㎡</span>
+                                            <span class="h5 text-dark font-weight-bold info">59.92㎡</span>
                                         </div>
                                         <div class="col pl-0">
-                                            <span class="now text-muted font-small d-block mb-2">가격</span>
-                                            <span class="h5 text-dark font-weight-bold info">41,641만원</span>
+                                            <span class="now text-muted font-small d-block mb-2">월세</span>
+                                            <span class="h5 text-dark font-weight-bold info">50만원</span>
                                         </div>
                                     </div>
                                 </div>
@@ -525,17 +515,17 @@
                         <!-- Item 2 -->
                         <div class="item">
                             <div class="card border-light mb-4 animate-up-5">
-                                <a href="./single-space.html" class="position-relative">
-                                    <img src="../../assets/img/home/image-office.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office">
+                                <a th:href=@{homeSellDetail?RealEstateDealNo=836} class="position-relative">
+                                    <img src="../../assets/img/home/apt17.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office" style="width:400px; height:300px;">
                                 </a>
                                 <div class="card-body">
                                     <a href="#"> 
-                                        <h5 class="h4 sell_description_title">수원 빛마루 APT</h5>
+                                        <h5 class="h4 sell_description_title">서희 스타힐스 APT</h5>
                                     </a>
                                     <ul class="list-group mb-3">
                                         <li class="list-group-item p-0 sell-location">
                                             <span class="fas fa-map-marker-alt mr-2"></span>
-                                            인천광역시 동구 송림동
+                                            서울특별시 동대문구 장안동
                                         </li>
                                     </ul>
                                 </div>
@@ -543,15 +533,15 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="col pl-0">
                                             <span class="now text-muted font-small d-block mb-2">세대수</span>
-                                            <span class="h5 text-dark font-weight-bold info">500가구</span>
+                                            <span class="h5 text-dark font-weight-bold info">203 세대</span>
                                         </div>
                                         <div class="col pl-0">
                                             <span class="now text-muted font-small d-block mb-2">면적</span>
-                                            <span class="h5 text-dark font-weight-bold info">135㎡</span>
+                                            <span class="h5 text-dark font-weight-bold info">80.53㎡</span>
                                         </div>
                                         <div class="col pl-0">
-                                            <span class="now text-muted font-small d-block mb-2">가격</span>
-                                            <span class="h5 text-dark font-weight-bold info">41,641만원</span>
+                                            <span class="now text-muted font-small d-block mb-2">월세</span>
+                                            <span class="h5 text-dark font-weight-bold info">25만원</span>
                                         </div>
                                     </div>
                                 </div>
@@ -561,17 +551,17 @@
                         <!-- Item 3 -->
                         <div class="item">
                             <div class="card border-light mb-4 animate-up-5">
-                                <a href="./single-space.html" class="position-relative">
-                                    <img src="../../assets/img/home/image-office.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office">
+                                <a th:href=@{homeSellDetail?RealEstateDealNo=4126} class="position-relative">
+                                    <img src="../../assets/img/home/apt2.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office" style="width:400px; height:300px;">
                                 </a>
                                 <div class="card-body">
                                     <a href="#"> 
-                                        <h5 class="h4 sell_description_title">일산 유보라 APT</h5>
+                                        <h5 class="h4 sell_description_title">힐스테이트 다산 APT</h5>
                                     </a>
                                     <ul class="list-group mb-3">
                                         <li class="list-group-item p-0 sell-location">
                                             <span class="fas fa-map-marker-alt mr-2"></span>
-                                            인천광역시 동구 송림동
+                                            경기도 남양주 다산동
                                         </li>
                                     </ul>
                                 </div>
@@ -579,15 +569,15 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="col pl-0">
                                             <span class="now text-muted font-small d-block mb-2">세대수</span>
-                                            <span class="h5 text-dark font-weight-bold info">500가구</span>
+                                            <span class="h5 text-dark font-weight-bold info">1,650 세대</span>
                                         </div>
                                         <div class="col pl-0">
                                             <span class="now text-muted font-small d-block mb-2">면적</span>
-                                            <span class="h5 text-dark font-weight-bold info">135㎡</span>
+                                            <span class="h5 text-dark font-weight-bold info">84.69㎡</span>
                                         </div>
                                         <div class="col pl-0">
-                                            <span class="now text-muted font-small d-block mb-2">가격</span>
-                                            <span class="h5 text-dark font-weight-bold info">41,641만원</span>
+                                            <span class="now text-muted font-small d-block mb-2">전세</span>
+                                            <span class="h5 text-dark font-weight-bold info">40,000만원</span>
                                         </div>
                                     </div>
                                 </div>
@@ -597,17 +587,17 @@
                         <!-- Item 4 -->
                         <div class="item">
                             <div class="card border-light mb-4 animate-up-5">
-                                <a href="./single-space.html" class="position-relative">
-                                    <img src="../../assets/img/home/image-office.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office">
+                                <a th:href=@{homeSellDetail?RealEstateDealNo=460} class="position-relative">
+                                    <img src="../../assets/img/home/apt16.jpg" class="card-img-top rounded-xl p-2" alt="themesberg office" style="width:400px; height:300px;">
                                 </a>
                                 <div class="card-body">
                                     <a href="#"> 
-                                        <h5 class="h4 sell_description_title">서울 사당동 자이APT</h5>
+                                        <h5 class="h4 sell_description_title">현대 파크빌 APT</h5>
                                     </a>
                                     <ul class="list-group mb-3">
                                         <li class="list-group-item p-0 sell-location">
                                             <span class="fas fa-map-marker-alt mr-2"></span>
-                                            인천광역시 동구 송림동
+                                            서울시 광진구 광장동
                                         </li>
                                     </ul>
                                 </div>
@@ -615,15 +605,15 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="col pl-0">
                                             <span class="now text-muted font-small d-block mb-2">세대수</span>
-                                            <span class="h5 text-dark font-weight-bold info">500가구</span>
+                                            <span class="h5 text-dark font-weight-bold info">1,170 세대</span>
                                         </div>
                                         <div class="col pl-0">
                                             <span class="now text-muted font-small d-block mb-2">면적</span>
-                                            <span class="h5 text-dark font-weight-bold info">135㎡</span>
+                                            <span class="h5 text-dark font-weight-bold info">84.81㎡</span>
                                         </div>
                                         <div class="col pl-0">
-                                            <span class="now text-muted font-small d-block mb-2">가격</span>
-                                            <span class="h5 text-dark font-weight-bold info">41,641만원</span>
+                                            <span class="now text-muted font-small d-block mb-2">전세</span>
+                                            <span class="h5 text-dark font-weight-bold info">65,000만원</span>
                                         </div>
                                     </div>
                                 </div>

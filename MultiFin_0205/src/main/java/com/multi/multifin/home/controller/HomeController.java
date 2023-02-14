@@ -35,8 +35,9 @@ public class HomeController {
 	}
 
 	@GetMapping("/homeMain")
-	public String homeMain(Model model) {
-
+	public String homeMain(Model model, @RequestParam Map<String, Object> paramMap) {
+		
+		
 		return "home/homeMain";
 	}
 
@@ -49,16 +50,17 @@ public class HomeController {
 			paramMap.put("searchValue", "역삼동");
 		}
 		paramMap.put("searchType", searchType);
-		System.out.println(searchType);
+		
 		List<MarkerParsing> markerParsing = homeService.selectHomeByXY(paramMap);
 		List<Home> list = homeService.searchHomeBylocatin(paramMap);
 		List<Home> home = homeService.searchHomeList(paramMap);
 		int homeCount = homeService.getHomeCount(paramMap);
-		
 		if(searchType == null) {
 			searchType = new ArrayList<>();
 			paramMap.put("searchType", searchType);
 		}
+		
+		System.out.println(searchType);
 		
 		if(markerParsing.size() > 0) {
 			model.addAttribute("x", markerParsing.get(0).getX());
@@ -84,8 +86,12 @@ public class HomeController {
 		List<Home> homeInfo = homeService.selectHomeInfo(param);
 		String dong= homeInfo.get(0).getDong();
 		String jibun= homeInfo.get(0).getJibun();
+		String apart_img= homeInfo.get(0).getFloor();
+		System.out.println(apart_img);
+		model.addAttribute("homeInfo", homeInfo);
 		model.addAttribute("homeInfo", homeInfo);
 		model.addAttribute("mainAddress", "https://www.google.com/maps/embed/v1/place?key=AIzaSyC1aON48lqcS91l_x_GJblY_kXTcrUk_ZI&region=KR&language=ko&q="+dong+jibun);
+		model.addAttribute("apart_img", "../../assets/img/home/apt"+apart_img+".jpg");
 
 		return "home/homeSellDetail";
 	}
