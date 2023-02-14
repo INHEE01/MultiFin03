@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<th:block th:replace="layout/head :: config"></th:block>
-	<title>MultiFin:부동산 경매</title>
+	<title>MultiFin:부동산 메인</title>
 	<!-- 현재 페이지에서만 쓰는 css, script -->
 	<link type="text/css" th:href="@{/css/home/homeMain.css}" rel="stylesheet">
 	 <link rel="stylesheet" href="../../css/korea.css" />
@@ -38,7 +38,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><span class="fas fa-map-marker-alt"></span></span>
                                                             </div>
-                                                            <input id="search-location" type="text" class="form-control autocomplete location" placeholder="지역을 입력하세요" tabindex="1" required>
+                                                            <input id="search-location" type="text" class="form-control autocomplete location" name="searchValue" placeholder="지역을 입력하세요" tabindex="1" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -48,7 +48,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <input class="form-control datepicker date" placeholder="날짜를 선택하세요" type="text" required>
+                                                            <input class="form-control datepicker date" name="day" placeholder="날짜를 선택하세요" type="text" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -64,7 +64,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><span class="fas fa-sliders-h"></span></span>
                                                             </div>
-                                                            <select class="custom-select" id="exampleFormControlSelect1">
+                                                            <select class="custom-select" name = "estateOption" id="exampleFormControlSelect1" required>
                                                                 <option>Type</option>
                                                                 <option>청약</option>
                                                                 <option>전세</option>
@@ -149,6 +149,7 @@
 	        .mercator()
 	        .scale(initialScale)
 	        .translate([initialX, initialY]);
+	    
 	    var path = d3.geo.path().projection(projection);
 	    var zoom = d3.behavior
 	        .zoom()
@@ -158,12 +159,12 @@
 	        .on('zoom', zoom);
 
 	    var svg = d3
-	        .select(target)
-	        .append('svg')
-	        .attr('width', width + 'px')
+	        .select(target)                   //요소 선택
+	        .append('svg')                    //SVG추가 SVG는 이차원 벡터 이미지를 그리기 위한 웹 표준임
+	        .attr('width', width + 'px')      //width, height를 이용해 크기 조정
 	        .attr('height', height + 'px')
-	        .attr('id', 'map')
-	        .attr('class', 'map');
+	        .attr('id', 'map')                //attr은 class 지정 든 css속성을 지정할 때 사용
+	        .attr('class', 'map');            //class를 map으로 지정
 
 	    var states = svg
 	        .append('g')
@@ -179,31 +180,39 @@
 	    //geoJson데이터를 파싱하여 지도그리기
 	    d3.json('../../assets/json/korea.json', function(json) {
 	        states
-	            .selectAll('path') //지역 설정
-	            .data(json.features)
-	            .enter()
+	            .selectAll('path')          //지역 설정
+	            .data(json.features)        // data 를 설정
+	            .enter()                    //데이터에 개수만큼 path 생성
 	            .append('path')
 	            .attr('d', path)
-	            .attr('id', function(d) {
+	            .append('title') 
+	            .text(d => d.properties.name)  //튤팁에 텍스트 입력
+	            .on("click",clicked)		   //click 시 clicked함수 실행
+	            .attr('id', function(d) {		
 	                return 'path-' + d.properties.name_eng;
 	            });
 
-	        labels = states
-	            .selectAll('text')
-	            .data(json.features) //라벨표시
-	            .enter()
+	        labels = states               //라벨표시
+	            .selectAll('text')        //모든 text 요소 
+	            .data(json.features) 	  
+	            .enter()                   //데이터에 개수만큼 text 생성
 	            .append('text')
-	            .attr('transform', translateTolabel)
+	            .attr('transform', translateTolabel)  
 	            .attr('id', function(d) {
 	                return 'label-' + d.properties.name_eng;
 	            })
-	            .attr('text-anchor', 'middle')
-	            .attr('dy', '.35em')
+	            .attr('text-anchor', 'middle')	//text-anchor text의 중심점을 정하는 요소
+	            .attr('dy', '.35em')			//dy 행 높이 조정
 	            .text(function(d) {
 	                return d.properties.name;
 	            });
 	    });
-
+	    function clicked(d){
+	    	console.log('안녕하세요?');
+			if(d.properties.code==31){
+				'<a xlink:href="home/homeMain" target="_blank">'
+			}
+		}
 	    //텍스트 위치 조절 - 하드코딩으로 위치 조절을 했습니다.
 	    function translateTolabel(d) {
 	        var arr = path.centroid(d);
@@ -213,6 +222,7 @@
 	                d3.event && d3.event.scale
 	                    ? d3.event.scale / height + 20
 	                    : initialScale / height + 20;
+	            
 	        } else if (d.properties.code == 34) {
 	            //충남은 조금 더 내리기
 	            arr[1] +=
@@ -234,9 +244,87 @@
 	        states.selectAll('path').attr('d', path);
 	        labels.attr('transform', translateTolabel);
 	    }
+		$(document).on("click","#container",function(d){console.log("check!"); });
+		$(document).on("click","#container",function(d){ //d.target.__data__.properties.name
+			if(d.target.__data__.properties.name=="강원도"){ 
+				$("p").text("강원도");
+				$(".description_title").text('강원도')
+			};  
+			if(d.target.__data__.properties.name=="서울특별시"){  
+				$("p").text("서울특별시");
+				$(".description_title").text('서울특별시')
+			};  
+			if(d.target.__data__.properties.name=="인천광역시"){  
+				$("p").text("인천광역시");
+				$(".description_title").text('인천광역시')
+			};  
+			if(d.target.__data__.properties.name=="경기도"){  
+				$("p").text("경기도");
+				$(".description_title").text('경기도')
+			};  
+			if(d.target.__data__.properties.name=="충청북도"){  
+				$("p").text("충청북도");
+				$(".description_title").text('충청북도')
+			};  
+			if(d.target.__data__.properties.name=="대전광역시"){  
+				$("p").text("대전광역시");
+				$(".description_title").text('대전광역시')
+			};  
+			if(d.target.__data__.properties.name=="경상북도"){  
+				$("p").text("경상북도");
+				$(".description_title").text('경상북도')
+			};  
+			if(d.target.__data__.properties.name=="충청북도"){  
+				$("p").text("충청북도");
+				$(".description_title").text('충청북도')
+			};  
+			if(d.target.__data__.properties.name=="충청남도"){  
+				$("p").text("충청남도");
+				$(".description_title").text('충청남도')
+			};  
+			if(d.target.__data__.properties.name=="세종특별자치시"){  
+				$("p").text("세종특별자치시");
+				$(".description_title").text('세종특별자치시')
+			};  
+			if(d.target.__data__.properties.name=="대구광역시"){  
+				$("p").text("대구광역시");
+				$(".description_title").text('대구광역시')
+			};  
+			if(d.target.__data__.properties.name=="울산광역시"){  
+				$("p").text("울산광역시");
+				$(".description_title").text('울산광역시')
+
+			};  
+			if(d.target.__data__.properties.name=="부산광역시"){  
+				$("p").text("부산광역시");
+				$(".description_title").text('부산광역시')
+
+			};  
+			if(d.target.__data__.properties.name=="광주광역시"){  
+				$("p").text("광주광역시");
+				$(".description_title").text('광주광역시')
+
+			};  
+			if(d.target.__data__.properties.name=="전라북도"){  
+				$("p").text("전라북도");
+				$(".description_title").text('전라북도')
+
+			};  
+			if(d.target.__data__.properties.name=="전라남도"){  
+				$("p").text("전라남도");
+				$(".description_title").text('전라남도')
+
+			};  
+	});
 	}
  </script>
- 
+ <script>
+	//지도 부분 클릭 시 이벤트 
+	
+
+	
+	
+	</script>
         <section class="auction_main_container">
             <div class="auction">
                <div class="map_container">
@@ -251,13 +339,13 @@
                <div class="detail_container">
                     <div class="detail_title">
                         <i class="fa-solid fa-location-dot"></i>
-                        <h3 class="title">경기도</h3> 
+                        <p class="title">경기도</p> 
                     </div>
                     <div class="detail">
                         <div class="table_table">
                             <div class="auction_container">
                                 <div class="description_title">
-                                    대곡역 두산위브 입주자 모집
+                                   대곡역 두산위브 입주자 모집
                                 </div>
                                 <div class="date">
                                     <div class="start">청약 접수 : 2023-01-23</div>
@@ -391,6 +479,7 @@
                     </tr>
                 </table>
             </div>
+            
         </section>
         <section class="sell-info-section">
             <div class="sell-info-container">

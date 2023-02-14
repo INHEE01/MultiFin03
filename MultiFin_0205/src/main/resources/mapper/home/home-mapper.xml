@@ -44,34 +44,28 @@
 		AND searchAddr like '%${searchValue}%'
 	</select>
 	
-	
 	<select id="selectHomeBylocatin"  resultMap="HomeResultMap" parameterType="map">
 		SELECT RealEstateDealNo,Build_Year,Contract_Type,Term_Contract,Offi_Name,Deal_Year,Dong,Deposit,Sigungu,Apartment_Name,
 		Deal_Month,Monthly_Rent,Deal_Day,Area,Jibun,Regional_Code,Floor
 		FROM REALESTATE
 		WHERE 1=1
 	 		<if test="searchValue != null">
-	 			AND '${searchValue}' like concat(dong,' ',jibun)
-				OR dong like '%${searchValue}%' OR  jibun like '%${searchValue}%'
+	 			AND concat(dong,' ',jibun) like '%${searchValue}%'
 			</if>
-			<if test="searchType != null">
-				<choose>
-					<when test="searchType != null">
-					AND deposit IN (0)
-					</when>
-					<otherwise>
-					AND deposit NOT IN (0)
-					</otherwise>
-				</choose>
+			<if test="searchType == 'deal_year'">
+			AND  Monthly_Rent = 0
+			</if>
+			<if test="searchType == 'deal_monthly'">
+			AND  Monthly_Rent  <![CDATA[>]]> 0
 			</if>
 	</select>
+	
 	<select id="selectHomeCount" resultType="int" parameterType="map">
 		SELECT count(*)
 		FROM REALESTATE
 		WHERE 1=1
 	 		<if test="searchValue != null">
-	 			AND '${searchValue}' like concat(dong,' ',jibun)
-				OR dong like '%${searchValue}%' OR  jibun like '%${searchValue}%';
+	 			AND concat(dong,' ',jibun) like '%${searchValue}%'
 			</if>
 	</select>
 	<select id="selectHomeInfo"  resultMap="HomeResultMap" parameterType="String">

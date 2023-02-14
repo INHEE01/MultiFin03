@@ -1,22 +1,20 @@
 package com.multi.multifin.home.controller;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.multi.multifin.bank.controller.BankController;
 import com.multi.multifin.home.model.service.HomeService;
 import com.multi.multifin.home.model.vo.Home;
 import com.multi.multifin.home.model.vo.MarkerParsing;
-import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.ui.Model;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequestMapping("/home")
@@ -43,32 +41,37 @@ public class HomeController {
 	}
 
 	@GetMapping("/homeSell")
-	public String homeSellSearch(Model model, @RequestParam Map<String, Object> paramMap) {
+	public String homeSellSearch(Model model, @RequestParam Map<String, Object> paramMap,
+			@RequestParam(required = false) List<String> searchType
+			) {
 		log.info("부동산 매물 페이지 요청 성공");
-
-		String searchValue = (String)(paramMap.get("searchValue"));
-		if (searchValue != null && searchValue.length() > 0) {
-			paramMap.put("searchValue", searchValue);
-		} else {
-//			model.addAttribute("msg", "제목을 적어주세요.");
-//			model.addAttribute("location", "/");
-//			return "common/msg";
+		if(paramMap.get("searchValue") == null) {
+			paramMap.put("searchValue", "역삼동");
 		}
-		String[] searchType = (String[])paramMap.get("searchType");
-		if (searchType != null  && searchType.length > 0) {
-			paramMap.put("searchType", searchType);
-		} else {
-			searchType = new String[] {};
-		}
+		paramMap.put("searchType", searchType);
+		System.out.println(searchType);
 		List<MarkerParsing> markerParsing = homeService.selectHomeByXY(paramMap);
 		List<Home> list = homeService.searchHomeBylocatin(paramMap);
 		List<Home> home = homeService.searchHomeList(paramMap);
 		int homeCount = homeService.getHomeCount(paramMap);
+		
+		if(searchType == null) {
+			searchType = new ArrayList<>();
+			paramMap.put("searchType", searchType);
+		}
+		
+		if(markerParsing.size() > 0) {
+			model.addAttribute("x", markerParsing.get(0).getX());
+			model.addAttribute("y", markerParsing.get(0).getY());
+		}else {
+			model.addAttribute("x", "127.0706095");
+			model.addAttribute("y", "37.5407622");
+		}
 		model.addAttribute("markerParsing", markerParsing);
 		model.addAttribute("homeCount", homeCount);
 		model.addAttribute("list", list);
 		model.addAttribute("home", home);
-		System.out.println(paramMap.toString());
+		model.addAttribute("paramMap", paramMap);
 
 		return "home/homeSell";
 	}
@@ -78,14 +81,6 @@ public class HomeController {
 		log.info("부동산 매물 상세 페이지 요청 성공");
 		System.out.println(param); // OK
 
-//			String RealEstateDealNo = (String)(paramMap.get("RealEstateDealNo"));
-//			if (RealEstateDealNo != null && RealEstateDealNo.length() > 0) {
-//				paramMap.put("RealEstateDealNo", RealEstateDealNo);
-//			} else {
-//				model.addAttribute("msg", "제목을 적어주세요.");
-//				model.addAttribute("location", "/");
-//				return "common/msg";
-//			}
 		List<Home> homeInfo = homeService.selectHomeInfo(param);
 		String dong= homeInfo.get(0).getDong();
 		String jibun= homeInfo.get(0).getJibun();

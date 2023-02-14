@@ -27,6 +27,7 @@ public class MarkerParsing {
 		this.x = x;
 		this.y = y;
 	}
+	
 	@Override
 	public String toString() {
 		return "Parsing [rno=" + rno + ", text=" + text + ", x=" + x + ", y=" + y + "]";
