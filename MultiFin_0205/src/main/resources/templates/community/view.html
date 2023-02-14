@@ -9,7 +9,7 @@
 <body>
 <header th:replace="~{layout/header :: #header}"></header>
     <main>
-        <section class="section section-header bg-primary overlay-primary text-white pb-8" data-background="../../assets/img/board/team-hero.jpg">
+        <section class="section section-header bg-primary overlay-primary text-white pb-8" data-background="/assets/img/board/team-hero.jpg">
             <div class="container">
                <div class="row justify-content-center">
                   <div class="col-12 col-md-8 text-center">
@@ -24,11 +24,17 @@
         </section>
         <section class="view mt-6 mb-5">
             <div class="bnts">
-              <c:if test="${not empty loginMember && (loginMember.id == board.writerId || loginMember.role == 'ROLE_ADMIN')}">
-                <button class="board_btn" type="button" id="btnUpdate">수정</button>
-                <button class="board_btn" type="button" id="btnDelete">삭제</button>
-              </c:if>
-                <button class="board_btn" type="bnt" id="btnDelete">목록</button>
+               <th:block th:if="${session.loginMember != null && 
+					(session.loginMember.id == board.id || session.loginMember.role == 'ROLE_ADMIN')}">
+                   <button class="board_btn" type="button" id="btnUpdate">수정</button>
+                   <button class="board_btn" type="button" id="btnDelete">삭제</button>
+                </th:block>
+              	<th:block th:if="${board.type} == '자유게시판'">
+                	<button class="board_btn" type="bnt" id="btnDelete" onclick="location.href='/community/freeList'">목록</button>
+            	<th:block>
+            	<th:block th:if="${board.type} == '공지사항'">
+                	<button class="board_btn" type="bnt" id="btnDelete" onclick="location.href='/community/noticeList'">목록</button>
+            	<th:block>
             </div>
             <table id="tbl-board" class="board-table">
               <tr>
@@ -37,87 +43,111 @@
                 </td>
               </tr>
               <tr class="board-info">
-                <td colspan="2" class="info-main">작성자 : [[${board.id}]] <c:out value="${board.writerId}"/></td>
+                <td colspan="2" class="info-main">작성자 : [[${board.id}]]</td>
                 <td class="info-sub"> 
-                  등록일 : [[${#dates.format(board.createDate, 'yyyy/MM/dd')}]]<fmt:formatDate type="both" value="${board.createDate}"/> &nbsp; &nbsp;
-                  조회수 : [[${board.readCount}]]<c:out value="${board.readCount}"/>&nbsp; &nbsp;
+                  등록일 : [[${#dates.format(board.createDate, 'yyyy/MM/dd')}]] &nbsp; &nbsp;
+                  조회수 : [[${board.readCount}]]&nbsp; &nbsp;
                   첨부파일 : 
 					<th:block th:if="${board.originalFileName != null}">
-					<a th:href="|javascript:fileDownload('${board.originalFileName}','${board.renamedFileName}')|">
-						<img src="/images/file.png" width="20" height="20"/>
-						[[${board.originalFileName}]]				
-					</a><br>
-					<img alt="" style="width: 300px" th:src="|/board/file/${board.renamedFileName}|">
-					<script>
-						function fileDownload(oriname, rename) {
-							const url = "/board/fileDown";
-							
-							let oName = encodeURIComponent(oriname);
-							let rName = encodeURIComponent(rename);
-							
-							location.assign(url + "?oriname=" + oName + "&rename=" + rName);
-						}
-					</script>	
-				</th:block>
-				<th:block th:if="${board.originalFileName == null}">
-					<span> - </span>
-				</th:block>
+						<a th:href="|javascript:fileDownload('${board.originalFileName}','${board.renamedFileName}')|">
+							<span>📁</span>
+							[[${board.originalFileName}]]				
+						</a><br>
+						<img alt="" style="width: 300px" th:src="|/board/file/${board.renamedFileName}|">
+						<script>
+							function fileDownload(oriname, rename) {
+								const url = "/community/fileDown";
+								
+								let oName = encodeURIComponent(oriname);
+								let rName = encodeURIComponent(rename);
+								
+								location.assign(url + "?oriname=" + oName + "&rename=" + rName);
+							}
+						</script>	
+					</th:block>
+					<th:block th:if="${board.originalFileName == null}">
+						<span> - </span>
+					</th:block>
                 </td>
               </tr>
               <tr>
                 <td colspan="3" >
-                  <div class="board-contents">
+                  <div class="board-contents m-0 mb-4">
                     <textarea  rows="15" cols="100" readonly class="textarea" disabled >[[${board.content}]]</textarea>
                   </div>
                 </td>
               </tr>
             </table>
-            
+               <!-- 리플 출력 -->
+            <table id="tbl-comment">
+            	<tr>
+                	<td class="comment-count" colspan="2" style="border-color: none;">댓글 [[${board.getReplyCount()}]]개</td>
+              	</tr>
+	             <th:block th:if="${replyList != null}">
+		              <th:block  th:each="reply : ${replyList}"> 
+			              <tr class="comments">
+			                    <td class="comment">
+			                        <sub class="comment-writer">[[${reply.id}]]</sub> &nbsp; &nbsp;
+			                        <sub class="comment-date">[[${#dates.format(reply.createDate, 'YY/MM/dd hh:mm')}]]</sub><br>
+			                        <span class="comment-detail font-weight-bold">[[${reply.content}]]</span>
+			                    </td>
+			                    <td class="comment comment-btn">
+			                    	<th:block th:if="${session.loginMember != null && (session.loginMember.id == reply.id || session.loginMember.role == 'ROLE_ADMIN')}">
+				                        <div class="btn-container">
+				                            <button class="btn-update mr-3 " th:onclick="|UpdateReply(${reply.rNo},${board.bNo});|" >수정</button>
+				                            <button class="btn-delete mr-3" th:onclick="|deleteReply(${reply.rNo},${board.bNo});|" >삭제</button>
+				                        </div>
+			                        </th:block>
+			                    </td>
+			          	   	 </tr>
+		             	 </th:block>
+					  </th:block>
+					  <th:block th:if="${replyList == null}">
+						<tr>
+							<td colspan="3" style="text-align: center;">등록된 리플이 없습니다.</td>
+						</tr>
+					</th:block>
+			</table>
             <!-- 리플 작성 Form -->
             <div id="comment-container">
                 <div class="comment-editor">
                     <form action="/community/reply" method="post" class="comment-inputer">
                         <input type="hidden" name="bNo" th:value="${board.bNo}" />
                         <!-- <input type="hidden" name="Id" value="${loginMember.id}" /> -->
-                          <textarea name="content" id="replyContent"  cols="140" rows="3"></textarea>
+                          <textarea name="content" id="replyContent"  cols="135" rows="3"></textarea>
                           <button type="submit" id="btn-insert">등록</button>	  	
                     </form>
                 </div>
             </div>
-            
-            <!-- 리플 출력 -->
-            <table id="tbl-comment">
-              <th:block th:if="${replyList != null}">
-              <th:block  th:each="reply : ${replyList}"> 
-              <tr class="comments">
-                    <td class="comment">
-                        <sub class="comment-writer">[[${reply.id}]]</sub> &nbsp; &nbsp;
-                        <sub class="comment-date">[[${#dates.format(reply.createDate)}]]</sub><br>
-                        <span class="comment-detail font-weight-bold">[[${reply.content}]]</span>
-                    </td>
-                    <td class="comment comment-btn">
-                    	<th:block th:if="${session.loginMember != null && (session.loginMember.id == reply.id || session.loginMember.role == 'ROLE_ADMIN')}">
-                        <div class="btn-container">
-                            <button class="btn-update mr-3 " th:onclick="|UpdateReply(${reply.rNo},${board.bNo});|" >수정</button>
-                            <button class="btn-delete mr-3" th:onclick="|deleteReply(${reply.rNo},${board.bNo});|" >삭제</button>
-                        </div>
-                        </th:block>
-                    </td>
-              </tr>
-              </th:block>
-			  </th:block>
-			  
-			  <th:block th:if="${replyList == null}">
-			<tr>
-				<td colspan="3" style="text-align: center;">등록된 리플이 없습니다.</td>
-			</tr>
-			</th:block>
-			</table>
-              
-            
           </section>
     </main>
 <footer th:replace="~{layout/footer :: #footer}"></footer>
 <th:block th:replace="layout/scripts :: scripts"></th:block>
+<script>
+
+	$(document).ready(() => {
+		$("#btnUpdate").on("click", (e) => {
+			location.href = "/community/update?no=[[${board.bNo}]]";
+		});
+		
+		$("#btnDelete").on("click", (e) => {
+			if(confirm("정말로 게시글을 삭제 하시겠습니까?")) {
+				location.replace("/community/delete?boardNo=[[${board.bNo}]]");
+			}
+		});
+	});
+	
+	function deleteReply(replyNo, boardNo){
+		var url = "/community/replyDel?replyNo=";
+		var requestURL = url + replyNo +"&boardNo=" + boardNo;
+		location.replace(requestURL);
+	}
+
+</script>
+
+
+
+</script>
+
 </body>
 </html>

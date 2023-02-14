@@ -93,7 +93,8 @@
 	
 	<select id="selectBoardByNo" parameterType="int" resultMap="boardDetailResultMap">
 		SELECT  
-			B.BNO, B.TITLE, M.ID, B.READCOUNT, B.TYPE, B.ORIGINAL_FILENAME, B.RENAMED_FILENAME, B.CONTENT, B.CREATE_DATE, B.MODIFY_DATE,
+			B.BNO, B.TITLE, M.ID, B.READCOUNT, B.TYPE, B.ORIGINAL_FILENAME, B.RENAMED_FILENAME, 
+			B.CONTENT, B.CREATE_DATE, B.MODIFY_DATE,
 			R.RNO AS R_RNO, 
 		    R.BNO AS R_BNO,
 		    R.CONTENT  AS R_CONTENT, 
@@ -114,10 +115,10 @@
 			RENAMED_FILENAME, READCOUNT, STATUS,
 			CREATE_DATE, MODIFY_DATE, TYPE	
 		) VALUES (
-			0, #{mNo}, #{title}, 
+			0, #{mNo}, #{title},
 			#{content}, #{originalFileName}, 
 			#{renamedFileName}, DEFAULT, DEFAULT, 
-			DEFAULT, DEFAULT, DEFAULT			
+			DEFAULT, DEFAULT, #{type}			
 		)
 	</insert>
 	

@@ -49,7 +49,6 @@ public class BoardController {
 	public String list(Model model, @RequestParam Map<String, String> paramMap) {
 		int page = 1;
 
-		// 탐색할 맵을 선언
 		Map<String, String> searchMap = new HashMap<String, String>();
 		try {
 			String searchValue = paramMap.get("searchValue");
@@ -72,14 +71,14 @@ public class BoardController {
 		return "community/freeList";
 	}
 	
-//	@RequestMapping("/board/view")
 	@RequestMapping("/view")
 	public String view(Model model, @RequestParam("no") int no) {
 		Board board = service.findByNo(no);
 		if(board == null) {
 			return "redirect:error";
 		}
-		
+		board.setReplyCount(board.getReplyList().size());
+		log.info("댓글개수: " + board.getReplyCount());
 		model.addAttribute("board", board);
 		model.addAttribute("replyList", board.getReplyList());
 		return "community/view";
@@ -105,6 +104,42 @@ public class BoardController {
 		log.info("게시글 작성 요청");
 		
 		board.setMNo(loginMember.getMNo());
+		if(upfile != null && upfile.isEmpty() == false) {
+			String renameFileName = service.saveFile(upfile, savePath); 
+			
+			if(renameFileName != null) {
+				board.setOriginalFileName(upfile.getOriginalFilename());
+				board.setRenamedFileName(renameFileName);
+			}
+		}
+		log.debug("board : " + board);
+		int result = service.saveBoard(board);
+
+		if(result > 0) {
+			model.addAttribute("msg", "게시글이 등록 되었습니다.");
+			model.addAttribute("location", "/community/freeList");
+		}else {
+			model.addAttribute("msg", "게시글 작성에 실패하였습니다.");
+			model.addAttribute("location", "/community/freeList");
+		}
+		return "common/msg";
+	}
+	
+	
+	@GetMapping("/noticeWrite")
+	public String noticeWriteView() {
+		return "community/noticeWrite";
+	}
+	
+	@PostMapping("/noticeWrite")
+	public String noticeWriteBoard(Model model, HttpSession session,
+			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
+			@ModelAttribute Board board,
+			@RequestParam("upfile") MultipartFile upfile
+			) {
+		log.info("게시글 작성 요청");
+		
+		board.setMNo(loginMember.getMNo());
 		
 		// 파일 저장 로직
 		if(upfile != null && upfile.isEmpty() == false) {
@@ -121,14 +156,21 @@ public class BoardController {
 
 		if(result > 0) {
 			model.addAttribute("msg", "게시글이 등록 되었습니다.");
-			model.addAttribute("location", "/community/freeList");
+			model.addAttribute("location", "/community/noticeList");
 		}else {
 			model.addAttribute("msg", "게시글 작성에 실패하였습니다.");
-			model.addAttribute("location", "/community/freeList");
+			model.addAttribute("location", "/community/noticeList");
 		}
 		
 		return "common/msg";
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping("/reply")
@@ -163,7 +205,7 @@ public class BoardController {
 		}else {
 			model.addAttribute("msg", "게시글 삭제에 실패하였습니다.");
 		}
-		model.addAttribute("location", "/board/list");
+		model.addAttribute("location", "/community/freeList");
 		return "common/msg";
 	}
 	
@@ -180,21 +222,25 @@ public class BoardController {
 		}else {
 			model.addAttribute("msg", "리플 삭제에 실패하였습니다.");
 		}
-		model.addAttribute("location", "/board/view?no=" + boardNo);
+		model.addAttribute("location", "/community/view?no=" + boardNo);
 		return "/common/msg";
 	}
 	
-	// http://localhost/mvc/board/update?no=27
+	
+	
+	
+	
 	@GetMapping("/update")
 	public String updateView(Model model,
-			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
+			@SessionAttribute(name = "loginMember", required = false)  Member loginMember,
 			@RequestParam("no") int no
 			) {
 		Board board = service.findByNo(no);
 		model.addAttribute("board",board);
-		return "board/update";
+		return "/community/update";
 	}
 	
+
 
 	@PostMapping("/update")
 	public String updateBoard(Model model, HttpSession session,
@@ -203,18 +249,15 @@ public class BoardController {
 			@RequestParam("reloadFile") MultipartFile reloadFile
 			) {
 		log.info("게시글 수정 요청");
-		
+		log.info("bno" + board.getBNo());
 		board.setMNo(loginMember.getMNo());
-		
-		// 파일 저장 로직
+
 		if(reloadFile != null && reloadFile.isEmpty() == false) {
-			// 기존 파일이 있는 경우 삭제
 			if(board.getRenamedFileName() != null) {
 				service.deleteFile(savePath + "/" +board.getRenamedFileName());
 			}
 			
-			String renameFileName = service.saveFile(reloadFile, savePath); // 실제 파일 저장하는 로직
-			
+			String renameFileName = service.saveFile(reloadFile, savePath);
 			if(renameFileName != null) {
 				board.setOriginalFileName(reloadFile.getOriginalFilename());
 				board.setRenamedFileName(renameFileName);
@@ -226,14 +269,17 @@ public class BoardController {
 
 		if(result > 0) {
 			model.addAttribute("msg", "게시글이 수정 되었습니다.");
-			model.addAttribute("location", "/board/list");
+			model.addAttribute("location", "/community/freeList");
 		}else {
 			model.addAttribute("msg", "게시글 수정에 실패하였습니다.");
-			model.addAttribute("location", "/board/list");
+			model.addAttribute("location", "/community/freeList");
 		}
 		
 		return "common/msg";
 	}
+	
+	
+	
 	
 	@GetMapping("/file/{fileName}")
 	@ResponseBody

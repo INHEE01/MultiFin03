@@ -24,4 +24,5 @@ public class Board {
 	private List<Reply> replyList;
 	private Date createDate;
 	private Date modifyDate;
+	private int replyCount;
 }
