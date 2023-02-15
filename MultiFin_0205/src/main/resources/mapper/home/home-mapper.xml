@@ -59,6 +59,8 @@
 			<if test="searchType == 'deal_monthly' ">
 			AND  Monthly_Rent  <![CDATA[>]]> 0
 			</if>
+			
+			ORDER BY RealEstateDealNo
 	</select>
 	
 	<select id="selectHomeCount" resultType="int" parameterType="map">
@@ -68,6 +70,15 @@
 	 		<if test="searchValue != null">
 	 			AND concat(dong,' ',jibun) like '%${searchValue}%'
 			</if>
+			
+			<if test="searchType == 'deal_year' ">
+			AND  Monthly_Rent = 0
+			</if>
+			
+			<if test="searchType == 'deal_monthly' ">
+			AND  Monthly_Rent  <![CDATA[>]]> 0
+			</if>
+			
 	</select>
 	<select id="selectHomeInfo"  resultMap="HomeResultMap" parameterType="String">
 		SELECT RealEstateDealNo,Build_Year,Contract_Type,Term_Contract,Offi_Name,Deal_Year,Dong,Deposit,Sigungu,Apartment_Name,

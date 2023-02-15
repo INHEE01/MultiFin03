@@ -1,6 +1,7 @@
 package com.multi.multifin.home.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,24 +44,33 @@ public class HomeController {
 
 	@GetMapping("/homeSell")
 	public String homeSellSearch(Model model, @RequestParam Map<String, Object> paramMap,
-			@RequestParam(required = false) List<String> searchType
+			@RequestParam(required = false) List<String> searchType, @RequestParam Map<String, Object> searchMap
 			) {
 		log.info("부동산 매물 페이지 요청 성공");
-		if(paramMap.get("searchValue") == null) {
+		
+		if(paramMap.get("searchValue") == null ||searchMap.get("searchValue") == null ) {
+			searchMap.put("searchValue", "역삼동");
 			paramMap.put("searchValue", "역삼동");
+		}
+		
+		if(searchType != null && searchType.size() != 2) {
+			searchMap.put("searchType", searchType.get(0));
+			paramMap.put("searchType", searchType.get(0));
+		}
+		if(searchType == null) {
+			searchType = new ArrayList<>();
 		}
 		paramMap.put("searchType", searchType);
 		
-		List<MarkerParsing> markerParsing = homeService.selectHomeByXY(paramMap);
-		List<Home> list = homeService.searchHomeBylocatin(paramMap);
-		List<Home> home = homeService.searchHomeList(paramMap);
-		int homeCount = homeService.getHomeCount(paramMap);
-		if(searchType == null) {
-			searchType = new ArrayList<>();
-			paramMap.put("searchType", searchType);
-		}
-		
+		System.out.println(paramMap.get("searchValue"));
+		System.out.println(searchMap.get("searchValue"));
 		System.out.println(searchType);
+		
+		List<MarkerParsing> markerParsing = homeService.selectHomeByXY(paramMap);
+		List<Home> list = homeService.searchHomeBylocatin(searchMap);
+		List<Home> home = homeService.searchHomeList(searchMap);
+		int homeCount = homeService.getHomeCount(searchMap);
+		
 		
 		if(markerParsing.size() > 0) {
 			model.addAttribute("x", markerParsing.get(0).getX());
@@ -69,6 +79,7 @@ public class HomeController {
 			model.addAttribute("x", "127.0706095");
 			model.addAttribute("y", "37.5407622");
 		}
+		System.out.println(homeCount);
 		model.addAttribute("markerParsing", markerParsing);
 		model.addAttribute("homeCount", homeCount);
 		model.addAttribute("list", list);
@@ -87,7 +98,6 @@ public class HomeController {
 		String dong= homeInfo.get(0).getDong();
 		String jibun= homeInfo.get(0).getJibun();
 		String apart_img= homeInfo.get(0).getFloor();
-		System.out.println(apart_img);
 		model.addAttribute("homeInfo", homeInfo);
 		model.addAttribute("homeInfo", homeInfo);
 		model.addAttribute("mainAddress", "https://www.google.com/maps/embed/v1/place?key=AIzaSyC1aON48lqcS91l_x_GJblY_kXTcrUk_ZI&region=KR&language=ko&q="+dong+jibun);
