@@ -32,8 +32,8 @@ public class NewsController {
 	}
 
 	public void initNews() {
-		newsList1 = NaverSearchAPI.getNewsList("경제", 100, 1);
-		newsList2 = NaverSearchAPI.getNewsList("유아인", 3, 1);
+		newsList1 = NaverSearchAPI.getNewsList("경제", 8, 1);
+		newsList2 = NaverSearchAPI.getNewsList("지진", 4, 1);
 		newsList3 = NaverSearchAPI.getNewsList("부동산", 5, 1);
 	}
 }
