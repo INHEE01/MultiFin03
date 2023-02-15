@@ -100,7 +100,6 @@
 table#tbl-comment tr td:first-of-type{
   padding: 6px 6px 6px 30px;
 }
-.btn-container{display: flex;}
 table#tbl-comment tr td:last-of-type { width: 100px;}
 .comment-count{
   font-weight: 800;
@@ -110,7 +109,6 @@ table#tbl-comment tr td:last-of-type { width: 100px;}
 .btn-container{
   display: none ;
   color:white;
-  width: 150px;
   border-radius: 4px;
 }
 

@@ -38,16 +38,20 @@ public class BoardService {
 	}
 	
 	
+	@Transactional(rollbackFor = Exception.class)
+	public int updateReply(Reply reply) {
+		return mapper.updateReply(reply);
+	}
+	
+	
 	public String saveFile(MultipartFile upFile, String savePath) {
 		File folder = new File(savePath);
 		
-		// 폴더 없으면 만드는 코드
 		if(folder.exists() == false) {
 			folder.mkdir();
 		}
 		System.out.println("savePath : " + savePath);
 		
-		// 파일이름을 랜덤하게 바꾸는 코드, test.txt -> 20221213_1728291212.txt
 		String originalFileName = upFile.getOriginalFilename();
 		String reNameFileName = 
 					LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmssSSS"));
@@ -55,7 +59,6 @@ public class BoardService {
 		String reNamePath = savePath + "/" + reNameFileName;
 		
 		try {
-			// 실제 파일이 저장되는 코드
 			upFile.transferTo(new File(reNamePath));
 		} catch (Exception e) {
 			return null;
@@ -81,12 +84,14 @@ public class BoardService {
 		return board; 
 	}
 	
+	
 	public void deleteFile(String filePath) {
 		File file = new File(filePath);
 		if(file.exists()) {
 			file.delete();
 		}
 	}
+	
 	
 	@Transactional(rollbackFor = Exception.class)
 	public int deleteBoard(int no, String rootPath) {

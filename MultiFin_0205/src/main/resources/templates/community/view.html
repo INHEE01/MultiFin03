@@ -87,14 +87,13 @@
 		              <th:block  th:each="reply : ${replyList}"> 
 			              <tr class="comments">
 			                    <td class="comment">
-			                        <sub class="comment-writer">[[${reply.id}]]</sub> &nbsp; &nbsp;
+			                        <sub class="comment-writer" id="comment-id">[[${reply.id}]]</sub> &nbsp; &nbsp;
 			                        <sub class="comment-date">[[${#dates.format(reply.createDate, 'YY/MM/dd hh:mm')}]]</sub><br>
-			                        <span class="comment-detail font-weight-bold">[[${reply.content}]]</span>
+			                        <span class="comment-detail font-weight-bold" id="comment-content">[[${reply.content}]]</span>
 			                    </td>
 			                    <td class="comment comment-btn">
 			                    	<th:block th:if="${session.loginMember != null && (session.loginMember.id == reply.id || session.loginMember.role == 'ROLE_ADMIN')}">
 				                        <div class="btn-container">
-				                            <button class="btn-update mr-3 " th:onclick="|UpdateReply(${reply.rNo},${board.bNo});|" >수정</button>
 				                            <button class="btn-delete mr-3" th:onclick="|deleteReply(${reply.rNo},${board.bNo});|" >삭제</button>
 				                        </div>
 			                        </th:block>
@@ -124,30 +123,25 @@
 <footer th:replace="~{layout/footer :: #footer}"></footer>
 <th:block th:replace="layout/scripts :: scripts"></th:block>
 <script>
-
-	$(document).ready(() => {
-		$("#btnUpdate").on("click", (e) => {
-			location.href = "/community/update?no=[[${board.bNo}]]";
-		});
-		
-		$("#btnDelete").on("click", (e) => {
-			if(confirm("정말로 게시글을 삭제 하시겠습니까?")) {
-				location.replace("/community/delete?boardNo=[[${board.bNo}]]");
-			}
-		});
+$(document).ready(() => {
+	$("#btnUpdate").on("click", (e) => {
+		location.href = "/community/update?no=[[${board.bNo}]]";
 	});
 	
-	function deleteReply(replyNo, boardNo){
-		var url = "/community/replyDel?replyNo=";
-		var requestURL = url + replyNo +"&boardNo=" + boardNo;
-		location.replace(requestURL);
-	}
+	$("#btnDelete").on("click", (e) => {
+		if(confirm("정말로 게시글을 삭제 하시겠습니까?")) {
+			location.replace("/community/delete?boardNo=[[${board.bNo}]]");
+		}
+	});
+});
 
+	
+	
+function deleteReply(replyNo, boardNo){
+	var url = "/community/replyDel?replyNo=";
+	var requestURL = url + replyNo +"&boardNo=" + boardNo;
+	location.replace(requestURL);
+}
 </script>
-
-
-
-</script>
-
 </body>
 </html>

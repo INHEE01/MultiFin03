@@ -166,13 +166,6 @@ public class BoardController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping("/reply")
 	public String writeReply(Model model, 
 			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
@@ -191,6 +184,10 @@ public class BoardController {
 		model.addAttribute("location", "/community/view?no="+reply.getBNo());
 		return "common/msg";
 	}
+	
+	
+	
+	
 	
 	@RequestMapping("/delete")
 	public String deleteBoard(Model model,  HttpSession session,
@@ -225,10 +222,6 @@ public class BoardController {
 		model.addAttribute("location", "/community/view?no=" + boardNo);
 		return "/common/msg";
 	}
-	
-	
-	
-	
 	
 	@GetMapping("/update")
 	public String updateView(Model model,

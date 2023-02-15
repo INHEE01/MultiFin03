@@ -19,4 +19,6 @@ public interface BoardMapper {
 	int updateReadCount(Board board);
 	int deleteBoard(int no);
 	int deleteReply(int no);
+	int updateReply(Reply reply);
+	Reply selectReplyByNo (int no);
 }
