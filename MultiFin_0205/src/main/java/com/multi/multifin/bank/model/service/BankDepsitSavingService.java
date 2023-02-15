@@ -16,6 +16,10 @@ public class BankDepsitSavingService {
 	@Autowired
 	private BankDepsitSavingMapper mapper;
 	
+	public List<BankDeposit> selectDepositList(){
+		return mapper.selectDepositList();
+	}
+	
 	public List<BankDeposit> selectDepositListAll(String param){
 		return mapper.selectDepositListAll(param);
 	}
@@ -32,6 +36,10 @@ public class BankDepsitSavingService {
 	
 	public int getDepositCountUnique(Map<String, String> param) {
 		return mapper.selectDepositCountUnique(param);
+	}
+	
+	public List<BankSaving> selectSavingList(){
+		return mapper.selectSavingList();
 	}
 	
 	public List<BankSaving> selectSavingListAll(String param){
