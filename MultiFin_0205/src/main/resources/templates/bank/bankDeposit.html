@@ -42,29 +42,21 @@
                         <span class="pointBox pl-2 pr-2">BEST</span>
                     </div>
                 </div>
-                <!--
-                <div class="loan_btn_container">
-                    <a href="#" class="bankMainMore">
-                        <span class="bankMainMore_title">더보기</span>
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </a>
-                </div>
-            -->
             </div>
             <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0">
                 <!-- Card -->
                 <div href="#" class="card img-card fh-290 outer-bg border-gray-500 lowRateCard">
                     <div class="align-items-center fh-290 card-body text-dark p-3">
-                        <img th:src="${depositList[0].logoUrl}" class="bdHotProductLogo">
+                        <img th:src="${depositList0[0].logoUrl}" class="bdHotProductLogo">
                         <div class="mt-5 goods_card">
-                            <h5 class="font-weight-bolder text-left top4-title">[[${depositList[0].finPrdtNm}]]</h5>
-                            <span style="font-weight: 500;">[[${depositList[0].saveTrm}]]개월</span>
-                            <span style="font-weight: 500;">[[${depositList[0].intrRateTypeNm}]]</span>
-                            <span style="font-weight: 500; color: red;">[[${depositList[0].intrRate2}]]%</span>
+                            <h5 class="font-weight-bolder text-left top4-title">[[${depositList0[0].finPrdtNm}]]</h5>
+                            <span style="font-weight: 500;">[[${depositList0[0].saveTrm}]]개월</span>
+                            <span style="font-weight: 500;">[[${depositList0[0].intrRateTypeNm}]]</span>
+                            <span style="font-weight: 500; color: red;">[[${depositList0[0].intrRate2}]]%</span>
                             <p class="text-gray-600 mt-3 font-weight-normal">
-                                [[${depositList[0].etcNote}]]
+                                [[${depositList0[0].etcNote}]]
                             </p>
-                            <button class="goods_btn" th:onclick="|location.href='/bank/bankFind?no=@{${depositList[0].finPrdtCd}}'|">상세보기</button>
+                            <button class="goods_btn" th:onclick="|location.href='/bank/bankFind?no=@{${depositList0[0].finPrdtCd}}'|">상세보기</button>
                         </div>
                     </div>
                 </div>
@@ -74,16 +66,16 @@
                 <!-- Card -->
                 <div href="#" class="card img-card fh-290 outer-bg border-gray-500 lowRateCard">
                     <div class="align-items-center fh-290 card-body text-dark p-3">
-                       	<img th:src="${depositList[4].logoUrl}" class="bdHotProductLogo">
+                       	<img th:src="${depositList0[4].logoUrl}" class="bdHotProductLogo">
                         <div class="mt-5 goods_card">
-                            <h5 class="font-weight-bolder text-left top4-title">[[${depositList[4].finPrdtNm}]]</h5>
-                            <span style="font-weight: 500;">[[${depositList[4].saveTrm}]]개월</span>
-                            <span style="font-weight: 500;">[[${depositList[4].intrRateTypeNm}]]</span>
-                            <span style="font-weight: 500; color: red;">[[${depositList[4].intrRate2}]]%</span>
+                            <h5 class="font-weight-bolder text-left top4-title">[[${depositList0[4].finPrdtNm}]]</h5>
+                            <span style="font-weight: 500;">[[${depositList0[4].saveTrm}]]개월</span>
+                            <span style="font-weight: 500;">[[${depositList0[4].intrRateTypeNm}]]</span>
+                            <span style="font-weight: 500; color: red;">[[${depositList0[4].intrRate2}]]%</span>
                             <p class="text-gray-600 mt-3 font-weight-normal">
-                                [[${depositList[4].etcNote}]]
+                                [[${depositList0[4].etcNote}]]
                             </p>
-                            <button class="goods_btn" th:onclick="|location.href='/bank/bankFind?no=@{${depositList[4].finPrdtCd}}'|">상세보기</button>
+                            <button class="goods_btn" th:onclick="|location.href='/bank/bankFind?no=@{${depositList0[4].finPrdtCd}}'|">상세보기</button>
                         </div>
                     </div>
                 </div>
@@ -93,16 +85,16 @@
                 <!-- Card -->
                 <div href="#" class="card img-card fh-290 outer-bg border-gray-500 lowRateCard">
                     <div class="align-items-center fh-290 card-body text-dark p-3">
-                        <img th:src="${savingList[1].logoUrl}" class="bdHotProductLogo">
+                        <img th:src="${savingList0[1].logoUrl}" class="bdHotProductLogo">
                         <div class="mt-5 goods_card">
-                            <h5 class="font-weight-bolder text-left top4-title">[[${savingList[1].finPrdtNm}]]</h5>
-                            <span style="font-weight: 500;">[[${savingList[1].saveTrm}]]개월</span>
-                            <span style="font-weight: 500;">[[${savingList[1].intrRateTypeNm}]]</span>
-                            <span style="font-weight: 500; color: red;">[[${savingList[1].intrRate2}]]%</span>
+                            <h5 class="font-weight-bolder text-left top4-title">[[${savingList0[1].finPrdtNm}]]</h5>
+                            <span style="font-weight: 500;">[[${savingList0[1].saveTrm}]]개월</span>
+                            <span style="font-weight: 500;">[[${savingList0[1].intrRateTypeNm}]]</span>
+                            <span style="font-weight: 500; color: red;">[[${savingList0[1].intrRate2}]]%</span>
                             <p class="text-gray-600 mt-3 font-weight-normal">
-                                [[${savingList[1].etcNote}]]
+                                [[${savingList0[1].etcNote}]]
                             </p>
-                            <button class="goods_btn" th:onclick="|location.href='/bank/bankFind?no=@{${savingList[1].finPrdtCd}}'|">상세보기</button>
+                            <button class="goods_btn" th:onclick="|location.href='/bank/bankFind?no=@{${savingList0[1].finPrdtCd}}'|">상세보기</button>
                         </div>
                     </div>
                 </div>
@@ -112,16 +104,16 @@
                 <!-- Card -->
                 <div href="#" class="card img-card fh-290 outer-bg border-gray-500 lowRateCard">
                     <div class="align-items-center fh-290 card-body text-dark p-3">
-                        <img th:src="${savingList[6].logoUrl}" class="bdHotProductLogo">
+                        <img th:src="${savingList0[6].logoUrl}" class="bdHotProductLogo">
                         <div class="mt-5 goods_card">
-                            <h5 class="font-weight-bolder text-left top4-title">[[${savingList[6].finPrdtNm}]]</h5>
-                            <span style="font-weight: 500;">[[${savingList[6].saveTrm}]]개월</span>
-                            <span style="font-weight: 500;">[[${savingList[6].intrRateTypeNm}]]</span>
-                            <span style="font-weight: 500; color: red;">[[${savingList[6].intrRate2}]]%</span>
+                            <h5 class="font-weight-bolder text-left top4-title">[[${savingList0[6].finPrdtNm}]]</h5>
+                            <span style="font-weight: 500;">[[${savingList0[6].saveTrm}]]개월</span>
+                            <span style="font-weight: 500;">[[${savingList0[6].intrRateTypeNm}]]</span>
+                            <span style="font-weight: 500; color: red;">[[${savingList0[6].intrRate2}]]%</span>
                             <p class="text-gray-600 mt-3 font-weight-normal">
-                                [[${savingList[6].etcNote}]]
+                                [[${savingList0[6].etcNote}]]
                             </p>
-                            <button class="goods_btn" th:onclick="|location.href='/bank/bankFind?no=@{${savingList[6].finPrdtCd}}'|">상세보기</button>
+                            <button class="goods_btn" th:onclick="|location.href='/bank/bankFind?no=@{${savingList0[6].finPrdtCd}}'|">상세보기</button>
                         </div>
                     </div>
                 </div>
@@ -286,7 +278,7 @@
 
 
 <th:block th:replace="layout/scripts :: scripts"></th:block>
-<!-- 카드 테이블 탭 -->
+<!-- 테이블 탭 -->
 <script>
     const tapbtnDeposit = document.querySelector('.tapbtnDeposit');
     const tapbtnSaving = document.querySelector('.tapbtnSaving');
