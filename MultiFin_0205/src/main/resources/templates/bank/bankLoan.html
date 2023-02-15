@@ -245,6 +245,22 @@
                         <td class="board-content">영업점, 스마트폰, 전화(텔레뱅킹)</td>
                         <td class="board-content">자유적립식</td>
                     </tr>
+<<<<<<< HEAD
+=======
+                    <th:block th:if="${lcList == null}">
+						<tr>
+							<td colspan="6">조회된 상품이 없습니다.</td>
+						</tr>
+					</th:block>
+        	        <th:block th:if="${lcList != null}">
+        	            <tr th:each="lcList, number : ${lcList}" th:onclick="|location.href='/bank/bankDetail?no=@{${lcList.finPrdtCd}}'|">
+            	           <td class="board-content">[[(${pageLcInfo.currentPage}-1)*10+${number.index}+1]]</td>
+	                        <td class="board-content board-title" style="width:240px;">[[${lcList.finPrdtNm}]]</td>
+	                        <td class="board-content">[[${lcList.crdtPrdtTypeNm}]]</td>
+	                        <td class="board-content">[[${lcList.crdtLendRateTypeNm}]]</td>
+	                        <td class="board-content" style="width:72px;">[[${lcList.crdtGradAvg}]]</td>
+                    	</tr>
+>>>>>>> parent of 6dc7099 (Revert "Merge branch 'master' of https://github.com/INHEE01/MultiFin03.git")
                 </table>
                 <div class="table-buttons">
                     <button onclick="" class="table-button">&lt;&lt;</button>
