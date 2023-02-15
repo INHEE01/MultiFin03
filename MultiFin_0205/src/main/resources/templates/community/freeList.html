@@ -27,6 +27,7 @@
             	<th:block th:if="${session.loginMember != null}">
                 	<button class="write_btn" type="button" id="btn-add" onclick="location.href='/community/write'">글쓰기</button>
                 </th:block>
+                <div class="space" ></div>
                 <!-- 검색창 시작 -->
                 <form th:action="@{/community/freeList}" method="get" class="search">
                     <div style="text-align: center;">

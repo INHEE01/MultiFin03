@@ -37,12 +37,10 @@
                                 </div> 
                                 <h2 class="h5 font-weight-normal text-center mt-3 mb-0"><span class="title here" >[[${session.loginMember.name}]]</span></h2>
                                 <div class="list-group dashboard-menu list-group-sm mt-4">
-                                    <a href="./account.html" class="d-flex list-group-item list-group-item-action title">나의 계좌 <span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
-                                    <a href="./settings.html" class="d-flex list-group-item list-group-item-action title active ">회원정보변경<span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
-                                    <a href="./my-items.html" class="d-flex list-group-item list-group-item-action title">내 글 보기<span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
-                                    <a href="./security.html" class="d-flex list-group-item list-group-item-action title">내 댓글 보기<span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
-                                    <!-- <a href="./billing.html" class="d-flex list-group-item list-group-item-action ">찜한 목록보기<span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a> -->
-                                    <a href="./messages.html" class="d-flex list-group-item list-group-item-action  border-0 title">메시지<span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
+                                    <a href="member/account" class="d-flex list-group-item list-group-item-action title">나의 계좌 <span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
+                                    <a href="/member/mypage" class="d-flex list-group-item list-group-item-action title active ">회원정보변경<span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
+                                    <a href="/member/mywrite" class="d-flex list-group-item list-group-item-action title">내 글 보기<span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
+                                    <a href="/member/myreply" class="d-flex list-group-item list-group-item-action title">내 댓글 보기<span class="icon icon-xs ml-auto"><span class="fas fa-chevron-right"></span></span> </a>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +85,7 @@
                                                 <div class="form-group">
                                                    <label for="zip" class="title here">우편번호</label>
                                                    <div class="address">
-                                                    	<input type="text" class="form-control mb-3 mr-3" name="address" id="postcode" placeholder="우편번호" readonly="readonly">
+                                                    	<input type="text" class="form-control mb-3 mr-3" name="address" id="postcode" placeholder="우편번호" readonly="readonly" th:value="${#strings.substring(session.loginMember.address,0,5)}">
                                                     	<input type="button" onclick="execDaumPostcode()"  class="find-btn mb-3" value="우편번호 찾기"></input>
                                                     </div>
                                                     <input 

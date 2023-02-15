@@ -30,10 +30,10 @@
                    <button class="board_btn" type="button" id="btnDelete">삭제</button>
                 </th:block>
               	<th:block th:if="${board.type} == '자유게시판'">
-                	<button class="board_btn" type="bnt" id="btnDelete" onclick="location.href='/community/freeList'">목록</button>
+                	<button class="board_btn"  id="btnDelete" onclick="location.href='/community/freeList'">목록</button>
             	<th:block>
             	<th:block th:if="${board.type} == '공지사항'">
-                	<button class="board_btn" type="bnt" id="btnDelete" onclick="location.href='/community/noticeList'">목록</button>
+                	<button class="board_btn"  id="btnDelete" onclick="location.href='/community/noticeList'">목록</button>
             	<th:block>
             </div>
             <table id="tbl-board" class="board-table">
@@ -110,7 +110,8 @@
             <!-- 리플 작성 Form -->
             <div id="comment-container">
                 <div class="comment-editor">
-                    <form action="/community/reply" method="post" class="comment-inputer">
+                    <form action="/community/reply" me
+                    thod="post" class="comment-inputer">
                         <input type="hidden" name="bNo" th:value="${board.bNo}" />
                         <!-- <input type="hidden" name="Id" value="${loginMember.id}" /> -->
                           <textarea name="content" id="replyContent"  cols="135" rows="3"></textarea>

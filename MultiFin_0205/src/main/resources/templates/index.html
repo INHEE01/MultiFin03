@@ -68,24 +68,27 @@
             <div class="graph_lst_bx">
                 <ul class="here">
                     <li class="csp"><!-- 코스피(큰 그래프) -->
-                        <a nocr="" onclick="return goOtherCR(this, 'a=nco_x70*1.item&amp;r=1&amp;i=18000004_000001140A85&amp;u=' + urlencode(this.href));"
-                            href="?where=nexearch&amp;sm=tab_etc&amp;mra=bjA3&amp;pkid=194&amp;qvt=0&amp;query=KOSPI"
-                            target="_blank">
-                            <div class="card shadow-soft stock_graph_card">
+                        <a href="/stock/stockList">
+                            <div class="card shadow-soft stock_graph_card main_card">
                                 <div class="stock_title_container">
-                                    <h4 class="stock_title">KOSPI</h4> 
+                                    <h5 class="stock_title">[[${kospiIndex.stockType}]]</h5> 
                                 </div>
-                                <div class="card-numbers">
-                                    <h5 class="text-gray number">712.01</h5>
-                                    <h5 class="increase">▲ 2.24</h5>
-                                </div>
+                               <div class="card-numbers mb-3">
+	                                <h5 class="text-gray number">[[${kospiIndex.fin}]] 원</h5>
+	                                <th:block th:if="${#strings.contains(kospiIndex.changePercent, '-') == true } ">
+			                              <h5 class="increase">▼ [[${kospiIndex.changePercent}]]</h5>
+									</th:block>	                                    
+									<th:block th:if="${#strings.contains(kospiIndex.changePercent, '-') == false } ">
+			                              <h5 class="increase">▲ [[${kospiIndex.changePercent}]]</h5>
+									</th:block>	 
+                              </div>
                                 <div class="main_graph">
                                     <canvas id="KOSPI" style="width: 220px;"></canvas>
                                 </div>
                                 <div class="now">
-                                    <div class="now-title">실시간</div>
-                                    <div class="now-sub">1월 20일 18:00 장마감</div>
-                                </div>
+					                <div class="now-title">데이터 정보</div>
+					                <div class="now-sub">[[${#dates.format(kospiIndex.stockDate, 'MM/dd')}]]&nbsp; 18:00 KST 장마감</div>
+					            </div>
                             </div>
                         </a>
                     </li>
@@ -96,15 +99,20 @@
                         target="_blank">
                             <div class="card shadow-soft stock_graph_card_sub">
                                 <div class="stock_title_container">
-                                    <h5 class="stock_title_sub">KOSDAQ</h5> 
-                                    <h5 class="today">{today}</h5>
+                                    <h5 class="stock_title_sub mt-1">[[${kosdaqIndex.stockType}]]</h5> 
+                                    <h6 class="today">[[${#dates.format(kosdaqIndex.stockDate, 'YY.MM.dd')}]]</h6>
                                 </div>
-                                <div class="card-numbers">
-                                    <h6 class="text-gray number_mini">712.01</h6>
-                                    <h6 class="increase number_mini">▲ 2.24</h6>
-                                </div>
+                               <div class="card-numbers" style="height: 25px;">
+	                                <h6 class="text-gray number">[[${kosdaqIndex.fin}]] 원</h6>
+	                                <th:block th:if="${#strings.contains(kosdaqIndex.changePercent, '-') == true } ">
+			                              <h6 class="increase">▼ [[${kosdaqIndex.changePercent}]]</h6>
+									</th:block>	                                    
+									<th:block th:if="${#strings.contains(kosdaqIndex.changePercent, '-') == false } ">
+			                              <h6 class="increase">▲ [[${kosdaqIndex.changePercent}]]</h6>
+									</th:block>	 
+                              </div>
                                 <div class="main_graph_mini">
-                                    <canvas id="KOSDAQ" style="width: 220px; height: 60px;"></canvas>
+                                    <canvas id="KOSDAQ" style="width: 220px; height: 70px;" ></canvas>
                                 </div>
                             </div>
                         </a>
@@ -113,16 +121,21 @@
                         href="?where=nexearch&amp;sm=tab_etc&amp;mra=bjA3&amp;pkid=194&amp;qvt=0&amp;query=KOSPI"
                         target="_blank">
                             <div class="card shadow-soft stock_graph_card_sub">
-                                <div class="stock_title_container">
-                                    <h5 class="stock_title_sub">NASDAQ</h5> 
-                                    <h5 class="today">{today}</h5>
+                                 <div class="stock_title_container">
+                                    <h5 class="stock_title_sub mt-1">[[${nasdaqIndex.stockType}]]</h5> 
+                                    <h6 class="today">[[${#dates.format(nasdaqIndex.stockDate, 'YY.MM.dd')}]]</h6>
                                 </div>
-                                <div class="card-numbers">
-                                    <h6 class="text-gray number_mini">712.01</h6>
-                                    <h6 class="increase number_mini">▲ 2.24</h5>
-                                </div>
+                               <div class="card-numbers" style="height: 25px;">
+	                                <h6 class="text-gray number">[[${nasdaqIndex.fin}]] 원</h6>
+	                                <th:block th:if="${#strings.contains(nasdaqIndex.changePercent, '-') == true } ">
+			                              <h6 class="increase">▼ [[${nasdaqIndex.changePercent}]]</h6>
+									</th:block>	                                    
+									<th:block th:if="${#strings.contains(nasdaqIndex.changePercent, '-') == false } ">
+			                              <h6 class="increase">▲ [[${nasdaqIndex.changePercent}]]</h6>
+									</th:block>	 
+								</div>
                                 <div class="main_graph_mini">
-                                    <canvas id="NASDAQ" style="width: 220px; height: 60px;"></canvas>
+                                    <canvas id="NASDAQ" style="width: 220px; height: 70px;"></canvas>
                                 </div>
                             </div>
                         </a>
@@ -134,15 +147,14 @@
                         target="_blank">
                             <div class="card shadow-soft stock_graph_card_sub">
                                 <div class="stock_title_container">
-                                    <h5 class="stock_title_sub">$USD/KRW</h5> 
-                                    <h5 class="today">{today}</h5>
+                                    <h5 class="stock_title_sub">$ USD/KRW</h5> 
                                 </div>
                                 <div class="card-numbers">
-                                    <h6 class="text-gray number_mini">712.01</h6>
-                                    <h6 class="increase number_mini">▲ 2.24</h5>
-                                </div>
+                               		 <h6 class="text-gray number">[[${#dates.format(USD.recorddate, 'YY.MM.dd')}]]</h6>
+                                	<h6 class="text-gray number">[[${USD.dealBasR}]] 원</h6>
+                             	</div>
                                 <div class="main_graph_mini">
-                                    <canvas id="USD" style="width: 220px; height: 60px;"></canvas>
+                                    <canvas id="USD" style="width: 220px; height: 73px;"></canvas>
                                 </div>
                             </div>
                         </a>
@@ -153,14 +165,13 @@
                             <div class="card shadow-soft stock_graph_card_sub">
                                 <div class="stock_title_container">
                                     <h5 class="stock_title_sub">¥JPY/KRW</h5> 
-                                    <h5 class="today">{today}</h5>
                                 </div>
-                                <div class="card-numbers">
-                                    <h6 class="text-gray number_mini">712.01</h6>
-                                    <h6 class="increase number_mini">▲ 2.24</h6>
-                                </div>
+                                 <div class="card-numbers">
+                               		<h6 class="text-gray number">[[${#dates.format(JPY.recorddate, 'YY.MM.dd')}]]</h6>
+                                	<h6 class="text-gray number">[[${JPY.dealBasR}]] 원</h6>
+                             	</div>
                                 <div class="main_graph_mini">
-                                    <canvas id="JPY" style="width: 220px; height: 58px;"></canvas>
+                                    <canvas id="JPY" style="width: 220px; height: 73px;"></canvas>
                                 </div>
                             </div>
                         </a>
@@ -582,11 +593,9 @@
 <hr>
 <div class="bg-primary pt-6 mt-n9" style="height: 140px;">
 </div>
-
 <footer th:replace="~{layout/footer :: #footer}"></footer>
-
 <th:block th:replace="layout/scripts :: scripts"></th:block>
-
+<script src="/assets/js/main.js"></script>
 </body>
 
 </html>

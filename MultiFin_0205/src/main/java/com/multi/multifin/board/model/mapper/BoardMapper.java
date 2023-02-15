@@ -21,4 +21,9 @@ public interface BoardMapper {
 	int deleteReply(int no);
 	int updateReply(Reply reply);
 	Reply selectReplyByNo (int no);
+	
+	//회원수정부
+	List<Board> selectMyBoardList(Map<String, String> map);
+	int selectMyBoardCount(String id);
+	int deleteAllMyBoard(int mNo);
 }

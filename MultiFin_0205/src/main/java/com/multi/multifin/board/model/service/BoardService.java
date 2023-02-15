@@ -105,6 +105,24 @@ public class BoardService {
 		return mapper.deleteReply(no);
 	}
 	
+	
+	/*회원수정부*/
+	public int getMyBoardCount(String id) {
+		return mapper.selectMyBoardCount(id);
+	}
+	
+	public List<Board> getMyBoardList(PageInfo pageInfo, Map<String, String> param){
+		param.put("limit", "" + pageInfo.getListLimit());
+		param.put("offset", "" + (pageInfo.getStartList() - 1));
+		return mapper.selectMyBoardList(param);
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public int deleteAllMyBoard(int mNo) {
+		return mapper.deleteAllMyBoard(mNo);
+	}
+	
+	
 }
 
 

@@ -276,6 +276,7 @@ function callAJAX(stockID){
 			let options = {
 	                scales: {
 	                  xAxes: [{
+						  display: false,
 				          gridLines: { //A축 gridLines 지우는 옵션
 				            display: false,
 				            drawBorder: false,

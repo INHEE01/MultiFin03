@@ -1,6 +1,7 @@
 package com.multi.multifin.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.multi.multifin.board.model.service.BoardService;
+import com.multi.multifin.board.model.vo.Board;
+import com.multi.multifin.common.util.PageInfo;
 import com.multi.multifin.member.model.service.MemberService;
 import com.multi.multifin.member.model.vo.Member;
 import com.multi.multifin.member.model.vo.MemberForm;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -33,6 +39,10 @@ public class MemberController {
 
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private BoardService boardService;
+	final static private String savePath = "c:\\multifin\\";
+	
 	
 	@GetMapping("/forgot-password")
 	public String forgotPassword() {
@@ -53,9 +63,6 @@ public class MemberController {
 		}
 		return "/common/msg";
 	}
-	
-	
-	
 	
 	
 	@GetMapping("/sign-in")
@@ -130,8 +137,6 @@ public class MemberController {
 	}
 	
 	
-	
-	
 	//회원정보 수정 
 	@GetMapping("/mypage")
 	public String mypage() {
@@ -187,6 +192,73 @@ public class MemberController {
 		}
 		return  "common/msg";
 	}
+	
+	
+	//내글 보기
+	@GetMapping("/mywrite")
+	public String mywrite(Model model,
+			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
+			@RequestParam Map<String, String> paramMap) {
+		int page = 1;
+		try {
+			page = Integer.parseInt(paramMap.get("page"));
+		} catch (Exception e) {}
+		Map<String, String> searchMap = new HashMap<String, String>();
+		searchMap.put("id", loginMember.getId());
+		int boardCount = boardService.getMyBoardCount(loginMember.getId());
+		System.out.println("dhkdhkdd: " +  boardCount);
+		PageInfo pageInfo = new PageInfo(page, 5, boardCount, 10);
+		List<Board> list = boardService.getMyBoardList(pageInfo, searchMap);
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pageInfo", pageInfo);
+		return "member/mywrite";
+	}
+	
+	
+	//글 히나씩 지우기
+	@RequestMapping("/boardDelete")
+	public String deleteBoard(Model model,  HttpSession session,
+			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
+			int boardNo
+			) {
+		log.info("게시글 삭제 요청 boardNo : " + boardNo);
+		int result = boardService.deleteBoard(boardNo, savePath);
+		
+		if(result > 0) {
+			model.addAttribute("msg", "게시글 삭제가 정상적으로 완료되었습니다.");
+		}else {
+			model.addAttribute("msg", "게시글 삭제에 실패하였습니다.");
+		}
+		model.addAttribute("location", "/member/mywrite");
+		return "common/msg";
+	}
+	
+
+	//내 글 다 지우기
+	@RequestMapping("/boardAllDelete")
+	public String deleteAllBoard(Model model, HttpSession session,
+			@SessionAttribute(name = "loginMember", required = false) Member loginMember) {
+		int mNo = loginMember.getMNo();
+		int result = boardService.deleteAllMyBoard(mNo);
+		if(result > 0) {
+			model.addAttribute("msg", "게시글 전체가 정상적으로 완료되었습니다.");
+		}else {
+			model.addAttribute("msg", "게시글 삭제에 실패하였습니다.");
+		}
+		model.addAttribute("location", "/member/mywrite");
+		return "common/msg";
+	}
+	
+	//내댓글 보기
+	@GetMapping("/myreply")
+	public String myreply() {
+		return "member/myreply";
+	}
+		
+	
+	
 }
 
 

@@ -292,7 +292,40 @@ public class StockController {
 	}
 	
 	@RequestMapping("/stockTest")
-	public String stockTest() {
+	public String stockTest(Model model) {
+		
+		log.info("리스트 요청");
+		Map<String, String> KospiTop5 = new HashMap<String, String>();
+		Map<String, String> KosdaqTop5 = new HashMap<String, String>();
+		KospiTop5.put("limit", "5");
+		KosdaqTop5.put("limit", "5");
+		List<StockPrice> KOSPI = service.getKospiRankingTop(KospiTop5);
+		List<StockPrice> KOSDAQ = service.getKosdaqRankingTop(KosdaqTop5);
+		model.addAttribute("KOSPI", KOSPI);
+		model.addAttribute("KOSDAQ", KOSDAQ);
+		
+		log.info("환율 테이블 요청: 원하는 국가만 가져옴");
+		ExchangeRate USD = service.findExchangeRate("USD");
+		ExchangeRate JPY = service.findExchangeRate("JPY(100)");
+		ExchangeRate GBP = service.findExchangeRate("GBP");
+		ExchangeRate HKD = service.findExchangeRate("HKD");
+		ExchangeRate EUR = service.findExchangeRate("EUR");
+		ExchangeRate CNH = service.findExchangeRate("CNH");
+		ExchangeRate AUD = service.findExchangeRate("AUD");
+		ExchangeRate SGD = service.findExchangeRate("SGD");
+		ExchangeRate THB = service.findExchangeRate("THB");
+		ExchangeRate CAD = service.findExchangeRate("CAD");
+		model.addAttribute("USD", USD);
+		model.addAttribute("JPY", JPY);
+		model.addAttribute("GBP", GBP);
+		model.addAttribute("HKD", HKD);
+		model.addAttribute("EUR", EUR);
+		model.addAttribute("CNH", CNH);
+		model.addAttribute("AUD", AUD);
+		model.addAttribute("SGD", SGD);
+		model.addAttribute("THB", THB);
+		model.addAttribute("CAD", CAD);
+		
 		return "stock/stockTest";
 	}
 	
@@ -368,14 +401,6 @@ public class StockController {
 				list.add(stockNum);
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 	
