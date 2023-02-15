@@ -148,8 +148,22 @@
 		where itmsNm like '${itmsNm}'	
 	</select>
 	
+	<!-- MRKTTOTAMT(시가총액)을 기준으로 내림차순 -->
+	<select id="selectAllStock" resultMap="StockPriceResultMap" parameterType="map">
+		select 
+		sno, itmsNm, clpr, fltRt, vs, lstgStCnt, mrktTotAmt 
+		from stockPrice as sp
+		ORDER BY MRKTTOTAMT DESC LIMIT ${limit} OFFSET ${offset};
+	</select>
 	
-	
+	<select id="selectAllStockCount" parameterType="map" resultType="int">
+		SELECT 
+		COUNT(DISTINCT s.itmsNm) 
+		FROM stockPrice s
+		<if test="fndNm != null">
+		 WHERE s.itmsNm LIKE '%${itmsNm}%'
+		</if>
+	</select>
 	
 	
 </mapper>

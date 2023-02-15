@@ -291,8 +291,8 @@ public class StockController {
 		return "stock/stockSelling";
 	}
 	
-	@RequestMapping("/stockTest")
-	public String stockTest(Model model) {
+	@GetMapping("/stockTest")
+	public String stockTest(Model model, @RequestParam Map<String, String> paramMap) {
 		
 		log.info("리스트 요청");
 		Map<String, String> KospiTop5 = new HashMap<String, String>();
@@ -301,6 +301,30 @@ public class StockController {
 		KosdaqTop5.put("limit", "5");
 		List<StockPrice> KOSPI = service.getKospiRankingTop(KospiTop5);
 		List<StockPrice> KOSDAQ = service.getKosdaqRankingTop(KosdaqTop5);
+		
+		int page = 1;
+
+		// 탐색할 맵을 선언
+		Map<String, String> searchMap = new HashMap<String, String>();
+		try {
+			String searchValue = paramMap.get("searchValue");
+			if (searchValue != null && searchValue.length() > 0) {
+				paramMap.put("itmsNm", searchValue);
+			} else {
+			}
+			
+			page = Integer.parseInt(paramMap.get("page"));
+			 
+		} catch (Exception e) {}
+		
+		int fundCount = service.getCountStockListByRank(searchMap);
+		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
+		List<StockPrice> allStock = service.getStockListByRank(pageInfo, paramMap);	
+		
+		model.addAttribute("allStock", allStock);
+		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("pageInfo", pageInfo);
+		
 		model.addAttribute("KOSPI", KOSPI);
 		model.addAttribute("KOSDAQ", KOSDAQ);
 		

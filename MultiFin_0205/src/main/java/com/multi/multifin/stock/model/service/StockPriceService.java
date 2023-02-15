@@ -150,4 +150,14 @@ public class StockPriceService {
 	public int getFundCount04(Map<String, String> param) {
 		return fpMapper.selectFundCount04(param);
 	}
+	// 주식 리스트 가져오기
+	public List<StockPrice> getStockListByRank(PageInfo pageInfo, Map<String, String> param) {
+		param.put("limit", "" + pageInfo.getListLimit());
+		param.put("offset", "" + (pageInfo.getStartList() - 1));
+		return mapper.selectAllStock(param);
+	}
+	// 주식 리스트 개수
+	public int getCountStockListByRank(Map<String, String> param) {
+		return mapper.selectAllStockCount(param);
+	}
 }
