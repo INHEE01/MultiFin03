@@ -66,15 +66,39 @@ public class BoardService {
 		return reNameFileName;
 	}
 	
+	
+	
+	
+	
+	
 	public int getBoardCount(Map<String, String> param) {
+		param.put("type", "공지사항");
 		return mapper.selectBoardCount(param);
 	}
 	
 	public List<Board> getBoardList(PageInfo pageInfo, Map<String, String> param){
+		param.put("type", "공지사항");
 		param.put("limit", "" + pageInfo.getListLimit());
 		param.put("offset", "" + (pageInfo.getStartList() - 1));
 		return mapper.selectBoardList(param);
 	}
+	
+	
+	
+	public int getBoardCount2(Map<String, String> param) {
+		param.put("type", "자유게시판");
+		return mapper.selectBoardCount(param);
+	}
+	
+	public List<Board> getBoardList2(PageInfo pageInfo, Map<String, String> param){
+		param.put("type", "자유게시판");
+		param.put("limit", "" + pageInfo.getListLimit());
+		param.put("offset", "" + (pageInfo.getStartList() - 1));
+		return mapper.selectBoardList(param);
+	}
+
+	
+	
 	
 	@Transactional(rollbackFor = Exception.class)
 	public Board findByNo(int boardNo) {

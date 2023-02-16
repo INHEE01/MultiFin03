@@ -39,6 +39,7 @@
 		LEFT OUTER JOIN REPLY R ON R.BNO = B.BNO 
 		LEFT OUTER JOIN MEMBER M2 ON R.MNO = M2.MNO 
 		WHERE B.STATUS = 'Y'
+		AND B.TYPE LIKE '${type}'
 		<if test="writer != null">
 			AND M1.ID LIKE '%${writer}%' 
 		</if>		

@@ -44,9 +44,9 @@ public class BoardController {
 	private BoardService service;
 	
 	final static private String savePath = "c:\\multifin\\";
-	
-	@GetMapping("/freeList")
-	public String list(Model model, @RequestParam Map<String, String> paramMap) {
+
+	@GetMapping("/noticeList")
+	public String noticeList(Model model, @RequestParam Map<String, String> paramMap) {
 		int page = 1;
 
 		Map<String, String> searchMap = new HashMap<String, String>();
@@ -64,6 +64,33 @@ public class BoardController {
 		int boardCount = service.getBoardCount(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 10, boardCount, 10);
 		List<Board> list = service.getBoardList(pageInfo, searchMap);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("pageInfo", pageInfo);
+		return "community/noticeList";
+	}
+	
+	
+	@GetMapping("/freeList")
+	public String list(Model model, @RequestParam Map<String, String> paramMap) {
+		int page = 1;
+
+		Map<String, String> searchMap = new HashMap<String, String>();
+		try {
+			String searchValue = paramMap.get("searchValue");
+			if(searchValue != null && searchValue.length() > 0) {
+				String searchType = paramMap.get("searchType");
+				searchMap.put(searchType, searchValue);
+			}else {
+				paramMap.put("searchType", "all");
+			}
+			page = Integer.parseInt(paramMap.get("page"));
+		} catch (Exception e) {}
+		
+		int boardCount = service.getBoardCount2(searchMap);
+		PageInfo pageInfo = new PageInfo(page, 10, boardCount, 10);
+		List<Board> list = service.getBoardList2(pageInfo, searchMap);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("paramMap", paramMap);
