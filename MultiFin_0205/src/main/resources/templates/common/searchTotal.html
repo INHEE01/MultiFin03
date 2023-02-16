@@ -21,10 +21,10 @@
     </main>
     <section class="bg-white  search_container">
         <div class="card shadow-soft search_details">     
-            <h4 class="search_title"><span style="color:orange">[[${value}]]</span> 에 대한 검색 결과입니다.</h4>
+            <h4 class="search_title"><span style="color:orange">[[${searchValue}]]</span> 에 대한 검색 결과입니다.</h4>
             <form class="search_form" action="" method="get">
-                <input class="search_input" type="text"  name="value"
-						value="${value}" placeholder="다른 검색어를 입력하고 싶으신가요?">
+                <input class="search_input" type="text"  name="searchValue"
+						th:value="${param.searchValue}" placeholder="다른 검색어를 입력하고 싶으신가요?">
                 <button class="search_btn" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
@@ -57,7 +57,7 @@
               <li class="tab-link" data-tab="tab-6">게시판</li>
             </ul>
             <div id="tab-1" class="tab-content current">
-                <h5 class="search_result_description">검색 결과 <sapn style="color: orange;"> 7</sapn> 건</h5>
+                <h5 class="search_result_description">검색 결과 <sapn style="color: orange;"> [[${depositList.size + savingList.size + loanCreditList0.size + loanMortgageList0.size + loanRentHoustList0.size + debitList.size + creditList.size}]]</sapn> 건</h5>
                 <table class="board_table_bank">
                     <tr class="table_row table_header_bank">
                       <th class="table-header_bank">번호</th>

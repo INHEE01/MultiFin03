@@ -7,7 +7,11 @@
 	<link rel="stylesheet" th:href="@{/css/main/mymain.css}">
 	<!--주식차트-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>	
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<style>
+	.onlineChatBtn {background-color: #0d1b48;    color: white;    width: 80px;    height: 80px;    line-height: 80px;    border-radius: 50%;border: 1px solid white;}
+	#goingChat{ position: fixed; bottom: 1rem; right: 1rem; cursor: pointer; z-index: 1000;}
+</style>
 </head>
 
 <body>
@@ -34,7 +38,7 @@
                     <div class="col-12">
                         <div class="card p-md-2">
                             <div class="card-body p-2 p-md-0">
-                                <form autocomplete="off" class="seach_box" method="get" action="#">
+                                <form autocomplete="off" class="seach_box" method="get" th:action="@{/common/searchTotal}">
                                     <select class="form-control options" name="" id="">
                                         <option value="">전체</option>
                                         <option value="">은행</option>
@@ -44,7 +48,7 @@
                                         <option value="">법률</option>
                                     </select>
                                     <div class="input-group">
-                                        <input id="search-location" type="text" class="form-control autocomplete" placeholder="검색어를 입력하세요" required>
+                                        <input id="search-location" type="text" class="form-control autocomplete" placeholder="검색어를 입력하세요" required th:value="${param.searchValue}" name="searchValue">
                                     </div>
                                     <div class="col-12 col-lg-3">
                                         <button class="btn btn-lg btn-primary font-weight-bolder btn-block animate-up-2" type="submit">Search</button>
@@ -542,6 +546,10 @@
     </div>
 </section>
 <!-- 뉴스와 커뮤니티 끝 -->
+
+<!-- 챗봇 버튼 -->
+<div id="goingChat"><a th:href="@{/common/chatbot}" target="_blank" class="text-center"><i class="fa-solid fa-comments fa-2x onlineChatBtn m-4"></i></a></div>
+
 <div class="py-0">
     <div class="z-2">
         <div class="maincontents">

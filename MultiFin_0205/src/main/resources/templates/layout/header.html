@@ -98,9 +98,6 @@
                                     <li class="mb-2 megamenu-item">
                                         <a class="megamenu-link" th:href="@{/home/homeBlue}">청약</a>
                                     </li>
-                                    <li class="mb-2 megamenu-item">
-                                        <a class="megamenu-link" th:href="@{/home/homeAuction}">경매</a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -162,8 +159,8 @@
             </th:block>
             <th:block th:if="${session.loginMember != null}">
 	            <div class="d-none d-lg-block @@cta_button_classes">
-	                <a th:href="@{/member/mypage}" target="_blank" class="btn btn-md btn-outline-white animate-up-2 mr-3"><i class="fa-solid fa-user"></i> <span class="d-xl-none">Docs</span> <span class="d-none d-xl-inline">마이페이지</span></a>
-	                <a th:href="@{/member/logout}" target="_blank" class="btn btn-md btn-secondary animate-up-2"><i class="fa-solid fa-arrow-right-to-bracket"></i> 로그아웃</a>
+	                <a th:href="@{/member/mypage}" class="btn btn-md btn-outline-white animate-up-2 mr-3"><i class="fa-solid fa-user"></i> <span class="d-xl-none">Docs</span> <span class="d-none d-xl-inline">마이페이지</span></a>
+	                <a th:href="@{/member/logout}" class="btn btn-md btn-secondary animate-up-2"><i class="fa-solid fa-arrow-right-to-bracket"></i> 로그아웃</a>
 	            </div>
             </th:block>
             <div class="d-flex d-lg-none align-items-center">

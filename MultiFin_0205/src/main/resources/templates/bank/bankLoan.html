@@ -148,11 +148,10 @@
                         </li>
                     </ul>
                 </div>
-                <div class="bg-soft text-center bankSearch fh-320 rounded">
-                    <a href="#" ><i class="fa-solid fa-comments fa-2x onlineChatBtn m-4"></i></a>
+                <div class="bg-soft text-center bankSearch fh-260 rounded">
+                    <a th:href="@{/common/chatbot}" target="_blank"><i class="fa-solid fa-comments fa-2x onlineChatBtn m-4"></i></a>
                     <p class="font-weight-bolder">궁금한 것이 있으신가요?</p>
-                    <p>실시간 채팅을 통해 궁금한 것을<br>한 번에 해결해 보세요!</p>
-                    <p>이용 시간 : 09:00 - 18:00<br>월~금 / 주말 • 공휴일 제외</p>
+                    <p>멀티핀 챗봇을 통해 궁금한 것을<br>한 번에 해결해 보세요!</p>
                 </div>
             </div>
             <div class="col-sm-9 border-gray-500">
@@ -175,16 +174,12 @@
                 <table id="tbl-board" class="board-table">
                     <tr class="text-center bg-info text-white">
                         <th class="table-header">번호</th>
+                        <th class="table-header" >금융회사명</th>
                         <th class="table-header" >금융상품</th>
                         <th class="table-header">대출종류명</th>
                         <th class="table-header">금리구분</th>
                         <th class="table-header">평균금리</th>
                     </tr>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 68a5429 (Revert "Merge branch 'master' of https://github.com/INHEE01/MultiFin03.git")
                     <th:block th:if="${lcList == null}">
 						<tr>
 							<td colspan="6">조회된 상품이 없습니다.</td>
@@ -193,20 +188,12 @@
         	        <th:block th:if="${lcList != null}">
         	            <tr th:each="lcList, number : ${lcList}" th:onclick="|location.href='/bank/bankDetail?no=@{${lcList.finPrdtCd}}'|">
             	           <td class="board-content">[[(${pageLcInfo.currentPage}-1)*10+${number.index}+1]]</td>
-<<<<<<< HEAD
-	                        <td class="board-content board-title" style="width:240px;">[[${lcList.finPrdtNm}]]</td>
-	                        <td class="board-content">[[${lcList.crdtPrdtTypeNm}]]</td>
-	                        <td class="board-content">[[${lcList.crdtLendRateTypeNm}]]</td>
-	                        <td class="board-content" style="width:72px;">[[${lcList.crdtGradAvg}]]</td>
-                    	</tr>
->>>>>>> parent of 6dc7099 (Revert "Merge branch 'master' of https://github.com/INHEE01/MultiFin03.git")
-=======
+		                        <td class="board-content board-title" style="width:190px;">[[${lcList.korCoNm}]]</td>
 		                        <td class="board-content board-title" style="width:240px;">[[${lcList.finPrdtNm}]]</td>
 		                        <td class="board-content">[[${lcList.crdtPrdtTypeNm}]]</td>
 		                        <td class="board-content">[[${lcList.crdtLendRateTypeNm}]]</td>
 		                        <td class="board-content" style="width:72px;">[[${lcList.crdtGradAvg}]]</td>
                     	</tr>
->>>>>>> parent of 68a5429 (Revert "Merge branch 'master' of https://github.com/INHEE01/MultiFin03.git")
                 </table>
                 <div class="table-buttons">
                     <button th:onclick="|movePage('/bank/bankLoan?pageLc=1','0');|" class="table-button">&lt;</button>
@@ -234,9 +221,9 @@
                 <table id="tbl-board" class="board-table">
                     <tr class="text-center bg-info text-white">
                         <th class="table-header">번호</th>
+                        <th class="table-header" >금융회사명</th>
                         <th class="table-header" >금융상품</th>
                         <th class="table-header">대출상환유형</th>
-                        <th class="table-header">대출금리유형</th>
                         <th class="table-header">대출금리(최저/최고)</th>
                         <th class="table-header">평균금리</th>
                     </tr>
@@ -248,9 +235,9 @@
         	        <th:block th:if="${lmList != null}">
         	            <tr th:each="lmList, number : ${lmList}" th:onclick="|location.href='/bank/bankDetail?no=@{${lmList.finPrdtCd}}'|">
             	           <td class="board-content">[[(${pageLmInfo.currentPage}-1)*10+${number.index}+1]]</td>
+		                        <td class="board-content board-title" style="width:190px;">[[${lmList.korCoNm}]]</td>
 		                        <td class="board-content board-title" style="width:240px;">[[${lmList.finPrdtNm}]]</td>
 		                        <td class="board-content">[[${lmList.rpayTypeNm}]]</td>
-		                        <td class="board-content">[[${lmList.lendRateTypeNm}]]</td>
 		                        <td class="board-content">[[${lmList.lendRateMin}]]/[[${lmList.lendRateMax}]]</td>
 		                        <td class="board-content" style="width:72px;">[[${lmList.lendRateAvg}]]</td>
                     	</tr>
@@ -281,10 +268,10 @@
                 <table id="tbl-board" class="board-table">
                     <tr class="text-center bg-info text-white">
                         <th class="table-header">번호</th>
+                        <th class="table-header" >금융회사명</th>
                         <th class="table-header" >금융상품</th>
                         <th class="table-header">대출상환유형</th>
                         <th class="table-header">대출금리유형</th>
-                        <th class="table-header">대출금리(최저/최고)</th>
                         <th class="table-header">평균금리</th>
                     </tr>
                     <th:block th:if="${lrhList == null}">
@@ -295,10 +282,10 @@
         	        <th:block th:if="${lrhList != null}">
         	            <tr th:each="lrhList, number : ${lrhList}" th:onclick="|location.href='/bank/bankDetail?no=@{${lrhList.finPrdtCd}}'|">
             	           <td class="board-content">[[(${pageLrhInfo.currentPage}-1)*10+${number.index}+1]]</td>
+		                        <td class="board-content board-title" style="width:190px;">[[${lrhList.korCoNm}]]</td>
 		                        <td class="board-content board-title" style="width:240px;">[[${lrhList.finPrdtNm}]]</td>
 		                        <td class="board-content">[[${lrhList.rpayTypeNm}]]</td>
 		                        <td class="board-content">[[${lrhList.lendRateTypeNm}]]</td>
-		                        <td class="board-content">[[${lrhList.lendRateMin}]]/[[${lrhList.lendRateMax}]]</td>
 		                        <td class="board-content" style="width:72px;">[[${lrhList.lendRateAvg}]]</td>
                     	</tr>
                 </table>
