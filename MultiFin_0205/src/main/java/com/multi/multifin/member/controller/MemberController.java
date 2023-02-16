@@ -258,7 +258,20 @@ public class MemberController {
 	}
 		
 	
-	
+	//내계좌보기
+	@GetMapping("/account")
+	public String account(Model model,
+			@SessionAttribute(name = "loginMember", required = false) Member loginMember) {
+		
+		
+		
+		
+		
+		
+		
+		return "member/account";
+	}
+		
 }
 
 
