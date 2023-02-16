@@ -152,19 +152,20 @@
 	<select id="selectAllStock" resultMap="StockPriceResultMap" parameterType="map">
 		select 
 		sno, itmsNm, clpr, fltRt, vs, lstgStCnt, mrktTotAmt 
-		from stockPrice as sp
+		from stockPrice as s
+		<if test="itmsNm != null">
+		 WHERE s.itmsNm LIKE '%${itmsNm}%'
+		</if>
 		ORDER BY MRKTTOTAMT DESC LIMIT ${limit} OFFSET ${offset};
 	</select>
 	
 	<select id="selectAllStockCount" parameterType="map" resultType="int">
 		SELECT 
-		COUNT(DISTINCT s.itmsNm) 
-		FROM stockPrice s
-		<if test="fndNm != null">
+		COUNT(distinct s.sno) 
+		FROM stockPrice as s
+		<if test="itmsNm != null">
 		 WHERE s.itmsNm LIKE '%${itmsNm}%'
 		</if>
 	</select>
-	
-	
 </mapper>
 

@@ -271,6 +271,24 @@
    <section id="stock_genre" class="bg-white  stock_sellBuy_container">
         <div class="card shadow-soft stock_details">     
             <h5 class="stock_details_title">주식 종목</h5>
+            <!-- 검색창 -->
+            <form autocomplete="off" class="row search" method="get" th:action="@{/stock/stockTest}">
+					<div class="col-12 mb-3 mb-lg-4">
+						<div class="form-group form-group-lg mb-0">
+							<div class="input-group">
+								<input id="searchValue" type="text"
+									class="form-control autocomplete border-gray-500 border-right-0 fw-280 "
+									placeholder="검색어 입력" th:value="${param.searchValue}" name="searchValue">
+								<button
+									class="bankMainSubmit border border-gray-500 border-left-0 bg-white text-dark fw-60"
+									type="submit">
+									<i class="fa-solid fa-magnifying-glass"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+			</form>
+			<!--  검색창 종료  -->
             <table class="stock-rank-table">
                 <tr class="table_row">
                   <th class="table-header">종목번호</th>
@@ -466,12 +484,13 @@
 
 </script>
 
+<!-- 페이지 이동 -->
 <script type="text/javascript">
 	function movePage(pageUrl) {
-//		var searchValue = document.getElementById("searchValue");
-//		if (searchValue.value.length > 0) {
-//			pageUrl = pageUrl + '&searchValue=' + searchValue.value;
-//		} 	
+		var searchValue = document.getElementById("searchValue");
+		if (searchValue.value.length > 0) {
+			pageUrl = pageUrl + '&searchValue=' + searchValue.value;
+		} 	
 	
 		location.href = encodeURI(pageUrl);
 	}

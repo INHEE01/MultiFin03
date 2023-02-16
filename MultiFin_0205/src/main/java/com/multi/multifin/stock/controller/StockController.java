@@ -186,7 +186,7 @@ public class StockController {
 			 
 		} catch (Exception e) {}
 		
-		int fundCount = service.getFundCount(searchMap);
+		int fundCount = service.getFundCount(paramMap);
 		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
 		List<FundProductInfo> list = service.getFundList(pageInfo, paramMap);	
 		
@@ -214,7 +214,7 @@ public class StockController {
 			 
 		} catch (Exception e) {}
 		
-		int fundCount = service.getFundCount02(searchMap);
+		int fundCount = service.getFundCount02(paramMap);
 		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
 		List<FundProductInfo> list = service.getFundList02(pageInfo, paramMap);	
 		
@@ -242,7 +242,7 @@ public class StockController {
 			 
 		} catch (Exception e) {}
 		
-		int fundCount = service.getFundCount03(searchMap);
+		int fundCount = service.getFundCount03(paramMap);
 		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
 		List<FundProductInfo> list = service.getFundList03(pageInfo, paramMap);	
 		
@@ -270,7 +270,7 @@ public class StockController {
 			 
 		} catch (Exception e) {}
 		
-		int fundCount = service.getFundCount04(searchMap);
+		int fundCount = service.getFundCount04(paramMap);
 		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
 		List<FundProductInfo> list = service.getFundList04(pageInfo, paramMap);	
 		
@@ -317,8 +317,8 @@ public class StockController {
 			 
 		} catch (Exception e) {}
 		
-		int fundCount = service.getCountStockListByRank(searchMap);
-		PageInfo pageInfo = new PageInfo(page, 10, fundCount, 10);
+		int stockCount = service.getCountStockListByRank(paramMap);
+		PageInfo pageInfo = new PageInfo(page, 10, stockCount, 10);
 		List<StockPrice> allStock = service.getStockListByRank(pageInfo, paramMap);	
 		
 		model.addAttribute("allStock", allStock);

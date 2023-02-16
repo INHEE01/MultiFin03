@@ -20,5 +20,5 @@ public interface StockPriceMapper {
 	List<StockPrice>stockPriceList(String name);
 	
 	List<StockPrice> selectAllStock(Map<String, String> map); // 모든 주식을 조회 (시가총액이 높은 순서대로!)
-	int selectAllStockCount(Map<String, String> map);
+	int selectAllStockCount(Map<String, String> map);	// 조회된 주식의 개수
 }
