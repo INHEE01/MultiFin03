@@ -94,48 +94,21 @@
 					</tr>
 			</th:block>
             </table>
-				<!-- <tr>
-                <td class="board-content">2</td>
-                <td class="board-content board-title" th:onclick="" >2023/2/17 &nbsp;&nbsp;&nbsp; 17:00 - 17:30 내부 서버 점검 진행</td>
-                <td class="board-content"> 관리자 </td>
-                <td class="board-content"> 2023-02-13 </td>
-                <td class="board-content"> - </td>
-                <td class="board-content"> 7 </td>
-              </tr>	
-			  <tr>
-                <td class="board-content">1</td>
-                <td class="board-content board-title" th:onclick="#" >가입을 환영합니다.</td>
-                <td class="board-content"> 관리자 </td>
-                <td class="board-content"> 2022-12-14 </td>
-                <td class="board-content"> 📁</td>
-                <td class="board-content"> 8 </td>
-              </tr> -->
-              
 			</th:block>
             </table>
-            <!-- 게시판 리스트 종료 -->
-            
-            <!-- page부 시작 -->
             <div class="table-buttons" align="center">
-            	<!--처음 페이지 -->
-                <button onclick="" class="table-button">&lt;&lt;</button>
-                <!--이전 페이지 -->
-                <button th:onclick="" class="table-button">&lt;</button>
-                
-                <!-- 10개 페이지 -->
-                <!-- <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
-					<th:block th:if="${status.current == pageInfo.currentPage}">
-                		<button class="table-button" disabled>1</button>
-                	</th:block>
-                	<th:block th:if="${status.current != pageInfo.currentPage}">
-                		<button class="table-button" th:onclick="|movePage('/community/freeList?page=${status.current}');|">1</button>
-                	</th:block>
-                </th:block> -->
-                <button onclick="" class="table-button">1</button>
-                <!--다음 페이지 -->
-                <button th:onclick="" class="table-button">&gt;</button>
-                <!-- 마지막 페이지 -->
-                <button th:onclick="" class="table-button">&gt;&gt;</button>
+                <button onclick="movePage('/community/noticeList?page=1');" class="table-button">&lt;&lt;</button>
+                <button th:onclick="|movePage('/community/noticeList?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
+                <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+                	<th:block th:if="${status.current == pageInfo.currentPage }" class="table-button">
+							<button type="button" class="table-button" disabled>[[${status.current}]]</button>
+					</th:block>
+                	<th:block th:if="${status.current != pageInfo.currentPage && status.current!=0}" class="table-button">
+						<button th:onclick="|movePage('/community/noticeList?page=${status.current}');|" class="table-button">[[${status.current}]]</button>
+					</th:block>
+                </th:block> 
+                <button th:onclick="|movePage('/community/noticeList?page=${pageInfo.nextPage}');|" class="table-button">&gt;</button>
+                <button th:onclick="|movePage('/community/noticeList?page=${pageInfo.maxPage}');|" class="table-button">&gt;&gt;</button>
             </div>
             <!-- page부 종료 -->
         </section>

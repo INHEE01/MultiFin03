@@ -43,7 +43,6 @@
             <div class="container z-2 mt-n9 mt-lg-n10">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                        <!-- Card -->
                         <a href="/stock/stockList" class="card text-center shadow-soft border-light animate-up-3">
                             <div class="card-body">
                               <h5 class="text-gray card-name font-weight-bolder">[[${kospiIndex.stockType}]]</h5>
@@ -64,7 +63,7 @@
                     </div>
                     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
                         <!-- Card -->
-                        <a href="/stock/stockList#tab-2" data-toggle="tab" class="card text-center shadow-soft border-light animate-up-3">
+                        <a id="kosdaqURl" class="card text-center shadow-soft border-light animate-up-3">
                             <div class="card-body">
                               <h5 class="text-gray card-name font-weight-bolder">[[${kosdaqIndex.stockType}]]</h5>
                               <div class="card-numbers">
@@ -376,7 +375,14 @@
 </section>
 <footer th:replace="~{layout/footer :: #footer}"></footer>
 <th:block th:replace="layout/scripts :: scripts"></th:block>
-
+<script>
+	$(document).ready(() => {
+		$("#kosdaqURl").on("click", (e) => {
+			location.href = "/stock/stockList#tab_second";
+		});
+		
+	});
+</script>
 <script src="/assets/js/stock/stock.js"> </script>
 </body>
 
