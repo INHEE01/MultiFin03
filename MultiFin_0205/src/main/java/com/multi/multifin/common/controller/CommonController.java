@@ -49,10 +49,12 @@ public class CommonController {
 	
 	@RequestMapping("/searchTotal")
 	public String searchTotal(Model model, @RequestParam("searchValue") String param, Map<String, String> paramMap) {
+		
 		log.info("통합검색 결과페이지 요청");
 		model.addAttribute("searchValue", param);
 		
 		log.info("예금상품 전체 요청");
+		
 		int pageDeposit = 1;
 		try {
 			paramMap.put("korCoNm", param);

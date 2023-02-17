@@ -30,6 +30,8 @@ import com.multi.multifin.bank.model.vo.BankSaving;
 import com.multi.multifin.bank.model.vo.LoanCredit;
 import com.multi.multifin.bank.model.vo.LoanMortgage;
 import com.multi.multifin.bank.model.vo.LoanRentHouse;
+import com.multi.multifin.board.model.service.BoardService;
+import com.multi.multifin.board.model.vo.Board;
 import com.multi.multifin.stock.model.service.StockPriceService;
 import com.multi.multifin.stock.model.vo.ExchangeRate;
 import com.multi.multifin.stock.model.vo.StockPrice;
@@ -42,21 +44,19 @@ public class MainController {
 	
 	@Autowired
 	private StockPriceService stockService;
-	
 	@Autowired
 	private BankDepsitSavingService bankbookService;
-	
 	@Autowired
 	private BankCompanyService companyService;
-	
 	@Autowired
 	private LoanCreditService lcService;
-	
 	@Autowired
 	private LoanMortgageService lmService;
-	
 	@Autowired
 	private LoanRentHouseService lrhService;
+	@Autowired
+	private BoardService boardService;
+	
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
@@ -121,6 +121,9 @@ public class MainController {
 		model.addAttribute("loanRentHoustList0", loanRentHoustList0);
 		
 		
+		logger.info("게시판(공지사항) 요청 성공");
+		List<Board> boardList = boardService.selectMainBoard();
+		model.addAttribute("list", boardList);
 		return "index";
 	}
 	
