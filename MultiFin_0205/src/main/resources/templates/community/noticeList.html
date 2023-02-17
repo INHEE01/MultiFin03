@@ -32,7 +32,7 @@
                 	<button class="write_btn" type="button" id="btn-add" onclick="location.href='/member/sign-in'">글쓰기</button>
                 </th:block>                
                 <!-- 검색창 시작 -->
-                <form action="@{/community/freeList}" method="get" class="search">
+                <form th:action="@{/community/noticeList}" method="get" class="search">
                     <div style="text-align: center;">
                         <label>
 						<input type="radio" name="searchType" value="all" th:checked="${paramMap.searchType == 'all'} ? 'checked' : null "> 전체

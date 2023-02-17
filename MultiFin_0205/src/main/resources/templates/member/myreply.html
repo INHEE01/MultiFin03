@@ -57,17 +57,20 @@
                                                 <input class="my_board-input" type="checkbox" value="my_board" id="terms"> &nbsp; 전체선택
                                                 <button type="submit" class="myboard_btn" style="float: right;">삭제</button>
                                             </div>
-                                            <div class="table-buttons">
-                                                <button onclick="" class="table-button">&lt;&lt;</button>
-                                                <button onclick="" class="table-button">&lt;</button>
-                                                <button onclick="" class="table-button">1</button>
-                                                <button onclick="" class="table-button">2</button>
-                                                <button onclick="" class="table-button">3</button>
-                                                <button onclick="" class="table-button">4</button>
-                                                <button onclick="" class="table-button">5</button>
-                                                <button onclick="" class="table-button">&gt;</button>
-                                                <button onclick="" class="table-button">&gt;&gt;</button>
-                                            </div>
+                                            <div class="table-buttons" align="center">
+								                <button onclick="movePage('/member/myreply?page=1');" class="table-button">&lt;&lt;</button>
+								                <button th:onclick="|movePage('/member/mywrite?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
+								                <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+													<th:block th:if="${status.current == pageInfo.currentPage}">
+								                		<button class="table-button" disabled>[[${status.current}]]</button>
+								                	</th:block>
+								                	<th:block th:if="${status.current != pageInfo.currentPage && status.current!=0}">
+								                		<button class="table-button" th:onclick="|movePage('/member/myreply?page=${status.current}');|">[[${status.current}]]</button>
+								                	</th:block>
+								                </th:block>
+								                <button th:onclick="|movePage('/member/myreply?page=${pageInfo.nextPage}');|" class="table-button">&gt;</button>
+								                <button th:onclick="|movePage('/member/myreply?page=${pageInfo.maxPage}');|" class="table-button">&gt;&gt;</button>
+								            </div>
                                         </section>
                                     </div>
                                 </div>
