@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.multi.multifin.member.model.vo.Member;
 
@@ -15,10 +14,11 @@ import com.multi.multifin.member.model.vo.Member;
 public interface MemberMapper {
 	int selectCount();
 	List<Member> selectAll();
-	Member selectMember(@Param("email") String email); // @Param : 파라메터임을 알리는 어노테이션. 없어 된다.
+	Member selectMember(String id); // @Param : 파라메터임을 알리는 어노테이션. 없어 된다.
 	int insertMember(Member member);
 	int updateMember(Member member);
 	int updatePwd(Map<String, String> map);
-	int deleteMember(int no); 
+	int deleteMember(int no);
+	Member selectByEmail(String email); 
 }
 

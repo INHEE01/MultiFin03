@@ -30,7 +30,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
                                         </div>
-                                        <input class="form-control" id="exampleInputIcon4" placeholder="아이디 입력해주세요.(4자 이상 20자 이하)" name="id" type="text" aria-label="text">
+                                        <input class="form-control" id="Id" placeholder="아이디 입력해주세요.(4자 이상 20자 이하)" name="id" type="text" aria-label="text">
                                     </div>
                                 </div>
                                 <!-- End of Form -->
@@ -41,10 +41,15 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
                                         </div>
-                                        <input class="form-control" id="exampleInputIcon4" placeholder="이메일을 입력해주세요." name="email" type="email" aria-label="email adress">
+                                        <input class="form-control" id="newEmail" placeholder="이메일을 입력해주세요." name="email" type="email" aria-label="email adress">
                                     </div>
                                 </div>
                                 
+                                    <div class="form-group">
+                                            <input type="button" class="find-btn mb-3" value="중복검사" id="checkDuplicate" onclick="checkDuplicateFunc();"></input>
+                                	</div>
+                               	
+                                	
                                 <!-- End of Form -->
                                 <!-- Form -->
                                 <div class="form-group">
@@ -67,7 +72,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
                                             </div>
-                                            <input class="form-control" id="password" placeholder="비밀번호를 입력해주세요.(4자 이상 20자 이하)" type="password" name="password" aria-label="Password" required>
+                                            <input class="form-control" id="pass1" placeholder="비밀번호를 입력해주세요.(4자 이상 20자 이하)" type="password" name="password" aria-label="Password" required>
                                         </div>
                                     </div>
                                     <!-- End of Form -->
@@ -78,7 +83,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
                                             </div>
-                                            <input class="form-control" id="password_confirm" placeholder="비밀번호를 다시 입력해주세요." type="password" aria-label="Password" required>
+                                            <input class="form-control" id="pass2" placeholder="비밀번호를 다시 입력해주세요." type="password" aria-label="Password" required>
                                         </div>
                                     </div>
                                     <div class="form-group"><span class="title here">문제</span>
@@ -116,6 +121,70 @@
                     </div>
                 </div>
             </div>
+            
+ <script type="text/javascript">
+	$(function() {
+		$("#pass2").blur((event) => {
+			let pass1 = $("#pass1").val();			
+			let pass2 = $(event.target).val();
+			
+			if(pass1.trim() != pass2.trim()) {
+				alert("비밀번호가 일치하지 않습니다.");
+				
+				$("#pass1").val("");
+				$(event.target).val("");
+				$("#pass1").focus();
+			}
+		});
+    	
+	    $("#enrollSubmit").on("click", () => {
+	    	// TODO 전송하기 전에 각 영역에 유효성 검사로직을 추가하는 부분!
+	    	//return false;
+	    });
+	});
+	
+	// email 중복을 확인하는 AJAX 코드 
+    function checkDuplicateFunc() {
+    	let email = $("#newEmail").val().trim();
+    	
+    	if(email.length < 4){
+    		alert("이메일은 최소 4글자입니다.")
+    		return;
+    	}
+    	
+    	if(email.indexOf('@') < 0){
+    		alert("이메일 형식이 아닙니다.")
+    		return;
+    	}
+    	let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+    	if(regex.test(email) == false){
+    		alert("이메일 형식이 아닙니다.")
+    		return;
+    	}
+    	
+    	$.ajax({
+    		type:"get",
+    		url:"/member/emailCheck",
+    		data:{email}, // 속성값이 키값과 같은 이름을 가질때 하나로만 key-value 채운다.
+    		success:
+    			(data)=>{ // validate key값
+    				console.log(data);
+    				if(data.validate === true){
+    					alert("이미 사용중인 이메일입니다.")
+    				} else{
+    					alert("사용 가능합니다.")
+    				}
+    			},
+    		error:
+    			(e)=>{
+					console.log(e);	    				
+    			}
+    	});
+    }
+	    
+	    
+</script>
+            
         </section>
     </main>
 <th:block th:replace="layout/scripts :: scripts"></th:block>

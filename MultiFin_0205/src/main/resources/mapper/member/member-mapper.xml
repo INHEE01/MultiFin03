@@ -37,6 +37,11 @@
 	
 	<select id="selectMember" parameterType="string" resultMap="memberResultMap">
 		<include refid="selectMemberSql"/>
+		WHERE ID = #{id} AND STATUS = 'Y'
+	</select>	
+	
+	<select id="selectByEmail" parameterType="string" resultMap="memberResultMap">
+		<include refid="selectMemberSql"/>
 		WHERE EMAIL = #{email} AND STATUS = 'Y'
 	</select>	
 	

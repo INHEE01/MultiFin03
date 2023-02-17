@@ -21,9 +21,12 @@ public class MemberService {
 	private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 	
 	public Member login(String email, String pw) {
-		Member member = mapper.selectMember(email);
+		Member member = mapper.selectByEmail(email);
 		if(member == null) {
-			return null;
+			member = mapper.selectMember(email);
+			if(member == null) {
+				return null;
+			}
 		}
 		
 		// passwordEncoder 활용법
@@ -31,7 +34,7 @@ public class MemberService {
 		System.out.println(pwEncoder.encode(pw)); // encode를 통해 평문에서 hash 코드로 변환
 		System.out.println(pwEncoder.matches(pw, member.getPassword())); // 평문 변환하고 비교까지
 		
-		if(email.equals("admin")) { // admin 테스트를 위한 코드
+		if(email.equals("admin@test.com")) { // admin 테스트를 위한 코드
 			return member;
 		}
 		
@@ -58,8 +61,9 @@ public class MemberService {
 		return result;
 	}
 	
-	public boolean validate(String userId) {
-		return this.findById(userId) != null;
+	public boolean validate(String email) {
+		Member member = mapper.selectByEmail(email);
+		return member != null;
 	}
 	
 	public Member findById(String id) {
