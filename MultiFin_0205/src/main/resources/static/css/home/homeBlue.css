@@ -91,10 +91,14 @@ hr{
 }
 /* 게시판 리스트 */
 .board-table{
-    width: 800px;
+    width: 100%;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     border-collapse: collapse;
+}
+
+.board-content,.board-title,.word{
+	width : 100px;
 }
 .table-header{
     padding: 10px 5px;

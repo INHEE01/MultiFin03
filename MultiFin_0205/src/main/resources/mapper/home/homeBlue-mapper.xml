@@ -38,38 +38,9 @@
 			<result property="totSuplyHshldco" column="tot_suply_hshldco"/>
 		</resultMap>
              
-        <resultMap type="APTHouseType" id="APTHouseTypeResultMap">
-        	<id property="aptHouseNo" column="aptHouseNo" />
-        	<result property="etcHshldco" column="etc_hshldco"/>
-        	<result property="houseManageNo" column="house_manage_no"/>
-        	<result property="houseTy" column="house_ty"/>
-        	<result property="insttRecomendHshldco" column="instt_recomend_hshldco"/>
-        	<result property="lfeFrstHshldco" column="lfe_frst_hshldco"/>
-        	<result property="lttotTopAmount" column="lttot_top_amount"/>
-        	<result property="mnychHshldco" column="mnych_hshldco"/>
-        	<result property="nwwdsHshldco" column="nwwds_hshldco"/>
-        	<result property="oldParntsSuportHshldco" column="old_parnts_suport_hshldco"/>
-        	<result property="pblancNo" column="pblanc_no"/>
-        	<result property="spsplyHshldco" column="spsply_hshldco"/>
-        	<result property="suplyAr" column="suply_ar"/>
-        	<result property="suplyHshldco" column="suply_hshldco"/>
-        	<result property="transrInsttEnfsnHshldco" column="transr_instt_enfsn_hshldco"/>
-        </resultMap>       
+             
            
-        <resultMap type="APTRate" id="APTRateResultMap">
- 	        <id property="aptRateNo" column="aptRateNo" />
- 	        <result property="houseManageNo" column="house_manage_no"/>
- 	        <result property="pblancNo" column="pblanc_no"/>
- 	        <result property="houseTy" column="house_ty"/>
- 	        <result property="resideSenm" column="reside_senm"/>
- 	        <result property="subscrptRankCode" column="subscrpt_rank_code"/>
- 	        <result property="suplyHshldco" column="suply_hshldco"/>
- 	        <result property="reqCnt" column="req_cnt"/>
- 	        <result property="cmpetRate" column="cmpet_rate"/>
- 	        <result property="lwetScore" column="lwet_score"/>
- 	        <result property="topScore" column="top_score"/>
- 	        <result property="avrgScore" column="avrg_score"/>
-        </resultMap>    
+       
         
         <resultMap type="OfficeDetail" id="OfficeDetailResultMap">
         	<id property="officeDno" column="officeDno"/>
@@ -94,41 +65,9 @@
         	<result property="totSuplyHshldco" column="tot_suply_hshldco"/>
         </resultMap>
         
-        <resultMap type="OfficeHouseType" id="OfficeHouseTypeResultMap">
-        	<id property="officeHouseNo" column="officeHouseNo"/>
-        	<result property="excluseAr" column="excluse_ar"/>
-        	<result property="gp" column="gp"/>
-        	<result property="houseManageNo" column="house_manage_no"/>
-        	<result property="pblancNo" column="pblanc_no"/>
-        	<result property="subscrptReqstAmount" column="subscrpt_reqst_amount"/>
-        	<result property="suplyAmount" column="suply_amount"/>
-        	<result property="suplyHshldco" column="suply_hshldco"/>
-        	<result property="tp" column="tp"/>
-        </resultMap>
         
-        <resultMap type="OfficeRate" id="OfficeRateResultMap">
-        	<id property="officeRateNo" column="officeRateNo"/>
-        	<result property="houseManageNo" column="house_manage_no"/>
-        	<result property="pblancNo" column="pblanc_no"/>
-        	<result property="houseTy" column="house_ty"/>
-        	<result property="suplyHshldco" column="suply_hshldco"/>
-        	<result property="residntPriorAt" column="residnt_prior_at"/>
-        	<result property="residentPriorSenm" column="resident_prior_senm"/>
-        	<result property="reqCnt" column="req_cnt"/>
-        	<result property="cmpetRate" column="cmpet_rate"/>
-        </resultMap>
+       
         
-        <resultMap type="PublicRate" id="PublicRateResultMap">
-        	<id property="pubNo" column="pubNo"/>
-        	<result property="houseManageNo" column="house_manage_no"/>
-        	<result property="pblancNo" column="pblanc_no"/>
-        	<result property="houseTy" column="house_ty"/>
-        	<result property="suplyHshldco" column="suply_hshldco"/>
-        	<result property="spsplyKndNm" column="spsply_knd_nm"/>
-        	<result property="spsplyKndHshldco" column="spsply_knd_hshldco"/>
-        	<result property="reqCnt" column="req_cnt"/>
-        	<result property="cmpetRate" column="cmpet_rate"/>
-        </resultMap>
         
         <resultMap type="RemainDetail" id="RemainDetailResultMap">
         	<id property="remainNo" column="remainNo"/>
@@ -157,18 +96,11 @@
         	<result property="totSuplyHshldco" column="tot_suply_hshldco"/>
         </resultMap>
         
-        <resultMap type="RemainHouseType" id="RemainHouseTypeResultMap">
-        	<id property="remainHouseNo" column="remainHouseNo"/>
-        	<result property="houseHanageNo" column="house_manage_no"/>
-        	<result property="houseTy" column="house_ty"/>
-        	<result property="lttotTopAmoun" column="lttot_top_amoun"/>
-        	<result property="pblancNo" column="pblanc_no"/>
-        	<result property="suplyHshldco" column="suply_hshldco"/>
-        </resultMap>
+       
         
         
 		<select id="searchAptList" resultMap="AptdetailResultMap" parameterType="map">
-			SELECT *
+			SELECT aptDno, house_nm, hssply_adres, hssply_zip, rcrit_pblanc_de, hmpg_adres, parcprc_uls, przwner_presnatn_de, rcept_bgnde, rcept_endde 
 			FROM aptdetail apt
 			WHERE 1=1
 			<if test="hssplyAdres != null">
