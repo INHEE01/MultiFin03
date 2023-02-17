@@ -73,8 +73,8 @@
 				</tr>
 			</th:block>
 			<th:block th:if="${list != null}">
-					<tr th:each="board : ${list}">
-						<td class="board-content" th:text="${board.bNo}"></td>
+					<tr th:each="board, number : ${list}">
+						<td class="board-content" th:text="${list.size - number.index}"></td>
 						<td class="board-content board-title">
 							<a th:href="|/community/view?no=${board.bNo}|">
 								[[${board.title}]]
