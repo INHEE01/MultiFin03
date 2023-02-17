@@ -283,6 +283,11 @@ public class StockController {
 		return "stock/stockFund04";
 	}
 	
+	@RequestMapping("/stockPredicate")
+	public String stockPredicate() {
+		return "stock/stockPredicate";
+	}
+	
 	@RequestMapping("/stockFundDetail")
 	public String stockFundDetail() {
 		return "stock/stockFundDetail";
