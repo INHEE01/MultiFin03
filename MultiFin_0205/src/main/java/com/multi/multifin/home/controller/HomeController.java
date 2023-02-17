@@ -52,6 +52,7 @@ public class HomeController {
 		try {
 			searchMap.put("searchValue", paramMap.get("searchValue"));
 			searchMap.put("locationCheck", locationCheck);
+			page = Integer.parseInt(""+paramMap.get("page"));
 		} catch (Exception e) {	}
 		System.out.println("searchMap : " + searchMap);
 		

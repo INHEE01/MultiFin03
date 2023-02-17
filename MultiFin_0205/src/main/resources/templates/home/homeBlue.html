@@ -92,20 +92,20 @@
                     </th:block>
                 </table>
                 <div class="table-buttons"> 
-	                    <button th:onclick="|movePage('/home/homeBlue?page=1');|" class="table-button">&lt;&lt;</button>
-	                    <button th:onclick="|movePage('/home/homeBlue?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
+	                    <button th:onclick="|movePage2('/home/homeBlue?page=1');|" class="table-button">&lt;&lt;</button>
+	                    <button th:onclick="|movePage2('/home/homeBlue?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
 	                    <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
 							<th:block th:if="${status.current == pageInfo.currentPage}">
 								<button class="btn-primary" disabled >[[${status.current}]]</button>
 							</th:block>
 							<th:block th:if="${status.current != pageInfo.currentPage}">
-								<button th:onclick="|movePage('/home/homeBlue?page=${status.current}');|" class="table-button">
+								<button th:onclick="|movePage2('/home/homeBlue?page=${status.current}');|" class="">
 									[[${status.current}]]
 								</button>
 							</th:block>
 						</th:block>
-	                    <button th:onclick="|movePage('/home/homeBlue?page=${pageInfo.nextPage}');|" class="table-button">&gt;</button>
-	                    <button th:onclick="|movePage('/home/homeBlue?page=${pageInfo.maxPage}');|" class="table-button">&gt;&gt;</button>
+	                    <button th:onclick="|movePage2('/home/homeBlue?page=${pageInfo.nextPage}');|" class="">&gt;</button>
+	                    <button th:onclick="|movePage2('/home/homeBlue?page=${pageInfo.maxPage}');|" class="">&gt;&gt;</button>
 	                </div>
                </div>
             </div>
@@ -115,10 +115,10 @@
 </form>
 <!-- 상품 검색 끝 -->
 <script type="text/javascript">
-	function movePage(pageUrl){
+	function movePage2(pageUrl){
 		var searchValue = document.getElementById("searchValue");
 		var locationCheck = document.getElementsByName("locationCheck");
-		if(searchValue.value != null){
+		if(searchValue.value.length > 0){
 			pageUrl = pageUrl + '&searchValue=' + searchValue.value; 
 		}
 		
@@ -130,7 +130,7 @@
 		}
 		
 		alert('pageUrl : ' + pageUrl)
-		location.href = encodeURI(pageUrl);	 
+		location.href = pageUrl;
 	}
 </script>
 
