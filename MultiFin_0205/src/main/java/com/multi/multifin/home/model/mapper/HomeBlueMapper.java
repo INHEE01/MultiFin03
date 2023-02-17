@@ -12,11 +12,11 @@ import com.multi.multifin.home.model.vo.RemainDetail;
 @Mapper
 public interface HomeBlueMapper {
 	
-	List<Aptdetail> searchAptList(Map<String, String> map);
-	int selectAptCount(Map<String, String> map);
-	List<OfficeDetail> searchOfficeList(Map<String, String> map);
-	int selectOfficeCount(Map<String, String> map);
-	List<RemainDetail> searchRemainList(Map<String, String> map);
-	int selectRemainCount(Map<String, String> map);
+	List<Aptdetail> searchAptList(Map<String, Object> map);
+	int selectAptCount(Map<String, Object> map);
+	List<OfficeDetail> searchOfficeList(Map<String, Object> map);
+	int selectOfficeCount(Map<String, Object> map);
+	List<RemainDetail> searchRemainList(Map<String, Object> map);
+	int selectRemainCount(Map<String, Object> map);
 
 }

@@ -20,21 +20,22 @@
             </div>
         </div>
         <!-- 상품 검색 시작 -->
+<form autocomplete="off" class="search" method="get" th:action="@{/home/homeBlue}" >
 <section class="section Blue_search_container pt-0 pb-5">
 	<div class="container" style="width:1200px;">
         <div class="search_container">
             <div class="search-left">
                 <h5 class="optionTitle">지역선택</h5>
-                <form class="search-form" method="get" th:action="@{/home/homeBlue}">
+                <div class="search-form" >
                     <div class="question">
                         <div class="local">
                             <div>
-                            	<input type="hidden" id="searchType" name="searchType" th:value="${param.searchType}"/>
-
-                            	
-                                <input type="checkbox" name="locationCheck" id="전국" value="전국"><span class="search_title">전국</span><br>
-                                <input type="checkbox" name="locationCheck" id="서울" value="서울"><span class="search_title">서울</span><br>
-                                <input type="checkbox" name="locationCheck" id="인천" value="인천"><span class="search_title">인천</span><br>      
+                                <input type="checkbox" name="locationCheck" id="서울" value="서울"
+                                th:checked="${#arrays.contains(paramMap.locationCheck, '서울')  ? 'checked' : null}"
+                                ><span class="search_title">서울</span><br>
+                                <input type="checkbox" name="locationCheck" id="인천" value="인천"
+                                  th:checked="${#arrays.contains(paramMap.locationCheck, '인천')  ? 'checked' : null}"
+                                ><span class="search_title">인천</span><br>      
                                 <input type="checkbox" name="locationCheck" id="경기" value="경기"><span class="search_title">경기</span><br>
                                 <input type="checkbox" name="locationCheck" id="세종" value="세종"><span class="search_title">세종</span><br>
                                 <input type="checkbox" name="locationCheck" id="충청" value="충청"><span class="search_title">충청</span><br>
@@ -55,16 +56,16 @@
                         <button class="search_btn btn btn-primary" type="submit">Search</button>
                         <button class="search_btn btn btn-outline-gray" type="reset">Reset</button>
                     </div><!--버튼끝-->
-                </form>
+                </div>
             </div>
             <div class="col-sm-9 border-gray-500">
                <div class="form_container">
-                    <form autocomplete="off" class="search" method="get" th:action="@{/home/homeBlue}" >
+                    <div class="search"  >
                         <div class="searching">
                             <input class="input_text" type="text" placeholder="검색어를 입력하세요" id="searchValue" th:value="${param.searchValue}" name="searchValue">
                             <input class="input_btn" type="submit" value="Search">
                         </div>
-                    </form>
+                    </div>
                </div>
                <div>
                 <table id="tbl-board" class="board-table">
@@ -95,7 +96,7 @@
 	                    <button th:onclick="|movePage('/home/homeBlue?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
 	                    <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
 							<th:block th:if="${status.current == pageInfo.currentPage}">
-								<button class="table-button" disabled >[[${status.current}]]</button>
+								<button class="btn-primary" disabled >[[${status.current}]]</button>
 							</th:block>
 							<th:block th:if="${status.current != pageInfo.currentPage}">
 								<button th:onclick="|movePage('/home/homeBlue?page=${status.current}');|" class="table-button">
@@ -111,21 +112,24 @@
         </div>
     </div>
 </section>
+</form>
 <!-- 상품 검색 끝 -->
 <script type="text/javascript">
 	function movePage(pageUrl){
-		var searchType = document.getElementById("searchType");
 		var searchValue = document.getElementById("searchValue");
 		var locationCheck = document.getElementsByName("locationCheck");
-		
-		if(searchValue.value.length > 0){
-			for(var i = 0; i <searchTypes.length; i++){
-				if(searchTypes[i].checked == true){
-					searchType = searchTypes[i].value;
-				}
-			}
-			pageUrl = pageUrl + '&searchType=' + searchType + '&searchValue=' + searchValue.value; 
+		if(searchValue.value != null){
+			pageUrl = pageUrl + '&searchValue=' + searchValue.value; 
 		}
+		
+		for(var i = 0; i <locationCheck.length; i++){
+			if(locationCheck[i].checked == true){
+				var locationStr = locationCheck[i].value;
+				pageUrl = pageUrl + '&locationCheck=' + locationStr; 
+			}
+		}
+		
+		alert('pageUrl : ' + pageUrl)
 		location.href = encodeURI(pageUrl);	 
 	}
 </script>

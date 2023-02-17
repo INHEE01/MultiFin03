@@ -100,24 +100,26 @@
         
         
 		<select id="searchAptList" resultMap="AptdetailResultMap" parameterType="map">
-	SELECT
-		aptDno,	bsns_mby_nm ,	cnstrct_entrps_nm ,	cntrct_cncls_bgnde ,	cntrct_cncls_endde ,	gnrl_rnk1_crsparea_rcept_pd ,
-		gnrl_rnk1_etc_area_rcptde_pd,	hmpg_adres ,	house_dtl_secd_nm ,	house_manage_no ,	house_nm ,
-		house_secd_nm ,	hssply_adres ,	hssply_zip ,	mdhs_telno ,	mvn_prearnge_ym ,	npln_prvopr_public_house_at ,
-		parcprc_uls_at ,	pblanc_no ,	pblanc_url ,	przwner_presnatn_de ,	public_house_earth_at ,	rcept_bgnde ,
-		rcept_endde ,rcrit_pblanc_de ,rent_secd_nm ,speclt_rdn_earth_at ,spsply_rcept_bgnde,
-		spsply_rcept_endde ,subscrpt_area_code_nm ,tot_suply_hshldco
-	FROM aptdetail apt
-	WHERE 1=1
-			<if test="hssplyAdres != null">
+			SELECT
+				aptDno,	bsns_mby_nm ,	cnstrct_entrps_nm ,	cntrct_cncls_bgnde ,	cntrct_cncls_endde ,	gnrl_rnk1_crsparea_rcept_pd ,
+				gnrl_rnk1_etc_area_rcptde_pd,	hmpg_adres ,	house_dtl_secd_nm ,	house_manage_no ,	house_nm ,
+				house_secd_nm ,	hssply_adres ,	hssply_zip ,	mdhs_telno ,	mvn_prearnge_ym ,	npln_prvopr_public_house_at ,
+				parcprc_uls_at ,	pblanc_no ,	pblanc_url ,	przwner_presnatn_de ,	public_house_earth_at ,	rcept_bgnde ,
+				rcept_endde ,rcrit_pblanc_de ,rent_secd_nm ,speclt_rdn_earth_at ,spsply_rcept_bgnde,
+				spsply_rcept_endde ,subscrpt_area_code_nm ,tot_suply_hshldco
+			FROM aptdetail apt
+			WHERE 1=1
+			<if test="searchValue != null">
 				AND(
-					apt.hssply_adres like '%${hssplyAdres}%' 
+					apt.house_nm like '%${searchValue}%' 
 				)
 			</if>
-			<if test="houseNm != null">
+			<if test="locationCheck != null">
 				AND(
-					apt.house_nm like '%${houseNm}%' 
-				)
+				<foreach collection="locationCheck" item="item" separator="or" index="index">
+		        		apt.hssply_adres LIKE '%${item}%'
+		    	</foreach>
+    			)
 			</if>
 			order by rcrit_pblanc_de desc
 			LIMIT ${limit} OFFSET ${offset}
@@ -127,15 +129,17 @@
 			SELECT COUNT(*)
 			FROM aptdetail apt 
 			WHERE 1=1
-			<if test="hssplyAdres != null">
+			<if test="searchValue != null">
 				AND(
-					apt.hssply_adres like '%${hssplyAdres}%' 
+					apt.house_nm like '%${searchValue}%' 
 				)
 			</if>
-			<if test="houseNm != null">
+			<if test="locationCheck != null">
 				AND(
-					apt.house_nm like '%${houseNm}%' 
-				)
+				<foreach collection="locationCheck" item="item" separator="or" index="index">
+		        		apt.hssply_adres LIKE '%${item}%'
+		    	</foreach>
+    			)
 			</if>
 		</select>
 		
