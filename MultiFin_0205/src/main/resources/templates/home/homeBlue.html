@@ -24,39 +24,42 @@
         <div class="search_container">
             <div class="search-left">
                 <h5 class="optionTitle">지역선택</h5>
-                <form class="search-form" saction="" method="get">
+                <form class="search-form" saction="" method="get" action="${path}/homeBlue">
                     <div class="question">
                         <div class="local">
                             <div>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">전국</span><br>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">서울</span><br>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">인천</span><br>      
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">경기</span><br>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">세종</span><br>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">충청</span><br>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">강원</span><br>
+                            	<input type="hidden" name="searchType" th:value="${param.searchType}"/>
+
+                            	
+                                <input type="checkbox" name="locationCheck" id="전국" value="전국"><span class="search_title">전국</span><br>
+                                <input type="checkbox" name="locationCheck" id="서울" value="서울"><span class="search_title">서울</span><br>
+                                <input type="checkbox" name="locationCheck" id="인천" value="인천"><span class="search_title">인천</span><br>      
+                                <input type="checkbox" name="locationCheck" id="경기" value="경기"><span class="search_title">경기</span><br>
+                                <input type="checkbox" name="locationCheck" id="세종" value="세종"><span class="search_title">세종</span><br>
+                                <input type="checkbox" name="locationCheck" id="충청" value="충청"><span class="search_title">충청</span><br>
+                                <input type="checkbox" name="locationCheck" id="강원" value="강원"><span class="search_title">강원</span><br>
                             </div>
                             <div>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">광주</span><br>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">전라</span><br>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">대구</span><br>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">울산</span><br>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">부산</span><br>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">경상</span><br>
-                                <input type="checkbox" name="locationCheck" value=""><span class="search_title">제주</span><br>
+                                <input type="checkbox" name="locationCheck" id="광주" value="광주"><span class="search_title">광주</span><br>
+                                <input type="checkbox" name="locationCheck" id="전라" value="전라"><span class="search_title">전라</span><br>
+                                <input type="checkbox" name="locationCheck" id="대구" value="대구"><span class="search_title">대구</span><br>
+                                <input type="checkbox" name="locationCheck" id="울산" value="울산"><span class="search_title">울산</span><br>
+                                <input type="checkbox" name="locationCheck" id="부산" value="부산"><span class="search_title">부산</span><br>
+                                <input type="checkbox" name="locationCheck" id="경상" value="경상"><span class="search_title">경상</span><br>
+                                <input type="checkbox" name="locationCheck" id="제주" value="제주"><span class="search_title">제주</span><br>
                             </div>
                         </div>
                         <hr>
                     
                         <h5 class="optionTitle">주택구분</h5>
-                        <input class="search_title" type="checkbox" name="houseTypeCheck" value=""><span class="search_title">APT</span><br>
-                        <input class="search_title" type="checkbox" name="houseTypeCheck" value=""><span class="search_title">도시형/오피스텔/민간임대</span><br>
-                        <input class="search_title" type="checkbox" name="houseTypeCheck" value=""><span class="search_title">무순위/잔여세대</span><br>
+                        <input class="search_title" type="checkbox" name="houseCheck" id="APT" value="APT"><span class="search_title">APT</span><br>
+                        <input class="search_title" type="checkbox" name="houseCheck" id="Office" value="Office"><span class="search_title">도시형/오피스텔/민간임대</span><br>
+                        <input class="search_title" type="checkbox" name="houseCheck" id="Remain" value="Remain"><span class="search_title">무순위/잔여세대</span><br>
                         <hr>
                     
                         <h5 class="optionTitle">아파트 분양 종류</h5>
-                        <input class="search_title" type="checkbox" name="houseTypeCheck" value=""><span class="search_title">민영</span><br>
-                        <input class="search_title" type="checkbox" name="houseTypeCheck" value=""><span class="search_title">국민</span><br>
+                        <input class="search_title" type="checkbox" name="houseTypeCheck" id="민영" value="민영"><span class="search_title">민영</span><br>
+                        <input class="search_title" type="checkbox" name="houseTypeCheck" id="국민" value="국민"><span class="search_title">국민</span><br>
                     
                     </div>
                     <div class="btnCheck">
@@ -67,9 +70,9 @@
             </div>
             <div class="col-sm-9 border-gray-500">
                <div class="form_container">
-                    <form autocomplete="off" class="search" method="get" action="#">
+                    <form autocomplete="off" class="search" method="get" th:action="@{/home/homeBlue}" >
                         <div class="searching">
-                            <input class="input_text" type="text" placeholder="검색어를 입력하세요">
+                            <input class="input_text" type="text" placeholder="검색어를 입력하세요" id="	" name="searchValue">
                             <input class="input_btn" type="submit" value="Search">
                         </div>
                     </form>
@@ -171,6 +174,25 @@
     </div>
 </section>
 <!-- 상품 검색 끝 -->
+<!--  <script type="text/javascript">
+	function movePage(pageUrl){
+		var searchValue = document.getElementById("searchValue"); 
+		var searchTypes1 = document.getElementsByName("locationCheck");
+		var searchTypes2 = document.getElementsByName("houseCheck");
+		var searchTypes3 = document.getElementsByName("houseTypeCheck");
+		
+		if(searchValue.value.length > 0){
+			for(var i = 0; i <searchTypes.length; i++){
+				if(searchTypes[i].checked == true){
+					searchType = searchTypes[i].value;
+				}
+			}
+			pageUrl = pageUrl + '&searchType=' + searchType + '&searchValue=' + searchValue.value; 
+		}
+		location.href = encodeURI(pageUrl);	
+	}
+	</script> -->
+
 </main>
 <footer th:replace="~{layout/footer :: #footer}"></footer>
 <th:block th:replace="layout/scripts :: scripts"></th:block> 

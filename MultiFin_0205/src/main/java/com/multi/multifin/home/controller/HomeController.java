@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.multi.multifin.home.model.service.HomeBlueService;
 import com.multi.multifin.home.model.service.HomeService;
+import com.multi.multifin.home.model.vo.Aptdetail;
 import com.multi.multifin.home.model.vo.Home;
 import com.multi.multifin.home.model.vo.MarkerParsing;
+import com.multi.multifin.home.model.vo.OfficeDetail;
+import com.multi.multifin.home.model.vo.RemainDetail;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,15 +29,48 @@ public class HomeController {
 	@Autowired
 	private HomeService homeService;
 
+
 	@GetMapping("/homeAuction")
 	public String homeAuction() {
 		return "home/homeAuction";
 	}
 
+
 	@GetMapping("/homeBlue")
 	public String homeBlue() {
 		return "home/homeBlue";
 	}
+	
+//	@GetMapping("/homeBlue")
+//	public String homeBlueSearch() {
+//	//(Model model, @RequestParam Map<String, String> param, @RequestParam Map<String, String> paramMap) {
+////		int page = 1;
+////		
+////		Map<String, String> searchMap = new HashMap<String, String>();
+////		String searchType = param.get("searchType");
+////		
+////		try {
+////			String searchValue = param.get("searchValue");
+////			if(searchValue != null && searchValue.length() > 0) {
+////				searchMap.put(searchType, searchValue);
+////			}else {
+////				paramMap.put("searchType", "all");
+////			}
+////		} catch (Exception e) {	}
+////		
+////		
+////		
+////		List<Aptdetail> Aptlist = homeBlueService.searchAptList(searchMap);
+//////		List<OfficeDetail> officelist = homeBlueService.searchOfficeList(searchMap);
+//////		List<RemainDetail> remainlist = homeBlueService.searchRemainList(searchMap);
+////		
+////		model.addAttribute("Aptlist", Aptlist);
+//////		model.addAttribute("officelist", officelist);
+//////		model.addAttribute("remainlist", remainlist);
+////		model.addAttribute("param", searchMap);
+//		
+//		return "home/homeBlue";
+//	}
 
 	@GetMapping("/homeMain")
 	public String homeMain(Model model, @RequestParam Map<String, Object> paramMap) {
