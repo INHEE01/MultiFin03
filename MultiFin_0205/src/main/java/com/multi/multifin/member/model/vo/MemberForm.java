@@ -24,9 +24,13 @@ public class MemberForm {
 	private String phone;
 	private String email;
 	private String address;
-	private String hobby;
+	@NotNull(message = "질문이 입력되지 않았습니다.")
+	private String answer1;
+	@NotNull(message = "답이 입력되지 않았습니다.")
+	private String answer2;
+	
 	
 	public Member toMember(){
-		return new Member(0, id, password, null, name, phone, email, address, hobby, address, null, null);
+		return new Member(0, id, password, null, name, phone, email, address, (answer1+answer2), address, null, null);
 	}
 }

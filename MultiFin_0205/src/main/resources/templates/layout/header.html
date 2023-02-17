@@ -69,6 +69,9 @@
                                         <a class="megamenu-link" th:href="@{/stock/stockList}">주식 시세</a>
                                     </li>
                                     <li class="mb-2 megamenu-item">
+                                        <a class="megamenu-link" th:href="@{/stock/stockPredicate}">주가 동향 확인 / 예측</a>
+                                    </li>
+                                    <li class="mb-2 megamenu-item">
                                         <a class="megamenu-link" th:href="@{/stock/stockTest}">모의 투자</a>
                                     </li>
                                 </ul>
@@ -95,8 +98,17 @@
                                     <li class="mb-2 megamenu-item">
                                         <a class="megamenu-link" th:href="@{/home/homeSell}">매물(월세/전세/매매)</a>
                                     </li>
+                                </ul>
+                                <h6 class="d-block pt-2 mb-3 text-primary">청약</h6>
+                                <ul class="list-style-none">
                                     <li class="mb-2 megamenu-item">
-                                        <a class="megamenu-link" th:href="@{/home/homeBlue}">청약</a>
+                                        <a class="megamenu-link" th:href="@{/home/homeBlue}">아파트</a>
+                                    </li>
+                                    <li class="mb-2 megamenu-item">
+                                        <a class="megamenu-link" th:href="@{/home/homeBlue2}">오피스텔</a>
+                                    </li>
+                                    <li class="mb-2 megamenu-item">
+                                        <a class="megamenu-link" th:href="@{/home/homeBlue3}">기타</a>
                                     </li>
                                 </ul>
                             </div>
@@ -120,9 +132,6 @@
                                 <ul class="list-style-none">
                                     <li class="mb-2 megamenu-item">
                                         <a class="megamenu-link" th:href="@{/law/lawFAQ}">자주 묻는 질문</a>
-                                    </li>
-                                    <li class="mb-2 megamenu-item">
-                                        <a class="megamenu-link" th:href="@{/law/lawSearch}">간편한 법률 검색</a>
                                     </li>
                                 </ul>
                             </div>
@@ -153,8 +162,8 @@
             </div>
             <th:block th:if="${session.loginMember == null}">
 	            <div class="d-none d-lg-block @@cta_button_classes">
-	                <a th:href="@{/member/sign-up}" target="_blank" class="btn btn-md btn-outline-white animate-up-2 mr-3"><i class="fa-solid fa-user"></i> <span class="d-xl-none">Docs</span> <span class="d-none d-xl-inline">회원가입</span></a>
-	                <a th:href="@{/member/sign-in}" target="_blank" class="btn btn-md btn-secondary animate-up-2"><i class="fa-solid fa-arrow-right-to-bracket"></i> 로그인</a>
+	                <a th:href="@{/member/sign-up}" class="btn btn-md btn-outline-white animate-up-2 mr-3"><i class="fa-solid fa-user"></i> <span class="d-xl-none">Docs</span> <span class="d-none d-xl-inline">회원가입</span></a>
+	                <a th:href="@{/member/sign-in}" class="btn btn-md btn-secondary animate-up-2"><i class="fa-solid fa-arrow-right-to-bracket"></i> 로그인</a>
 	            </div>
             </th:block>
             <th:block th:if="${session.loginMember != null}">

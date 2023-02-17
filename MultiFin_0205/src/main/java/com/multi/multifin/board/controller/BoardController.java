@@ -87,7 +87,7 @@ public class BoardController {
 			}
 			page = Integer.parseInt(paramMap.get("page"));
 		} catch (Exception e) {}
-		
+		log.info("page:" + page);
 		int boardCount = service.getBoardCount2(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 10, boardCount, 10);
 		List<Board> list = service.getBoardList2(pageInfo, searchMap);

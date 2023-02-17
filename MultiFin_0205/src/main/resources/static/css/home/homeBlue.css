@@ -96,6 +96,8 @@ hr{
     border-bottom: 1px solid black;
     border-collapse: collapse;
 }
+
+
 .table-header{
     padding: 10px 5px;
     background-color: rgb(13, 27, 72);
@@ -107,6 +109,8 @@ hr{
     border-bottom: 1px solid black;
     font-weight: 500;
 }
+
+
 .board-title{
     text-align: left;
     padding-left: 50px;

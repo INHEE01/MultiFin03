@@ -17,7 +17,6 @@
                 <div class="row justify-content-center">
                     <div style="height:150px" class="col-12">
                         <div class="text-center text-md-center mb-5 mt-md-0 text-white">
-                            <h1 class="mt-6 mb-0 h3"><span class="title">회원가입</span></h1>
                         </div>
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
@@ -30,7 +29,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
                                         </div>
-                                        <input class="form-control" id="exampleInputIcon4" placeholder="아이디 입력해주세요.(4자 이상 20자 이하)" name="id" type="text" aria-label="text">
+                                        <input class="form-control" id="Id" placeholder="아이디 입력해주세요.(4자 이상 20자 이하)" name="id" type="text" aria-label="text">
                                     </div>
                                 </div>
                                 <!-- End of Form -->
@@ -41,10 +40,15 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
                                         </div>
-                                        <input class="form-control" id="exampleInputIcon4" placeholder="이메일을 입력해주세요." name="email" type="email" aria-label="email adress">
+                                        <input class="form-control" id="newEmail" placeholder="이메일을 입력해주세요." name="email" type="email" aria-label="email adress">
                                     </div>
                                 </div>
                                 
+                                    <div class="form-group">
+                                            <input type="button" class="find-btn mb-3" value="중복검사" id="checkDuplicate" onclick="checkDuplicateFunc();"></input>
+                                	</div>
+                               	
+                                	
                                 <!-- End of Form -->
                                 <!-- Form -->
                                 <div class="form-group">
@@ -67,7 +71,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
                                             </div>
-                                            <input class="form-control" id="password" placeholder="비밀번호를 입력해주세요.(4자 이상 20자 이하)" type="password" name="password" aria-label="Password" required>
+                                            <input class="form-control" id="pass1" placeholder="비밀번호를 입력해주세요.(4자 이상 20자 이하)" type="password" name="password" aria-label="Password" required>
                                         </div>
                                     </div>
                                     <!-- End of Form -->
@@ -78,12 +82,12 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
                                             </div>
-                                            <input class="form-control" id="password_confirm" placeholder="비밀번호를 다시 입력해주세요." type="password" aria-label="Password" required>
+                                            <input class="form-control" id="pass2" placeholder="비밀번호를 다시 입력해주세요." type="password" aria-label="Password" required>
                                         </div>
                                     </div>
                                     <div class="form-group"><span class="title here">문제</span>
-                                        <select class="form-control select2-hidden-accessible" id="country" data-toggle="select" title="Country" data-live-search="true" data-live-search-placeholder="Country" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option data-select2-id="3">비밀번호 찾기 문제</option>
+                                        <select class="form-control select2-hidden-accessible" name="answer1" id="country" data-toggle="select" title="Country" data-live-search="true" data-live-search-placeholder="Country" data-select2-id="1" tabindex="-1" aria-hidden="true" required>
+                                            <!-- <option data-select2-id="3"></option> -->
                                             <option>내가 태어난 도시 이름은?</option>
                                             <option>어릴 때 키우던 강아지 이름은?</option>
                                             <option>어머니 고향은?</option>
@@ -93,11 +97,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="address"><span class="title here">답</span></label>
-                                        <input class="form-control" id="address" type="text" >
+                                        <input class="form-control" id="address" type="text" name="answer2" required>
                                     </div>
                                     <!-- End of Form -->
                                     <div class="form-check mb-4">
-                                        <input class="form-check-input" type="checkbox" value="" id="terms">
+                                        <input class="form-check-input" type="checkbox" value="" id="terms" required>
                                         <label class="form-check-label" for="terms">
                                             <span class="title">다음 <a class="text-secondary title" href="./terms.html"><b class="title">약관</b></a>에 동의합니다.</span>
                                         </label>
@@ -116,6 +120,70 @@
                     </div>
                 </div>
             </div>
+            
+ <script type="text/javascript">
+	$(function() {
+		$("#pass2").blur((event) => {
+			let pass1 = $("#pass1").val();			
+			let pass2 = $(event.target).val();
+			
+			if(pass1.trim() != pass2.trim()) {
+				alert("비밀번호가 일치하지 않습니다.");
+				
+				$("#pass1").val("");
+				$(event.target).val("");
+				$("#pass1").focus();
+			}
+		});
+    	
+	    $("#enrollSubmit").on("click", () => {
+	    	// TODO 전송하기 전에 각 영역에 유효성 검사로직을 추가하는 부분!
+	    	//return false;
+	    });
+	});
+	
+	// email 중복을 확인하는 AJAX 코드 
+    function checkDuplicateFunc() {
+    	let email = $("#newEmail").val().trim();
+    	
+    	if(email.length < 4){
+    		alert("이메일은 최소 4글자입니다.")
+    		return;
+    	}
+    	
+    	if(email.indexOf('@') < 0){
+    		alert("이메일 형식이 아닙니다.")
+    		return;
+    	}
+    	let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+    	if(regex.test(email) == false){
+    		alert("이메일 형식이 아닙니다.")
+    		return;
+    	}
+    	
+    	$.ajax({
+    		type:"get",
+    		url:"/member/emailCheck?email="+ email,
+    		// data:{email}, // 속성값이 키값과 같은 이름을 가질때 하나로만 key-value 채운다.
+    		success:
+    			(data)=>{ // validate key값
+    				console.log(data);
+    				if(data.validate === true){
+    					alert("이미 사용중인 이메일입니다.")
+    				} else{
+    					alert("사용 가능합니다.")
+    				}
+    			},
+    		error:
+    			(e)=>{
+					console.log(e);	    				
+    			}
+    	});
+    }
+	    
+	    
+</script>
+            
         </section>
     </main>
 <th:block th:replace="layout/scripts :: scripts"></th:block>
