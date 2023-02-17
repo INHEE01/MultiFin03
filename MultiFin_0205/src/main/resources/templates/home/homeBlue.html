@@ -14,7 +14,7 @@
             <div class="container z-2">
                 <div class="row justify-content-center pt-3">
                     <div class="col-12 text-center">
-                        <h1 class="home-mainTitle">청약 조회</h1></span></h1>
+                        <h1 class="home-mainTitle">아파트 청약</h1></span></h1>
                     </div>
                 </div>
             </div>
@@ -25,11 +25,11 @@
         <div class="search_container">
             <div class="search-left">
                 <h5 class="optionTitle">지역선택</h5>
-                <form class="search-form" saction="" method="get" action="${path}/homeBlue">
+                <form class="search-form" method="get" th:action="@{/home/homeBlue}">
                     <div class="question">
                         <div class="local">
                             <div>
-                            	<input type="hidden" name="searchType" th:value="${param.searchType}"/>
+                            	<input type="hidden" id="searchType" name="searchType" th:value="${param.searchType}"/>
 
                             	
                                 <input type="checkbox" name="locationCheck" id="전국" value="전국"><span class="search_title">전국</span><br>
@@ -61,7 +61,7 @@
                <div class="form_container">
                     <form autocomplete="off" class="search" method="get" th:action="@{/home/homeBlue}" >
                         <div class="searching">
-                            <input class="input_text" type="text" placeholder="검색어를 입력하세요" id="search" name="searchValue" >
+                            <input class="input_text" type="text" placeholder="검색어를 입력하세요" id="searchValue" th:value="${param.searchValue}" name="searchValue">
                             <input class="input_btn" type="submit" value="Search">
                         </div>
                     </form>
@@ -114,10 +114,9 @@
 <!-- 상품 검색 끝 -->
 <script type="text/javascript">
 	function movePage(pageUrl){
-		var searchValue = document.getElementById("searchValue"); 
-		var searchTypes1 = document.getElementsByName("locationCheck");
-		var searchTypes2 = document.getElementsByName("houseCheck");
-		var searchTypes3 = document.getElementsByName("houseTypeCheck");
+		var searchType = document.getElementById("searchType");
+		var searchValue = document.getElementById("searchValue");
+		var locationCheck = document.getElementsByName("locationCheck");
 		
 		if(searchValue.value.length > 0){
 			for(var i = 0; i <searchTypes.length; i++){
@@ -129,7 +128,7 @@
 		}
 		location.href = encodeURI(pageUrl);	 
 	}
-	</script>
+</script>
 
 </main>
 <footer th:replace="~{layout/footer :: #footer}"></footer>
