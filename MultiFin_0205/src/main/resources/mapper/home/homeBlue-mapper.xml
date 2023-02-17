@@ -169,20 +169,68 @@
         
 		<select id="searchAptList" resultMap="AptdetailResultMap" parameterType="map">
 			SELECT *
-			FROM aptdetail
+			FROM aptdetail apt
 			WHERE 1=1
+			<if test="hssplyAdres != null">
+				AND(
+					apt.hssply_adres like '%${hssplyAdres}%' 
+				)
+			</if>
+		</select>
+		
+		<select id="selectAptCount" resultType="int" parameterType="map">
+			SELECT COUNT(*)
+			FROM aptdetail apt 
+			WHERE 1=1
+			<if test="hssplyAdres != null">
+				AND(
+					apt.hssply_adres like '%${hssplyAdres}%' 
+				)
+			</if>
 		</select>
 		
 		<select id="searchOfficeList" resultMap="OfficeDetailResultMap" parameterType="map">
-			SELECT *
-			FROM OfficeDetail
+			SELECT * 
+			FROM OfficeDetail office
 			WHERE 1=1
+			<if test="hssplyAdres != null">
+				AND(
+					office.hssply_adres like '%${hssplyAdres}%' 
+				)
+			</if>
+		</select>
+		
+		<select id="selectOfficeCount" resultType="int" parameterType="map">
+			SELECT COUNT(*) 
+			FROM OfficeDetail office
+			WHERE 1=1
+			<if test="hssplyAdres != null">
+				AND(
+					office.hssply_adres like '%${hssplyAdres}%' 
+				)
+			</if>
 		</select>
 		
 		<select id="searchRemainList" resultMap="RemainDetailResultMap" parameterType="map">
 			SELECT *
-			FROM RemainDetail
+			FROM RemainDetail remain
 			WHERE 1=1
+				<if test="hssplyAdres != null">
+				AND(
+					remain.hssply_adres like '%${hssplyAdres}%' 
+				)
+			</if>
+		</select>
+		
+		<select id="selectRemainCount" resultType="int" parameterType="map">
+			SELECT COUNT(*)
+			FROM RemainDetail remain
+			WHERE 1=1
+				<if test="hssplyAdres != null">
+				AND(
+					remain.hssply_adres like '%${hssplyAdres}%' 
+				)
+			</if>
 		</select>
 
 </mapper>

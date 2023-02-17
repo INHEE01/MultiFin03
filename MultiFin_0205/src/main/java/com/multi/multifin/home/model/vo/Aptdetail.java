@@ -42,6 +42,6 @@ public class Aptdetail {
 	Date spsplyRceptEndde    ; 			// DATETIME, -- 특별공급 접수종료일                 
 	String subscrptAreaCodeNm    ; 		//varchar(10), -- 공급지역명                     
 	int totSuplyHshldco   ; 				// int -- 공급규모   
-	
+	//지역에 상세지역이 있고 서울,경기 이렇게만 네~
 	
 }

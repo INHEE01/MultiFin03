@@ -100,7 +100,9 @@ hr{
     padding: 10px 5px;
     background-color: rgb(13, 27, 72);
 }
-
+.board-table tr{
+	width: 200px;
+}
 .board-content{
     text-align: center;
     padding: 10px 0px;
