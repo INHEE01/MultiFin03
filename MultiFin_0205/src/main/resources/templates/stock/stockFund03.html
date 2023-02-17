@@ -202,7 +202,7 @@
 					</th:block>
 					<th:block th:if="${list != null}">
 						<tr th:each="fund : ${list}">
-							<td th:text="${fund.fpino}" class="board-content"></td>
+							<td class="board-content">[[(${pageInfo.currentPage}-1)*10+${number.index}+1]]</td>
 							<td th:text="${fund.fndNm}" class="board-content board-title"></td>
 							<td th:text="혼합형" class=board-content></td>
 						</tr>
