@@ -100,7 +100,7 @@
         
         
 		<select id="searchAptList" resultMap="AptdetailResultMap" parameterType="map">
-			SELECT aptDno, house_nm, hssply_adres, hssply_zip, rcrit_pblanc_de, hmpg_adres, parcprc_uls, przwner_presnatn_de, rcept_bgnde, rcept_endde 
+			SELECT aptDno, house_nm, hssply_adres, hssply_zip, rcrit_pblanc_de, hmpg_adres, parcprc_uls_at, przwner_presnatn_de, rcept_bgnde, rcept_endde 
 			FROM aptdetail apt
 			WHERE 1=1
 			<if test="hssplyAdres != null">
