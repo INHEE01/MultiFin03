@@ -11,15 +11,13 @@ public class LawController {
 	@RequestMapping("/lawMain")
 	public String lawMain() {
 		return "law/lawMain";
+		 // 모델에 데이터를 담고, law/lawMain 뷰를 리턴한다.
 	}
 	
-	@RequestMapping("/lawSearch")
-	public String lawSearch() {
-		return "law/lawSearch";
-	}
 	@RequestMapping("/lawFAQ")
 	public String lawFAQ() {
 		return "law/lawFAQ";
+		// FAQ 기능 구현
 	}
 	
 }

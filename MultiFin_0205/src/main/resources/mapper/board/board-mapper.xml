@@ -212,4 +212,17 @@
 	</update>
 	
 	
+	<!--커뮤니티-->
+	
+	
+	<select id="selectMainBoard"  resultMap="boardDetailResultMap">
+		SELECT TITLE, CREATE_DATE
+			FROM BOARD B
+			LEFT OUTER JOIN MEMBER M1 ON B.MNO = M1.MNO
+			WHERE B.STATUS = 'Y'
+	        AND B.TYPE = '공지사항'
+	        ORDER BY CREATE_DATE DESC
+        LIMIT 6 
+	</select>
+	
 </mapper>

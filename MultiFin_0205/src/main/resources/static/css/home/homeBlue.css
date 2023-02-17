@@ -96,6 +96,10 @@ hr{
     border-bottom: 1px solid black;
     border-collapse: collapse;
 }
+
+.board-content,.board-title,.word{
+	width : 100px;
+}
 .table-header{
     padding: 10px 5px;
     background-color: rgb(13, 27, 72);

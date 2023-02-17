@@ -26,4 +26,6 @@ public interface BoardMapper {
 	List<Board> selectMyBoardList(Map<String, String> map);
 	int selectMyBoardCount(String id);
 	int deleteAllMyBoard(int mNo);
+	//메인
+	List<Board> selectMainBoard();
 }

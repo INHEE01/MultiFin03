@@ -20,7 +20,11 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import com.multi.multifin.member.model.vo.Member;
 
 // TODO 챗컨트롤러 안됨
 @Controller
@@ -32,7 +36,8 @@ public class ChatController {
 																																							// 맞음
 
 	@RequestMapping("/common/chatbot")
-	public String chatbot() {
+	public String chatbot(@SessionAttribute(name = "loginMember", required = false) Member loginMember, Model model) {
+		model.addAttribute("loginMember", loginMember);
 		return "/common/chatbot";
 	}
 

@@ -24,7 +24,7 @@ $(document).ready(function() {
 
 
 $(function() {
-	if (location.hash == "#tab-2") {
+	if (location.hash == "#tab_second") {
 		$('ul.tabs li').removeClass('current');
 		$('.tab-content').removeClass('current');
 		$('.stock_tab_sub').removeClass('current');
@@ -35,7 +35,7 @@ $(function() {
 		var tab_id = $(check).attr('data-tab');
 		var tab_check = $(check).attr('data-tab') + 2;
 		var tab_check_second = $(check).attr('data-tab') + 3;
-		var tab_third = $(this).attr('data-tab') + 4;
+		var tab_third = $(check).attr('data-tab') + 4;
 
 		$(check).addClass('current');
 		$("#" + tab_id).addClass('current');
@@ -43,6 +43,28 @@ $(function() {
 		$("#" + tab_check_second).addClass('current');
 		$("#" + tab_third).addClass('current');
 	}
+	
+		if (location.hash == "#tab_third") {
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+		$('.stock_tab_sub').removeClass('current');
+		$('.stock_details').removeClass('current');
+		$('.stock_description_detail_container').removeClass('current');
+
+		var check = $('.tabs').find('li').eq(2);
+		var tab_id = $(check).attr('data-tab');
+		var tab_check = $(check).attr('data-tab') + 2;
+		var tab_check_second = $(check).attr('data-tab') + 3;
+		var tab_third = $(check).attr('data-tab') + 4;
+
+		$(check).addClass('current');
+		$("#" + tab_id).addClass('current');
+		$("#" + tab_check).addClass('current');
+		$("#" + tab_check_second).addClass('current');
+		$("#" + tab_third).addClass('current');
+	}
+	
+	
 })
 
 

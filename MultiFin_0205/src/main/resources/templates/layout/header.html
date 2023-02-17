@@ -121,9 +121,6 @@
                                     <li class="mb-2 megamenu-item">
                                         <a class="megamenu-link" th:href="@{/law/lawFAQ}">자주 묻는 질문</a>
                                     </li>
-                                    <li class="mb-2 megamenu-item">
-                                        <a class="megamenu-link" th:href="@{/law/lawSearch}">간편한 법률 검색</a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -153,8 +150,8 @@
             </div>
             <th:block th:if="${session.loginMember == null}">
 	            <div class="d-none d-lg-block @@cta_button_classes">
-	                <a th:href="@{/member/sign-up}" target="_blank" class="btn btn-md btn-outline-white animate-up-2 mr-3"><i class="fa-solid fa-user"></i> <span class="d-xl-none">Docs</span> <span class="d-none d-xl-inline">회원가입</span></a>
-	                <a th:href="@{/member/sign-in}" target="_blank" class="btn btn-md btn-secondary animate-up-2"><i class="fa-solid fa-arrow-right-to-bracket"></i> 로그인</a>
+	                <a th:href="@{/member/sign-up}" class="btn btn-md btn-outline-white animate-up-2 mr-3"><i class="fa-solid fa-user"></i> <span class="d-xl-none">Docs</span> <span class="d-none d-xl-inline">회원가입</span></a>
+	                <a th:href="@{/member/sign-in}" class="btn btn-md btn-secondary animate-up-2"><i class="fa-solid fa-arrow-right-to-bracket"></i> 로그인</a>
 	            </div>
             </th:block>
             <th:block th:if="${session.loginMember != null}">

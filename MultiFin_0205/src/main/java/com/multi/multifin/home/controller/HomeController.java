@@ -11,9 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.multi.multifin.common.util.PageInfo;
+import com.multi.multifin.home.model.service.HomeBlueService;
 import com.multi.multifin.home.model.service.HomeService;
+import com.multi.multifin.home.model.vo.Aptdetail;
 import com.multi.multifin.home.model.vo.Home;
 import com.multi.multifin.home.model.vo.MarkerParsing;
+import com.multi.multifin.home.model.vo.OfficeDetail;
+import com.multi.multifin.home.model.vo.RemainDetail;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,13 +30,46 @@ public class HomeController {
 	@Autowired
 	private HomeService homeService;
 
+	@Autowired
+	private HomeBlueService blueService;
+
 	@GetMapping("/homeAuction")
 	public String homeAuction() {
 		return "home/homeAuction";
 	}
 
+
+	
+	
 	@GetMapping("/homeBlue")
-	public String homeBlue() {
+	public String homeBlueSearch(Model model, @RequestParam Map<String, String> paramMap) {
+		log.info("청약 아파트 조회 페이지 요청 성공");
+		int page = 1;
+		Map<String, String> searchMap = new HashMap<>();
+		
+		// TODO 검색기능 다시보기
+		try {
+			String searchValue = paramMap.get("searchValue"); 
+			if(searchValue != null && searchValue.length() > 0) {
+				String searchType = paramMap.get("searchType");
+				searchMap.put(searchType, searchValue);
+			}else {
+				paramMap.put("searchType", "all");
+			}
+		} catch (Exception e) {	}
+		
+		int aptCount = blueService.selectAptCount(paramMap);
+		PageInfo pageInfo = new PageInfo(page, 5, aptCount, 10);
+		List<Aptdetail> Aptlist = blueService.searchAptList(pageInfo, searchMap);
+//		List<OfficeDetail> officelist = homeBlueService.searchOfficeList(searchMap);
+//		List<RemainDetail> remainlist = homeBlueService.searchRemainList(searchMap);
+		
+		model.addAttribute("Aptlist", Aptlist);
+//		model.addAttribute("officelist", officelist);
+//		model.addAttribute("remainlist", remainlist);
+		model.addAttribute("pageInfo",pageInfo);
+		model.addAttribute("paramMap", paramMap);
+		
 		return "home/homeBlue";
 	}
 
