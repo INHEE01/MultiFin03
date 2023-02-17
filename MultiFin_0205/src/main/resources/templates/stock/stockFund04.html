@@ -217,6 +217,7 @@
 						<th:block th:if="${status.current == pageInfo.currentPage}" class="table-button">
 							<button type="button" class="table-button" disabled>[[${status.current}]]</button>
 						</th:block>
+							[[${status.current}]]
 						<th:block th:if="${status.current != pageInfo.currentPage}" class="table-button">
 							<button th:onclick="|movePage('/stock/stockFund04?page=${status.current}');|" class="table-button">[[${status.current}]]</button>
 						</th:block>
