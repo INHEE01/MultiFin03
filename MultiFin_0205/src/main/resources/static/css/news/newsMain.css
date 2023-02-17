@@ -20,12 +20,6 @@
 	display:flex;
 }
 .news_sub{width:120px;}
-.news_pic_sub>img{width:400px !important;}
-.container{
-	display:flex;
-	justify-content: space-between;
-}
-
 
 
 /*하단정보*/
@@ -41,13 +35,12 @@
 	text-align: left;
 	height: 40px;
 }
-
+.news_pic_sub{width:300px;}
 .middle-news{
-	width:100px !important;
-	height: 150px !important;
-	
+	width: 300px !important;
+	height: 180px !important;
 }
-
+.news_article_sub{width:800px;}
 
 
 .movie-info{
@@ -86,7 +79,13 @@
 }
 
 /*한줄기사*/
-.news_b_title{font-size: 18px;}
+.news_b_title{
+	font-size: 18px;
+	width:500px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
 .rank{
 	font-weight: 600;
 	width: 40px;
