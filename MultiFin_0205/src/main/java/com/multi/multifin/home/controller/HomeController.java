@@ -58,21 +58,23 @@ public class HomeController {
 			}
 		} catch (Exception e) {	}
 		
-		int aptCount = blueService.selectAptCount(paramMap);
+		int aptCount = blueService.selectAptCount(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 5, aptCount, 10);
 		List<Aptdetail> Aptlist = blueService.searchAptList(pageInfo, searchMap);
-//		List<OfficeDetail> officelist = homeBlueService.searchOfficeList(searchMap);
-//		List<RemainDetail> remainlist = homeBlueService.searchRemainList(searchMap);
-		
+
 		model.addAttribute("Aptlist", Aptlist);
-//		model.addAttribute("officelist", officelist);
-//		model.addAttribute("remainlist", remainlist);
 		model.addAttribute("pageInfo",pageInfo);
 		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("searchMap", searchMap);
 		
 		return "home/homeBlue";
 	}
-
+	
+	@GetMapping("/homeBlue2")
+	public String homeBlue2() {
+		return "home/homeBlue2";
+	}
+	
 	@GetMapping("/homeMain")
 	public String homeMain(Model model, @RequestParam Map<String, Object> paramMap) {
 		
