@@ -98,9 +98,7 @@
                     </li>
                     <li class="csp col-3">
                         <!-- 코스닥 -->
-                        <a nocr="" onclick="return goOtherCR(this, 'a=nco_x70*1.item&amp;r=1&amp;i=18000004_000001140A85&amp;u=' + urlencode(this.href));"
-                        href="?where=nexearch&amp;sm=tab_etc&amp;mra=bjA3&amp;pkid=194&amp;qvt=0&amp;query=KOSPI"
-                        target="_blank">
+                        <a id="kosdaqURl">
                             <div class="card shadow-soft stock_graph_card_sub">
                                 <div class="stock_title_container">
                                     <h5 class="stock_title_sub mt-1">[[${kosdaqIndex.stockType}]]</h5> 
@@ -121,9 +119,7 @@
                             </div>
                         </a>
                         <!-- 나스닥 -->
-                        <a nocr="" onclick="return goOtherCR(this, 'a=nco_x70*1.item&amp;r=1&amp;i=18000004_000001140A85&amp;u=' + urlencode(this.href));"
-                        href="?where=nexearch&amp;sm=tab_etc&amp;mra=bjA3&amp;pkid=194&amp;qvt=0&amp;query=KOSPI"
-                        target="_blank">
+                        <a id="nasdaqURl">
                             <div class="card shadow-soft stock_graph_card_sub">
                                  <div class="stock_title_container">
                                     <h5 class="stock_title_sub mt-1">[[${nasdaqIndex.stockType}]]</h5> 
@@ -558,6 +554,17 @@
 </div>
 <footer th:replace="~{layout/footer :: #footer}"></footer>
 <th:block th:replace="layout/scripts :: scripts"></th:block>
+<script>
+	$(document).ready(() => {
+		$("#kosdaqURl").on("click", (e) => {
+			location.href = "/stock/stockList#tab_second";
+		});
+		$("#nasdaqURl").on("click", (e) => {
+			location.href = "/stock/stockList#tab_third";
+		});
+		
+	});
+</script>
 <script src="/assets/js/main.js"></script>
 </body>
 
