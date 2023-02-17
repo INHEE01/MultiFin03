@@ -73,55 +73,61 @@ public class HomeController {
 	}
 	
 	@GetMapping("/homeBlue2")
-	public String homeBlue2(Model model, @RequestParam Map<String, Object> paramMap ) {
+	public String homeBlueSearch2(Model model, @RequestParam Map<String, Object> paramMap,
+			@RequestParam(required =  false) List<String> locationCheck
+			) {
 		log.info("오피스텔 조회 페이지 요청 성공");
 		int page = 1;
 		Map<String, Object> searchMap = new HashMap<>();
 		
 		try {
-			String searchValue = ""+ paramMap.get("searchValue"); 
-			if(searchValue != null && searchValue.length() > 0) {
-				String searchType = ""+ paramMap.get("searchType");
-				searchMap.put(searchType, searchValue);
-			}else {
-				paramMap.put("searchType", "all");
-			}
+			searchMap.put("searchValue", paramMap.get("searchValue"));
+			searchMap.put("locationCheck", locationCheck);
+			page = Integer.parseInt(""+paramMap.get("page"));
 		} catch (Exception e) {	}
+		System.out.println("searchMap : " + searchMap);
 		
 		int officeCount = blueService.selectOfficeCount(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 5, officeCount, 10);
 		List<OfficeDetail> Officelist = blueService.searchOfficeList(pageInfo, searchMap);
-
+		if(locationCheck == null) {
+			locationCheck = new ArrayList<>();
+		}
+		paramMap.put("locationCheck", locationCheck);
+		
 		model.addAttribute("Officelist", Officelist);
 		model.addAttribute("pageInfo",pageInfo);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("searchMap", searchMap);
 		
-		
 		return "home/homeBlue2";
 	}
 	
 	@GetMapping("/homeBlue3")
-	public String homeBlue3(Model model, @RequestParam Map<String, Object> paramMap ) {
+	public String homeBlue3(Model model, @RequestParam Map<String, Object> paramMap,
+			@RequestParam(required =  false) List<String> locationCheck) {
 		log.info("기타 조회 페이지 요청 성공");
 		int page = 1;
 		Map<String, Object> searchMap = new HashMap<>();
 		
 		// TODO 검색기능 다시보기
 		try {
-			String searchValue = ""+ paramMap.get("searchValue"); 
-			if(searchValue != null && searchValue.length() > 0) {
-				String searchType ="" + paramMap.get("searchType");
-				searchMap.put(searchType, searchValue);
-			}else {
-				paramMap.put("searchType", "all");
-			}
+			searchMap.put("searchValue", paramMap.get("searchValue"));
+			searchMap.put("locationCheck", locationCheck);
+			page = Integer.parseInt(""+paramMap.get("page"));
 		} catch (Exception e) {	}
+		
+		System.out.println("searchMap : " + searchMap);
 		
 		int remainCount = blueService.selectRemainCount(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 5, remainCount, 10);
 		List<RemainDetail> Remainlist = blueService.searchRemainList(pageInfo, searchMap);
 
+		if(locationCheck == null) {
+			locationCheck = new ArrayList<>();
+		}
+		paramMap.put("locationCheck", locationCheck);
+		
 		model.addAttribute("Remainlist", Remainlist);
 		model.addAttribute("pageInfo",pageInfo);
 		model.addAttribute("paramMap", paramMap);
