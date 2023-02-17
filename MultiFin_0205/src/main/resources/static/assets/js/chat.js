@@ -56,17 +56,18 @@ function disconnect() {
 
 function sendMessage() {
     let message = $("#msg").val()
+    let loginMember = $("#loginMember").val()
     showMessage("<div class=\"card bg-primary text-white border-light p-4 ml-lg-9 mb-4 chatbubble\"><div class=\"d-flex justify-content-between align-items-center mb-2\">"
-    			 + "<span class=\"font-weight-bolder font-medium\">{loginMember}</span>" + "<span class=\"ml-2 font-small\">"
+    			 + "<span class=\"font-weight-bolder font-medium\">" + loginMember + "</span>" + "<span class=\"ml-2 font-small\">"
     			 + date.yyyymmdd() + "</span></div><p class=\"m-0 font-weight-normal\">" + message + "</p></div>");
     stompClient.send("/app/sendMessage", {}, JSON.stringify(message)); //서버에 보낼 메시지
 }
 
 function sendMessage2(id) {
-     let message = $("#linkBtn"+id).val();
-//	let message = $(".linkBtn").val()
+    let message = $("#linkBtn"+id).val();
+	let loginMember = $("#loginMember").val()
     showMessage("<div class=\"card bg-primary text-white border-light p-4 ml-lg-9 mb-4 chatbubble\"><div class=\"d-flex justify-content-between align-items-center mb-2\">"
-    			 + "<span class=\"font-weight-bolder font-medium\">{loginMember}</span>" + "<span class=\"ml-2 font-small\">"
+    			 + "<span class=\"font-weight-bolder font-medium\">" + loginMember + "</span>" + "<span class=\"ml-2 font-small\">"
     			 + date.yyyymmdd() + "</span></div><p class=\"m-0 font-weight-normal\">" + message + "</p></div>");
     stompClient.send("/app/sendMessage", {}, JSON.stringify(message)); //서버에 보낼 메시지
 }

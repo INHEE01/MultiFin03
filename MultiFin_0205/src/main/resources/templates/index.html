@@ -389,7 +389,7 @@
                 </a>
             </div>
             <div class="navy_icon">
-                <a class="icon_btn" th:href="@{/bank/bankDeposit}">
+                <a class="icon_btn" th:href="@{/bank/bankDeposit?pageSaving=1&check=1}">
                     <i class="fa-solid fa-piggy-bank fa-3x"><br><span>적금 바로가기</span></i>
                 </a>
             </div>
@@ -415,7 +415,7 @@
             <div class="news_title">
                 <span class="title">NEWS</span>
                 <div class="moreview">
-                    <a href="#">
+                    <a  th:href="@{/news/newsMain}">
                         <span class="More_title">더보기</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </a>
@@ -481,67 +481,22 @@
                 </div>
             </div>
             <table class="home-notice-table">
-				<tr class="table_content">
-                    <td>
-                        <a class="c_title" href="">
-                            <h6 class="board_c_title"> 핀테크 기업 대상, 해외진출 설명회 개최 핀테크 기업 대상, 해외진출 설명회 개최 </h6>
-                        </a>
-                    </td>
-                    <td>
-                        <span>2022-12-19</span>
-                    </td>
+				<th:block th:if="${list == null}">
+				<tr>
+					<td colspan="6" style="text-align: center;">조회된 글이 없습니다.</td>
 				</tr>
-                <tr class="table_content">
-                    <td>
-                        <a class="c_title" href="">
-                            <h6 class="board_c_title">한 눈에 보는 규제 in 서울</h6>
-                        </a>
-                    </td>
-                    <td>
-                        <span>2022-12-15</span>
-                    </td>
-				</tr>
-                <tr class="table_content">
-                    <td>
-                        <a class="c_title" href="">
-                            <h6 class="board_c_title"> 핀테크 기업 대상, 해외진출 설명회 개최 핀테크 기업 대상, 해외진출 설명회 개최 </h6>
-                        </a>
-                    </td>
-                    <td>
-                        <span>2022-12-19</span>
-                    </td>
-				</tr>
-                <tr class="table_content">
-                    <td>
-                        <a class="c_title" href="">
-                            <h6 class="board_c_title">한 눈에 보는 규제 in 서울</h6>
-                        </a>
-                    </td>
-                    <td>
-                        <span>2022-12-15</span>
-                    </td>
-				</tr>
-                <tr class="table_content">
-                    <td>
-                        <a class="c_title" href="">
-                            <h6 class="board_c_title"> 핀테크 기업 대상, 해외진출 설명회 개최 핀테크 기업 대상, 해외진출 설명회 개최 </h6>
-                        </a>
-                    </td>
-                    <td>
-                        <span>2022-12-19</span>
-                    </td>
-				</tr>
-                <tr class="table_content">
-                    <td>
-                        <a class="c_title" href="">
-                            <h6 class="board_c_title">한 눈에 보는 규제 in 서울</h6>
-                        </a>
-                    </td>
-                    <td>
-                        <span>2022-12-15</span>
-                    </td>
-				</tr>
-            </table><!-- home-notice-list -->
+			  </th:block>
+			  <th:block th:if="${list != null}">
+					<tr class="table_content" th:each="board : ${list}">
+						<td class="board-content board-title">
+							<a th:href="|/community/view?no=${board.bNo}|">
+								 <h6 class="board_c_title"> [[${board.title}]] </h6>
+							</a>
+						</td>
+						<td class="board-content" th:text="${#dates.format(board.createDate, 'yyyy/MM/dd')}"/></td>
+					</tr>
+			</th:block>
+            </table>
         </div>
     </div>
 </section>
