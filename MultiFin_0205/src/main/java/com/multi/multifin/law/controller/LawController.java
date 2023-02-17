@@ -14,11 +14,6 @@ public class LawController {
 		 // 모델에 데이터를 담고, law/lawMain 뷰를 리턴한다.
 	}
 	
-	@RequestMapping("/lawSearch")
-	public String lawSearch() {
-		return "law/lawSearch";
-		// 검색 기능 구현
-	}
 	@RequestMapping("/lawFAQ")
 	public String lawFAQ() {
 		return "law/lawFAQ";
