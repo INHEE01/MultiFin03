@@ -13,8 +13,8 @@ public class OfficeDetail {
 
 	int	officeDno ;								// int primary key auto_increment,                            
 	String	bsnsMbyNm;    					// varchar(20),           -- 사업주체명 (시행사)                                   
-	Date cntrctCnclsBgnde ;					// varchar(10)  ,         -- 계약시작일               
-	Date  cntrctCnclsEndde ;				// varchar(10)  ,              -- 계약종료일         
+	String cntrctCnclsBgnde ;					// varchar(10)  ,         -- 계약시작일               
+	String  cntrctCnclsEndde ;				// varchar(10)  ,              -- 계약종료일         
 	String  hmpgAdres;							// varchar(100),            			-- 홈페이지주소       
 	String  houseDtlSecdNm;   				// varchar(30),       			-- 주택상세구분코드명 
 	int houseManageNo ;					// int,				-- 주택관리번호                      
@@ -26,10 +26,10 @@ public class OfficeDetail {
 	String mvnPrearngeYm  ;					//varchar(10),   -- 입주예정월                          
 	int  pblancNo  ;						//int,			-- 공고번호                                  
 	String  pblancUrl  ;						//varchar(500),  			 -- 분양정보 URL                 
-	Date  przwnerPresnatnDe   ;				//varchar(10),  			  -- 당첨자발표일       
-	Date   rcritPblancDe  ;					//varchar(10),  				 -- 모집공고일           
-	Date  subscrptRceptBgnde ;				// varchar(10),    -- 오피스텔/도시형/민간임대 청약접수시작일           
-	Date  subscrptRceptEndde; 				// varchar(10),    -- 오피스텔/도시형/민간임대 청약접수종료일   
+	String  przwnerPresnatnDe   ;				//varchar(10),  			  -- 당첨자발표일       
+	String   rcritPblancDe  ;					//varchar(10),  				 -- 모집공고일           
+	String  subscrptRceptBgnde ;				// varchar(10),    -- 오피스텔/도시형/민간임대 청약접수시작일           
+	String  subscrptRceptEndde; 				// varchar(10),    -- 오피스텔/도시형/민간임대 청약접수종료일   
 	int totSuplyHshldco        ;			// int			 -- 공급규모                  
 			                                                                              ;
 }

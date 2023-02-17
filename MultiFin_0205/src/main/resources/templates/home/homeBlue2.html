@@ -14,7 +14,7 @@
             <div class="container z-2">
                 <div class="row justify-content-center pt-3">
                     <div class="col-12 text-center">
-                        <h1 class="home-mainTitle">청약 조회</h1></span></h1>
+                        <h1 class="home-mainTitle">오피스텔 청약</h1></span></h1>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
         <div class="search_container">
             <div class="search-left">
                 <h5 class="optionTitle">지역선택</h5>
-                <form class="search-form" saction="" method="get" action="${path}/homeBlue">
+                <form class="search-form" saction="" method="get" action="${path}/homeBlue2">
                     <div class="question">
                         <div class="local">
                             <div>
@@ -59,7 +59,7 @@
             </div>
             <div class="col-sm-9 border-gray-500">
                <div class="form_container">
-                    <form autocomplete="off" class="search" method="get" th:action="@{/home/homeBlue}" >
+                    <form autocomplete="off" class="search" method="get" th:action="@{/home/homeBlue2}" >
                         <div class="searching">
                             <input class="input_text" type="text" placeholder="검색어를 입력하세요" id="search" name="searchValue" >
                             <input class="input_btn" type="submit" value="Search">
@@ -75,36 +75,36 @@
                         <th class="table-header">모집공고일</th>
                         <th class="table-header">상세보기</th>
                     </tr>
-                    <th:block th:if="${Aptlist.size == 0}">
+                    <th:block th:if="${Officelist.size == 0}">
                     	<tr>
                     		<td colspan="6">조회된 상품이 없습니다.</td>
                     	</tr>
                     </th:block>
-                    <th:block th:if="${Aptlist.size != 0}">
-	                    <tr th:each="Aptlist, number : ${Aptlist}">
+                    <th:block th:if="${Officelist.size != 0}">
+	                    <tr th:each="Officelist, number : ${Officelist}">
 	                        <td class="board-content">[[${number.index}+1]]</td>
-	                        <td class="board-content board-title">[[${Aptlist.houseNm}]]</td>
-	                        <td class="board-content">[[${Aptlist.hssplyAdres[0]}]][[${Aptlist.hssplyAdres[1]}]][[${Aptlist.hssplyAdres[2]}]][[${Aptlist.hssplyAdres[3]}]][[${Aptlist.hssplyAdres[4]}]][[${Aptlist.hssplyAdres[5]}]][[${Aptlist.hssplyAdres[6]}]]...</td>
-	                        <td class="board-content">[[${Aptlist.rcritPblancDe}]]</td>
-	                        <td class="board-content"><a th:href="${Aptlist.pblancUrl}" target="_blank">바로가기</a></td>
+	                        <td class="board-content board-title">[[${Officelist.houseNm}]]</td>
+	                        <td class="board-content">[[${Officelist.hssplyAdres[0]}]][[${Officelist.hssplyAdres[1]}]][[${Officelist.hssplyAdres[2]}]][[${Officelist.hssplyAdres[3]}]][[${Officelist.hssplyAdres[4]}]][[${Officelist.hssplyAdres[5]}]][[${Officelist.hssplyAdres[6]}]]...</td>
+	                        <td class="board-content">[[${Officelist.rcritPblancDe}]]</td>
+	                        <td class="board-content"><a th:href="${Officelist.pblancUrl}" target="_blank">바로가기</a></td>
 	                    </tr> 
                     </th:block>
                 </table>
                 <div class="table-buttons"> 
-	                    <button th:onclick="|movePage('/home/homeBlue?page=1');|" class="table-button">&lt;&lt;</button>
-	                    <button th:onclick="|movePage('/home/homeBlue?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
+	                    <button th:onclick="|movePage('/home/homeBlue2?page=1');|" class="table-button">&lt;&lt;</button>
+	                    <button th:onclick="|movePage('/home/homeBlue2?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
 	                    <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
 							<th:block th:if="${status.current == pageInfo.currentPage}">
 								<button class="table-button" disabled >[[${status.current}]]</button>
 							</th:block>
 							<th:block th:if="${status.current != pageInfo.currentPage}">
-								<button th:onclick="|movePage('/home/homeBlue?page=${status.current}');|" class="table-button">
+								<button th:onclick="|movePage('/home/homeBlue2?page=${status.current}');|" class="table-button">
 									[[${status.current}]]
 								</button>
 							</th:block>
 						</th:block>
-	                    <button th:onclick="|movePage('/home/homeBlue?page=${pageInfo.nextPage}');|" class="table-button">&gt;</button>
-	                    <button th:onclick="|movePage('/home/homeBlue?page=${pageInfo.maxPage}');|" class="table-button">&gt;&gt;</button>
+	                    <button th:onclick="|movePage('/home/homeBlue2?page=${pageInfo.nextPage}');|" class="table-button">&gt;</button>
+	                    <button th:onclick="|movePage('/home/homeBlue2?page=${pageInfo.maxPage}');|" class="table-button">&gt;&gt;</button>
 	                </div>
                </div>
             </div>

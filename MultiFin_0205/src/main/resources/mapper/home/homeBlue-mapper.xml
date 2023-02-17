@@ -114,6 +114,13 @@
 					apt.hssply_adres like '%${hssplyAdres}%' 
 				)
 			</if>
+			<if test="houseNm != null">
+				AND(
+					apt.house_nm like '%${houseNm}%' 
+				)
+			</if>
+			order by rcrit_pblanc_de desc
+			LIMIT ${limit} OFFSET ${offset}
 		</select>
 		
 		<select id="selectAptCount" resultType="int" parameterType="map">
@@ -123,6 +130,11 @@
 			<if test="hssplyAdres != null">
 				AND(
 					apt.hssply_adres like '%${hssplyAdres}%' 
+				)
+			</if>
+			<if test="houseNm != null">
+				AND(
+					apt.house_nm like '%${houseNm}%' 
 				)
 			</if>
 		</select>
@@ -136,6 +148,13 @@
 					office.hssply_adres like '%${hssplyAdres}%' 
 				)
 			</if>
+			<if test="houseNm != null">
+				AND(
+					office.house_nm like '%${houseNm}%' 
+				)
+			</if>
+			order by rcrit_pblanc_de desc
+			LIMIT ${limit} OFFSET ${offset}
 		</select>
 		
 		<select id="selectOfficeCount" resultType="int" parameterType="map">
@@ -147,6 +166,11 @@
 					office.hssply_adres like '%${hssplyAdres}%' 
 				)
 			</if>
+			<if test="houseNm != null">
+				AND(
+					office.house_nm like '%${houseNm}%' 
+				)
+			</if>
 		</select>
 		
 		<select id="searchRemainList" resultMap="RemainDetailResultMap" parameterType="map">
@@ -154,10 +178,17 @@
 			FROM RemainDetail remain
 			WHERE 1=1
 				<if test="hssplyAdres != null">
-				AND(
-					remain.hssply_adres like '%${hssplyAdres}%' 
-				)
-			</if>
+					AND(
+						remain.hssply_adres like '%${hssplyAdres}%' 
+					)
+				</if>
+				<if test="houseNm != null">
+					AND(
+						remain.house_nm like '%${houseNm}%' 
+					)
+				</if>
+			order by rcrit_pblanc_de desc
+			LIMIT ${limit} OFFSET ${offset}
 		</select>
 		
 		<select id="selectRemainCount" resultType="int" parameterType="map">
@@ -165,10 +196,15 @@
 			FROM RemainDetail remain
 			WHERE 1=1
 				<if test="hssplyAdres != null">
-				AND(
-					remain.hssply_adres like '%${hssplyAdres}%' 
-				)
-			</if>
+					AND(
+						remain.hssply_adres like '%${hssplyAdres}%' 
+					)
+				</if>
+				<if test="houseNm != null">
+					AND(
+						remain.house_nm like '%${houseNm}%' 
+					)
+				</if>
 		</select>
 
 </mapper>
