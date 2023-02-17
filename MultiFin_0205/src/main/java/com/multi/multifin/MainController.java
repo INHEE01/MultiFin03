@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.multi.multifin.bank.model.service.BankCardService;
 import com.multi.multifin.bank.model.service.BankCompanyService;
@@ -32,6 +33,7 @@ import com.multi.multifin.bank.model.vo.LoanMortgage;
 import com.multi.multifin.bank.model.vo.LoanRentHouse;
 import com.multi.multifin.board.model.service.BoardService;
 import com.multi.multifin.board.model.vo.Board;
+import com.multi.multifin.member.model.vo.Member;
 import com.multi.multifin.stock.model.service.StockPriceService;
 import com.multi.multifin.stock.model.vo.ExchangeRate;
 import com.multi.multifin.stock.model.vo.StockPrice;
@@ -62,9 +64,9 @@ public class MainController {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String home(Locale locale, Model model, HttpSession session, Map<String, String> paramMap) {
+	public String home(Locale locale, Model model, HttpSession session, Map<String, String> paramMap, @SessionAttribute(name = "loginMember", required = false) Member loginMember) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		
+		model.addAttribute("loginMember", loginMember);
 		
 		/*증권정보*/
 		logger.info("환율 테이블 요청: 원하는 국가만 가져옴");

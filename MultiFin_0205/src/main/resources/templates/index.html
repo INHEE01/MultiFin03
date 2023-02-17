@@ -499,8 +499,9 @@
 <!-- 뉴스와 커뮤니티 끝 -->
 
 <!-- 챗봇 버튼 -->
-<div id="goingChat"><a th:href="@{/common/chatbot}" target="_blank" class="text-center"><i class="fa-solid fa-comments fa-2x onlineChatBtn m-4"></i></a></div>
-
+<th:block th:if="${loginMember != null}">
+	<div id="goingChat"><a th:href="@{/common/chatbot}" target="_blank" class="text-center"><i class="fa-solid fa-comments fa-2x onlineChatBtn m-4"></i></a></div>
+</th:block>
 <div class="py-0">
     <div class="z-2">
         <div class="maincontents">
