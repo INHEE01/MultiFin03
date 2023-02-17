@@ -159,17 +159,11 @@
 					</ul>
 					</form>
 				</div>
-				<div class="bg-soft text-center bankSearch fh-320 rounded">
-					<a href="#"><i
-						class="fa-solid fa-comments fa-2x onlineChatBtn m-4"></i></a>
-					<p class="font-weight-bolder">궁금한 것이 있으신가요?</p>
-					<p>
-						실시간 채팅을 통해 궁금한 것을<br>한 번에 해결해 보세요!
-					</p>
-					<p>
-						이용 시간 : 09:00 - 18:00<br>월~금 / 주말 • 공휴일 제외
-					</p>
-				</div>
+				<div class="bg-soft text-center bankSearch fh-260 rounded">
+                    <a th:href="@{/common/chatbot}" target="_blank"><i class="fa-solid fa-comments fa-2x onlineChatBtn m-4"></i></a>
+                    <p class="font-weight-bolder">궁금한 것이 있으신가요?</p>
+                    <p>멀티핀 챗봇을 통해 궁금한 것을<br>한 번에 해결해 보세요!</p>
+                </div>
 			</div>
 			<div class="col-sm-9 border-gray-500">
 				<form autocomplete="off" class="row search" method="get" th:action="@{/stock/stockFund03}">
