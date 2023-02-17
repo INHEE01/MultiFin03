@@ -146,7 +146,13 @@ public class BoardService {
 		return mapper.deleteAllMyBoard(mNo);
 	}
 	
-	
+	/*메인에 들어갈 것*/
+	public List<Board> selectMainBoard(){
+		return mapper.selectMainBoard();
+	}
+
+
+
 }
 
 
