@@ -69,6 +69,9 @@ public class MemberService {
 	public Member findById(String id) {
 		return mapper.selectMember(id);
 	}
+	public Member findByEmail(String email) {
+		return mapper.selectByEmail(email);
+	}
 
 	
 	@Transactional(rollbackFor = Exception.class)

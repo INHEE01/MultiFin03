@@ -51,16 +51,31 @@ public class MemberController {
 	
 	@PostMapping("/forgot-password")
 	public String updatePwd(Model model,
-			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
-			String userPwd
-			) {
-		int result = service.updatePwd(loginMember, userPwd);
+//			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
+			String email, String answer1, String answer2, String password
+			) { 
+		System.out.println("email : " + email);
+		System.out.println("answer1 : " + answer1);
+		System.out.println("answer2 : " + answer2);
+		System.out.println("password : " + password);
+
+		String userAnswer = answer1 + answer2;
 		
-		if(result > 0) {
-			model.addAttribute("msg", "비밀번호 수정에 성공하였습니다.");
+		Member member = service.findByEmail(email);
+		
+		if(member.getPasswordAnswer().equals(userAnswer)) {
+			int result = service.updatePwd(member, password);
+			if(result > 0) {
+				model.addAttribute("msg", "비밀번호 수정에 성공하였습니다.");
+			}else{
+				model.addAttribute("msg", "비밀번호 변경에 실패했습니다.");
+			}
 		}else {
-			model.addAttribute("msg", "비밀번호 변경에 실패했습니다.");
+			model.addAttribute("msg", "정답이 다릅니다.");
 		}
+		
+		model.addAttribute("location", "/member/forgot-password");
+		
 		return "/common/msg";
 	}
 	
@@ -102,14 +117,15 @@ public class MemberController {
 	@PostMapping("/sign-up")
 	public String enroll(Model model, @Validated MemberForm memberForm, BindingResult bindingResult) {
 		log.info("회원가입, MemberForm : " + memberForm.toString());
-
+		
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("msg","회원가입 실패 : " + bindingResult.getAllErrors().get(0).getDefaultMessage());
 			model.addAttribute("location", "/member/sign-up");
 			return "common/msg";
 		}
-
+		
 		Member member = memberForm.toMember();
+		System.out.println(member);
 
 		int result = service.save(member);
 		
@@ -123,19 +139,17 @@ public class MemberController {
 		return "common/msg";
 	}
 	
-
 	// AJAX 회원아이디 중복 검사부
-	@GetMapping("/idCheck")
-	public ResponseEntity<Map<String, Object>> idCheck(String id){
-		log.info("아이디 중복 확인 : " + id);
+	@GetMapping("/emailCheck")
+	public ResponseEntity<Map<String, Object>> emailCheck(String email){
+		log.info("아이디 중복 확인 : " + email);
 		
-		boolean result = service.validate(id);
+		boolean result = service.validate(email);
 		Map<String,	Object> map = new HashMap<String, Object>();
 		map.put("validate", result);
 		
 		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 	}
-	
 	
 	//회원정보 수정 
 	@GetMapping("/mypage")
@@ -253,7 +267,23 @@ public class MemberController {
 	
 	//내댓글 보기
 	@GetMapping("/myreply")
-	public String myreply() {
+	public String myreply(Model model,
+			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
+			@RequestParam Map<String, String> paramMap) {
+		int page = 1;
+		try {
+			page = Integer.parseInt(paramMap.get("page"));
+		} catch (Exception e) {}
+		Map<String, String> searchMap = new HashMap<String, String>();
+		searchMap.put("id", loginMember.getId());
+		int boardCount = boardService.getMyBoardCount(loginMember.getId());
+		System.out.println("dhkdhkdd: " +  boardCount);
+		PageInfo pageInfo = new PageInfo(page, 5, boardCount, 10);
+		List<Board> list = boardService.getMyBoardList(pageInfo, searchMap);
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pageInfo", pageInfo);
 		return "member/myreply";
 	}
 		

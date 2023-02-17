@@ -187,5 +187,29 @@
 		UPDATE BOARD SET STATUS='N' WHERE mNo= ${mNo}
 	</update>
 	
+	<!--회원 정보 수정 부(reply)-->
+	<select id="selectMyBoardList" resultMap="boardListResultMap" parameterType="map">
+		SELECT 
+		DISTINCT B.BNO, B.TITLE, M1.ID, B.CREATE_DATE, B.ORIGINAL_FILENAME, B.READCOUNT, B.STATUS,B.TYPE
+		FROM BOARD B
+		LEFT OUTER JOIN MEMBER M1 ON B.MNO = M1.MNO
+		WHERE B.STATUS = 'Y'
+		AND M1.ID LIKE '${id}' 
+		ORDER BY B.BNO DESC LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	
+	<select id="selectMyBoardCount" resultType="int" parameterType="String">
+		SELECT COUNT(DISTINCT B.BNO)
+		FROM BOARD B
+		LEFT OUTER JOIN MEMBER M1 ON B.MNO = M1.MNO
+		WHERE B.STATUS = 'Y'
+		AND M1.ID = '${id}'
+	</select>
+	
+	<update id="deleteAllMyBoard" parameterType="int">
+		UPDATE BOARD SET STATUS='N' WHERE mNo= ${mNo}
+	</update>
+	
 	
 </mapper>

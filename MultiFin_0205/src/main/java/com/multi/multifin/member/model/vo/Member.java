@@ -18,7 +18,7 @@ public class Member {
 	private String phone;
 	private String email;
 	private String address;
-	private String hobby = "";
+	private String passwordAnswer;
 	private String status;
 	private Date enrollDate;
 	private Date modifyDate;
