@@ -22,20 +22,9 @@
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="signin-inner mt-3 mt-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                             <form action="/member/sign-up" method="post">
-                                <!-- Form -->
+                            <!-- 이메일 입력 Form -->
                                 <div class="form-group">
-                                    <label for="exampleInputIcon4"><span class="title"><span class="title here">ID</span></span></label>
-                                    <div class="input-group mb-4">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><span class="fas fa-envelope"></span></span>
-                                        </div>
-                                        <input class="form-control" id="Id" placeholder="아이디 입력해주세요.(4자 이상 20자 이하)" name="id" type="text" aria-label="text">
-                                    </div>
-                                </div>
-                                <!-- End of Form -->
-                                <!-- Form -->
-                                <div class="form-group">
-                                    <label for="exampleInputIcon4"><span class="title"><span class="title here">E-mail</span></span></label>
+                                    <label for="exampleInputIcon4"><span class="title"><span class="title here">이메일</span></span></label>
                                     <div class="input-group mb-4">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
@@ -44,15 +33,31 @@
                                     </div>
                                 </div>
                                 
-                                    <div class="form-group">
-                                            <input type="button" class="find-btn mb-3" value="중복검사" id="checkDuplicate" onclick="checkDuplicateFunc();"></input>
+                                	<div class="d-flex justify-content-between align-items-center mb-4" style="height: 20px">
+                                        <div class="form-check">
+                                        </div>
+                                        <!-- 이메일 중복검사 버튼 Form -->
+                                        <div class="form-group">
+                                            <input type="button" class="find-btn mb-3" value="중복검사" id="checkDuplicate" style="width:100px; height:35px; border-radius:5px; font-weight: 500 ; margin-top:30px; color: white; background-color: #0d1b48" onclick="checkDuplicateFunc();"></input>
                                 	</div>
-                               	
-                                	
-                                <!-- End of Form -->
-                                <!-- Form -->
+                                    </div>
+                               	<!-- End of Form -->
+                                <!-- 닉네임 입력 Form -->
                                 <div class="form-group">
-                                    <label for="exampleInputIcon4"><span class="title"><span class="title here">Name</span></span></label>
+                                    <label for="exampleInputIcon4"><span class="title"><span class="title here">닉네임</span></span></label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="fas fa-envelope"></span></span>
+                                        </div>
+                                        <input class="form-control" id="Id" placeholder="닉네임을 입력해주세요.(2자 이상 6자 이하)" name="id" type="text" aria-label="text">
+                                    </div>
+                                </div>
+                                <!-- End of Form -->
+                                
+                                	
+                                <!-- 이름 입력 Form -->
+                                <div class="form-group">
+                                    <label for="exampleInputIcon4"><span class="title"><span class="title here">이름</span></span></label>
                                     <div class="input-group mb-4">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
@@ -60,13 +65,37 @@
                                         <input class="form-control" id="exampleInputIcon4" placeholder="이름을 입력해주세요." name="name" type="text" aria-label="text">
                                     </div>
                                 </div>
-                                
-                                
                                 <!-- End of Form -->
+                                
+                                <!-- 전화번호 입력 Form -->
                                 <div class="form-group">
-                                    <!-- Form -->
+                                    <label for="exampleInputIcon4"><span class="title"><span class="title here">핸드폰</span></span></label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="fas fa-envelope"></span></span>
+                                        </div>
+                                        <input class="form-control" id="exampleInputIcon4"  placeholder="핸드폰 입력해주세요.(- 제외)" name="phone" type="text" aria-label="text" required>
+                                    </div>
+                                </div>
+                                <!-- End of Form -->
+                                
+                                <!-- 주소 입력 Form -->
+                                <div class="form-group">
+                                    <label for="exampleInputIcon4"><span class="title"><span class="title here">주소</span></span></label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="fas fa-envelope"></span></span>
+                                        </div>
+                                        <input class="form-control" id="exampleInputIcon4"  placeholder="주소를 입력해주세요." name="address" type="text" aria-label="text">
+                                    </div>
+                                </div>
+                                <!-- End of Form -->
+                                
+                                <!-- 비밀번호 입력 Form -->
+                                <div class="form-group">
+                                    
                                     <div class="form-group">
-                                        <label for="password"><span class="title here">Password</span></label>
+                                        <label for="password"><span class="title here">비밀번호</span></label>
                                         <div class="input-group mb-4">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
@@ -77,7 +106,7 @@
                                     <!-- End of Form -->
                                     <!-- Form -->
                                     <div class="form-group">
-                                        <label for="password_confirm"> <span class="title here">Confirm Password</span></label>
+                                        <label for="password_confirm"> <span class="title here">비밀번호 확인</span></label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
@@ -103,7 +132,7 @@
                                     <div class="form-check mb-4">
                                         <input class="form-check-input" type="checkbox" value="" id="terms" required>
                                         <label class="form-check-label" for="terms">
-                                            <span class="title">다음 <a class="text-secondary title" href="./terms.html"><b class="title">약관</b></a>에 동의합니다.</span>
+                                            <span class="title">다음 <a class="text-secondary title" href="#"><b class="title">약관</b></a>에 동의합니다.</span>
                                         </label>
                                     </div>
                                 </div>

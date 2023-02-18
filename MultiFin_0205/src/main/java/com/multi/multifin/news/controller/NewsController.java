@@ -25,14 +25,16 @@ public class NewsController {
 		if (newsList1 == null) {
 			initNews();
 		}
+		
 		if(searchValue != null) {
 			List<News> mainList = NaverSearchAPI.getNewsList(searchValue, 5, 1);
 			model.addAttribute("newsList1", mainList);
+			model.addAttribute("newsList2", mainList);
 		}else {
 			model.addAttribute("newsList1", newsList1);
+			model.addAttribute("newsList2", newsList2);
 		}
 		
-		model.addAttribute("newsList2", newsList2);
 		model.addAttribute("newsList3", newsList3);
 
 		return "news/newsMain";

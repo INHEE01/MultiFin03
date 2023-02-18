@@ -37,12 +37,24 @@
                 (<span style="color: orange;">#</span>) 추천검색어 | 
             </h4>
             <div class="reccomend_keywords_btns">
-                <button class="seaching_keyword">청약</button>
-                <button class="seaching_keyword">삼성 전자</button>
-                <button class="seaching_keyword">KOSPI</button>
-                <button class="seaching_keyword">예적금 상품</button>
-                <button class="seaching_keyword">주택 대출</button>
-                <button class="seaching_keyword">카드 상품</button>
+            <input type="button" value="# 청약"
+				onclick="location.href='http://localhost/common/searchTotal?searchValue=청약'"
+				class="seaching_keyword">
+            <input type="button" value="# 삼성 전자"
+				onclick="location.href='http://localhost/common/searchTotal?searchValue=삼성 전자'"
+				class="seaching_keyword">
+            <input type="button" value="# KOSPI"
+				onclick="location.href='http://localhost/common/searchTotal?searchValue=KOSPI'"
+				class="seaching_keyword">
+            <input type="button" value="# 예적금 상품"
+				onclick="location.href='http://localhost/common/searchTotal?searchValue=예적금 상품'"
+				class="seaching_keyword">
+            <input type="button" value="# 주택 대출"
+				onclick="location.href='http://localhost/common/searchTotal?searchValue=주택 대출'"
+				class="seaching_keyword">
+            <input type="button" value="# 카드 상품"
+				onclick="location.href='http://localhost/common/searchTotal?searchValue=카드 상품'"
+				class="seaching_keyword">
             </div>
         </div>
     </section>
@@ -53,8 +65,7 @@
               <li class="tab-link" data-tab="tab-2">증권</li>
               <li class="tab-link" data-tab="tab-3">부동산</li>
               <li class="tab-link" data-tab="tab-4">뉴스</li>
-              <li class="tab-link" data-tab="tab-5">법률</li>
-              <li class="tab-link" data-tab="tab-6">게시판</li>
+              <li class="tab-link" data-tab="tab-5">게시판</li>
             </ul>
             <div id="tab-1" class="tab-content current">
                 <h5 class="search_result_description">검색 결과 <sapn style="color: orange;"> [[${depositList.size + savingList.size + loanCreditList0.size + loanMortgageList0.size + loanRentHoustList0.size + debitList.size + creditList.size}]]</sapn> 건</h5>
@@ -70,7 +81,7 @@
                       <td class="board-content_bank">007</td>
                       <td class="board-content_bank">적금</td>
                       <td class="board-content_bank img"><img class="logo" src="https://blog.kakaocdn.net/dn/qAwyo/btqyWLbmOAD/9eqyPAko6fuK9ycDeAcYrk/img.jpg"></td>
-                      <td class="board-content_bank bank_title">우리SUPER주거래 <span style="color:orange">청약</span>적금 </td>
+                      <td class="board-content_bank bank_title">우리SUPER주거래 <span style="color:orange">[[${searchValue}]]</span>적금 </td>
                       <td class="board-content_bank">우리은행</td>
                       <td class="board-content_bank">인터넷,스마트폰</td>
                     </tr>
@@ -78,7 +89,7 @@
                         <td class="board-content_bank">006</td>
                         <td class="board-content_bank">적금</td>
                         <td class="board-content_bank img"><img class="logo" src="https://blog.kakaocdn.net/dn/cdNxCH/btqyU8rQfKP/adu2Kzot3kNW5sK1r9ekd0/img.jpg"></td>
-                        <td class="board-content_bank bank_title">내가 만든<span style="color:orange">청약</span>적금 </td>
+                        <td class="board-content_bank bank_title">내가 만든<span style="color:orange">[[${searchValue}]]</span>적금 </td>
                         <td class="board-content_bank">하나은행</td>
                         <td class="board-content_bank">인터넷,스마트폰</td>
                     </tr>
@@ -86,7 +97,7 @@
                         <td class="board-content_bank">005</td>
                         <td class="board-content_bank">대출</td>
                         <td class="board-content_bank img"><img class="logo" src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FIz97w%2FbtqyXx4yZhO%2F3myJG9cf8ioKZ67PuYfeIK%2Fimg.jpg"></td>
-                        <td class="board-content_bank bank_title">신한 ONE<span style="color:orange">청약</span>대출 </td>
+                        <td class="board-content_bank bank_title">신한 ONE<span style="color:orange">[[${searchValue}]]</span>대출 </td>
                         <td class="board-content_bank">신한은행</td>
                         <td class="board-content_bank">인터넷,스마트폰</td>
                     </tr>
@@ -94,7 +105,7 @@
                         <td class="board-content_bank">004</td>
                         <td class="board-content_bank">대출</td>
                         <td class="board-content_bank img"><img class="logo" src="https://blog.kakaocdn.net/dn/cdNxCH/btqyU8rQfKP/adu2Kzot3kNW5sK1r9ekd0/img.jpg"></td>
-                        <td class="board-content_bank bank_title">하나로 <span style="color:orange">청약</span>대출 </td>
+                        <td class="board-content_bank bank_title">하나로 <span style="color:orange">[[${searchValue}]]</span>대출 </td>
                         <td class="board-content_bank">하나은행</td>
                         <td class="board-content_bank">인터넷,스마트폰</td>
                     </tr>
@@ -102,7 +113,7 @@
                         <td class="board-content_bank">003</td>
                         <td class="board-content_bank">대출</td>
                         <td class="board-content_bank img"><img class="logo" src="https://mblogthumb-phinf.pstatic.net/MjAxODA5MDNfMjI0/MDAxNTM1OTU3MTIwNjA3.UnmFeUMO59gKvjT-or1HeV0QlxtvbyBH8tdutNvivGIg.W_R3dGQOQMwtFjMHDQpJjc30lIduwVrZxqEe-1qXIZUg.PNG.dnduf75/%EB%A1%9C%EA%B3%A0%EB%AA%A8%EC%9D%8C%EB%A1%9C%EA%B3%A0%EA%B3%B5%EC%9C%A0-%EA%B5%AD%EB%AF%BC%EC%9D%80%ED%96%89%EB%A1%9C%EA%B3%A03.png?type=w800"></td>
-                        <td class="board-content_bank bank_title">디딤돌<span style="color:orange">청약</span>대출 </td>
+                        <td class="board-content_bank bank_title">디딤돌<span style="color:orange">[[${searchValue}]]</span>대출 </td>
                         <td class="board-content_bank">국민은행</td>
                         <td class="board-content_bank">인터넷,스마트폰</td>
                     </tr>
@@ -110,7 +121,7 @@
                         <td class="board-content_bank">002</td>
                         <td class="board-content_bank">적금</td>
                         <td class="board-content_bank img"><img class="logo" src="https://blog.kakaocdn.net/dn/qAwyo/btqyWLbmOAD/9eqyPAko6fuK9ycDeAcYrk/img.jpg"></td>
-                        <td class="board-content_bank bank_title">청소년 <span style="color:orange">[[${value}]]</span>적금 </td>
+                        <td class="board-content_bank bank_title">청소년 <span style="color:orange">[[${searchValue}]]</span>적금 </td>
                         <td class="board-content_bank">우리은행</td>
                         <td class="board-content_bank">인터넷,스마트폰</td>
                     </tr>
@@ -118,7 +129,7 @@
                         <td class="board-content_bank">001</td>
                         <td class="board-content_bank">적금</td>
                         <td class="board-content_bank img"><img class="logo" src="https://blog.kakaocdn.net/dn/qAwyo/btqyWLbmOAD/9eqyPAko6fuK9ycDeAcYrk/img.jpg"></td>
-                        <td class="board-content_bank bank_title">직장인주거래 <span style="color:orange">[[${value}]]</span>적금 </td>
+                        <td class="board-content_bank bank_title">직장인주거래 <span style="color:orange">[[${searchValue}]]</span>적금 </td>
                         <td class="board-content_bank">우리은행</td>
                         <td class="board-content_bank">인터넷,스마트폰</td>
                     </tr>
@@ -166,7 +177,7 @@
                     </tr>
                     <tr class="table_row">
                     <td class="board-content">007</td>
-                    <td class="board-content"><span style="color:orange">[[${value}]]</span></td>
+                    <td class="board-content"><span style="color:orange">[[${searchValue}]]</span></td>
                     <td class="board-content">경기</td>
                     <td class="board-content title">파주연풍 영우내안에 에코하임</td>
                     <td class="board-content">APT</td>
@@ -175,7 +186,7 @@
                     </tr>
                     <tr class="table_row">
                         <td class="board-content">006</td>
-                        <td class="board-content"><span style="color:orange">[[${value}]]</span></td>
+                        <td class="board-content"><span style="color:orange">[[${searchValue}]]</span></td>
                         <td class="board-content">대구</td>
                         <td class="board-content title">빌리브 해리티지</td>
                         <td class="board-content">APT</td>
@@ -184,7 +195,7 @@
                     </tr>
                     <tr class="table_row">
                         <td class="board-content">005</td>
-                        <td class="board-content"><span style="color:orange">[[${value}]]</span></td>
+                        <td class="board-content"><span style="color:orange">[[${searchValue}]]</span></td>
                         <td class="board-content">경기</td>
                         <td class="board-content title">프레나 평택화양</td>
                         <td class="board-content">APT</td>
@@ -193,7 +204,7 @@
                     </tr>
                     <tr class="table_row">
                         <td class="board-content">004</td>
-                        <td class="board-content"><span style="color:orange">[[${value}]]</span></td>
+                        <td class="board-content"><span style="color:orange">[[${searchValue}]]</span></td>
                         <td class="board-content">경기</td>
                         <td class="board-content title">성남판교대장 A-10블록 신혼희망타운</td>
                         <td class="board-content">신혼희망타운</td>
@@ -202,7 +213,7 @@
                     </tr>
                     <tr class="table_row">
                         <td class="board-content">003</td>
-                        <td class="board-content"><span style="color:orange">[[${value}]]</span></td>
+                        <td class="board-content"><span style="color:orange">[[${searchValue}]]</span></td>
                         <td class="board-content">전북</td>
                         <td class="board-content title">북악산 오투그란데 더원</td>
                         <td class="board-content">APT</td>
@@ -211,7 +222,7 @@
                     </tr>
                     <tr class="table_row">
                         <td class="board-content">002</td>
-                        <td class="board-content"><span style="color:orange">[[${value}]]</span></td>
+                        <td class="board-content"><span style="color:orange">[[${searchValue}]]</span></td>
                         <td class="board-content">대전</td>
                         <td class="board-content title">프레나 대전학하1단지</td>
                         <td class="board-content">APT</td>
@@ -220,7 +231,7 @@
                     </tr>
                     <tr class="table_row">
                         <td class="board-content">001</td>
-                        <td class="board-content"><span style="color:orange">[[${value}]]</span></td>
+                        <td class="board-content"><span style="color:orange">[[${searchValue}]]</span></td>
                         <td class="board-content">충남</td>
                         <td class="board-content title">천안 일봉공원 호반써밋 센트럴파크</td>
                         <td class="board-content">APT</td>
@@ -240,6 +251,22 @@
             <div id="tab-4" class="tab-content">
                 <!--사진 넣을 수 있으면 넣어도 좋을것 같아요!-->
                 <h5 class="search_result_description">검색 결과 <sapn style="color: orange;"> 5</sapn> 건</h5>
+                <!-- 수정중 <th:if test="${empty ShowList}">
+							<tr>
+								<td colspan="6">검색결과가 없습니다.</td>
+							</tr>
+						</th:if>
+						<th:if test="${not empty newsList1}">
+							<th:forEach var="news" items="${newsList1}">
+								<tr>
+									<td class="board-content"><a href="$/news/newsMain/view?no=${news.News_nno}"> 
+									</a></td>
+									<td class="board-content"><a th:href="${news.originallink}"> 
+									&emsp;&emsp;&emsp;[[${news.title}]]</a></td>
+									<td class="board-content">[[${news.description}]]</td>
+								</tr>
+							</th:forEach>
+						</th:if>-->
                 <table class="board_table_news">
                     <tr class="table_row table_header">
                       <th class="table-header">분류</th>
@@ -292,60 +319,6 @@
                 </div>   
             </div>
             <div id="tab-5" class="tab-content">
-                <h5 class="search_result_description">검색 결과 <sapn style="color: orange;"> 5</sapn> 건</h5>
-                <table class="board_table">
-                    <tr class="table_row table_header">
-                      <th class="table-header">번호</th>
-                      <th class="table-header" >구분</th>
-                      <th class="table-header" >제목</th>
-                      <th class="table-header">작성자</th>
-                      <th class="table-header">등록일</th>
-                    </tr>
-                    <tr class="table_row">
-                        <td class="board-content">005</td>
-                      <td class="board-content">FAQ</td>
-                      <td class="board-content title"><span style="color:orange">[[${value}]]</span> 통장과 청년 우대 통장의 차이는 무엇인가요?</td>
-                      <td class="board-content">admin</td>
-                      <td class="board-content">2023-01-22</td>
-                    </tr>
-                    <tr class="table_row">
-                        <td class="board-content">004</td>
-                        <td class="board-content">FAQ</td>
-                        <td class="board-content title">개인회생 진행중 <span style="color:orange">[[${value}]]</span> 통장 괜찮을까요?</td>
-                        <td class="board-content">admin</td>
-                        <td class="board-content">2023-01-21</td>
-                    </tr>
-                    <tr class="table_row">
-                        <td class="board-content">003</td>
-                        <td class="board-content">FAQ</td>
-                        <td class="board-content title"><span style="color:orange">[[${value}]]</span> 통장 연말정산은 어떻게 하나요?</td>
-                        <td class="board-content">admin</td>
-                        <td class="board-content">2023-01-21</td>
-                    </tr>
-                    <tr class="table_row">
-                        <td class="board-content">002</td>
-                        <td class="board-content">FAQ</td>
-                        <td class="board-content title">주택<span style="color:orange">[[${value}]]</span>에 대한 자동이체를 다른 은행에서 할 수 있나요?</td>
-                        <td class="board-content">admin</td>
-                        <td class="board-content">2023-01-20</td>
-                    </tr>
-                    <tr class="table_row">
-                        <td class="board-content">001</td>
-                        <td class="board-content">FAQ</td>
-                        <td class="board-content title"><span style="color:orange">[[${value}]]</span> 당첨시 계약금을 내지 않았을 때 권리는 어디까지 보장되나요?</td>
-                        <td class="board-content">admin</td>
-                        <td class="board-content">2023-01-20</td>
-                    </tr>
-                  </table>
-                  <div class="table-buttons">
-                    <button onclick="" class="table-button">&lt;&lt;</button>
-                    <button onclick="" class="table-button">&lt;</button>
-                    <button onclick="" class="table-button">1</button>
-                    <button onclick="" class="table-button">&gt;</button>
-                    <button onclick="" class="table-button">&gt;&gt;</button>
-                </div>   
-            </div>
-            <div id="tab-6" class="tab-content">
                 <h5 class="search_result_description">검색 결과 <sapn style="color: orange;"> 7</sapn> 건</h5>
                 <table class="board_table">
                     <tr class="table_row table_header">
@@ -365,42 +338,42 @@
                     <tr class="table_row">
                         <td class="board-content">006</td>
                         <td class="board-content">자유게시판</td>
-                        <td class="board-content title">솔직히 요즘에 <span style="color:orange">청약</span> 당첨 되는거 진짜 복받은 사람인듯</td>
+                        <td class="board-content title">솔직히 요즘에 <span style="color:orange">[[${searchValue}]]</span> 당첨 되는거 진짜 복받은 사람인듯</td>
                         <td class="board-content">admin</td>
                         <td class="board-content">2023-01-22</td>
                     </tr>
                     <tr class="table_row">
                         <td class="board-content">005</td>
                       <td class="board-content">자유게시판</td>
-                      <td class="board-content title"><span style="color:orange">청약</span> 통장 개설 처음해보는데 어느 금융사걸로 하나요?</td>
+                      <td class="board-content title"><span style="color:orange">[[${searchValue}]]</span> 통장 개설 처음해보는데 어느 금융사걸로 하나요?</td>
                       <td class="board-content">admin</td>
                       <td class="board-content">2023-01-22</td>
                     </tr>
                     <tr class="table_row">
                         <td class="board-content">004</td>
                         <td class="board-content">공지</td>
-                        <td class="board-content title">수원 햇마루 APT <span style="color:orange">청약</span> 결과 발표 공지</td>
+                        <td class="board-content title">수원 햇마루 APT <span style="color:orange">[[${searchValue}]]</span> 결과 발표 공지</td>
                         <td class="board-content">admin</td>
                         <td class="board-content">2023-01-21</td>
                     </tr>
                     <tr class="table_row">
                         <td class="board-content">003</td>
                         <td class="board-content">자유게시판</td>
-                        <td class="board-content title"><span style="color:orange">[[${value}]]</span> 대출에 대해서 궁금한게 있는데 혹시 아시는분..?</td>
+                        <td class="board-content title"><span style="color:orange">[[${searchValue}]]</span> 대출에 대해서 궁금한게 있는데 혹시 아시는분..?</td>
                         <td class="board-content">admin</td>
                         <td class="board-content">2023-01-21</td>
                     </tr>
                     <tr class="table_row">
                         <td class="board-content">002</td>
                         <td class="board-content">공지</td>
-                        <td class="board-content title">성남시 판교 자이APT 1차 <span style="color:orange">[[${value}]]</span> </td>
+                        <td class="board-content title">성남시 판교 자이APT 1차 <span style="color:orange">[[${searchValue}]]</span> </td>
                         <td class="board-content">admin</td>
                         <td class="board-content">2023-01-20</td>
                     </tr>
                     <tr class="table_row">
                         <td class="board-content">001</td>
                         <td class="board-content">자유게시판</td>
-                        <td class="board-content title"><span style="color:orange">[[${value}]]</span> 결과 나왔네요!</td>
+                        <td class="board-content title"><span style="color:orange">[[${searchValue}]]</span> 결과 나왔네요!</td>
                         <td class="board-content">HAPPY</td>
                         <td class="board-content">2023-01-20</td>
                     </tr>

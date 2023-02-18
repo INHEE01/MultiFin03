@@ -50,8 +50,10 @@ input[type="checkbox"]{
     width: 15px; /*Desired width*/
     height: 15px; /*Desired height*/
     margin-right: 10px;
+    margin-left: 10px;
     cursor: pointer;
 }
+
 .question{margin-bottom: 20px;}
 .btnCheck{
     display: flex;
@@ -110,6 +112,14 @@ hr{
     font-weight: 500;
 }
 
+.board-none{
+   text-align :right;
+    padding: 10px 0px;
+    border-bottom: 1px solid black;
+    font-weight: 500;
+ 	color : gray;
+ 	padding-right:50px;
+}
 
 .board-title{
     text-align: left;

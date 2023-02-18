@@ -146,6 +146,22 @@ public class BoardService {
 		return mapper.deleteAllMyBoard(mNo);
 	}
 	
+	/*내댓글수정부*/
+	public int selectMyReplyTime(String id) {
+		return mapper.selectMyReplyTime(id);
+	}
+	
+	public List<Board> selectMyReplyList(PageInfo pageInfo, Map<String, String> param){
+		param.put("limit", "" + pageInfo.getListLimit());
+		param.put("offset", "" + (pageInfo.getStartList() - 1));
+		return mapper.selectMyReplyList(param);
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public int deleteAllMyReply(int mNo) {
+		return mapper.deleteAllMyReply(mNo);
+	}
+	
 	/*메인에 들어갈 것*/
 	public List<Board> selectMainBoard(){
 		return mapper.selectMainBoard();

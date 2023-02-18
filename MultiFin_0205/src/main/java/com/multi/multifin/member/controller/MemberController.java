@@ -180,7 +180,7 @@ public class MemberController {
 		
 		if(result > 0) {
 			model.addAttribute("msg", "회원정보를 수정하였습니다.");
-			model.addAttribute("loginMember", service.findById(loginMember.getEmail()));
+			model.addAttribute("loginMember", service.findByEmail(loginMember.getEmail()));
 			log.info("세션: " + loginMember.toString());
 			model.addAttribute("location", "/member/update");
 		}else {
