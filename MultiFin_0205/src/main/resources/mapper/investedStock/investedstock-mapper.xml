@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//KO" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.multi.multifin.investedstock.model.mapper.InvestedStockMapper">
+	<!-- InvestedStock 테이블 -->
+	<resultMap type="InvestedStock" id="InvestedStockResultMap">
+		<id property="orderNum" column="ORDERNUM" />
+		<result property="mNo" column="MNO" />
+		<result property="sNo" column="SNO" />
+		<result property="aNum" column="ANUM" />
+		<result property="orderDt" column="orderdt" />
+		<result property="stockCode" column="stockcode" />
+		<result property="stockNum" column="stockNUM" />
+		<result property="tradeStat" column="tradestat" />
+		<result property="price" column="price" />
+		<result property="cnt" column="cnt" />
+		<result property="totalPrice" column="totalPrice" />
+	</resultMap>
+	
+	<!-- 나의 체결 내역 전체 조회 -->
+	<select id="selectInvestedStockList" resultMap="InvestedStockResultMap" parameterType="map">
+		SELECT ORDERNUM, MNO, SNO, ANUM, orderdt, stockcode, stockcode, stockNUM, tradestat, price, cnt, totalPrice  
+		FROM INVESTEDSTOCK AS I
+		WHERE I.MNO=#{MNO}
+	</select>
+	
+</mapper>

@@ -150,18 +150,20 @@
 	
 	<!-- MRKTTOTAMT(시가총액)을 기준으로 내림차순 -->
 	<select id="selectAllStock" resultMap="StockPriceResultMap" parameterType="map">
-		select 
-		sno, itmsNm, clpr, fltRt, vs, lstgStCnt, mrktTotAmt 
-		from stockPrice as s
-		<if test="itmsNm != null">
-		 WHERE s.itmsNm LIKE '%${itmsNm}%'
+		select sno, basDt, srtnCd, isinCd, itmsNm, mrktCtg, clpr, vs, fltRt, mkp, hipr, lopr, trqu, trPrc, lstgStCnt, mrktTotAmt 
+		from (select sno, basDt, LPAD(srtnCd, 6, 0) as srtnCd, isinCd, itmsNm, mrktCtg, clpr, vs, fltRt, mkp, hipr, lopr, trqu, trPrc, lstgStCnt, mrktTotAmt
+		from stockPrice where (srtnCd, basDt) in (select srtnCd, max(basDt) as basDt from stockPrice group by srtnCd)
+    	order by basDt desc) stockPrice
+    	<if test="itmsNm != null">
+		 WHERE itmsNm LIKE '%${itmsNm}%'
 		</if>
-		ORDER BY MRKTTOTAMT DESC LIMIT ${limit} OFFSET ${offset};
+    	group by stockPrice.srtnCd 
+    	ORDER BY srtnCd ASC LIMIT ${limit} OFFSET ${offset}
 	</select>
 	
 	<select id="selectAllStockCount" parameterType="map" resultType="int">
 		SELECT 
-		COUNT(distinct s.sno) 
+		COUNT(distinct s.srtnCd) 
 		FROM stockPrice as s
 		<if test="itmsNm != null">
 		 WHERE s.itmsNm LIKE '%${itmsNm}%'

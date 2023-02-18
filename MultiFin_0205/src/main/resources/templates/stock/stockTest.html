@@ -45,7 +45,7 @@
                                     <h5 class="sub_title">종목찾기</h5>
                                 </div>
                             </a>
-                            <a class="menu_btn" href="#">
+                            <a class="menu_btn" th:href="@{/common/chatbot}" target="blank">
                                 <div class="tab_sub">
                                     <i class="fa-solid fa-comments"></i>
                                     <h5 class="sub_title">실시간 채팅</h5>
@@ -291,14 +291,13 @@
 			<!--  검색창 종료  -->
             <table class="stock-rank-table">
                 <tr class="table_row">
-                  <th class="table-header">종목번호</th>
+                  <th class="table-header">종목코드</th>
                   <th class="table-header" >종목명</th>
                   <th class="table-header">현재가</th>
                   <th class="table-header">전일비</th>
                   <th class="table-header">등락률</th>
                   <th class="table-header">상장주식수</th>
                   <th class="table-header">시가총액</th>
-                  <th class="table-header">주가동향</th>
                   <th class="table-header" colspan="2">매매</th>
                 </tr>
                 <th:block th:if="${allStock == null}">
@@ -308,14 +307,13 @@
             	</th:block>
             	<th:block th:if="${allStock != null}">
             		<tr th:each="stock : ${allStock}">
-            			<td th:text="${stock.sno}" class="board-content"></td>
+            			<td th:text="${#numbers.formatInteger(stock.srtnCd, 6)}" class="board-content"></td>
             			<td th:text="${stock.itmsNm}" class="board-content"></td>
-            			<td th:text="${stock.clpr}" class="board-content"></td>
+            			<td th:text="|${#numbers.formatInteger(stock.clpr, 3, 'COMMA')} 원|" class="board-content"></td>
             			<td th:text="${stock.fltRt}" class="board-content"></td>
-            			<td th:text="${stock.vs}" class="board-content"></td>
-            			<td th:text="${stock.lstgStCnt}" class="board-content"></td>
-            			<td th:text="${stock.mrktTotAmt}" class="board-content"></td>
-            			<td class="board-content"> <button class="stock_future_detail_btns" onclick="window.open('./stockFuture.html')">확인하기</button></td>
+            			<td th:text="${stock.vs}" class="board-content"></td>          		 	           	
+            			<td th:text="|${#numbers.formatInteger(stock.lstgStCnt, 3, 'COMMA')} 개|" class="board-content"></td>
+            			<td th:text="|${#numbers.formatInteger(stock.mrktTotAmt, 3, 'COMMA')} 원|" class="board-content"></td>
                   		<td class="board-content"> <button class="stock_buy__btns"  onclick="window.open('./stockBuying.html')">매수</button></td>
                   		<td class="board-content"> <button class="stock_sell__btns"  onclick="window.open('./stockSelling.html')">매도</button></td>
             		</tr>
@@ -493,6 +491,29 @@
 		} 	
 	
 		location.href = encodeURI(pageUrl);
+	}
+	
+	function comma(str) {
+        str = String(str);
+        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    }
+
+    function uncomma(str) {
+        str = String(str);
+        return str.replace(/[^\d]+/g, '');
+    } 
+    
+    function inputNumberFormat(obj) {
+        obj.value = comma(uncomma(obj.value));
+    }
+    
+    function inputOnlyNumberFormat(obj) {
+        obj.value = onlynumber(uncomma(obj.value));
+    }
+    
+    function onlynumber(str) {
+	    str = String(str);
+	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g,'$1');
 	}
 </script>
 

@@ -312,7 +312,6 @@ public class StockController {
 		int page = 1;
 
 		// 탐색할 맵을 선언
-		Map<String, String> searchMap = new HashMap<String, String>();
 		try {
 			String searchValue = paramMap.get("searchValue");
 			if (searchValue != null && searchValue.length() > 0) {
