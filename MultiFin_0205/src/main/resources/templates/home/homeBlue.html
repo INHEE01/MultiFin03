@@ -125,15 +125,15 @@
 								<button class="btn-primary" disabled >[[${status.current}]]</button>
 							</th:block>
 							<th:block th:if="${Aptlist.size != 0}">
-							<th:block th:if="${status.current != pageInfo.currentPage}">
-								<button th:onclick="|movePage2('/home/homeBlue?page=${status.current}');|" class="">
-									[[${status.current}]]
-								</button>
+								<th:block th:if="${status.current != pageInfo.currentPage}">
+									<button th:onclick="|movePage2('/home/homeBlue?page=${status.current}');|" class="table-button">
+										[[${status.current}]]
+									</button>
+								</th:block>
 							</th:block>
 						</th:block>
-						</th:block>
-	                    <button th:onclick="|movePage2('/home/homeBlue?page=${pageInfo.nextPage}');|" class="">&gt;</button>
-	                    <button th:onclick="|movePage2('/home/homeBlue?page=${pageInfo.maxPage}');|" class="">&gt;&gt;</button>
+	                    <button th:onclick="|movePage2('/home/homeBlue?page=${pageInfo.nextPage}');|" class="table-button">&gt;</button>
+	                    <button th:onclick="|movePage2('/home/homeBlue?page=${pageInfo.maxPage}');|" class="table-button">&gt;&gt;</button>
 	                </div>
                </div>
             </div>

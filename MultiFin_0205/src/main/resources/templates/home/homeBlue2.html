@@ -122,7 +122,7 @@
 	                    <button th:onclick="|movePage('/home/homeBlue2?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
 	                    <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
 							<th:block th:if="${status.current == pageInfo.currentPage}">
-								<button class="table-button" disabled >[[${status.current}]]</button>
+								<button class="btn-primary" disabled >[[${status.current}]]</button>
 							</th:block>
 							<th:block th:if="${Officelist.size != 0}">
 								<th:block th:if="${status.current != pageInfo.currentPage}">
