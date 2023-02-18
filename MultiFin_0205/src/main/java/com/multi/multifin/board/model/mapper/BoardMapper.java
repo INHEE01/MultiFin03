@@ -28,4 +28,9 @@ public interface BoardMapper {
 	int deleteAllMyBoard(int mNo);
 	//메인
 	List<Board> selectMainBoard();
+	
+	//내댓글수정부
+	List<Board> selectMyReplyList(Map<String, String> map);
+	int selectMyReplyTime(String id);
+	int deleteAllMyReply(int mNo);
 }

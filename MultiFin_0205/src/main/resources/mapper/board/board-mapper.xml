@@ -187,6 +187,35 @@
 		UPDATE BOARD SET STATUS='N' WHERE mNo= ${mNo}
 	</update>
 	
+	<!--회원 정보 수정 부(댓글)-->
+	<select id="selectMyReplyList" resultMap="boardListResultMap" parameterType="map"> 
+		SELECT  
+			DISTINCT B.BNO, B.TITLE, M1.ID, B.CREATE_DATE, B.ORIGINAL_FILENAME, B.READCOUNT, B.STATUS,
+            R.RNO, R.MNO, R.CONTENT, R.STATUS, M1.ID, R.CREATE_DATE, R.MODIFY_DATE
+		FROM BOARD B
+		LEFT OUTER JOIN MEMBER M1 ON B.MNO = M1.MNO
+		LEFT OUTER JOIN REPLY R ON R.BNO = B.BNO 
+		LEFT OUTER JOIN MEMBER M2 ON R.MNO = M2.MNO 
+		WHERE B.STATUS = 'Y'
+        AND M1.ID LIKE '${id}'
+		ORDER BY R.RNO DESC LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	
+	<select id="selectMyReplyTime" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM REPLY R
+		LEFT OUTER JOIN MEMBER M1 ON R.MNO = M1.MNO
+		WHERE R.STATUS = 'Y'
+		AND M1.ID = '${id}';
+	</select>
+	
+	<update id="deleteAllMyReply" parameterType="int">
+		UPDATE REPLY SET STATUS='N' WHERE mNo= ${mNo}
+	</update>
+	
+	
+	
 	
 	
 	

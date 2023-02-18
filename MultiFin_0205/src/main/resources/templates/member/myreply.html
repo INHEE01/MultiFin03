@@ -60,13 +60,11 @@
                                             </div>
                                             <table id="tbl-board" class="board-table">
 	                                            <tr>
-	                                                <th class="table-header" >게시판</th>
-	                                                <th class="table-header" >제목</th>
-	                                                <th class="table-header">작성자</th>
-	                                                <th class="table-header">작성일</th>
-	                                                <th class="table-header">첨부파일</th>
-	                                                <th class="table-header">조회수</th>
-	                                                <th class="table-header">삭제</th>
+	                                                <th class="table-header"></th>
+	                                                <th class="table-header"></th>
+	                                                <th class="table-header"><a style="margin-left: -80%; font-weight: 700">댓글</a></th>
+	                                                <th class="table-header"></th>
+	                                               
 	                                            </tr>
 	                                            <th:block th:if="${list == null || list.size()==0}">
 													<tr>
@@ -74,25 +72,16 @@
 													</tr>
 												</th:block>
 												<th:block th:if="${list != null}">
-														<tr th:each="board, number: ${list}">
-															<td class="board-content">[[${board.type}]]</td>
+														<tr th:each="list, number: ${list}" th:href="|/community/view?no=${list.bNo}|">
+															<td class="board-content">[[${list.content}]]</td>
+															
+															<td class="board-content" th:text="${#dates.format(list.createDate, 'yyyy/MM/dd')}"/></td>
+															
 															<td class="board-content board-title">
-																<a class="title" th:href="|/community/view?no=${board.bNo}|">
-																	[[${board.title}]]
-																</a>
+															[[${list.title}]]
 															</td>
-															<td class="board-content" th:text="${#dates.format(board.createDate, 'yyyy/MM/dd')}"/></td>
 															<td class="board-content">
-																<th:block th:if="${board.originalFileName != null }">
-																	<span>📁</span>
-																</th:block>
-																<th:block th:if="${board.originalFileName == null }">
-																	<span>-</span>
-																</th:block>
-															</td>
-															<td class="board-content">[[${board.readCount}]]</td>
-															<td class="board-content">
-																<button class="del-btn" th:value="${board.bNo}" th:onclick="|deletePage('${board.bNo}')|">삭제</button>
+																<button class="del-btn" th:value="${list.bNo}" th:onclick="|deletePage('${list.bNo}')|">삭제</button>
 															</td>
 														</tr>
 												</th:block>
