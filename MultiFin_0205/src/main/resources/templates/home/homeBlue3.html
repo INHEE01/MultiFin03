@@ -84,7 +84,7 @@
                <div class="form_container">
                     <div class="search" >
                         <div class="searching">
-                        	<input class="input_text" type="text" placeholder="검색어를 입력하세요" id="searchValue" th:value="${param.searchValue}" name="searchValue">	
+                        	<input class="input_text" type="text" placeholder="검색어를 입력하세요" required id="searchValue" th:value="${param.searchValue}" name="searchValue">	
                             <input class="input_btn" type="submit" value="Search">
                         </div>
                     </div>
@@ -126,7 +126,7 @@
 							</th:block>
 							<th:block th:if="${Remainlist.size != 0}">
 								<th:block th:if="${status.current != pageInfo.currentPage}">
-									<button th:onclick="|movePage('/home/homeBlue2?page=${status.current}');|" class="table-button">
+									<button th:onclick="|movePage('/home/homeBlue3?page=${status.current}');|" class="table-button">
 										[[${status.current}]]
 									</button>
 								</th:block>
@@ -146,7 +146,7 @@
 	function movePage(pageUrl){
 		var searchValue = document.getElementById("searchValue");
 		var locationCheck = document.getElementsByName("locationCheck");
-		if(searchValue.value != null){
+		if(searchValue.value.length > 0){
 			pageUrl = pageUrl + '&searchValue=' + searchValue.value; 
 		}
 		
@@ -157,7 +157,7 @@
 			}
 		}
 		
-		alert('pageUrl : ' + pageUrl)
+/* 		alert('pageUrl : ' + pageUrl) */
 		location.href = encodeURI(pageUrl);	 
 	}
 </script>
