@@ -109,7 +109,7 @@
                     </th:block>
                     <th:block th:if="${Remainlist.size != 0}">
 	                    <tr th:each="Remainlist, number : ${Remainlist}">
-	                        <td class="board-content">[[${number.index}+1]]</td>
+	                        <td class="board-content">[[(${pageInfo.currentPage}-1)*10+${number.index}+1]]</td>
 	                        <td class="board-content board-title">[[${Remainlist.houseNm}]]</td>
 	                        <td class="board-content">[[${Remainlist.hssplyAdres[0]}]][[${Remainlist.hssplyAdres[1]}]][[${Remainlist.hssplyAdres[2]}]][[${Remainlist.hssplyAdres[3]}]][[${Remainlist.hssplyAdres[4]}]][[${Remainlist.hssplyAdres[5]}]][[${Remainlist.hssplyAdres[6]}]]...</td>
 	                        <td class="board-content">[[${Remainlist.rcritPblancDe}]]</td>

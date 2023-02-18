@@ -109,7 +109,7 @@
                     </th:block>
                     <th:block th:if="${Aptlist.size != 0}">
 	                    <tr th:each="Aptlist, number : ${Aptlist}">
-	                        <td class="board-content">[[${number.index}+1]]</td>
+	                        <td class="board-content">[[(${pageInfo.currentPage}-1)*10+${number.index}+1]]</td>
 	                        <td class="board-content board-title">[[${Aptlist.houseNm}]]</td>
 	                        <td class="board-content">[[${Aptlist.hssplyAdres[0]}]][[${Aptlist.hssplyAdres[1]}]][[${Aptlist.hssplyAdres[2]}]][[${Aptlist.hssplyAdres[3]}]][[${Aptlist.hssplyAdres[4]}]][[${Aptlist.hssplyAdres[5]}]][[${Aptlist.hssplyAdres[6]}]]...</td>
 	                        <td class="board-content">[[${Aptlist.rcritPblancDe}]]</td>
