@@ -78,15 +78,6 @@
                         <button class="search_btn btn btn-primary" type="submit">Search</button>
                         <button class="search_btn btn btn-outline-gray" type="reset" id="resetButton">Reset</button>
                     </div><!--버튼끝-->
-                    <script><!--리셋버튼 누르면 체크 없애기-->
-              document.getElementById('resetButton').addEventListener('click', function () {
-            	  var checkboxes = document.getElementsByClassName('locationCheck');
-
-                for (var i = 0; i < checkboxes.length; i++) {
-                  checkboxes[i].checked = false;
-                }
-              });
-            </script>
                 </div>
             </div>
             <div class="col-sm-9 border-gray-500">
@@ -118,7 +109,7 @@
                     </th:block>
                     <th:block th:if="${Officelist.size != 0}">
 	                    <tr th:each="Officelist, number : ${Officelist}">
-	                        <td class="board-content">[[${number.index}+1]]</td>
+	                        <td class="board-content">[[(${pageInfo.currentPage}-1)*10+${number.index}+1]]</td>
 	                        <td class="board-content board-title">[[${Officelist.houseNm}]]</td>
 	                        <td class="board-content">[[${Officelist.hssplyAdres[0]}]][[${Officelist.hssplyAdres[1]}]][[${Officelist.hssplyAdres[2]}]][[${Officelist.hssplyAdres[3]}]][[${Officelist.hssplyAdres[4]}]][[${Officelist.hssplyAdres[5]}]][[${Officelist.hssplyAdres[6]}]]...</td>
 	                        <td class="board-content">[[${Officelist.rcritPblancDe}]]</td>

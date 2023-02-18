@@ -36,41 +36,41 @@
                                 <input type="checkbox" name="locationCheck" id="인천" value="인천"
                                   th:checked="${#arrays.contains(paramMap.locationCheck, '인천')  ? 'checked' : null}"
                                 ><span class="search_title">인천</span><br>      
-                                <input type="checkbox" name="locationCheck" id="경기" value="경기"
-                                th:checked="${#arrays.contains(paramMap.locationCheck, '경기')  ? 'checked' : null}"
-                                ><span class="search_title">경기</span><br>
                                 <input type="checkbox" name="locationCheck" id="세종" value="세종"
-                                th:checked="${#arrays.contains(paramMap.locationCheck, '세종')  ? 'checked' : null}"
-                                ><span class="search_title">세종</span><br>
-                                <input type="checkbox" name="locationCheck" id="충청" value="충청"
-                                th:checked="${#arrays.contains(paramMap.locationCheck, '충청')  ? 'checked' : null}"
-                                ><span class="search_title">충청</span><br>
-                                <input type="checkbox" name="locationCheck" id="강원" value="강원"
-                                th:checked="${#arrays.contains(paramMap.locationCheck, '강원')  ? 'checked' : null}"
-                                ><span class="search_title">강원</span><br>
+                                 th:checked="${#arrays.contains(paramMap.locationCheck, '세종')  ? 'checked' : null}"
+                                 ><span class="search_title">세종</span><br>
+                                 <input type="checkbox" name="locationCheck" id="광주" value="광주"
+                                 th:checked="${#arrays.contains(paramMap.locationCheck, '광주')  ? 'checked' : null}"
+                                ><span class="search_title">광주</span><br>
+                                  <input type="checkbox" name="locationCheck" id="대구" value="대구"
+                                 th:checked="${#arrays.contains(paramMap.locationCheck, '대구')  ? 'checked' : null}"
+                                 ><span class="search_title">대구</span><br>
+                                <input type="checkbox" name="locationCheck" id="울산" value="울산" 
+                                 th:checked="${#arrays.contains(paramMap.locationCheck, '울산')  ? 'checked' : null}"
+                                ><span class="search_title">울산</span><br>
+                                  <input type="checkbox" name="locationCheck" id="부산" value="부산"
+                                 th:checked="${#arrays.contains(paramMap.locationCheck, '부산')  ? 'checked' : null}"
+                                 ><span class="search_title">부산</span><br>
                             </div>
                             <div>
-                                <input type="checkbox" name="locationCheck" id="광주" value="광주"
-                                th:checked="${#arrays.contains(paramMap.locationCheck, '광주')  ? 'checked' : null}"
-                                ><span class="search_title">광주</span><br>
+                               <input type="checkbox" name="locationCheck" id="경기" value="경기"
+                                 th:checked="${#arrays.contains(paramMap.locationCheck, '경기')  ? 'checked' : null}"
+                                 ><span class="search_title">경기</span><br>
+                                 <input type="checkbox" name="locationCheck" id="강원" value="강원"
+                                 th:checked="${#arrays.contains(paramMap.locationCheck, '강원')  ? 'checked' : null}"
+                                ><span class="search_title">강원</span><br>
+                                    <input type="checkbox" name="locationCheck" id="충청" value="충청"
+                                 th:checked="${#arrays.contains(paramMap.locationCheck, '충청')  ? 'checked' : null}"
+                                ><span class="search_title">충청</span><br>
                                 <input type="checkbox" name="locationCheck" id="전라" value="전라"
-                                th:checked="${#arrays.contains(paramMap.locationCheck, '전라')  ? 'checked' : null}"
-                                ><span class="search_title">전라</span><br>
-                                <input type="checkbox" name="locationCheck" id="대구" value="대구"
-                                th:checked="${#arrays.contains(paramMap.locationCheck, '대구')  ? 'checked' : null}"
-                                ><span class="search_title">대구</span><br>
-                                <input type="checkbox" name="locationCheck" id="울산" value="울산"
-                                th:checked="${#arrays.contains(paramMap.locationCheck, '울산')  ? 'checked' : null}"
-                                ><span class="search_title">울산</span><br>
-                                <input type="checkbox" name="locationCheck" id="부산" value="부산"
-                                th:checked="${#arrays.contains(paramMap.locationCheck, '부산')  ? 'checked' : null}"
-                                ><span class="search_title">부산</span><br>
+                                 th:checked="${#arrays.contains(paramMap.locationCheck, '전라')  ? 'checked' : null}"
+                                 ><span class="search_title">전라</span><br>
                                 <input type="checkbox" name="locationCheck" id="경상" value="경상"
-                                th:checked="${#arrays.contains(paramMap.locationCheck, '경상')  ? 'checked' : null}"
-                                ><span class="search_title">경상</span><br>
+                                 th:checked="${#arrays.contains(paramMap.locationCheck, '경상')  ? 'checked' : null}"
+                                 ><span class="search_title">경상</span><br>
                                 <input type="checkbox" name="locationCheck" id="제주" value="제주"
-                                th:checked="${#arrays.contains(paramMap.locationCheck, '제주')  ? 'checked' : null}"
-                                ><span class="search_title">제주</span><br>
+                                 th:checked="${#arrays.contains(paramMap.locationCheck, '제주')  ? 'checked' : null}"
+                                 ><span class="search_title">제주</span><br>
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,11 @@
                     </tr>
                     <th:block th:if="${Aptlist.size == 0}">
                     	<tr>
-                    		<td colspan="6">조회된 상품이 없습니다.</td>
+                    		<td></td>
+                    		<td></td>
+                    		<td class="board-none">조회된 상품이 없습니다.</td>
+                    		<td></td>
+                    		<td></td>
                     	</tr>
                     </th:block>
                     <th:block th:if="${Aptlist.size != 0}">
@@ -120,11 +124,13 @@
 							<th:block th:if="${status.current == pageInfo.currentPage}">
 								<button class="btn-primary" disabled >[[${status.current}]]</button>
 							</th:block>
+							<th:block th:if="${Aptlist.size != 0}">
 							<th:block th:if="${status.current != pageInfo.currentPage}">
 								<button th:onclick="|movePage2('/home/homeBlue?page=${status.current}');|" class="">
 									[[${status.current}]]
 								</button>
 							</th:block>
+						</th:block>
 						</th:block>
 	                    <button th:onclick="|movePage2('/home/homeBlue?page=${pageInfo.nextPage}');|" class="">&gt;</button>
 	                    <button th:onclick="|movePage2('/home/homeBlue?page=${pageInfo.maxPage}');|" class="">&gt;&gt;</button>
