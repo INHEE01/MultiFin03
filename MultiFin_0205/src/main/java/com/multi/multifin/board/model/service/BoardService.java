@@ -129,6 +129,7 @@ public class BoardService {
 		return mapper.deleteReply(no);
 	}
 	
+		
 	
 	/*회원수정부*/
 	public int getMyBoardCount(String id) {
@@ -146,6 +147,8 @@ public class BoardService {
 		return mapper.deleteAllMyBoard(mNo);
 	}
 	
+
+	
 	/*내댓글수정부*/
 	public int selectMyReplyTime(String id) {
 		return mapper.selectMyReplyTime(id);
@@ -158,8 +161,8 @@ public class BoardService {
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
-	public int deleteAllMyReply(int mNo) {
-		return mapper.deleteAllMyReply(mNo);
+	public int deleteAllMyReply(String id) {
+		return mapper.deleteAllMyReply(id);
 	}
 	
 	/*메인에 들어갈 것*/

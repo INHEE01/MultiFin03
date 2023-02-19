@@ -279,26 +279,53 @@ public class MemberController {
 		int boardCount = boardService.getMyBoardCount(loginMember.getId());
 		System.out.println("dhkdhkdd: " +  boardCount);
 		PageInfo pageInfo = new PageInfo(page, 5, boardCount, 10);
-		List<Board> list = boardService.getMyBoardList(pageInfo, searchMap);
+		List<Board> list = boardService.selectMyReplyList(pageInfo, searchMap);
 		
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageInfo);
 		return "member/myreply";
 	}
+	
+	// 댓글 히나씩 지우기
+	@RequestMapping("/replyDelete")
+	public String deleteReply(Model model,  HttpSession session,
+		@SessionAttribute(name = "loginMember", required = false) Member loginMember, int replyNo) {
+		log.info("게시글 삭제 요청 boardNo : " + replyNo);
+		int result = boardService.deleteReply(replyNo);
+		
+		if(result > 0) {
+			model.addAttribute("msg", "댓글 삭제가 정상적으로 완료되었습니다.");
+		}else {
+			model.addAttribute("msg", "댓글 삭제에 실패하였습니다.");
+		}
+		model.addAttribute("location", "/member/myreply");
+		return "common/msg";
+	}
+		
+
+	//내 댓글 다 지우기
+	@RequestMapping("/replyAllDelete")
+	public String deleteAllReply(Model model, HttpSession session,
+			@SessionAttribute(name = "loginMember", required = false) Member loginMember) {
+		String id = loginMember.getId();
+		int result = boardService.deleteAllMyReply(id);
+		if(result > 0) {
+			model.addAttribute("msg", "게시글 전체가 정상적으로 완료되었습니다.");
+		}else {
+			model.addAttribute("msg", "게시글 삭제에 실패하였습니다.");
+		}
+		model.addAttribute("location", "/member/myreply");
+		return "common/msg";
+	}
+	
+	
 		
 	
 	//내계좌보기
 	@GetMapping("/account")
 	public String account(Model model,
 			@SessionAttribute(name = "loginMember", required = false) Member loginMember) {
-		
-		
-		
-		
-		
-		
-		
 		return "member/account";
 	}
 		

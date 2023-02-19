@@ -104,8 +104,10 @@
 		FROM BOARD B
 		JOIN MEMBER M ON(B.MNO = M.MNO)
 		LEFT OUTER JOIN REPLY R ON (B.BNO = R.BNO)
+							AND R.STATUS = 'Y'
 		LEFT OUTER JOIN MEMBER M2 ON (R.MNO = M2.MNO)
-		WHERE B.STATUS = 'Y' AND B.BNO = #{bNo}
+		WHERE B.STATUS = 'Y'
+		  AND B.BNO = #{bNo}
 	</select>
 	
 	<insert id="insertBoard" parameterType="Board">
@@ -157,9 +159,9 @@
 		UPDATE BOARD SET STATUS='N' WHERE BNO=#{bNo}
 	</update>
 	
-	<delete id="deleteReply" parameterType="int">
-		DELETE FROM REPLY WHERE RNO=#{rNo}
-	</delete>
+	<update id="deleteReply" parameterType="int">
+		UPDATE REPLY SET STATUS='N' WHERE RNO=#{rNo}
+	</update>
 	
 	
 	
@@ -188,16 +190,25 @@
 	</update>
 	
 	<!--회원 정보 수정 부(댓글)-->
-	<select id="selectMyReplyList" resultMap="boardListResultMap" parameterType="map"> 
+	<select id="selectMyReplyList" resultMap="boardListResultMap" parameterType="map">
+		/* 
 		SELECT  
 			DISTINCT B.BNO, B.TITLE, M1.ID, B.CREATE_DATE, B.ORIGINAL_FILENAME, B.READCOUNT, B.STATUS,
             R.RNO, R.MNO, R.CONTENT, R.STATUS, M1.ID, R.CREATE_DATE, R.MODIFY_DATE
 		FROM BOARD B
 		LEFT OUTER JOIN MEMBER M1 ON B.MNO = M1.MNO
 		LEFT OUTER JOIN REPLY R ON R.BNO = B.BNO 
-		LEFT OUTER JOIN MEMBER M2 ON R.MNO = M2.MNO 
-		WHERE B.STATUS = 'Y'
-        AND M1.ID LIKE '${id}'
+		LEFT OUTER JOIN MEMBER M2 ON R.MNO = M2.MNO
+		*/
+		SELECT B.BNO, B.TITLE, M.ID, B.CREATE_DATE, B.ORIGINAL_FILENAME, B.READCOUNT, B.STATUS,
+            R.RNO, R.MNO, R.CONTENT, R.STATUS, M.ID, R.CREATE_DATE, R.MODIFY_DATE
+		FROM REPLY R
+        INNER JOIN BOARD B 
+		   ON R.BNO = B.BNO
+        INNER JOIN MEMBER M
+           ON R.mNo = M.mNo 
+		WHERE R.STATUS = 'Y'
+        AND M.ID LIKE '${id}'
 		ORDER BY R.RNO DESC LIMIT ${limit} OFFSET ${offset}
 	</select>
 	
@@ -210,17 +221,15 @@
 		AND M1.ID = '${id}';
 	</select>
 	
-	<update id="deleteAllMyReply" parameterType="int">
-		UPDATE REPLY SET STATUS='N' WHERE mNo= ${mNo}
+	<update id="deleteAllMyReply" parameterType="string">
+		UPDATE REPLY R
+		 INNER JOIN MEMBER M ON (M.mNo = R.mNo) 
+		   SET R.STATUS='N'
+		 WHERE M.id = '${id}'
+		;
 	</update>
 	
-	
-	
-	
-	
-	
 	<!--커뮤니티-->
-	
 	
 	<select id="selectMainBoard"  resultMap="boardDetailResultMap">
 		SELECT TITLE, CREATE_DATE

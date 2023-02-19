@@ -110,8 +110,8 @@
             <!-- 리플 작성 Form -->
             <div id="comment-container">
                 <div class="comment-editor">
-                    <form action="/community/reply" me
-                    thod="post" class="comment-inputer">
+                    <form action="/community/reply" method="post" class="comment-inputer">
+                    
                         <input type="hidden" name="bNo" th:value="${board.bNo}" />
                         <!-- <input type="hidden" name="Id" value="${loginMember.id}" /> -->
                           <textarea name="content" id="replyContent"  cols="135" rows="3"></textarea>

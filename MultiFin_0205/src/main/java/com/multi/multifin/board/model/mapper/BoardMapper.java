@@ -20,7 +20,7 @@ public interface BoardMapper {
 	int deleteBoard(int no);
 	int deleteReply(int no);
 	int updateReply(Reply reply);
-	Reply selectReplyByNo (int no);
+	Reply selectReplyByNo(int no);
 	
 	//회원수정부
 	List<Board> selectMyBoardList(Map<String, String> map);
@@ -32,5 +32,5 @@ public interface BoardMapper {
 	//내댓글수정부
 	List<Board> selectMyReplyList(Map<String, String> map);
 	int selectMyReplyTime(String id);
-	int deleteAllMyReply(int mNo);
+	int deleteAllMyReply(String id);
 }
