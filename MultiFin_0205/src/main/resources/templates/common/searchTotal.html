@@ -74,38 +74,30 @@
 			</ul>
 			<div id="tab-1" class="tab-content current">
 				<table id="tbl-board" class="board_table_bank">
-					<th:if
-						test="[[${empty depositList.size + savingList.size + loanCreditList0.size + loanMortgageList0.size + loanRentHoustList0.size + debitList.size + creditList.size}]]">
-						<h5 class="search_result_description" colspan="5">검색결과가 없습니다.
-						</td>
-					</th:if>
-					<tr class="table_row table_header_bank">
-						<th class="table-header">번호</th>
-						<th class="table-header">구분</th>
-						<th class="table-header" colspan="2">금융상품</th>
-						<th class="table-header">금융회사</th>
-						<th class="table-header">가입방법</th>
-					</tr>
-					<tr class="table_row">
-						<th:if
-							test="[[${not empty depositList.size + savingList.size + loanCreditList0.size + loanMortgageList0.size + loanRentHoustList0.size + debitList.size + creditList.size}]]">
-						</th:if>
-						<th:block
-							th:each="bank, status : ${depositList}+${savingList}+${loanCreditList0}+${loanMortgageList0}+${loanRentHoustList0}+${debitList}+${creditList}">
-
-							<tr><td class="board-content_bank"><a
-								href="$/bank/bankSearch?no=${Bank.cno}">${bank.번호}</a></td>
-							<td class="board-content_bank"><a
-								href="$/bank/bankSearch?no=${Bank.cno}">${bank.구분}</a></td>
-							<td class="board-content_bank"><a
-								href="$/bank/bankSearch?no=${Bank.cno}">${bank.금융상품}</a></td>
-							<td class="board-content_bank"><a
-								href="$/bank/bankSearch?no=${Bank.cno}">${bank.금융회사}</a></td>
-							<td class="board-content_bank"><a
-								href="$/bank/bankSearch?no=${Bank.cno}">${bank.가입방법}</a></td>
-					</tr>
-
-						</th:block>
+				
+					
+					<th:block th:if="${bankSize == 0}">
+						<tr>
+							<td colspan="6" style="text-align: center;">조회된 정보가 없습니다.</td>
+						</tr>
+					</th:block>
+					<th:block th:if="${bankSize != 0}">
+						<tr class="table_row table_header_bank">
+							<th class="table-header">번호</th>
+							<th class="table-header">카드명</th>
+							<th class="table-header">상품특징</th>
+							<th class="table-header">주요혜택</th>
+							<th class="table-header">상세정보</th>
+						</tr>
+						<tr class="table_row" th:each="credit, number : ${creditList}">
+							<td class="board-content_bank">[[${number.index}+1]]</td>
+							<td class="board-content_bank">[[${credit.productNm}]]</td>
+							<td class="board-content_bank"><img th:src="${credit.productImg}">[[${credit.productChar}]]</td>
+							<td class="board-content_bank">[[${credit.keyBenefit}]]</td>
+							<td class="board-content_bank"><a th:href="${credit.detailUrl}" target="_blank">카드사바로가기</a></td>
+						</tr>
+	
+					</th:block>
 					</tr>
 				</table>
 				<div class="table-buttons">
@@ -126,12 +118,14 @@
 			<div id="tab-2" class="tab-content">
 				<!-- 주식 -->
 				<table id="tbl-board" class="board_table_bank">
-					<th:if test="[[${empty stockList}]]">
-						<tr>
-							<td colspan="5">검색결과가 없습니다.</td>
-						</tr>
+					<th:if
+						test="[[${empty stockList}]]">
+						<h5 class="search_result_description" colspan="5">
+							검색 결과가 없습니다.
+							</td>
+						</h5>
 					</th:if>
-					<tr class="table_row table_header">
+					<tr class="table_row table_header_bank">
 						<th class="table-header">번호</th>
 						<th class="table-header">구분</th>
 						<th class="table-header">종목이름</th>
@@ -140,11 +134,11 @@
 						<th:block th:each="stock, status : ${stockList}">
 							<tr>
 								<td class="board-content"><a
-									href="$/stock/stockList?no=${stock.sno}">${stock.sno}</a></td>
+									href="$/stock/stockList?no=${stock.stock_sno}">${stock.번호}</a></td>
 								<td class="board-content"><a
-									href="$/stock/stockList?no=${stock.sno}">${stock.mrktCtg}</a></td>
+									href="$/stock/stockList?no=${stock.stock_sno}">${stock.구분}</a></td>
 								<td class="board-content"><a
-									href="$/stock/stockList?no=${stock.sno}">${stock.itmsNm}</a></td>
+									href="$/stock/stockList?no=${stock.stock_sno}">${stock.itmsNm}</a></td>
 							</tr>
 						</th:block>
 					</th:if>
@@ -159,90 +153,44 @@
 			</div>
 			<div id="tab-3" class="tab-content">
 				<!-- 부동산 -->
-				<h5 class="search_result_description">
-					검색 결과
-					<sapn style="color: orange;"> 7</sapn>
-					건
-				</h5>
-				<table class="board_table">
-					<tr class="table_row table_header">
-						<th class="table-header">번호</th>
-						<th class="table-header">구분</th>
-						<th class="table-header">지역</th>
-						<th class="table-header">주택명</th>
-						<th class="table-header">주택구분</th>
-						<th class="table-header">등록일</th>
-						<th class="table-header">관련정보</th>
-					</tr>
-					<tr class="table_row">
-						<td class="board-content">007</td>
-						<td class="board-content"><span style="color: orange">[[${searchValue}]]</span></td>
-						<td class="board-content">경기</td>
-						<td class="board-content title">파주연풍 영우내안에 에코하임</td>
-						<td class="board-content">APT</td>
-						<td class="board-content">2023-01-23</td>
-						<td class="board-content"><button class="more"
-								onclick="window.open('./homeSellDetail(청약 상세주소넣으면 될거같아요).html')">상세보기</button></td>
-					</tr>
-					<tr class="table_row">
-						<td class="board-content">006</td>
-						<td class="board-content"><span style="color: orange">[[${searchValue}]]</span></td>
-						<td class="board-content">대구</td>
-						<td class="board-content title">빌리브 해리티지</td>
-						<td class="board-content">APT</td>
-						<td class="board-content">2023-01-23</td>
-						<td class="board-content"><button class="more"
-								onclick="window.open('./homeSellDetail(청약 상세주소넣으면 될거같아요).html')">상세보기</button></td>
-					</tr>
-					<tr class="table_row">
-						<td class="board-content">005</td>
-						<td class="board-content"><span style="color: orange">[[${searchValue}]]</span></td>
-						<td class="board-content">경기</td>
-						<td class="board-content title">프레나 평택화양</td>
-						<td class="board-content">APT</td>
-						<td class="board-content">2023-01-23</td>
-						<td class="board-content"><button class="more"
-								onclick="window.open('./homeSellDetail(청약 상세주소넣으면 될거같아요).html')">상세보기</button></td>
-					</tr>
-					<tr class="table_row">
-						<td class="board-content">004</td>
-						<td class="board-content"><span style="color: orange">[[${searchValue}]]</span></td>
-						<td class="board-content">경기</td>
-						<td class="board-content title">성남판교대장 A-10블록 신혼희망타운</td>
-						<td class="board-content">신혼희망타운</td>
-						<td class="board-content">2023-01-23</td>
-						<td class="board-content"><button class="more"
-								onclick="window.open('./homeSellDetail(청약 상세주소넣으면 될거같아요).html')">상세보기</button></td>
-					</tr>
-					<tr class="table_row">
-						<td class="board-content">003</td>
-						<td class="board-content"><span style="color: orange">[[${searchValue}]]</span></td>
-						<td class="board-content">전북</td>
-						<td class="board-content title">북악산 오투그란데 더원</td>
-						<td class="board-content">APT</td>
-						<td class="board-content">2023-01-23</td>
-						<td class="board-content"><button class="more"
-								onclick="window.open('./homeSellDetail(청약 상세주소넣으면 될거같아요).html')">상세보기</button></td>
-					</tr>
-					<tr class="table_row">
-						<td class="board-content">002</td>
-						<td class="board-content"><span style="color: orange">[[${searchValue}]]</span></td>
-						<td class="board-content">대전</td>
-						<td class="board-content title">프레나 대전학하1단지</td>
-						<td class="board-content">APT</td>
-						<td class="board-content">2023-01-23</td>
-						<td class="board-content"><button class="more"
-								onclick="window.open('./homeSellDetail(청약 상세주소넣으면 될거같아요).html')">상세보기</button></td>
-					</tr>
-					<tr class="table_row">
-						<td class="board-content">001</td>
-						<td class="board-content"><span style="color: orange">[[${searchValue}]]</span></td>
-						<td class="board-content">충남</td>
-						<td class="board-content title">천안 일봉공원 호반써밋 센트럴파크</td>
-						<td class="board-content">APT</td>
-						<td class="board-content">2023-01-23</td>
-						<td class="board-content"><button class="more"
-								onclick="window.open('./homeSellDetail(청약 상세주소넣으면 될거같아요).html')">상세보기</button></td>
+				<table id="tbl-board" class="board_table_bank">
+					<th:if
+						test="[[${empty homeList}]]">
+							<h5 class="search_result_description" colspan="5">
+							검색 결과가 없습니다.
+							</td>
+						</h5>
+					</th:if>
+						<tr class="table_row table_header_bank">
+							<th class="table-header">번호</th>
+							<th class="table-header">구분</th>
+							<th class="table-header">지역</th>
+							<th class="table-header">주택명</th>
+							<th class="table-header">주택구분</th>
+							<th class="table-header">등록일</th>
+							<th class="table-header">관련정보</th>
+						</tr>
+						<tr class="table_row">
+							<th:if test="${not empty homeList}">
+						</th:if>
+						<th:block th:each="news, status : ${homeList}" >
+								<tr>
+									<td class="board-content"><a href="$/home/homeMain/homeList?no=${home.Home_RealEstateDealNo}"> 
+									${home.RealEstateDealNo}</a></td>
+									<td class="board-content"><a href="$/home/homeMain/homeList?no=${home.Home_RealEstateDealNo}"> 
+									${home.구분}</a></td>
+									<td class="board-content"><a href="$/home/homeMain/homeList?no=${home.Home_RealEstateDealNo}"> 
+									${home.지역}</a></td>
+									<td class="board-content"><a href="$/home/homeMain/homeList?no=${home.Home_RealEstateDealNo}"> 
+									${home.주택명}</a></td>
+									<td class="board-content"><a href="$/home/homeMain/homeList?no=${home.Home_RealEstateDealNo}"> 
+									${home.주택구분}</a></td>
+									<td class="board-content"><a href="$/home/homeMain/homeList?no=${home.Home_RealEstateDealNo}"> 
+									${home.등록일}</a></td>
+									<td class="board-content"><a href="$/home/homeMain/homeList?no=${home.Home_RealEstateDealNo}"> 
+									${home.관련정보}</a></td>
+								</tr>
+								</th:block>
 					</tr>
 				</table>
 				<div class="table-buttons">
@@ -251,83 +199,38 @@
 					<button onclick="" class="table-button">1</button>
 					<button onclick="" class="table-button">&gt;</button>
 					<button onclick="" class="table-button">&gt;&gt;</button>
-				</div>
-
 			</div>
 			<div id="tab-4" class="tab-content">
-				<!--뉴스-->
-				<th:if test="[[${empty newsList1}]]">
-					<tr>
-						<td colspan="5">검색결과가 없습니다.</td>
+			
+			<!--뉴스-->
+				<table id="tbl-board" class="board_table_bank">
+					<th:if
+						test="[[${empty newsList1}]]">
+						<h5 class="search_result_description" colspan="5">
+							검색 결과가 없습니다.
+							</td>
+						</h5>
+					</th:if>
+					<tr class="table_row table_header_bank">
+						<th class="table-header">번호</th>
+						<th class="table-header">구분</th>
+						<th class="table-header">종목이름</th>
 					</tr>
-				</th:if>
-				<table class="board_table_news">
-					<tr class="table_row table_header">
-						<th class="table-header">분류</th>
-						<th class="table-header">제목</th>
-						<th class="table-header">본문</th>
-						<th class="table-header">뉴스회사</th>
-						<th class="table-header">등록일</th>
-					</tr>
-					<tr class="table_row">
-						<td class="board-content_news number">005</td>
-						<td class="board-content_news news_title">출격 대기중인 '<span
-							style="color: orange">[[${value}]]</span>'대어 업계선 "상반기 분양 어려울 수도"
-						</td>
-						<td class="board-content_news news_contents"><span>‘장위자이
-								레디언트’, ‘마포더클래시’ 등 서울 강북의 <span style="color: orange">청약</span>
-								대어들이 연이어 기대치에 못 미치는 성적을 내자 다음 주자인 이문·휘경뉴타운</td>
-						<td class="board-content_news">조선비즈</td>
-						<td class="board-content_news">2023-01-23</td>
-					</tr>
-					<tr class="table_row">
-						<td class="board-content_news number">004</td>
-						<td class="board-content_news news_title">분양 한파 성큼.. 올해 <span
-							style="color: orange">[[${value}]]</span> 미달 단지 속출 중
-						</td>
-						<td class="board-content_news news_contents">새해 들어 분양시장에도 한파가
-							몰아치고 있다. 새해 분양한 아파트의 <span style="color: orange">청약</span>이 연이어
-							부진을 겪는 것.
-						</td>
-						<td class="board-content_news">뉴데일리</td>
-						<td class="board-content_news">2023-01-22</td>
-					</tr>
-					<tr class="table_row">
-						<td class="board-content_news number">003</td>
-						<td class="board-content_news news_title">비수도권 <span
-							style="color: orange">[[${value}]]</span> 미달 속출.. 서울 규제 완화까지 설상가상
-						</td>
-						<td class="board-content_news news_contents">새해 분양에 나선 비수도권
-							지역 아파트 단지 대다수의 <span style="color: orange">청약</span> 경쟁률이 1대 1을
-							밑돈 것으로 나타났다. 서울 주요 지역에 대한 규제가 한꺼번에 풀리면서
-						</td>
-						<td class="board-content_news">한겨례</td>
-						<td class="board-content_news">2023-01-22</td>
-					</tr>
-					<td class="board-content_news number">002</td>
-					<td class="board-content_news news_title">수도권 '규제완화'백약이 무효 '<span
-						style="color: orange">[[${value}]]</span> 한파'
-					</td>
-					<td class="board-content_news news_contents">새해 들어 분양에 나선
-						경기·인천 등 수도권 공동주택 단지들이 청약시장에서 잇따라 저조한 성적표를 받아들고 있다. 정부의 규제완화책에도
-						청약시장 한파가 이어지자</td>
-					<td class="board-content_news">경기일보</td>
-					<td class="board-content_news">2023-01-22</td>
-					</tr>
-					<tr class="table_row">
-						<td class="board-content_news number">001</td>
-						<td class="board-content_news news_title"><span
-							style="color: orange">[[${value}]]</span> 한 사람이 승자? 미달 났던 공모주의
-							대반전</td>
-						<td class="board-content_news news_contents">새해 첫 공모주로 주목받은
-							반도체 특수가스 제조사 티이엠씨의 일반<span style="color: orange">청약</span> 경쟁률은 총
-							45만주를 모집했지만, 주문은 36만6230주 들어오는 데 그쳤습니다. 숫자에서 알 수 있다시피 청약 미달사태가
-							벌어진 겁니다. 앞서 진행됐던 기관 수요예측에서도 33대 1이라는 저조한 성적표를 받았지만, 증권업계에서는 "미달까지
-							갈 줄은 몰랐다"는 반응입니다.
-						</td>
-						<td class="board-content_news">한국경제</td>
-						<td class="board-content_news">2023-01-22</td>
-					</tr>
+					<th:if test="[[${not empty newsList1}]]">
+						<th:block>
+							<tr th:each="news, status : ${newsList1}">
+								<a th:href="${news.originallink}">
+									<td class="board-content"><a
+										href="$/news/newsMain/view?no=${news.News_nno}">${news.nno}</a></td>
+									<td class="board-content"><a
+										href="$/news/newsMain/view?no=${news.News_nno}">${news.type}</a>
+										</td>
+									<td class="board-content"><a
+										href="$/news/newsMain/view?no=${news.News_nno}">${news.description}</a>
+								</td>
+							</tr>
+						</th:block>
+					</th:if>
 				</table>
 				<div class="table-buttons">
 					<button onclick="" class="table-button">&lt;&lt;</button>
@@ -340,10 +243,12 @@
 			<div id="tab-5" class="tab-content">
 				<!-- 자유게시판 -->
 				<table id="tbl-board" class="board_table_bank">
-					<th:if test="[[${empty freeList}]]">
-						<tr>
-							<td colspan="5">검색결과가 없습니다.</td>
-						</tr>
+					<th:if
+						test="[[${empty freeList}]]">
+						<h5 class="search_result_description" colspan="5">
+							검색 결과가 없습니다.
+							</td>
+						</h5>
 					</th:if>
 					<tr class="table_row table_header">
 						<th class="table-header">번호</th>
@@ -355,11 +260,11 @@
 						<th:block th:each="board, status : ${freeList}">
 							<tr>
 								<td class="board-content"><a
-									href="$/localhost/community/freeList?no=${board.bNo}">${board.bNo}</a></td>
+									href="$/localhost/community/freeList?no=${board.board_bNo}">${board.bNo}</a></td>
 								<td class="board-content"><a
-									href="$localhost/community/freeList?no=${board.bNo}">${board.type}</a></td>
+									href="$localhost/community/freeList?no=${board.board_bNo}">${board.type}</a></td>
 								<td class="board-content"><a
-									href="$localhost/community/freeList?no=${board.bNo}">${board.title}</a></td>
+									href="$localhost/community/freeList?no=${board.board_bNo}">${board.title}</a></td>
 								<td class="board-content"><fmt:formatDate
 										pattern="yyyy-MM-dd" value="${board.createDate}" /></td>
 							</tr>
@@ -537,35 +442,42 @@
 
 	<th:block th:replace="layout/scripts :: scripts"></th:block>
 
-	<script> 
+	<script>
+		// Background images for sections
+		$('[data-background]').each(
+				function() {
+					$(this).css('background-image',
+							'url(' + $(this).attr('data-background') + ')');
+				});
+		$('[data-background-inner]').each(
+				function() {
+					$(this).find('.inner-bg').css(
+							'background-image',
+							'url(' + $(this).attr('data-background-inner')
+									+ ')');
+				});
+		$('[data-background-color]').each(
+				function() {
+					$(this).css('background-color',
+							$(this).attr('data-background-color'));
+				});
+		$('[data-color]').each(function() {
+			$(this).css('color', $(this).attr('data-color'));
+		});
 
-// Background images for sections
-$('[data-background]').each(function () {
-$(this).css('background-image', 'url(' + $(this).attr('data-background') + ')');
-});
-$('[data-background-inner]').each(function () {
-    $(this).find('.inner-bg').css('background-image', 'url(' + $(this).attr('data-background-inner') + ')');
-});
-$('[data-background-color]').each(function () {
-    $(this).css('background-color', $(this).attr('data-background-color'));
-});
-$('[data-color]').each(function () {
-    $(this).css('color', $(this).attr('data-color'));
-});
+		$(document).ready(function() {
 
-$(document).ready(function(){
-	
-	$('ul.tabs li').click(function(){
-		var tab_id = $(this).attr('data-tab');
+			$('ul.tabs li').click(function() {
+				var tab_id = $(this).attr('data-tab');
 
-		$('ul.tabs li').removeClass('current');
-		$('.tab-content').removeClass('current');
+				$('ul.tabs li').removeClass('current');
+				$('.tab-content').removeClass('current');
 
-		$(this).addClass('current');
-		$("#"+tab_id).addClass('current');
-	})
+				$(this).addClass('current');
+				$("#" + tab_id).addClass('current');
+			})
 
-});
-</script>
+		});
+	</script>
 </body>
 </html>
