@@ -157,8 +157,6 @@
 		 AND itmsNm LIKE '%${itmsNm}%'
 		</if>
 		ORDER BY srtnCd ASC LIMIT ${limit} OFFSET ${offset}
-    	
-
 	</select>
 	
 	<select id="selectAllStockCount" parameterType="map" resultType="int">
