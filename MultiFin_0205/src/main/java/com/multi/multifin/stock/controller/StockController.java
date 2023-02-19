@@ -12,11 +12,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.multi.multifin.account.model.service.AccountService;
+import com.multi.multifin.account.model.vo.Account;
 import com.multi.multifin.common.util.PageInfo;
+import com.multi.multifin.investedstock.model.service.InvestedStockService;
+import com.multi.multifin.investedstock.model.vo.InvestedStock;
+import com.multi.multifin.member.model.vo.Member;
 import com.multi.multifin.stock.model.service.StockPriceService;
 import com.multi.multifin.stock.model.vo.ExchangeRate;
 import com.multi.multifin.stock.model.vo.FundProductInfo;
@@ -27,11 +33,18 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequestMapping("/stock")
+@SessionAttributes("loginMember")
 @Controller
 public class StockController {
 	
 	@Autowired
 	private StockPriceService service;
+	
+	@Autowired
+	private InvestedStockService isService;
+	
+	@Autowired
+	private AccountService aService;
 	
 	@GetMapping("/stockMain")
 	public String stockMainPage(Model model) {
@@ -299,7 +312,8 @@ public class StockController {
 	}
 	
 	@GetMapping("/stockTest")
-	public String stockTest(Model model, @RequestParam Map<String, String> paramMap) {
+	public String stockTest(Model model, @SessionAttribute(name = "loginMember", required = false) Member loginMember,
+			@RequestParam Map<String, String> paramMap) {
 		
 		log.info("리스트 요청");
 		Map<String, String> KospiTop5 = new HashMap<String, String>();
@@ -333,6 +347,24 @@ public class StockController {
 		
 		model.addAttribute("KOSPI", KOSPI);
 		model.addAttribute("KOSDAQ", KOSDAQ);
+		
+		try {
+			Map<String, String> myStockMap = new HashMap<String, String>();
+			myStockMap.put("id", loginMember.getId());
+			List<InvestedStock> myStock = isService.getInvestedStockList(myStockMap);
+			model.addAttribute("myStock", myStock);
+		} catch (Exception e) {
+			
+		}
+		
+		try {
+			Map<String, String> myAccountMap = new HashMap<String, String>();
+			myAccountMap.put("id", loginMember.getId());
+			List<Account> myAcc = aService.getAccountList(myAccountMap);
+			model.addAttribute("myAcc", myAcc);
+		} catch (Exception e) {
+			
+		}
 		
 		log.info("환율 테이블 요청: 원하는 국가만 가져옴");
 		ExchangeRate USD = service.findExchangeRate("USD");

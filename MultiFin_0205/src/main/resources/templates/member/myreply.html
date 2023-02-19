@@ -72,34 +72,39 @@
 													</tr>
 												</th:block>
 												<th:block th:if="${list != null}">
-														<tr th:each="list, number: ${list}" th:href="|/community/view?no=${list.bNo}|">
-															<td class="board-content">[[${list.content}]]</td>
+												
+														<tr th:each="list, number: ${list}" > 
+															<td class="board-content" th:onclick="|directView('${list.bNo}')|">[[${list.content}]]</td>
 															
-															<td class="board-content" th:text="${#dates.format(list.createDate, 'yyyy/MM/dd')}"/></td>
+															<td class="board-content" th:onclick="|directView('${list.bNo}')|" th:text="${#dates.format(list.createDate, 'yyyy/MM/dd')}"/></td>
 															
-															<td class="board-content board-title">
-															[[${list.title}]]
+															<td class="board-content board-title" th:onclick="|directView('${list.bNo}')|">
+														 		[[${list.title}]]
 															</td>
 															<td class="board-content">
-																<button class="del-btn" th:value="${list.bNo}" th:onclick="|deletePage('${list.bNo}')|">삭제</button>
+																<button class="del-btn" th:value="${list.rNo}" th:onclick="|deletePage('${list.rNo}')|">삭제</button>
 															</td>
+															
 														</tr>
 												</th:block>
                                            </table>
+                                           
+                                           <!-- 페이징 시작 -->
 								            <div class="table-buttons" align="center">
 								                <button onclick="movePage('/member/myreply?page=1');" class="table-button">&lt;&lt;</button>
-								                <button th:onclick="|movePage('/member/mywrite?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
+								                <button th:onclick="|movePage('/member/myreply?page=${pageInfo.prevPage}');|" class="table-button">&lt;</button>
 								                <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
 													<th:block th:if="${status.current == pageInfo.currentPage}">
 								                		<button class="table-button" disabled>[[${status.current}]]</button>
 								                	</th:block>
 								                	<th:block th:if="${status.current != pageInfo.currentPage && status.current!=0}">
-								                		<button class="table-button" th:onclick="|movePage('/member/mywrite?page=${status.current}');|">[[${status.current}]]</button>
+								                		<button class="table-button" th:onclick="|movePage('/member/myreply?page=${status.current}');|">[[${status.current}]]</button>
 								                	</th:block>
 								                </th:block>
-								                <button th:onclick="|movePage('/member/mywrite?page=${pageInfo.nextPage}');|" class="table-button">&gt;</button>
-								                <button th:onclick="|movePage('/member/mywrite?page=${pageInfo.maxPage}');|" class="table-button">&gt;&gt;</button>
+								                <button th:onclick="|movePage('/member/myreply?page=${pageInfo.nextPage}');|" class="table-button">&gt;</button>
+								                <button th:onclick="|movePage('/member/myreply?page=${pageInfo.maxPage}');|" class="table-button">&gt;&gt;</button>
 								            </div>
+								             <!-- 페이징 끝 -->
                                         </section>
                                     </div>
                                 </div>
@@ -117,16 +122,20 @@
 		location.href = encodeURI(pageUrl);	
 	}
 	
-	function deletePage(bno){
+	function deletePage(rno){
 		if(confirm("정말로 게시글을 삭제 하시겠습니까?")){
-			location.replace("/member/boardDelete?boardNo="+bno);
+			location.replace("/member/replyDelete?replyNo="+rno);
 		}
 	}
 	
 	function deleteAllPage(){
 		if(confirm("정말로 게시글을 삭제 하시겠습니까?")){
-			location.replace("/member/boardAllDelete");
+			location.replace("/member/replyAllDelete");
 		}
+	}
+	
+	function directView(bno){
+		location.replace("/community/view?no="+bno);
 	}
 	
 </script>
