@@ -43,6 +43,10 @@
 	</section>
 	<section class="news mt-7 mb-6">
 		<div class="container p-0 m-0">
+			<th:block th:if="${newsList1.size == 0}">
+				<h4 class="text-center">조회된 결과가 없습니다.</h4>			
+			</th:block>
+			<th:block th:if="${newsList1.size != 0}">
 				<div class="news_main animate-up-3">
 					<div class="news_pic ml-3 mr-5">
 						<a href="https://www.ciokorea.com/news/278281">
@@ -57,25 +61,32 @@
 						</a>
 					</div>
 				</div>
-			</div>
-			<div class="news_containers mt-6">
-				<th:block th:each="news, status : ${newsList2}" >
-					<div class="mb-3 newsCard">
-		                <a th:href="${news.originallink}" class="card border-light animate-up-3 shadow-soft p-4 pl-5 pr-5">     
-					        <div class="news_sub_container">
-								<div class="news_pic_sub mr-5">
-									<img class="middle-news" th:src="|/assets/img/news/news${status.count}.jpg|" alt="Dashboard Preview">
-								</div>
-								<div class="news_article_sub">
-									<img class="news_sub mb-3" th:src="|/assets/img/newslogo/news${status.count}.png|"> 
-									<h4>[[${news.title}]]<h4>
-									<p>[[${news.description}]]</p>
-								</div>
+			</th:block>
+		</div>
+		<div class="news_containers mt-6">
+			<th:block th:if="${newsList2.size == 0}">
+				<!-- 조회 결과가 없습니다 -->
+			</th:block>
+			
+			<th:block th:if="${newsList2.size != 0}">
+			<th:block th:each="news, status : ${newsList2}" >
+				<div class="mb-3 newsCard">
+	                <a th:href="${news.originallink}" class="card border-light animate-up-3 shadow-soft p-4 pl-5 pr-5">     
+				        <div class="news_sub_container">
+							<div class="news_pic_sub mr-5">
+								<img class="middle-news" th:src="|/assets/img/news/news${status.count}.jpg|" alt="Dashboard Preview">
 							</div>
-		                </a>
-	          	 	</div>
-	          	 </th:block>
-			</div>
+							<div class="news_article_sub">
+								<img class="news_sub mb-3" th:src="|/assets/img/newslogo/news${status.count}.png|"> 
+								<h4>[[${news.title}]]<h4>
+								<p>[[${news.description}]]</p>
+							</div>
+						</div>
+	                </a>
+          	 	</div>
+          	 </th:block>
+          	 </th:block>
+		</div>
 	</section>
 	<section class="movie-info mt-6 mb-6">
 		<div class="bottom_news">
