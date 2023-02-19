@@ -150,15 +150,16 @@
 	
 	<!-- MRKTTOTAMT(시가총액)을 기준으로 내림차순 -->
 	<select id="selectAllStock" resultMap="StockPriceResultMap" parameterType="map">
-		select sno, basDt, srtnCd, isinCd, itmsNm, mrktCtg, clpr, vs, fltRt, mkp, hipr, lopr, trqu, trPrc, lstgStCnt, mrktTotAmt 
-		from (select sno, basDt, LPAD(srtnCd, 6, 0) as srtnCd, isinCd, itmsNm, mrktCtg, clpr, vs, fltRt, mkp, hipr, lopr, trqu, trPrc, lstgStCnt, mrktTotAmt
-		from stockPrice where (srtnCd, basDt) in (select srtnCd, max(basDt) as basDt from stockPrice group by StockPrice.srtnCd)
-    	order by basDt desc) stockPrice
-    	<if test="itmsNm != null">
-		 WHERE itmsNm LIKE '%${itmsNm}%'
+		SELECT sno, basDt, srtnCd, isinCd, itmsNm, mrktCtg, clpr, vs, fltRt, mkp, hipr, lopr, trqu, trPrc, lstgStCnt, mrktTotAmt
+		 FROM STOCKPRICE 
+		WHERE BASDT IN (SELECT MAX(BASDT) FROM STOCKPRICE)
+		<if test="itmsNm != null">
+		 AND itmsNm LIKE '%${itmsNm}%'
 		</if>
-    	group by stockPrice.srtnCd 
-    	ORDER BY srtnCd ASC LIMIT ${limit} OFFSET ${offset}
+		GROUP BY SRTNCD
+		ORDER BY srtnCd ASC LIMIT ${limit} OFFSET ${offset}
+    	
+
 	</select>
 	
 	<select id="selectAllStockCount" parameterType="map" resultType="int">
