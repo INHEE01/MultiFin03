@@ -152,7 +152,7 @@
 	<select id="selectAllStock" resultMap="StockPriceResultMap" parameterType="map">
 		select sno, basDt, srtnCd, isinCd, itmsNm, mrktCtg, clpr, vs, fltRt, mkp, hipr, lopr, trqu, trPrc, lstgStCnt, mrktTotAmt 
 		from (select sno, basDt, LPAD(srtnCd, 6, 0) as srtnCd, isinCd, itmsNm, mrktCtg, clpr, vs, fltRt, mkp, hipr, lopr, trqu, trPrc, lstgStCnt, mrktTotAmt
-		from stockPrice where (srtnCd, basDt) in (select srtnCd, max(basDt) as basDt from stockPrice group by srtnCd)
+		from stockPrice where (srtnCd, basDt) in (select srtnCd, max(basDt) as basDt from stockPrice group by StockPrice.srtnCd)
     	order by basDt desc) stockPrice
     	<if test="itmsNm != null">
 		 WHERE itmsNm LIKE '%${itmsNm}%'
