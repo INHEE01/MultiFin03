@@ -14,6 +14,5 @@ public class Account {
 	private int mNo              ;	//회원 고유번호
 	private int totalAsset       ;	//보유 자산
 	private int won              ;	//보유 중인 한화
-	private long totalAcc        ;	//평가 손익
-	private long totalProfit     ;	//계좌번호
+	private long totalProfit     ;	//평가 손익
 }

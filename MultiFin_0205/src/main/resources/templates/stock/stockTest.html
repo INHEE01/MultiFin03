@@ -103,7 +103,7 @@
                     <h4 class="card_title"> 보유주식</h4>
                     <div class="test_info_title">
                         <h3 class="money">1,010,000원</h3>
-                        <div class="account">내 계좌 보기</div>
+                        <div th:onclick="movePage('/member/mypage');" class="account">내 계좌 보기</div>
                     </div>
                     <div class="companies">
                         <h5 class="in-area font-weight-bolder">국내주식</h5>
@@ -206,58 +206,35 @@
     </section>
    <section class="bg-white  stock_description_container">
     <div class="card shadow-soft stock_details">     
-        <h4 class="stock_details_title">체결 내역</h4>
+        <h4 class="stock_details_title">나의 체결 내역</h4>
         <table class="stock_table">
           <tr class="table_row table_header">
             <th class="table-header">주문번호</th>
             <th class="table-header" >날짜</th>
             <th class="table-header">종목코드</th>
             <th class="table-header">종목명</th>
-            <th class="table-header">구분</th>
             <th class="table-header">가격</th>
             <th class="table-header">수량</th>
             <th class="table-header">상태</th>
           </tr>
-          <tr class="table_row">
-            <td class="board-content">01</td>
-            <td class="board-content">2023-01-13</td>
-            <td class="board-content">005930</td>
-            <td class="board-content">삼성전자</td>
-            <td class="board-content buy">매수</td>
-            <td class="board-content">61,200원</td>
-            <td class="board-content">12주</td>
-            <td class="board-content">체결</td>
-          </tr>
-          <tr class="table_row">
-            <td class="board-content">02</td>
-            <td class="board-content">2023-01-15</td>
-            <td class="board-content">005930</td>
-            <td class="board-content">삼성전자</td>
-            <td class="board-content sell">매도</td>
-            <td class="board-content">60,000원</td>
-            <td class="board-content">2주</td>
-            <td class="board-content">체결</td>
-          </tr>
-          <tr class="table_row">
-            <td class="board-content">03</td>
-            <td class="board-content">2023-01-16</td>
-            <td class="board-content">127938</td>
-            <td class="board-content">네이버</td>
-            <td class="board-content buy">매수</td>
-            <td class="board-content">61,200원</td>
-            <td class="board-content">12주</td>
-            <td class="board-content">체결</td>
-          </tr>
-          <tr class="table_row">
-            <td class="board-content">04</td>
-            <td class="board-content">2023-01-16</td>
-            <td class="board-content">127938</td>
-            <td class="board-content">네이버</td>
-            <td class="board-content buy">매수</td>
-            <td class="board-content">61,200원</td>
-            <td class="board-content">12주</td>
-            <td class="board-content">미체결</td>
-          </tr>
+          <th:block th:if="${myStock == null}">
+			<tr>
+				<td colspan="7" style="text-align: center;"> 체결 내역이 없습니다.</td>
+			</tr>
+			</th:block>
+			<th:block th:if="${myStock != null}">
+				<tr th:each="myStock, number: ${myStock}" class="table_row">
+					<td th:text="${#numbers.formatInteger(myStock.orderNum, 8)}" class="board-content"></td>										
+					<td th:text="${#dates.format(myStock.orderDt, 'yyyy-MM-dd')}" class="board-content"></td>											
+					<td th:text="${#numbers.formatInteger(myStock.stockCode, 6)}" class="board-content"></td>
+					<td th:text="${myStock.stockNum}" class="board-content"></td>																						
+					<td th:if="${myStock.tradeStat == 'B'}" class="board-content">매수</td>				
+					<td th:text="${myStock.price}" class="board-content"></td>
+					<td th:text="${myStock.cnt}" class="board-content"></td>
+					<td th:text="${myStock.tradeStat}" class="board-content"></td>																						
+				</tr>
+			</th:block>
+          
         </table>
         <div class="table-buttons">
             <button onclick="" class="table-button">&lt;&lt;</button>
