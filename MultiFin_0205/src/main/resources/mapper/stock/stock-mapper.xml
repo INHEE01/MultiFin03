@@ -152,11 +152,10 @@
 	<select id="selectAllStock" resultMap="StockPriceResultMap" parameterType="map">
 		SELECT sno, basDt, srtnCd, isinCd, itmsNm, mrktCtg, clpr, vs, fltRt, mkp, hipr, lopr, trqu, trPrc, lstgStCnt, mrktTotAmt
 		 FROM STOCKPRICE 
-		WHERE BASDT IN (SELECT MAX(BASDT) FROM STOCKPRICE)
+		WHERE BASDT = (SELECT MAX(BASDT) FROM STOCKPRICE) AND SRTNCD > 0
 		<if test="itmsNm != null">
 		 AND itmsNm LIKE '%${itmsNm}%'
 		</if>
-		GROUP BY SRTNCD
 		ORDER BY srtnCd ASC LIMIT ${limit} OFFSET ${offset}
     	
 
@@ -167,7 +166,7 @@
 		COUNT(distinct s.srtnCd) 
 		FROM stockPrice as s
 		<if test="itmsNm != null">
-		 WHERE s.itmsNm LIKE '%${itmsNm}%'
+		 WHERE s.itmsNm LIKE '%${itmsNm}%' AND SRTNCD > 0
 		</if>
 	</select>
 </mapper>
