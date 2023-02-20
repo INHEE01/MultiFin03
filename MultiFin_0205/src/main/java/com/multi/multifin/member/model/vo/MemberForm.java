@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MemberForm {
 	@NotNull(message = "id가 입력되지 않았습니다.")
-	@Size(max = 6, min = 2, message = "id를 2글자 이상, 6글자 미만 입력바랍니다.")
+	@Size(max = 6, min = 2, message = "닉네임을 2글자 이상, 6글자 미만 입력바랍니다.")
 	private String id;
 	
 	@NotNull(message = "pw가 입력되지 않았습니다.")

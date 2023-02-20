@@ -5,14 +5,13 @@
 	<title>MultiFin:회원가입</title>
 	<!-- 현재 페이지에서만 쓰는 css, script -->
 <style>
-    .overlay-soft-dark:before{height:941px; }
     .title{  font-family: 'IBM Plex Sans KR', sans-serif;}
     .here{font-weight: 600;}
 </style>
 </head>
 <body>
     <main>
-        <section class="align-items-center section-image overlay-soft-dark pb-6" data-background="../../assets/img/common/form-image.jpg">
+        <section class="align-items-center section-image pb-6" data-background="../../assets/img/common/form-image.jpg">
             <div class="container">
                 <div class="row justify-content-center">
                     <div style="height:150px" class="col-12">
@@ -21,15 +20,15 @@
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="signin-inner mt-3 mt-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-                            <form action="/member/sign-up" method="post">
+                            <form action="/member/sign-up" id="signup" method="post">
                             <!-- 이메일 입력 Form -->
-                                <div class="form-group">
+                                <div class="form-group" >
                                     <label for="exampleInputIcon4"><span class="title"><span class="title here">이메일</span></span></label>
                                     <div class="input-group mb-4">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
                                         </div>
-                                        <input class="form-control" id="newEmail" placeholder="이메일을 입력해주세요." name="email" type="email" aria-label="email adress">
+                                        <input class="form-control" id="newEmail" style="width:150px;" placeholder="이메일을 입력해주세요." name="email" type="email" aria-label="email adress" >
                                     </div>
                                 </div>
                                 
@@ -79,18 +78,26 @@
                                 </div>
                                 <!-- End of Form -->
                                 
-                                <!-- 주소 입력 Form -->
-                                <div class="form-group">
-                                    <label for="exampleInputIcon4"><span class="title"><span class="title here">주소</span></span></label>
-                                    <div class="input-group mb-4">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><span class="fas fa-envelope"></span></span>
+								<!-- 주소 입력 Form -->			
+                                <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                   <label for="zip" class="title here">주소</label>
+                                                   <div class="address"  style="width:400px; overflow: hidden; ">
+                                                    	<input type="text" class="form-control mb-3 mr-3" style="width:150px; float:left;" name="address" id="postcode" placeholder="우편번호">
+                                                    	<input type="button" onclick="execDaumPostcode()"  class="find-btn mb-3" value="주소 찾기"
+                                                    	style="width:100px; height:44px; border-radius:7px; font-weight: 500 ; margin-left:10px; float:right; color: white; background-color: #0d1b48; "></input>
+                                                    </div>
+                                                    <input 
+                                                    class="form-control mb-3 address_detail" type="text" name="address" id="roadAddress" 
+                                                    placeholder="주소"style="width:400px;" >
+                                                  
+                                                	<span id="guide" style="color:#999; display:none"></span>
+	                                                <input class="form-control" style="width:400px;" name="address" id="detailAddress" type="text" placeholder="상세 주소입력" >
+                                                </div>
+                                            </div>
                                         </div>
-                                        <input class="form-control" id="exampleInputIcon4"  placeholder="주소를 입력해주세요." name="address" type="text" aria-label="text">
-                                    </div>
-                                </div>
                                 <!-- End of Form -->
-                                
                                 <!-- 비밀번호 입력 Form -->
                                 <div class="form-group">
                                     
@@ -130,13 +137,13 @@
                                     </div>
                                     <!-- End of Form -->
                                     <div class="form-check mb-4">
-                                        <input class="form-check-input" type="checkbox" value="" id="terms" required>
+                                        <input class="form-check-input" type="checkbox"  id="myCheckbox" required>
                                         <label class="form-check-label" for="terms">
                                             <span class="title">다음 <a class="text-secondary title" href="#"><b class="title">약관</b></a>에 동의합니다.</span>
                                         </label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-block btn-primary"><span class="title">가입하기</span></button>
+                                <button type="submit" class="btn btn-block btn-primary" id="signup" onclick="boxchecking()" ><span class="title">가입하기</span></button>
                             </form>
                             
                             <div class="d-block d-sm-flex justify-content-center align-items-center mt-4">
@@ -171,6 +178,7 @@
 	    });
 	});
 	
+	
 	// email 중복을 확인하는 AJAX 코드 
     function checkDuplicateFunc() {
     	let email = $("#newEmail").val().trim();
@@ -199,6 +207,7 @@
     				console.log(data);
     				if(data.validate === true){
     					alert("이미 사용중인 이메일입니다.")
+    					
     				} else{
     					alert("사용 가능합니다.")
     				}
@@ -209,12 +218,26 @@
     			}
     	});
     }
-	    
-	    
+	
+    function boxchecking() {
+		// 체크박스 요소를 가져옴
+		var checkbox = document.getElementById("myCheckbox");
+
+		// 체크박스가 선택되지 않은 경우
+		if (checkbox.checked===false) {
+			alert("약관 동의는 필수사항입니다.")
+			return;
+		}
+    } 
+    
 </script>
+
             
         </section>
     </main>
 <th:block th:replace="layout/scripts :: scripts"></th:block>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/assets/js/mypage.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 </body>
 </html>
