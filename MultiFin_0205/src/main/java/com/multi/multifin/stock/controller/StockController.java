@@ -444,7 +444,7 @@ public class StockController {
 		int page = 1;
 		int totalP = 0;	// 총 자산
 		int cnt = 0;	// 보유중인 주 개수
-		
+		int baseOfStockPrice = 0;	//  cnt * 현재주식가(64000원)
 		// 탐색할 맵을 선언
 		try {
 			String searchValue = paramMap.get("searchValue");
@@ -480,6 +480,8 @@ public class StockController {
 				totalP +=check.get(i).getTotalPrice();
 				System.out.println(totalP);
 			}
+			
+			
 			model.addAttribute("totalP", totalP);
 			
 		} catch (Exception e) {}
@@ -490,12 +492,18 @@ public class StockController {
 			List<InvestedStock> tot_count = isService.getInvestedStockList(cMap);
 			
 			for (int i = 0; i < tot_count.size(); i++) {
-				cnt += tot_count.get(i).getCnt();
+				if(tot_count.get(i).getTradeStat().equals("매수")) {
+					cnt += tot_count.get(i).getCnt();
+				}else {
+					cnt -= tot_count.get(i).getCnt();
+				}
 			}
+			System.out.println("cnt: " + cnt);
+			baseOfStockPrice = cnt * 64000;
 			model.addAttribute("cnt", cnt);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+			model.addAttribute("base", baseOfStockPrice);
+		} catch (Exception e) {}
+		
 		
 		try {
 			Map<String, String> myStockMap = new HashMap<String, String>();
@@ -518,7 +526,6 @@ public class StockController {
 			Map<String, String> getId = new HashMap<String, String>();
 			getId.put("id", loginMember.getId());
 			List<InvestedStock> nowStock = isService.getInvestedStockList2(getId);
-			System.out.println("여기야!!!!!!!!!!!!!!!"  + nowStock.toString());
 			model.addAttribute("nowStock", nowStock);
 		} catch (Exception e) {	}
 		
