@@ -334,32 +334,62 @@
 	        <th:block th:if="${check} != '2'">
 	            <div id="tab-3" class="tab-content">
 	        </th:block>
-				<th:block th:if="${newsList1.size != 0}">
+				<th:block th:if="${homeSize != 0}">
 					<h5 class="search_result_description">
-						검색 결과 <sapn style="color: orange;"> [[${newsList1.size}]]</sapn>건
+						검색 결과 <sapn style="color: orange;"> [[${homeSize}]]</sapn>건
 					</h5>
 				</th:block>
 				<table id="tbl-board" class="board_table_bank">
-					<th:block th:if="${newsList1.size == 0}">
+					<th:block th:if="${homeSize == 0}">
 						<tr>
 							<td colspan="6" style="text-align: center;">검색 결과가 없습니다.</td>
 						</tr>
 					</th:block>
-					<th:block th:if="${newsList1.size != 0}">
-						<tr class="table_row table_header_bank">
-							<th class="news_title">번호</th>
-							<th class="news_title">구분</th>
-							<th class="news_title">지역</th>
-							<th class="news_title">주택명</th>
-							<th class="news_title">주택구분</th>
-							<th class="news_title">등록일</th>
-							<th class="news_title">관련정보</th>
-						</tr>
-						<tr th:each="news, number : ${newsList1}">
-							<td class="board_table_news">[[${number.index}+1]]</td>
-							<td class="board_table_news">[[${news.title}]]</td>
-							<td th:onclick="|location.href='@{${news.originallink}}'|">바로가기</td>
-						</tr>
+					<th:block th:if="${Aptlist.size != 0}">
+							<tr><td colspan="6" class="h5" style="height: 100px;vertical-align: bottom;line-height: 60px;border-top: none;">청약</td></tr>
+							<tr class="table_row table_header_bank">
+								<th class="table_header_bank">공급유형</th>
+								<th class="table_header_bank">주택명</th>
+								<th class="table_header_bank">모집공고일</th>
+								<th class="table_header_bank">홈페이지</th>
+							</tr>
+							<tr class="table_row" th:each="Aptlist, number : ${Aptlist}">
+								<td class="board-content_bank">APT</td>
+								<td class="board-content_bank">[[${Aptlist.houseNm}]]</td>
+								<td class="board-content_bank">[[${Aptlist.rcritPblancDe}]]</td>
+								<td class="board-content_bank">
+									<a class="address"th:href="${Aptlist.pblancUrl}"  target="_blank">
+		                                <span class="adress_decription"> 
+		                                    <i style="padding-top: 3px; margin-right: 10px;" class="fas fa-home"></i>
+		                                    홈페이지
+		                                </span>
+		                            </a>
+								</td>
+							</tr>
+						</th:block>
+					<th:block th:if="${homeSize != 0}">
+						<th:block th:if="${homeList.size != 0}">
+							<tr><td colspan="6" class="h5" style="height: 100px;vertical-align: bottom;line-height: 60px;border-top: none;">매물</td></tr>
+							<tr class="table_row table_header_bank">
+								<th class="table_header_bank">건축년도</th>
+								<th class="table_header_bank">아파트명</th>
+								<th class="table_header_bank">상세위치</th>
+								<th class="table_header_bank">상세정보</th>
+							</tr>
+							<tr class="table_row" th:each="homeList, number : ${homeList}">
+								<td class="board-content_bank">[[${homeList.build_Year}]]년</td>
+								<td class="board-content_bank">[[${homeList.apartment_Name}]]</td>
+								<td class="board-content_bank">[[${homeList.dong}]]-[[${homeList.jibun}]]/  [[${homeList.Floor}]]층</td>
+								<td class="board-content_bank">
+									<a class="address"th:href="@{/home/homeSellDetail(RealEstateDealNo=${homeList.RealEstateDealNo})}">
+	                                <span class="adress_decription"> 
+	                                    <i style="padding-top: 3px; margin-right: 10px;" class="fas fa-home"></i>
+	                                    상세정보 이동하기
+	                                </span>
+	                            </a>
+								</td>
+							</tr>
+						</th:block>
 					</th:block>
 				</table>
 			</div>

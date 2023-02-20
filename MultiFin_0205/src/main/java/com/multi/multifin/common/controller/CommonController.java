@@ -1,5 +1,6 @@
 package com.multi.multifin.common.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,12 @@ import com.multi.multifin.bank.model.vo.LoanRentHouse;
 import com.multi.multifin.board.model.service.BoardService;
 import com.multi.multifin.board.model.vo.Board;
 import com.multi.multifin.common.util.PageInfo;
+import com.multi.multifin.home.model.service.HomeBlueService;
+import com.multi.multifin.home.model.service.HomeService;
+import com.multi.multifin.home.model.vo.Aptdetail;
+import com.multi.multifin.home.model.vo.Home;
+import com.multi.multifin.home.model.vo.OfficeDetail;
+import com.multi.multifin.home.model.vo.RemainDetail;
 import com.multi.multifin.news.naverapi.NaverSearchAPI;
 import com.multi.multifin.news.naverapi.News;
 import com.multi.multifin.stock.model.service.StockPriceService;
@@ -64,10 +71,19 @@ public class CommonController {
 	private StockPriceService fundService;
 	
 	@Autowired
+	private HomeService homeService;
+
+	@Autowired
+	private HomeBlueService blueService;
+	
+	@Autowired
 	private BoardService boardService;
 	
 	@RequestMapping("/searchTotal")
-	public String searchTotal(Model model, @RequestParam("searchValue") String param, @RequestParam Map<String, String> paramMap) {
+	public String searchTotal(Model model, @RequestParam("searchValue") String param, @RequestParam Map<String, String> paramMap,
+			@RequestParam Map<String, Object> paramMapHome,
+			@RequestParam(required =  false) List<String> locationCheck,
+			@RequestParam Map<String, Object> searchMapHome) {
 		
 		log.info("통합검색 결과페이지 요청");
 		model.addAttribute("searchValue", param);
@@ -191,16 +207,74 @@ public class CommonController {
 		PageInfo pageInfo = new PageInfo(stockPage, 5, stockCount, 10);
 		List<StockPrice> stockList = spService.getStockList(pageInfo, paramMap);
 		
-		System.out.println(stockList.size());
 		model.addAttribute("stockCount", stockCount);
 		model.addAttribute("stockList", stockList);
 		model.addAttribute("stockPage", stockPage);
 		model.addAttribute("stockPageInfo", pageInfo);
 		
+		log.info("부동산 매물 요청");
+		List<Home> homeList = homeService.searchHomeBylocatin(searchMapHome);
+		List<Home> home = homeService.searchHomeList(searchMapHome);
+		int homeCount = homeService.getHomeCount(searchMapHome);
 		
+		model.addAttribute("homeCount", homeCount);
+		model.addAttribute("homeList", homeList);
+		model.addAttribute("home", home);
+		model.addAttribute("paramMapHome", paramMapHome);
+
+		log.info("부동산 청약 아파트 요청");
+		int pageAPT = 1;
+		try {
+			searchMapHome.put("searchValue", paramMapHome.get("searchValue"));
+			searchMapHome.put("locationCheck", locationCheck);
+			pageAPT = Integer.parseInt(""+paramMapHome.get("pageAPT"));
+		} catch (Exception e) {	}
 		
+		int aptCount = blueService.selectAptCount(searchMapHome);
+		PageInfo pageAPTInfo = new PageInfo(pageAPT, 5, aptCount, 10);
+		List<Aptdetail> Aptlist = blueService.searchAptList(pageAPTInfo, searchMapHome);
+		if(locationCheck == null) {
+			locationCheck = new ArrayList<>();
+		}
+		paramMapHome.put("locationCheck", locationCheck);
 		
+		model.addAttribute("Aptlist", Aptlist);
+		model.addAttribute("pageAPTInfo",pageAPTInfo);
+		model.addAttribute("searchMapHome", searchMapHome);
 		
+		log.info("부동산 청약 오피스텔 요청");
+		int pageOff = 1;
+		try {
+			searchMapHome.put("searchValue", paramMapHome.get("searchValue"));
+			searchMapHome.put("locationCheck", locationCheck);
+			pageOff = Integer.parseInt(""+paramMapHome.get("pageOff"));
+		} catch (Exception e) {	}
+		
+		int offCount = blueService.selectOfficeCount(searchMapHome);
+		PageInfo pageOffInfo = new PageInfo(pageOff, 5, aptCount, 10);
+		List<OfficeDetail> Offlist = blueService.searchOfficeList(pageOffInfo, searchMapHome);
+		model.addAttribute("Offlist", Offlist);
+		model.addAttribute("pageOffInfo",pageOffInfo);
+		
+		log.info("부동산 청약 기타 요청");
+		int pageEtc = 1;
+		try {
+			searchMapHome.put("searchValue", paramMapHome.get("searchValue"));
+			searchMapHome.put("locationCheck", locationCheck);
+			pageEtc = Integer.parseInt(""+paramMapHome.get("pageEtc"));
+		} catch (Exception e) {	}
+		
+		int etcCount = blueService.selectOfficeCount(searchMapHome);
+		PageInfo pageEtcInfo = new PageInfo(pageEtc, 5, etcCount, 10);
+		List<RemainDetail> Etclist = blueService.searchRemainList(pageOffInfo, searchMapHome);
+		model.addAttribute("Etclist", Etclist);
+		model.addAttribute("pageEtcInfo",pageEtcInfo);
+		
+		System.out.println(Aptlist.toString());
+		System.out.println(Offlist.toString());
+		System.out.println(Etclist.toString());
+		int homeSize = homeCount + aptCount + offCount + etcCount;
+		model.addAttribute("homeSize", homeSize);
 		
 		log.info("뉴스 요청 성공");
 		if(param != null) {
