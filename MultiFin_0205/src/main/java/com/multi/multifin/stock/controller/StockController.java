@@ -360,6 +360,23 @@ public class StockController {
 		model.addAttribute("KOSPI", KOSPI);
 		model.addAttribute("KOSDAQ", KOSDAQ);
 		
+		
+		
+		Map<String, String> member = new HashMap<String, String>();
+		member.put("id", loginMember.getId());
+		List<InvestedStock> check = isService.getInvestedStockList(member);
+		
+		
+		for (int i = 0; i <check.size(); i++) {
+			totalP +=check.get(i).getTotalPrice();
+			System.out.println(totalP);
+		}
+		model.addAttribute("totalP", totalP);
+		
+		
+		
+		
+		
 		try {
 			Map<String, String> myStockMap = new HashMap<String, String>();
 			myStockMap.put("id", loginMember.getId());
@@ -370,7 +387,6 @@ public class StockController {
 			myAccountMap.put("id", loginMember.getId());
 			List<Account> myAcc = aService.getAccountList(myAccountMap);
 			
-			log.info("" + myAcc);
 			model.addAttribute("myStock", myStock);
 			model.addAttribute("totalPrice", totalPrice);
 			model.addAttribute("myAcc", myAcc);

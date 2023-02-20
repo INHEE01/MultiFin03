@@ -102,10 +102,9 @@
                     </th:block>
                     <th:block th:if="${myAcc != null}">
                     	<div class="test_info_title">
-                    	<div th:each="totPrice : ${totalPrice}">
-                    		
-                    	</div>
-                        <h3 class="money">1,010,000원</h3>
+                    	<div th:each="totPrice : ${totalPrice}" class="money"></div>
+                    	
+                        <h3 th:text="${#numbers.formatInteger(totalP, 3, 'COMMA')}"  class="money">원</h3>
                         <div th:onclick="movePage('/member/account');" class="account">내 계좌 보기</div>
                     </div>
                     <div class="companies">
