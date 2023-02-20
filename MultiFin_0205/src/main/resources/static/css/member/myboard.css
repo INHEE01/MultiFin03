@@ -97,7 +97,7 @@
 .board-title{
   text-align: left;
   padding-left: 50px;
-  max-width: 400px;
+  max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

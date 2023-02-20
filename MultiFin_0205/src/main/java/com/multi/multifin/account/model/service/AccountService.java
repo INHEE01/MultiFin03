@@ -20,11 +20,8 @@ public class AccountService {
 		return mapper.selectAccountList(param);
 	}
 	
-	public int saveInvestedStock(Account account) {
-		int result = 0;
-		if (account.getANum() == 0) {
-			result = mapper.insertAccount(account);
-		}
-		return result;
+	public Account saveInvestedStock(int mno) {
+		return mapper.insertAccount(mno);
 	}
+	
 }
