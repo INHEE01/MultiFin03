@@ -37,6 +37,7 @@ import com.multi.multifin.home.model.vo.RemainDetail;
 import com.multi.multifin.news.naverapi.NaverSearchAPI;
 import com.multi.multifin.news.naverapi.News;
 import com.multi.multifin.stock.model.service.StockPriceService;
+import com.multi.multifin.stock.model.vo.ExchangeRate;
 import com.multi.multifin.stock.model.vo.FundProductInfo;
 import com.multi.multifin.stock.model.vo.StockPrice;
 
@@ -78,6 +79,9 @@ public class CommonController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private StockPriceService stockPService;
 	
 	@RequestMapping("/searchTotal")
 	public String searchTotal(Model model, @RequestParam("searchValue") String param, @RequestParam Map<String, String> paramMap,
@@ -161,8 +165,6 @@ public class CommonController {
 		List<LoanRentHouse> loanRentHoustList0 = lrhService.selectLoanRentHouseListUnique(pageLmInfo, paramMap);
 		model.addAttribute("loanRentHoustList0", loanRentHoustList0);
 		model.addAttribute("pageLrhInfo", pageLrhInfo);
-		
-		
 		
 		log.info("신용카드 전체 요청");
 		int pageDebit = 1;
@@ -310,6 +312,37 @@ public class CommonController {
 		model.addAttribute("freeList", freeList);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("pageFreeInfo", pageFreeInfo);
+		
+		log.info("환율 테이블 요청: 원하는 국가만 가져옴");
+		ExchangeRate USD = stockPService.findExchangeRate("USD");
+		ExchangeRate JPY = stockPService.findExchangeRate("JPY(100)");
+		ExchangeRate GBP = stockPService.findExchangeRate("GBP");
+		ExchangeRate HKD = stockPService.findExchangeRate("HKD");
+		ExchangeRate EUR = stockPService.findExchangeRate("EUR");
+		ExchangeRate CNH = stockPService.findExchangeRate("CNH");
+		ExchangeRate AUD = stockPService.findExchangeRate("AUD");
+		ExchangeRate SGD = stockPService.findExchangeRate("SGD");
+		ExchangeRate THB = stockPService.findExchangeRate("THB");
+		ExchangeRate CAD = stockPService.findExchangeRate("CAD");
+		model.addAttribute("USD", USD);
+		model.addAttribute("JPY", JPY);
+		model.addAttribute("GBP", GBP);
+		model.addAttribute("HKD", HKD);
+		model.addAttribute("EUR", EUR);
+		model.addAttribute("CNH", CNH);
+		model.addAttribute("AUD", AUD);
+		model.addAttribute("SGD", SGD);
+		model.addAttribute("THB", THB);
+		model.addAttribute("CAD", CAD);
+		
+		Map<String, String> KospiTop5 = new HashMap<String, String>();
+		Map<String, String> KosdaqTop5 = new HashMap<String, String>();
+		KospiTop5.put("limit", "5");
+		KosdaqTop5.put("limit", "5");
+		List<StockPrice> KOSPI = stockPService.getKospiRankingTop(KospiTop5);
+		List<StockPrice> KOSDAQ = stockPService.getKosdaqRankingTop(KosdaqTop5);
+		model.addAttribute("KOSPI", KOSPI);
+		model.addAttribute("KOSDAQ", KOSDAQ);
 		
 		return "common/searchTotal";
 	}
