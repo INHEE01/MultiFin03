@@ -233,7 +233,6 @@ public class CommonController {
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("pageFreeInfo", pageFreeInfo);
 		
-		
 		return "common/searchTotal";
 	}
 	

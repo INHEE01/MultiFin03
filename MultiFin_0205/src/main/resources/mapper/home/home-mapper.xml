@@ -38,10 +38,11 @@
 		WHERE 1=1
 	</select>
 	<select id="selectHomeByXY"  resultMap="MarkerParsingResultMap">
-		SELECT realEstateDealNo,searchAddr,x,y 
-		FROM Marker
+		SELECT m.realEstateDealNo,m.searchAddr,m.x,m.y 
+		FROM Marker m inner join REALESTATE r on m.RealEstateDealNo = r.RealEstateDealNo 
 		WHERE 1=1
-		AND searchAddr like '%${searchValue}%'
+		AND m.searchAddr like '%${searchValue}%'
+		OR  r.Apartment_Name like '%${searchValue}%'
 	</select>
 	
 	<select id="selectHomeBylocatin"  resultMap="HomeResultMap" parameterType="map">
@@ -49,15 +50,15 @@
 		Deal_Month,Monthly_Rent,Deal_Day,Area,Jibun,Regional_Code,Floor
 		FROM REALESTATE
 		WHERE 1=1
-	 		<if test="searchValue != null">
-	 			AND concat(dong,' ',jibun) like '%${searchValue}%'
-			</if>
 			<if test="searchType == 'deal_year' ">
 			AND  Monthly_Rent = 0
 			</if>
-			
 			<if test="searchType == 'deal_monthly' ">
 			AND  Monthly_Rent  <![CDATA[>]]> 0
+			</if>
+		
+	 		<if test="searchValue != null">
+	 			AND (concat(dong,' ',jibun) like '%${searchValue}%' OR  Apartment_Name like '%${searchValue}%')
 			</if>
 			
 			ORDER BY RealEstateDealNo
@@ -67,17 +68,17 @@
 		SELECT count(*)
 		FROM REALESTATE
 		WHERE 1=1
-	 		<if test="searchValue != null">
-	 			AND concat(dong,' ',jibun) like '%${searchValue}%'
-			</if>
-			
-			<if test="searchType == 'deal_year' ">
-			AND  Monthly_Rent = 0
-			</if>
-			
 			<if test="searchType == 'deal_monthly' ">
 			AND  Monthly_Rent  <![CDATA[>]]> 0
 			</if>
+			<if test="searchType == 'deal_year' ">
+			AND  Monthly_Rent = 0
+			</if>
+	 		<if test="searchValue != null">
+	 			AND (concat(dong,' ',jibun) like '%${searchValue}%' OR  Apartment_Name like '%${searchValue}%')
+			</if>
+			
+			ORDER BY RealEstateDealNo
 			
 	</select>
 	<select id="selectHomeInfo"  resultMap="HomeResultMap" parameterType="String">

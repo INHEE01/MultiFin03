@@ -23,7 +23,15 @@ public class HomeBlueService {
 		map.put("offset", "" + (pageInfo.getStartList() - 1));
 		return mapper.searchAptList(map);
 	}
-		
+	public List<Aptdetail> searchAptList2(Map<String, Object> map){
+		return mapper.searchAptList2(map);
+	}	
+	public List<Aptdetail> searchAptListName(String name){
+		return mapper.searchAptListName(name);
+	}	
+	public List<Aptdetail> searchAptList3(Map<String, Object> map){
+		return mapper.searchAptList3(map);
+	}	
 	public int selectAptCount(Map<String, Object> param) {
 		return mapper.selectAptCount(param);
 	}
