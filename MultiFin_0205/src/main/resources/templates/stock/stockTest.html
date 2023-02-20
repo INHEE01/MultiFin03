@@ -118,7 +118,7 @@
 				                    </div>
 					             
 				                    <div class="company_money">
-				                        <h5 th:text="|${#numbers.formatInteger(nowStock.totalPrice, 3, 'COMMA')} 원|" class="now_money"></h5>
+				                        <h5 th:text="|${#numbers.formatInteger(nowStock.price*nowStock.cnt, 3, 'COMMA')} 원|" class="now_money"></h5> 
 				                        <a class="sellBtn" th:href="|/stock/stockSell?no=${nowStock.stockCode}|">매도</a>
 				                    </div>  
 		                   		</div>
@@ -176,7 +176,7 @@
                             </div>
                             <div class="company_money">
                                 <h5 class="now_money"> 62,400 원 </h5>
-                                <h6 class="now_percent decrease">- 3.4%</h6>
+                                <h6 class="now_percent decrease">▼ 3.4%</h6>
                             </div>
                         </div>
                         <div class="company">
@@ -188,7 +188,7 @@
                             </div>
                             <div class="company_money">
                                 <h5 class="now_money"> 63,100 원 </h5>
-                                <h6 class="now_percent increase">.69%</h6>
+                                <h6 class="now_percent increase">▲ .69%</h6>
                             </div>
                         </div>
                         <div class="company">
@@ -200,7 +200,7 @@
                             </div>
                             <div class="company_money">
                                 <h5 class="now_money"> 76,600 원 </h5>
-                                <h6 class="now_percent increase">1.06%</h6>
+                                <h6 class="now_percent increase">▲ 1.06%</h6>
                             </div>
                         </div>                       
                     </div>

@@ -44,7 +44,7 @@
 		FROM INVESTEDSTOCK I
 		LEFT OUTER JOIN MEMBER M ON I.MNO=M.MNO
 		WHERE M.ID = '${id}' AND TRADESTAT = "매수"
-		ORDER BY ORDERNUM DESC LIMIT 1
+		ORDER BY ORDERNUM DESC LIMIT 2
 	</select>
 	<!-- 나의 보유 주식들의 totalPrice 가져오기 -->
 	<select id="selectTotalPrice" resultMap="InvestedStockResultMap" parameterType="map">
