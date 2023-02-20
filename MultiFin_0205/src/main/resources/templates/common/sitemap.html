@@ -64,20 +64,24 @@
                         <br>
                         <h4 class="mb-3 font-weight-bolder">증권</h4>
                         <a class="sitelink" th:href="@{/stock/stockMain}">주식 메인</a>
-                        <a class="sitelink" th:href="@{#}">주식시세</a>
-                        <a class="sitelink" th:href="@{/stock/stockFuture}">동향예측</a>
+                        <a class="sitelink" th:href="@{/stock/stockList}">주식시세</a>
+                        <a class="sitelink" th:href="@{/stock/stockPredicate}">주식동향확인/예측</a>
                         <a class="sitelink" th:href="@{/stock/stockTest}">모의투자</a>
-                        <a class="sitelink" th:href="@{#}">펀드</a>
+                        <a class="sitelink" th:href="@{/stock/stockFund}">펀드</a>
                     </div>
                     <div class="col-4 text-left pl-3">
                         <h4 class="mb-3 font-weight-bolder">부동산</h4>
-                        <a class="sitelink" href="#">매물(월세/전세/매매)</a>
-                        <a class="sitelink" href="#">청약</a>
+                        <a class="sitelink" href="@{/home/homeMain}">부동산 메인</a>
+                        <a class="sitelink" href="@{/home/homeSell}">매물(월세/전세/매매)</a>
+                        <h4 class="mb-3 font-weight-bolder">청약</h4>
+                        <a class="sitelink" href="@{/home/homeBlue}">아파트</a>
+                        <a class="sitelink" href="@{/home/homeBlue2}">오피스텔</a>
+                        <a class="sitelink" href="@{/home/homeBlue3}">기타</a>
                         <br>
                         <h4 class="mb-3 font-weight-bolder">뉴스/법률</h4>
-                        <a class="sitelink" href="#">뉴스</a>
-                        <a class="sitelink" href="#">법률 메인</a>
-                        <a class="sitelink" href="#">법률 FAQ</a>
+                        <a class="sitelink" href="@{/news/newsMain}">뉴스</a>
+                        <a class="sitelink" href="@{/law/lawMain}">법률 메인</a>
+                        <a class="sitelink" href="@{/law/lawFAQ}">자주묻는질문</a>
                     </div>
                     <div class="col-4 text-left pl-3">
                         <h4 class="mb-3 font-weight-bolder">커뮤니티</h4>
@@ -85,10 +89,10 @@
                         <a class="sitelink" href="#">자유게시판</a>
                         <br>
                         <h4 class="mb-3 font-weight-bolder">회원관리</h4>
-                        <a class="sitelink" href="#">회원가입</a>
-                        <a class="sitelink" href="#">로그인</a>
-                        <a class="sitelink" href="#">계정찾기</a>
-                        <a class="sitelink" href="#">마이페이지</a>
+                        <a class="sitelink" href="@{/member/sign-up}">회원가입</a>
+                        <a class="sitelink" href="@{}/member/sign-in">로그인</a>
+                        <a class="sitelink" href="@{/member/forgot-password}">비밀번호찾기</a>
+                        <a class="sitelink" href="@{/member/mypage}">마이페이지</a>
                     </div>
                 </div>
             </div>
