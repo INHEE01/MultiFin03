@@ -60,10 +60,11 @@
                                             </div>
                                             <table id="tbl-board" class="board-table">
 	                                            <tr>
-	                                                <th class="table-header"><div class="space" ></div></th>
-	                                                <th class="table-header"><div class="space" ></div></th>
-	                                                <th class="table-header">댓글</th>
-	                                                <th class="table-header"></th>
+	                                                <th class="table-header" >댓글</div></th>
+	                                                <th class="table-header" >작성한날짜</th>
+	                                                <th class="table-header" >원제</th>
+	                                                <th class="table-header">삭제</th>
+	                                                
 	                                               
 	                                            </tr>
 	                                            <th:block th:if="${list == null || list.size()==0}">
@@ -74,11 +75,11 @@
 												<th:block th:if="${list != null}">
 												
 														<tr th:each="list, number: ${list}" > 
-															<td class="board-content" th:onclick="|directView('${list.bNo}')|">[[${list.content}]]</td>
+															<td class="board-content board-title2" th:onclick="|directView('${list.bNo}')|">[[${list.content}]]</td>
 															
 															<td class="board-content" th:onclick="|directView('${list.bNo}')|" th:text="${#dates.format(list.createDate, 'yyyy/MM/dd')}"/></td>
 															
-															<td class="board-content board-title" th:onclick="|directView('${list.bNo}')|">
+															<td class="board-content board-title2" th:onclick="|directView('${list.bNo}')|">
 														 		[[${list.title}]]
 															</td>
 															<td class="board-content">

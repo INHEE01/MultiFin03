@@ -121,3 +121,11 @@
   background-color: rgb(13, 27, 72);
   color:white;
 }
+.board-title2{
+  text-align: left;
+  padding-left: 50px;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
