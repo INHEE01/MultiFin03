@@ -46,14 +46,14 @@
 				<input type="button" value="# 청약"
 					onclick="location.href='http://localhost/common/searchTotal?searchValue=청약'"
 					class="seaching_keyword"> <input type="button"
-					value="# 삼성 전자"
-					onclick="location.href='http://localhost/common/searchTotal?searchValue=삼성 전자'"
+					value="# 삼성"
+					onclick="location.href='http://localhost/common/searchTotal?searchValue=삼성'"
 					class="seaching_keyword"> <input type="button"
 					value="# KOSPI"
 					onclick="location.href='http://localhost/common/searchTotal?searchValue=KOSPI'"
 					class="seaching_keyword"> <input type="button"
-					value="# 예적금 상품"
-					onclick="location.href='http://localhost/common/searchTotal?searchValue=예적금 상품'"
+					value="# 저축"
+					onclick="location.href='http://localhost/common/searchTotal?searchValue=저축'"
 					class="seaching_keyword"> <input type="button"
 					value="# 주택 대출"
 					onclick="location.href='http://localhost/common/searchTotal?searchValue=주택 대출'"
@@ -113,7 +113,7 @@
 				<table id="tbl-board" class="board_table_bank">
 					<th:block th:if="${bankSize == 0}">
 						<tr>
-							<td colspan="6" style="text-align: center;">조회된 정보가 없습니다.</td>
+							<td colspan="6" style="text-align: center;">검색 결과가 없습니다.</td>
 						</tr>
 					</th:block>
 					<th:block th:if="${bankSize != 0}">
@@ -284,7 +284,7 @@
 				<table id="tbl-board" class="board_table_bank">
 					<th:block th:if="${stockList.size == 0}">
 						<tr>
-							<td colspan="6" style="text-align: center;">조회된 정보가 없습니다.</td>
+							<td colspan="6" style="text-align: center;">검색 결과가 없습니다.</td>
 						</tr>
 					</th:block>
 					<th:block th:if="${stockList.size != 0}">
@@ -309,21 +309,21 @@
 					</th:block>
 				</table>
 				<div class="table-buttons">
-	                    <button th:onclick="|movePage('/common/searchTotal?stockPage=1','1');|" class="table-button">&lt;</button>
-	                    <button th:onclick="|movePage('/common/searchTotal?stockPage=${stockPageInfo.prevPage}','1');|" class="table-button">&lt;</button>
-	                    <th:block th:each="num, status : ${#numbers.sequence(stockPageInfo.startPage, stockPageInfo.endPage)}">
-							<th:block th:if="${status.current == stockPageInfo.currentPage}">
-								<button class="table-button" disabled >[[${status.current}]]</button>
-							</th:block>
-							<th:block th:if="${status.current != stockPageInfo.currentPage}">
-								<button th:onclick="|movePage('/common/searchTotal?stockPage=${status.current}','1');|" class="table-button">
-									[[${status.current}]]
-								</button>
-							</th:block>
+                    <button th:onclick="|movePage('/common/searchTotal?stockPage=1','1');|" class="table-button">&lt;</button>
+                    <button th:onclick="|movePage('/common/searchTotal?stockPage=${stockPageInfo.prevPage}','1');|" class="table-button">&lt;</button>
+                    <th:block th:each="num, status : ${#numbers.sequence(stockPageInfo.startPage, stockPageInfo.endPage)}">
+						<th:block th:if="${status.current == stockPageInfo.currentPage}">
+							<button class="table-button" disabled >[[${status.current}]]</button>
 						</th:block>
-	                    <button th:onclick="|movePage('/common/searchTotal?stockPage=${stockPageInfo.nextPage}','1');|" class="table-button">&gt;</button>
-	                    <button th:onclick="|movePage('/common/searchTotal?stockPage=${stockPageInfo.maxPage}','1');|" class="table-button">&gt;&gt;</button>
-	                </div>
+						<th:block th:if="${status.current != stockPageInfo.currentPage}">
+							<button th:onclick="|movePage('/common/searchTotal?stockPage=${status.current}','1');|" class="table-button">
+								[[${status.current}]]
+							</button>
+						</th:block>
+					</th:block>
+                    <button th:onclick="|movePage('/common/searchTotal?stockPage=${stockPageInfo.nextPage}','1');|" class="table-button">&gt;</button>
+                    <button th:onclick="|movePage('/common/searchTotal?stockPage=${stockPageInfo.maxPage}','1');|" class="table-button">&gt;&gt;</button>
+                </div>
 			</div>
 <!-- 주식 끝 -->
 
@@ -342,22 +342,22 @@
 				<table id="tbl-board" class="board_table_bank">
 					<th:block th:if="${newsList1.size == 0}">
 						<tr>
-							<td colspan="6" style="text-align: center;">조회된 정보가 없습니다.</td>
+							<td colspan="6" style="text-align: center;">검색 결과가 없습니다.</td>
 						</tr>
 					</th:block>
 					<th:block th:if="${newsList1.size != 0}">
 						<tr class="table_row table_header_bank">
-							<th class="table-header">번호</th>
-							<th class="table-header">구분</th>
-							<th class="table-header">지역</th>
-							<th class="table-header">주택명</th>
-							<th class="table-header">주택구분</th>
-							<th class="table-header">등록일</th>
-							<th class="table-header">관련정보</th>
+							<th class="news_title">번호</th>
+							<th class="news_title">구분</th>
+							<th class="news_title">지역</th>
+							<th class="news_title">주택명</th>
+							<th class="news_title">주택구분</th>
+							<th class="news_title">등록일</th>
+							<th class="news_title">관련정보</th>
 						</tr>
 						<tr th:each="news, number : ${newsList1}">
-							<td class="board-content">[[${number.index}+1]]</td>
-							<td class="board-content">[[${news.title}]]</td>
+							<td class="board_table_news">[[${number.index}+1]]</td>
+							<td class="board_table_news">[[${news.title}]]</td>
 							<td th:onclick="|location.href='@{${news.originallink}}'|">바로가기</td>
 						</tr>
 					</th:block>
@@ -384,7 +384,7 @@
 				<table id="tbl-board" class="board_table_bank">
 					<th:block th:if="${newsList1.size == 0}">
 						<tr>
-							<td colspan="6" style="text-align: center;">조회된 정보가 없습니다.</td>
+							<td colspan="6" style="text-align: center;">검색 결과가 없습니다.</td>
 						</tr>
 					</th:block>
 					<th:block th:if="${newsList1.size != 0}">
@@ -394,9 +394,9 @@
 							<th class="table-header">뉴스보기</th>
 						</tr>
 						<tr th:each="news, number : ${newsList1}">
-							<td class="board-content">[[${number.index}+1]]</td>
-							<td class="board-content">[[${news.title}]]</td>
-							<td th:onclick="|location.href='@{${news.originallink}}'|">바로가기</td>
+							<td class="board-content_bank">[[${number.index}+1]]</td>
+							<td class="board-content_bank">[[${news.title}]]</td>
+							<td class="board-content_bank" th:onclick="|location.href='@{${news.originallink}}'|">바로가기</td>
 						</tr>
 					</th:block>
 				</table>
@@ -409,42 +409,62 @@
 	        <th:block th:if="${check} != '4'">
 	            <div id="tab-5" class="tab-content">
 	        </th:block>
+	        	<th:block th:if="${freeList.size != 0}">
+					<h5 class="search_result_description">
+						검색 결과 <sapn style="color: orange;"> [[${freeList.size}]]</sapn>건
+					</h5>
+				</th:block>
 				<table id="tbl-board" class="board_table_bank">
-					<th:if test="[[${freeList.size == 0}]]">
-						<h5 class="search_result_description" colspan="5">
-							검색 결과가 없습니다.
+					<th:block th:if="${freeList.size == 0}">
+						<tr>
+							<td colspan="6" style="text-align: center;">검색 결과가 없습니다.</td>
+						</tr>
+					</th:block>
+					<th:block th:if="${freeList.size != 0}">
+						<tr class="table_row table_header_bank">
+							<th class="table-header">번호</th>
+							<th class="table-header">제목</th>
+							<th class="table-header">작성자</th>
+							<th class="table-header">첨부파일</th>
+							<th class="table-header">조회수</th>
+							<th class="table-header">댓글수</th>
+						</tr>
+						<tr th:each="freeList, number : ${freeList}" th:onclick="|location.href='@{/community/view?no=${freeList.bno}}'|">
+							<td class="board-content_bank">[[(${pageFreeInfo.currentPage}-1)*10+${number.index}+1]]</td>
+							<td class="board-content_bank">[[${freeList.title}]]</td>
+							<td class="board-content_bank">[[${freeList.id}]]</td>
+							<td class="board-content_bank">
+								<th:block th:if="${freeList.originalFileName != null }">
+									<span>📁</span>
+								</th:block>
+								<th:block th:if="${freeList.originalFileName == null }">
+									<span>-</span>
+								</th:block>
 							</td>
-						</h5>
-					</th:if>
-					<tr class="table_row table_header">
-						<th class="table-header">번호</th>
-						<th class="table-header">구분</th>
-						<th class="table-header">제목</th>
-						<th class="table-header">작성일</th>
-					</tr>
-					<th:if test="[[${not empty freeList}]]">
-						<th:block th:each="board, status : ${freeList}">
-							<tr>
-								<td class="board-content"><a
-									href="$/localhost/community/freeList?no=${board.board_bNo}">${board.bNo}</a></td>
-								<td class="board-content"><a
-									href="$localhost/community/freeList?no=${board.board_bNo}">${board.type}</a></td>
-								<td class="board-content"><a
-									href="$localhost/community/freeList?no=${board.board_bNo}">${board.title}</a></td>
-								<td class="board-content"><fmt:formatDate
-										pattern="yyyy-MM-dd" value="${board.createDate}" /></td>
-							</tr>
-						</th:block>
-					</th:if>
+							<td class="board-content_bank">[[${freeList.readCount}]]</td>
+							<td class="board-content_bank">[[${freeList.replyCount}]]</td>
+						</tr>
+					</th:block>
+					
 				</table>
 				<div class="table-buttons">
-					<button onclick="" class="table-button">&lt;&lt;</button>
-					<button onclick="" class="table-button">&lt;</button>
-					<button onclick="" class="table-button">1</button>
-					<button onclick="" class="table-button">&gt;</button>
-					<button onclick="" class="table-button">&gt;&gt;</button>
-				</div>
+                    <button th:onclick="|movePage('/common/searchTotal?pageFree=1','4');|" class="table-button">&lt;</button>
+                    <button th:onclick="|movePage('/common/searchTotal?pageFree=${pageFreeInfo.prevPage}','4');|" class="table-button">&lt;</button>
+                    <th:block th:each="num, status : ${#numbers.sequence(pageFreeInfo.startPage, pageFreeInfo.endPage)}">
+						<th:block th:if="${status.current == pageFreeInfo.currentPage}">
+							<button class="table-button" disabled >[[${status.current}]]</button>
+						</th:block>
+						<th:block th:if="${status.current != pageFreeInfo.currentPage}">
+							<button th:onclick="|movePage('/common/searchTotal?pageFree=${status.current}','4');|" class="table-button">
+								[[${status.current}]]
+							</button>
+						</th:block>
+					</th:block>
+                    <button th:onclick="|movePage('/common/searchTotal?pageFree=${pageFreeInfo.nextPage}','4');|" class="table-button">&gt;</button>
+                    <button th:onclick="|movePage('/common/searchTotal?pageFree=${pageFreeInfo.maxPage}','4');|" class="table-button">&gt;&gt;</button>
+                </div>
 			</div>
+<!-- 게시판 끝 -->
 		</div>
 	</section>
 	<section class="stock__total pb-5">

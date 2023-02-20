@@ -1,5 +1,6 @@
 package com.multi.multifin.common.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,8 @@ import com.multi.multifin.bank.model.vo.BankSaving;
 import com.multi.multifin.bank.model.vo.LoanCredit;
 import com.multi.multifin.bank.model.vo.LoanMortgage;
 import com.multi.multifin.bank.model.vo.LoanRentHouse;
+import com.multi.multifin.board.model.service.BoardService;
+import com.multi.multifin.board.model.vo.Board;
 import com.multi.multifin.common.util.PageInfo;
 import com.multi.multifin.news.naverapi.NaverSearchAPI;
 import com.multi.multifin.news.naverapi.News;
@@ -59,6 +62,9 @@ public class CommonController {
 	
 	@Autowired
 	private StockPriceService fundService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	@RequestMapping("/searchTotal")
 	public String searchTotal(Model model, @RequestParam("searchValue") String param, @RequestParam Map<String, String> paramMap) {
@@ -189,7 +195,6 @@ public class CommonController {
 		model.addAttribute("stockCount", stockCount);
 		model.addAttribute("stockList", stockList);
 		model.addAttribute("stockPage", stockPage);
-		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("stockPageInfo", pageInfo);
 		
 		
@@ -201,10 +206,32 @@ public class CommonController {
 		if(param != null) {
 			List<News> mainList = NaverSearchAPI.getNewsList(param, 10, 1);
 			model.addAttribute("newsList1", mainList); // 이게 뉴스메인에서 검색결과로 나오는것
-			System.out.println("newsList1" + mainList.toString());
 		}else {
 			model.addAttribute("newsList1", newsList1);
 		}
+		
+		log.info("자유게시판 요청 성공");
+		int pageFree = 1;
+
+		Map<String, String> searchMap = new HashMap<String, String>();
+		try {
+			String searchValue = paramMap.get("searchValue");
+			if(searchValue != null && searchValue.length() > 0) {
+				String searchType = "title";
+				searchMap.put(searchType, searchValue);
+			}else {
+				paramMap.put("searchType", "all");
+			}
+			pageFree = Integer.parseInt(paramMap.get("pageFree"));
+		} catch (Exception e) {}
+		log.info("pageFree:" + pageFree);
+		int boardCount = boardService.getBoardCount2(searchMap);
+		PageInfo pageFreeInfo = new PageInfo(pageFree, 10, boardCount, 10);
+		List<Board> freeList = boardService.getBoardList2(pageFreeInfo, searchMap);
+		System.out.println(freeList);
+		model.addAttribute("freeList", freeList);
+		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("pageFreeInfo", pageFreeInfo);
 		
 		
 		return "common/searchTotal";
