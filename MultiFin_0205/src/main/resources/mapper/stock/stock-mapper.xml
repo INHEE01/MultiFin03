@@ -135,7 +135,7 @@
 	
 	<select id="selectStockCount" resultType="int" parameterType="map">
 		SELECT  
-			count(itmsNm)
+			count(distinct srtnCd)
 		FROM stockprice 
 		WHERE basDt IN (SELECT MAX(basDt) FROM stockprice)
 		<if test="itmsNm != null">

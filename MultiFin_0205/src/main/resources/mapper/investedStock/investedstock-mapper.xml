@@ -40,9 +40,9 @@
 	<select id="selectInvestedStockLimit2" resultMap="InvestedStockResultMap" parameterType="map">
 		SELECT 
 		DISTINCT I.ORDERNUM, I.MNO, I.SNO, I.ANUM, I.orderdt, I.stockcode, I.stockNUM, I.tradestat, I.price, I.cnt, I.totalPrice  
-		FROM INVESTEDSTOCK AS I
+		FROM INVESTEDSTOCK I
 		LEFT OUTER JOIN MEMBER M ON I.MNO=M.MNO
-		WHERE M.ID = '${id}'
+		WHERE M.ID = '${id}' AND TRADESTAT = "매수"
 		ORDER BY ORDERNUM DESC LIMIT 2
 	</select>
 	<!-- 나의 보유 주식들의 totalPrice 가져오기 -->

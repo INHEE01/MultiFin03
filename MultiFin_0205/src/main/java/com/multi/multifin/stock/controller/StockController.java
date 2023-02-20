@@ -327,13 +327,16 @@ public class StockController {
 		log.info("리스트 요청");
 		Map<String, String> KospiTop5 = new HashMap<String, String>();
 		Map<String, String> KosdaqTop5 = new HashMap<String, String>();
+		Map<String, String> rec = new HashMap<String, String>(); // 추천 주식 담는 Map
 		KospiTop5.put("limit", "5");
 		KosdaqTop5.put("limit", "5");
 		List<StockPrice> KOSPI = service.getKospiRankingTop(KospiTop5);
 		List<StockPrice> KOSDAQ = service.getKosdaqRankingTop(KosdaqTop5);
+		List<StockPrice> recStock = service.getRecStockList(rec); // 추천 주식
 		
 		int page = 1;
-		int totalP = 0;
+		int totalP = 0;	// 총 자산
+		int cnt = 0;	// 보유중인 주 개수
 		
 		// 탐색할 맵을 선언
 		try {
@@ -350,13 +353,13 @@ public class StockController {
 		int stockCount = service.getCountStockListByRank(paramMap);
 		PageInfo pageInfo = new PageInfo(page, 10, stockCount, 10);
 		List<StockPrice> allStock = service.getStockListByRank(pageInfo, paramMap);
-		List<StockPrice> recStock = service.getRecStockList(paramMap);
 		
 		model.addAttribute("allStock", allStock);
 		model.addAttribute("recStock", recStock);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("pageInfo", pageInfo);
 		
+		model.addAttribute("recStock", recStock);
 		model.addAttribute("KOSPI", KOSPI);
 		model.addAttribute("KOSDAQ", KOSDAQ);
 		
@@ -373,6 +376,19 @@ public class StockController {
 			model.addAttribute("totalP", totalP);
 			
 		} catch (Exception e) {}
+		// 보유중인 주 개수 구하기
+		try {
+			Map<String, String> cMap = new HashMap<String, String>();
+			cMap.put("id", loginMember.getId());
+			List<InvestedStock> tot_count = isService.getInvestedStockList(cMap);
+			
+			for (int i = 0; i < tot_count.size(); i++) {
+				cnt += tot_count.get(i).getCnt();
+			}
+			model.addAttribute("cnt", cnt);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		try {
 			Map<String, String> myStockMap = new HashMap<String, String>();

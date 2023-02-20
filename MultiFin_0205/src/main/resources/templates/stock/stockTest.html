@@ -39,7 +39,7 @@
                                     <h5 class="sub_title">계좌 만들기</h5>
                                 </div>
                             </a>
-                            <a class="menu_btn" href="#">
+                            <a class="menu_btn" href="#searchStock">
                                 <div class="tab_sub">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                     <h5 class="sub_title">종목찾기</h5>
@@ -48,10 +48,10 @@
                             <a class="menu_btn" th:href="@{/common/chatbot}" target="blank">
                                 <div class="tab_sub">
                                     <i class="fa-solid fa-comments"></i>
-                                    <h5 class="sub_title">실시간 채팅</h5>
+                                    <h5 class="sub_title">멀티핀 챗봇</h5>
                                 </div>
                             </a>
-                            <a class="menu_btn" href="#">
+                            <a class="menu_btn" href="/law/lawFAQ">
                                 <div class="tab_sub">
                                     <i class="fa-solid fa-circle-question"></i>
                                     <h5 class="sub_title">이용 안내</h5>
@@ -116,11 +116,10 @@
 				                            <h6  class="company_have_stock">[[${nowStock.cnt}]]주</h6>
 				                        </div>
 				                    </div>
-					             <!--
+					             
 				                    <div class="company_money">
-				                        <h5 class="now_money"> 611,000 원 </h5>
-				                        <h6 class="now_percent decrease">-10,000원 (-0.27%)</h6>
-				                    </div>  -->
+				                        <h5 th:text="|${#numbers.formatInteger(nowStock.totalPrice, 3, 'COMMA')} 원|" class="now_money"></h5>
+				                    </div>  
 		                   		</div>
                            </div>
                     	</div>
@@ -150,6 +149,10 @@
                             <h5 class="moeny_title">보유중인 한화</h5>
                             <h5 class="moeny increase">[[${#numbers.formatInteger(10000000 -totalP, 0, 'COMMA')}]] 원</h5>
                         </div>
+                        <div class="total_money">
+                            <h5 class="moeny_title">주식 평단가</h5>
+                            <h5 th:text="|${#numbers.formatInteger(totalP/cnt, 3, 'COMMA')} 원|"class="moeny increase"></h5>
+                        </div>
                     </div>
                     <!--  <div class="sell">
                         <h5 class="sell_title font-weight-bolder">판매수익</h5>
@@ -173,31 +176,30 @@
                                 <h6 class="now_percent decrease">- 3.4%</h6>
                             </div>
                         </div>
-                        <h5 class="in-area font-weight-bolder">미국주식</h5>
                         <div class="company">
                             <div class="company_category">
-                                <div class="want_company_logo">A</div>
+                                <div class="want_company_logo">S</div>
                                 <div class="company_detail">
-                                    <h6 class="want_company_name">애플</h6>
+                                    <h6 class="want_company_name">삼성전자</h6>
                                 </div>
                             </div>
                             <div class="company_money">
-                                <h5 class="now_money"> 166,293 원 </h5>
-                                <h6 class="now_percent increase"> + 1.0%</h6>
+                                <h5 class="now_money"> 63,100 원 </h5>
+                                <h6 class="now_percent increase">.69%</h6>
                             </div>
                         </div>
                         <div class="company">
                             <div class="company_category">
-                                <div class="want_company_logo">T</div>
+                                <div class="want_company_logo">L</div>
                                 <div class="company_detail">
-                                    <h6 class="want_company_name">테슬라</h6>
+                                    <h6 class="want_company_name">LG</h6>
                                 </div>
                             </div>
                             <div class="company_money">
-                                <h5 class="now_money"> 151,041 원 </h5>
-                                <h6 class="now_percent decrease"> - 0.9%</h6>
+                                <h5 class="now_money"> 76,600 원 </h5>
+                                <h6 class="now_percent increase">1.06%</h6>
                             </div>
-                        </div>
+                        </div>                       
                     </div>
                 </div>
             </div>
@@ -229,7 +231,13 @@
 					<td th:if="${myStock.tradeStat == 'B'}" class="board-content">매수</td>				
 					<td th:text="${#numbers.formatInteger(myStock.price, 3, 'COMMA')}" class="board-content"></td>
 					<td th:text="${myStock.cnt}" class="board-content"></td>
-					<td th:text="${myStock.tradeStat}" class="board-content"></td>																						
+					<th:block th:if="${myStock.tradeStat == '매수'}">
+						<td th:text="${myStock.tradeStat}" class="increase"></td>		
+					</th:block>
+					<th:block th:if="${myStock.tradeStat == '매도'}">
+						<td th:text="${myStock.tradeStat}" class="decrease"></td>		
+					</th:block>			
+																							
 				</tr>
 			</th:block>
           
@@ -245,7 +253,7 @@
    </section>
    <section id="stock_genre" class="bg-white  stock_sellBuy_container">
         <div class="card shadow-soft stock_details">     
-            <h5 class="stock_details_title">주식 종목</h5>
+            <h5 class="stock_details_title" id="searchStock">주식 종목</h5>
             <!-- 검색창 -->
             <form autocomplete="off" class="row search" method="get" th:action="@{/stock/stockTest}">
 					<div class="col-12 mb-3 mb-lg-4">
@@ -280,7 +288,7 @@
             			<td>조회된 내용이 없습니다.</td>
             		</tr>
             	</th:block>
-            	<th:block th:if="${allStock != null}">
+            	<th:block th:if="${allStock != null}" id="search">
             		<tr th:each="stock : ${allStock}">
             			<td th:text="${#numbers.formatInteger(stock.srtnCd, 6)}" class="board-content"></td>
             			<td th:text="${stock.itmsNm}" class="board-content"></td>
