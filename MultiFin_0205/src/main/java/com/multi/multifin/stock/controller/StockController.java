@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.multi.multifin.account.model.service.AccountService;
 import com.multi.multifin.account.model.vo.Account;
+import com.multi.multifin.board.model.vo.Board;
 import com.multi.multifin.common.util.PageInfo;
 import com.multi.multifin.investedstock.model.service.InvestedStockService;
 import com.multi.multifin.investedstock.model.vo.InvestedStock;
@@ -319,7 +321,7 @@ public class StockController {
 	
 	
 	@RequestMapping("/stockSelling")
-	public String stockSelling(Model model,@RequestParam("no") int no) {
+	public String stockSelling(Model model,@RequestParam("no") int no, @SessionAttribute(name = "loginMember", required = false) Member loginMember) {
 		
 		log.info("리스트 요청");
 		Map<String, String> KospiTop5 = new HashMap<String, String>();
@@ -359,10 +361,49 @@ public class StockController {
 		List<StockPrice> stockList=service.stockMoreViewList(no);
 		model.addAttribute("sp", sp);
 		model.addAttribute("stockList", stockList);
+		
+		
+		//총자산
+		int totalP=0;
+		int basic = 10000000;
+		try {
+			Map<String, String> member = new HashMap<String, String>();
+			member.put("id", loginMember.getId());
+			List<InvestedStock> check = isService.getInvestedStockList(member);
+			
+			for (int i = 0; i <check.size(); i++) {
+				totalP +=check.get(i).getTotalPrice();
+				System.out.println(totalP);
+			}
+			int now = basic-totalP;
+			int stockPrice = Integer.parseInt(sp.getClpr());
+			int canBuy = now/stockPrice;
+			model.addAttribute("stockPrice", stockPrice);
+			model.addAttribute("now", now);
+			model.addAttribute("canBuy", canBuy);
+		} catch (Exception e) {}
+		
 		return "stock/stockSelling";
 	}
 	
 	
+	
+
+	@RequestMapping("/selling")
+	public String selling(Model model,	@ModelAttribute InvestedStock istock,
+			@SessionAttribute(name = "loginMember", required = false) Member loginMember) {
+			
+		int result = isService.saveInvestedStock(istock);
+		if(result > 0) {
+			model.addAttribute("msg", "구매가 완료되었습니다.");
+			model.addAttribute("location", "/stock/stockTest");
+		}else {
+			model.addAttribute("msg", "구매에 실패하였습니다.");
+			model.addAttribute("location", "/stock/stockTest");
+		}
+		return "common/msg";
+	}
+		
 	
 	
 	/*계좌 생성코드*/
@@ -506,8 +547,6 @@ public class StockController {
 		
 		return "stock/stockTest";
 	}
-	
-	
 	
 	
 

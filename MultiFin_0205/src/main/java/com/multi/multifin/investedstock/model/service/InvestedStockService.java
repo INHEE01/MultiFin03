@@ -32,6 +32,9 @@ public class InvestedStockService {
 		}
 		return result;
 	}
+	
+	
+	
 	// 나의 체결 내역에서 TotalPrice 만 뽑아오기
 	public List<Integer> getTotalPrice(Map<String, String> param) {
 		return mapper.selectTotalPrice(param);

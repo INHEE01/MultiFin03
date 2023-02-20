@@ -3,7 +3,7 @@
 
 <mapper namespace="com.multi.multifin.investedstock.model.mapper.InvestedStockMapper">
 	<!-- InvestedStock 테이블 -->
-	<resultMap type="InvestedStock" id="InvestedStockResultMap">
+	<resultMap type="INVESTEDSTOCK" id="InvestedStockResultMap">
 		<id property="orderNum" column="ORDERNUM" />
 		<result property="mNo" column="MNO" />
 		<result property="sNo" column="SNO" />
@@ -27,12 +27,13 @@
 		WHERE M.ID = '${id}'
 		ORDER BY I.ORDERNUM DESC
 	</select>
+	
 	<!-- 체결 내역 삽입 -->
 	<insert id="insertInvestedStock" parameterType="InvestedStock">
-		INSERT INTO INVESTESTOCK(
+		INSERT INTO INVESTEDSTOCK(
 		ORDERNUM, MNO, SNO, ANUM, orderdt, stockcode, stockNUM, tradestat, price, cnt, totalPrice) 
 		VALUES(
-		0, #{mNo}, #{sNo}, #{aNum}, #{orderDt}, #{stockCode}, 
+		0, 2, 43372, 1, default, 5930, 
 		#{stockNum}, #{tradeStat}, #{price}, #{cnt}, #{totalPrice}
 		)
 	</insert>

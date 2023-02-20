@@ -59,4 +59,18 @@ $.ajax({
 	}
 });
 
+/* 주가 돈 */
+$(function(){
+  $('.selling-amount-able').on('click', function(e) {
+    let nomValue = $(".selling-amount-able").attr("value")
+    console.log(nomValue);
+      var sum = parseInt(nomValue || 0);
+      var stockPrice=$('.total_money').attr("id");
+      var money= sum*stockPrice;
+
+      $("#selling-able-amount").val(sum);
+      $("#total_money").val(money.toLocaleString());
+      $("#allMoney").val(money);
+    });
+}); 
 
