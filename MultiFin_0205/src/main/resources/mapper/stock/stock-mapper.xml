@@ -112,7 +112,8 @@
 			trqu,trPrc,lstgStCnt,mrktTotAmt
 		FROM stockprice
 		WHERE srtnCd = #{srtnCd}
-		AND basDt IN (SELECT MAX(basDt) FROM stockprice)
+		ORDER BY BASDT DESC LIMIT 1
+		<!-- AND basDt IN (SELECT BASDT FROM stockprice WHERE BASDT='2023-02-13') -->
 	</select>
 	
 	
@@ -147,7 +148,11 @@
 		select * from stockprice 
 		where itmsNm like '${itmsNm}'	
 	</select>
-	
+	<!-- 추천 주식 가져오기(시가 총액 가장 높은 것 기준) -->
+	<select id="selectRecStock" parameterType="map" resultMap="StockPriceResultMap">
+		SELECT * FROM STOCKPRICE
+		ORDER BY mrktTotAmt DESC LIMIT 3 
+	</select>
 	<!-- MRKTTOTAMT(시가총액)을 기준으로 내림차순 -->
 	<select id="selectAllStock" resultMap="StockPriceResultMap" parameterType="map">
 		SELECT sno, basDt, srtnCd, isinCd, itmsNm, mrktCtg, clpr, vs, fltRt, mkp, hipr, lopr, trqu, trPrc, lstgStCnt, mrktTotAmt

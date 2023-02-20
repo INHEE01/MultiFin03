@@ -176,8 +176,17 @@ public class StockController {
 		return "stock/stockFuture";
 	}
 	
-	@RequestMapping("/stockBuying")
-	public String stockBuying() {
+	@GetMapping("/stockBuying")
+	public String stockBuying(Model model, @RequestParam Map<String, String> paramMap) {
+		try {
+			String stockNum = paramMap.get("stockNum");
+			if (stockNum != null && stockNum.length() > 0) {
+				paramMap.put("stockNum", stockNum);
+			}
+		} catch (Exception e) {}		
+		List<InvestedStock> list = isService.getInvestedStockList(paramMap);
+		model.addAttribute("list", list);
+		
 		return "stock/stockBuying";
 	}
 	
@@ -324,7 +333,8 @@ public class StockController {
 		List<StockPrice> KOSDAQ = service.getKosdaqRankingTop(KosdaqTop5);
 		
 		int page = 1;
-
+		int totalP = 0;
+		
 		// 탐색할 맵을 선언
 		try {
 			String searchValue = paramMap.get("searchValue");
@@ -339,9 +349,11 @@ public class StockController {
 		
 		int stockCount = service.getCountStockListByRank(paramMap);
 		PageInfo pageInfo = new PageInfo(page, 10, stockCount, 10);
-		List<StockPrice> allStock = service.getStockListByRank(pageInfo, paramMap);	
+		List<StockPrice> allStock = service.getStockListByRank(pageInfo, paramMap);
+		List<StockPrice> recStock = service.getRecStockList(paramMap);
 		
 		model.addAttribute("allStock", allStock);
+		model.addAttribute("recStock", recStock);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("pageInfo", pageInfo);
 		
@@ -352,19 +364,19 @@ public class StockController {
 			Map<String, String> myStockMap = new HashMap<String, String>();
 			myStockMap.put("id", loginMember.getId());
 			List<InvestedStock> myStock = isService.getInvestedStockList(myStockMap);
-			model.addAttribute("myStock", myStock);
-		} catch (Exception e) {
+			List<Integer> totalPrice = isService.getTotalPrice(myStockMap);
 			
-		}
-		
-		try {
 			Map<String, String> myAccountMap = new HashMap<String, String>();
 			myAccountMap.put("id", loginMember.getId());
 			List<Account> myAcc = aService.getAccountList(myAccountMap);
-			model.addAttribute("myAcc", myAcc);
-		} catch (Exception e) {
 			
-		}
+			log.info("" + myAcc);
+			model.addAttribute("myStock", myStock);
+			model.addAttribute("totalPrice", totalPrice);
+			model.addAttribute("myAcc", myAcc);
+		} catch (Exception e) {}
+		
+
 		
 		log.info("환율 테이블 요청: 원하는 국가만 가져옴");
 		ExchangeRate USD = service.findExchangeRate("USD");

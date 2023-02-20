@@ -63,28 +63,22 @@
                 <li class="tab-choice" data-tab="tab-2">
                     <div id="tab-2" class="tab-content freqeuncy">
                         <div class="content_container second_container">
-                            <a class="menu_btn" href="#">
+                            <a class="menu_btn" href="/member/account">
                                 <div class="tab_sub">
                                     <i class="fa-solid fa-circle-dollar-to-slot"></i>
                                     <h5 class="sub_title freqeuncy">계좌 보기</h5>
                                 </div>
                             </a>
-                            <a class="menu_btn" href="#">
+                            <a class="menu_btn" href="/stock/stockPredicate">
                                 <div class="tab_sub">
                                     <i class="fa-solid fa-chart-column"></i>
                                     <h5 class="sub_title freqeuncy">주가동향</h5>
                                 </div>
                             </a>
-                            <a class="menu_btn" href="#">
+                            <a class="menu_btn" href="/news/newsMain">
                                 <div class="tab_sub">
                                     <i class="fa-solid fa-newspaper"></i>
                                     <h5 class="sub_title freqeuncy">경제 뉴스</h5>
-                                </div>
-                            </a>
-                            <a class="menu_btn" href="#">
-                                <div class="tab_sub">
-                                    <i class="fa-regular fa-heart"></i>
-                                    <h5 class="sub_title freqeuncy">찜한 상품</h5>
                                 </div>
                             </a>
                         </div>
@@ -100,10 +94,19 @@
     <section class="future">
             <div class="test_info_container">
                 <div class="card shadow-soft test_info_card">     
-                    <h4 class="card_title"> 보유주식</h4>
-                    <div class="test_info_title">
+                    <h4 class="card_title">총 자산</h4>
+                    <th:block th:if="${myAcc == null}">
+                    	<tr>
+                    		<td>나의 계좌 정보가 없습니다.<br>계좌 생성 후 이용 가능합니다!</td>
+                    	</tr>
+                    </th:block>
+                    <th:block th:if="${myAcc != null}">
+                    	<div class="test_info_title">
+                    	<div th:each="totPrice : ${totalPrice}">
+                    		
+                    	</div>
                         <h3 class="money">1,010,000원</h3>
-                        <div th:onclick="movePage('/member/mypage');" class="account">내 계좌 보기</div>
+                        <div th:onclick="movePage('/member/account');" class="account">내 계좌 보기</div>
                     </div>
                     <div class="companies">
                         <h5 class="in-area font-weight-bolder">국내주식</h5>
@@ -135,9 +138,17 @@
                         </div>
                     </div>
                 </div>
+                    </th:block>
+                    
                 <div class="card shadow-soft test_info_card">     
                     <h4 class="card_title"> 내 수익률</h4>
-                    <div class="test_info_title">
+                    <th:block th:if="${myAcc == null}">
+                    	<tr>
+                    		<td>나의 계좌 정보가 없습니다.<br>계좌 생성 후 이용 가능합니다!</td>
+                    	</tr>
+                    </th:block>
+                    <th:block th:if="${myAcc != null}">
+                    	<div class="test_info_title">
                         <h3 class="money">1,010,000원</h3>
                     </div>
                     <div class="gain_percent">
@@ -149,18 +160,21 @@
                             <h5 class="moeny_title">총수익</h5>
                             <h5 class="moeny increase">10,000원</h5>
                         </div>
+                        <!-- 
                         <div class="day_money">
                             <h5 class="moeny_title">일간수익</h5>
                             <h5 class="moeny increase">+100원</h5>
-                        </div>
+                        </div>                      
+                         -->
                     </div>
-                    <div class="sell">
+                    <!--  <div class="sell">
                         <h5 class="sell_title font-weight-bolder">판매수익</h5>
                         <h6 class="sell_money">판매된 주식이 없습니다.</h6>
-                    </div>
+                    </div> -->
+                    </th:block>                                      
                 </div>
                 <div class="card shadow-soft test_info_card">     
-                    <h4 class="card_title"> 관심 주식</h4>
+                    <h4 class="card_title"> 추천 주식</h4>
                     <div class="companies">
                         <h5 class="in-area font-weight-bolder">국내주식</h5>
                         <div class="company">
@@ -229,7 +243,7 @@
 					<td th:text="${#numbers.formatInteger(myStock.stockCode, 6)}" class="board-content"></td>
 					<td th:text="${myStock.stockNum}" class="board-content"></td>																						
 					<td th:if="${myStock.tradeStat == 'B'}" class="board-content">매수</td>				
-					<td th:text="${myStock.price}" class="board-content"></td>
+					<td th:text="${#numbers.formatInteger(myStock.price, 3, 'COMMA')}" class="board-content"></td>
 					<td th:text="${myStock.cnt}" class="board-content"></td>
 					<td th:text="${myStock.tradeStat}" class="board-content"></td>																						
 				</tr>
@@ -287,12 +301,22 @@
             			<td th:text="${#numbers.formatInteger(stock.srtnCd, 6)}" class="board-content"></td>
             			<td th:text="${stock.itmsNm}" class="board-content"></td>
             			<td th:text="${#numbers.formatInteger(stock.clpr, 3, 'COMMA')}" class="board-content"></td>
-            			<td th:text="${stock.fltRt}" class="board-content"></td>
-            			<td th:text="${stock.vs}" class="board-content"></td>          		 	           	
+            			<th:block th:if="${#strings.contains(stock.fltRt, '-') == true } ">
+		                      <td th:text="|▼ ${stock.fltRt}|" class="decrease"></td>    
+						</th:block>
+						<th:block th:if="${#strings.contains(stock.fltRt, '-') == false } ">
+		                      <td th:text="|▲ ${stock.fltRt}|" class="increase"></td>    
+						</th:block>
+						<th:block th:if="${#strings.contains(stock.vs, '-') == true } ">
+		                      <td th:text="|${stock.vs}|" class="decrease"></td>    
+						</th:block>
+						<th:block th:if="${#strings.contains(stock.vs, '-') == false } ">
+		                      <td th:text="|+${stock.vs}|" class="increase"></td>    
+						</th:block>         		 	           	
             			<td th:text="${#numbers.formatInteger(stock.lstgStCnt, 3, 'COMMA')}" class="board-content"></td>
             			<td th:text="${#numbers.formatInteger(stock.mrktTotAmt, 3, 'COMMA')}" class="board-content"></td>
-                  		<td class="board-content"> <button class="stock_buy__btns"  onclick="window.open('./stockBuying.html')">매수</button></td>
-                  		<td class="board-content"> <button class="stock_sell__btns"  onclick="window.open('./stockSelling.html')">매도</button></td>
+                  		<td class="board-content"> <button class="stock_buy__btns"  onclick="window.open('./stockBuying')">매수</button></td>
+                  		<!-- <td class="board-content"> <button class="stock_sell__btns"  onclick="window.open('./stockSelling.html')">매도</button></td> -->
             		</tr>
             	</th:block>
               </table>
@@ -492,6 +516,7 @@
 	    str = String(str);
 	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g,'$1');
 	}
+   	
 </script>
 
 

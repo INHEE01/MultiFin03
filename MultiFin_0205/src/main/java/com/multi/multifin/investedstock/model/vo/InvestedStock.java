@@ -18,7 +18,7 @@ public class InvestedStock {
 	private Date orderDt         ;	//처리 날짜
 	private String stockCode     ;	//종목코드
 	private String stockNum      ;	//종목명
-	private char tradeStat       ;	//구분(매수'B' OR 매도'S')
+	private String tradeStat     ;	// 구분(매수 OR 매도)
 	private int price            ;	//가격
 	private int cnt              ;	//수량
 	private long totalPrice      ;	// 구매하는 총 금액

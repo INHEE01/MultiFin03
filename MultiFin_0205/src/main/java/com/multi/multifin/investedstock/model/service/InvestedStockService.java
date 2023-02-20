@@ -15,11 +15,15 @@ public class InvestedStockService {
 	
 	@Autowired
 	private InvestedStockMapper mapper;
-	
+	// 체결 내역 가져오기
 	public List<InvestedStock> getInvestedStockList(Map<String, String> param) {
 		return mapper.selectInvestedStockList(param);
 	}
-	
+	// 체결 내역 최신으로 두개만 가져오기
+	public List<InvestedStock> getInvestedStockList2(Map<String, String> param) {
+		return mapper.selectInvestedStockListBy2(param);
+	}
+	// 매수/매도 클릭 시 insert
 	@Transactional(rollbackFor = Exception.class)
 	public int saveInvestedStock(InvestedStock investedStock) {
 		int result = 0;
@@ -28,7 +32,9 @@ public class InvestedStockService {
 		}
 		return result;
 	}
-	
-	
+	// 나의 체결 내역에서 TotalPrice 만 뽑아오기
+	public List<Integer> getTotalPrice(Map<String, String> param) {
+		return mapper.selectTotalPrice(param);
+	}
 	
 }

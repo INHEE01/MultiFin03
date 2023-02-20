@@ -156,6 +156,10 @@ public class StockPriceService {
 		param.put("offset", "" + (pageInfo.getStartList() - 1));
 		return mapper.selectAllStock(param);
 	}
+	// 추천 주식 리스트 가져오기
+	public List<StockPrice> getRecStockList(Map<String, String> param) {
+		return mapper.selectRecStock(param);
+	}
 	// 주식 리스트 개수
 	public int getCountStockListByRank(Map<String, String> param) {
 		return mapper.selectAllStockCount(param);
