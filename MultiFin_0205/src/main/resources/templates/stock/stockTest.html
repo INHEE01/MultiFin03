@@ -119,6 +119,7 @@
 					             
 				                    <div class="company_money">
 				                        <h5 th:text="|${#numbers.formatInteger(nowStock.totalPrice, 3, 'COMMA')} 원|" class="now_money"></h5>
+				                        <a class="sellBtn" th:href="|/stock/stockSell?no=${nowStock.stockCode}|">매도</a>
 				                    </div>  
 		                   		</div>
                            </div>
@@ -151,7 +152,9 @@
                         </div>
                         <div class="total_money">
                             <h5 class="moeny_title">주식 평단가</h5>
-                            <h5 th:text="|${#numbers.formatInteger(totalP/cnt, 3, 'COMMA')} 원|"class="moeny increase"></h5>
+                             <th:block th:if="${totalP != 0 &&  cnt != 0}">
+                            	<h5 th:text="|${#numbers.formatInteger(totalP/cnt, 3, 'COMMA')} 원|"class="moeny increase"></h5>
+                        	 </th:block>
                         </div>
                     </div>
                     <!--  <div class="sell">
@@ -232,10 +235,10 @@
 					<td th:text="${#numbers.formatInteger(myStock.price, 3, 'COMMA')}" class="board-content"></td>
 					<td th:text="${myStock.cnt}" class="board-content"></td>
 					<th:block th:if="${myStock.tradeStat == '매수'}">
-						<td th:text="${myStock.tradeStat}" class="increase"></td>		
+						<td th:text="${myStock.tradeStat}" class="increase font-weight-bold"></td>		
 					</th:block>
 					<th:block th:if="${myStock.tradeStat == '매도'}">
-						<td th:text="${myStock.tradeStat}" class="decrease"></td>		
+						<td th:text="${myStock.tradeStat}" class="decrease font-weight-bold"></td>		
 					</th:block>			
 																							
 				</tr>
@@ -294,16 +297,16 @@
             			<td th:text="${stock.itmsNm}" class="board-content"></td>
             			<td th:text="${#numbers.formatInteger(stock.clpr, 3, 'COMMA')}" class="board-content"></td>
             			<th:block th:if="${#strings.contains(stock.fltRt, '-') == true } ">
-		                      <td th:text="|▼ ${stock.fltRt}|" class="decrease"></td>    
+		                      <td th:text="|▼ ${stock.fltRt}%|" class="decrease font-weight-bold"></td>    
 						</th:block>
 						<th:block th:if="${#strings.contains(stock.fltRt, '-') == false } ">
-		                      <td th:text="|▲ ${stock.fltRt}|" class="increase"></td>    
+		                      <td th:text="|▲ ${stock.fltRt}%|" class="increase font-weight-bold"></td>    
 						</th:block>
 						<th:block th:if="${#strings.contains(stock.vs, '-') == true } ">
-		                      <td th:text="|${stock.vs}|" class="decrease"></td>    
+		                      <td th:text="|${stock.vs} 원|" class="decrease font-weight-bold"></td>    
 						</th:block>
 						<th:block th:if="${#strings.contains(stock.vs, '-') == false } ">
-		                      <td th:text="|+${stock.vs}|" class="increase"></td>    
+		                      <td th:text="|+${stock.vs} 원|" class="increase font-weight-bold"></td>    
 						</th:block>         		 	           	
             			<td th:text="${#numbers.formatInteger(stock.lstgStCnt, 3, 'COMMA')}" class="board-content"></td>
             			<td th:text="${#numbers.formatInteger(stock.mrktTotAmt, 3, 'COMMA')}" class="board-content"></td>

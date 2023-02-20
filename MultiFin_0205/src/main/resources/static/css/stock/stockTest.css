@@ -243,6 +243,27 @@ padding-bottom: 30px;
 }
 
 /*매수매도버튼*/
+.sellBtn{
+  padding: 5px 30px;
+  border-radius:5px;
+  background-color: rgb(13, 27, 72);
+  border: 2px solid  rgb(13, 27, 72);
+  color: white;
+  text-align: center;
+  line-height: 35px;
+  font-size: 15px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+.sellBtn:hover{
+  background-color: transparent;
+  color: rgb(13, 27, 72);
+  transition: all 0.3s;
+}
+
+
+
+
 
 .stock_buy__btns,
 .stock_sell__btns{

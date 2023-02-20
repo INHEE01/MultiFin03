@@ -319,9 +319,78 @@ public class StockController {
 	
 	
 	
-	
+	//매수
 	@RequestMapping("/stockSelling")
 	public String stockSelling(Model model,@RequestParam("no") int no, @SessionAttribute(name = "loginMember", required = false) Member loginMember) {
+		
+		log.info("리스트 요청");
+		Map<String, String> KospiTop5 = new HashMap<String, String>();
+		Map<String, String> KosdaqTop5 = new HashMap<String, String>();
+		KospiTop5.put("limit", "5");
+		KosdaqTop5.put("limit", "5");
+		List<StockPrice> KOSPI = service.getKospiRankingTop(KospiTop5);
+		List<StockPrice> KOSDAQ = service.getKosdaqRankingTop(KosdaqTop5);
+		model.addAttribute("KOSPI", KOSPI);
+		model.addAttribute("KOSDAQ", KOSDAQ);
+		
+		
+		log.info("환율 테이블 요청: 원하는 국가만 가져옴");
+		ExchangeRate USD = service.findExchangeRate("USD");
+		ExchangeRate JPY = service.findExchangeRate("JPY(100)");
+		ExchangeRate GBP = service.findExchangeRate("GBP");
+		ExchangeRate HKD = service.findExchangeRate("HKD");
+		ExchangeRate EUR = service.findExchangeRate("EUR");
+		ExchangeRate CNH = service.findExchangeRate("CNH");
+		ExchangeRate AUD = service.findExchangeRate("AUD");
+		ExchangeRate SGD = service.findExchangeRate("SGD");
+		ExchangeRate THB = service.findExchangeRate("THB");
+		ExchangeRate CAD = service.findExchangeRate("CAD");
+		model.addAttribute("USD", USD);
+		model.addAttribute("JPY", JPY);
+		model.addAttribute("GBP", GBP);
+		model.addAttribute("HKD", HKD);
+		model.addAttribute("EUR", EUR);
+		model.addAttribute("CNH", CNH);
+		model.addAttribute("AUD", AUD);
+		model.addAttribute("SGD", SGD);
+		model.addAttribute("THB", THB);
+		model.addAttribute("CAD", CAD);
+		
+		
+		StockPrice sp = service.findByNo(no);
+		List<StockPrice> stockList=service.stockMoreViewList(no);
+		model.addAttribute("sp", sp);
+		model.addAttribute("stockList", stockList);
+		
+		
+		//총자산
+		int totalP=0;
+		int basic = 10000000;
+		
+		try {
+			Map<String, String> member = new HashMap<String, String>();
+			member.put("id", loginMember.getId());
+			List<InvestedStock> check = isService.getInvestedStockList(member);
+			
+			for (int i = 0; i <check.size(); i++) {
+				totalP +=check.get(i).getTotalPrice();
+				System.out.println(totalP);
+			}
+			int now = basic-totalP;
+			int stockPrice = Integer.parseInt(sp.getClpr());
+			int canBuy = now/stockPrice;
+			model.addAttribute("stockPrice", stockPrice);
+			model.addAttribute("now", now);
+			model.addAttribute("canBuy", canBuy);
+		} catch (Exception e) {}
+		
+		return "stock/stockSelling";
+	}
+	
+	
+	//매도
+	@RequestMapping("/stockSell")
+	public String stockSell(Model model,@RequestParam("no") int no, @SessionAttribute(name = "loginMember", required = false) Member loginMember) {
 		
 		log.info("리스트 요청");
 		Map<String, String> KospiTop5 = new HashMap<String, String>();
@@ -383,12 +452,37 @@ public class StockController {
 			model.addAttribute("canBuy", canBuy);
 		} catch (Exception e) {}
 		
-		return "stock/stockSelling";
+		
+		// 보유중인 주 개수 구하기
+		int cnt=0;
+		int baseOfStockPrice=0;
+		try {
+			Map<String, String> cMap = new HashMap<String, String>();
+			cMap.put("id", loginMember.getId());
+			List<InvestedStock> tot_count = isService.getInvestedStockList(cMap);
+			
+			for (int i = 0; i < tot_count.size(); i++) {
+				if(tot_count.get(i).getTradeStat().equals("매수")) {
+					cnt += tot_count.get(i).getCnt();
+				}else {
+					cnt -= tot_count.get(i).getCnt();
+				}
+			}
+			System.out.println("cnt: " + cnt);
+			baseOfStockPrice = cnt * 64000;
+			model.addAttribute("cnt", cnt);
+			model.addAttribute("base", baseOfStockPrice);
+		} catch (Exception e) {}
+		
+		
+		
+		
+		
+		return "stock/stockSell";
 	}
 	
 	
-	
-
+	//사기
 	@RequestMapping("/selling")
 	public String selling(Model model,	@ModelAttribute InvestedStock istock,
 			@SessionAttribute(name = "loginMember", required = false) Member loginMember) {
@@ -404,6 +498,24 @@ public class StockController {
 		return "common/msg";
 	}
 		
+	//팔기
+	@RequestMapping("/realSell")
+	public String realSell(Model model,	@ModelAttribute InvestedStock istock,
+			@SessionAttribute(name = "loginMember", required = false) Member loginMember) {
+			
+		int result = isService.saveInvestedStock(istock);
+		if(result > 0) {
+			model.addAttribute("msg", "판매가 완료되었습니다.");
+			model.addAttribute("location", "/stock/stockTest");
+		}else {
+			model.addAttribute("msg", "판매에 실패하였습니다.");
+			model.addAttribute("location", "/stock/stockTest");
+		}
+		return "common/msg";
+	}
+	
+	
+	
 	
 	
 	/*계좌 생성코드*/

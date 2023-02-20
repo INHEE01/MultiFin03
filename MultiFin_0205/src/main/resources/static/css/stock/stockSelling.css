@@ -236,3 +236,7 @@ padding-bottom: 30px;
   color: rgb(13, 27, 72);
   margin-left: 100px;
 }
+
+
+/*추가*/
+.realSell{width:200px; text-align: right; font-weight: 500; font-size: 20px;} 

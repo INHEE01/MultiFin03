@@ -15,7 +15,7 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10 text-center">
-                        <h1 class="mb-3 stock-mainTitle">모의 주식 매수</h1>
+                        <h1 class="mb-3 stock-mainTitle">모의 주식 매도</h1>
                     </div>
                 </div>
             </div>
@@ -48,28 +48,30 @@
    </section>
    <section class="bg-white  stock_description_container">
     <div class="card shadow-soft stock_details">     
-        <h4 class="stock_details_title">모의투자 매수</h4>
-        <form class="sell" action="/stock/selling" method="get">
-        	<input type="text" value="매수" name="tradeStat" style="display:none;">
+        <h4 class="stock_details_title">모의투자 매도</h4>
+        <form class="sell" action="/stock/realSell" method="get">
+        	<input type="text" value="매도" name="tradeStat" style="display:none;">
         	<input type="text" th:value="${sp.itmsNm}" name="stockNum" style="display:none;">
         	<input type="text" th:value="${stockPrice}" name="price"  style="display:none;">
-        	<input type="text" id="allMoney" value="0" name="totalPrice" style="display:none;">
+        	<input type="text" id="allMoney" name="totalPrice" style="display:none;">
             <div class="selling-now">
-                <h5 class="selling-now_money-title">매수 가격</h5>
-                <h5 class="selling-now_money"><input class="total_money" th:id="${stockPrice}" style="color: rgb(231, 76, 60)" th:value="${#numbers.formatInteger(sp.clpr, 0, 'COMMA')}">원</h5>
+                <h5 class="selling-now_money-title">매도 가격</h5>
+                <h5 class="selling-now_money"><input class="total_money" th:id="${stockPrice}" style="color: rgb(52, 152, 219)" th:value="${#numbers.formatInteger(sp.clpr, 0, 'COMMA')}">원</h5>
             </div>
             <div class="selling-amount mb-4">
-                <h5 class="selling-amount-title">매수 수량</h5>
-                  <div class="input_box"><input type="text"  name="cnt" id="selling-able-amount" class="selling-able-amount" placeholder="매도 수량" value="">주</div>
+                <h5 class="selling-amount-title">매도 수량</h5>
+                  <div class="input_box"><input type="text"  name="cnt" id="selling-able-amount" class="selling-able-amount" placeholder="매도 수량" onkeyup='printName()' >주</div>
                     <div class="selling_amount_btn"> 
-                        <div th:onclick="updateMoney(${stockPrice})" class="selling-amount-able" th:value="${canBuy}">[[${canBuy}]]주 구매 가능</div> 
+                        <div th:onclick="updateMoney(${stockPrice})" class="selling-amount-able" th:value="${cnt}">[[${cnt}]]주 판매 가능</div> 
                     </div>
                 </div>
                 <div class="selling-total">
-                    <h5 class="selling-money-title">매수 금액</h5>
-                    <h5 class="selling-money" value="0"> <input id="total_money" class="total_money" style="color: rgb(231, 76, 60)" value="0"> 원</h5>
+                    <h5 class="selling-money-title">매도 금액</h5>
+                    <div class="realSell" value="0"> 
+                   		 <span id="total_money" class="total_money" style="color: rgb(52, 152, 219)"></span>원
+                    </div>
                 </div>
-                <input type="submit" class="selling-btn" value="매 수"></input>
+                <input type="submit" class="selling-btn" value="매 도"></input>
             </div>
         </form>
       
@@ -207,5 +209,5 @@
 <th:block th:replace="layout/scripts :: scripts"></th:block>
 
 <!--제작한  js-->
-<script src="/assets/js/stock/stockSelling.js"></script>
+<script src="/assets/js/stock/stockSell.js"></script>
 </body>
