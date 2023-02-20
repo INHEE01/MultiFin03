@@ -39,13 +39,13 @@
                         <div class="card p-md-2">
                             <div class="card-body p-2 p-md-0">
                                 <form autocomplete="off" class="seach_box" method="get" th:action="@{/common/searchTotal}">
-                                    <select class="form-control options" name="" id="">
+                                    <select class="form-control options" name="check" id="">
                                         <option value="">전체</option>
-                                        <option value="">은행</option>
-                                        <option value="">증권</option>
-                                        <option value="">부동산</option>
-                                        <option value="">뉴스</option>
-                                        <option value="">법률</option>
+                                        <option value="check">은행</option>
+                                        <option th:value="1">증권</option>
+                                        <option th:value="2">부동산</option>
+                                        <option th:value="3">뉴스</option>
+                                        <option th:value="4">법률</option>
                                     </select>
                                     <div class="input-group">
                                         <input id="search-location" type="text" class="form-control autocomplete" placeholder="검색어를 입력하세요" required th:value="${param.searchValue}" name="searchValue">
