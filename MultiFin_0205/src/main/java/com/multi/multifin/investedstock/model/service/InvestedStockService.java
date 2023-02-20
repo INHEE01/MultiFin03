@@ -21,7 +21,7 @@ public class InvestedStockService {
 	}
 	// 체결 내역 최신으로 두개만 가져오기
 	public List<InvestedStock> getInvestedStockList2(Map<String, String> param) {
-		return mapper.selectInvestedStockListBy2(param);
+		return mapper.selectInvestedStockLimit2(param);
 	}
 	// 매수/매도 클릭 시 insert
 	@Transactional(rollbackFor = Exception.class)

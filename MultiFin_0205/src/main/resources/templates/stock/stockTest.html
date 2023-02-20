@@ -101,44 +101,31 @@
                     	</tr>
                     </th:block>
                     <th:block th:if="${myAcc != null}">
-                    	<div class="test_info_title">
-                    	<div th:each="totPrice : ${totalPrice}" class="money"></div>
-                    	
-                        <h3 th:text="${#numbers.formatInteger(totalP, 3, 'COMMA')}"  class="money">원</h3>
-                        <div th:onclick="movePage('/member/account');" class="account">내 계좌 보기</div>
-                    </div>
-                    <div class="companies">
-                        <h5 class="in-area font-weight-bolder">국내주식</h5>
-                        <div class="company">
-                            <div class="company_category">
-                                <div class="company_logo">S</div>
-                                <div class="company_detail">
-                                    <h6 class="company_name">삼성전자</h6>
-                                    <h6 class="company_have_stock">10주</h6>
-                                </div>
-                            </div>
-                            <div class="company_money">
-                                <h5 class="now_money"> 611,000 원 </h5>
-                                <h6 class="now_percent decrease">-10,000원 (-0.27%)</h6>
-                            </div>
-                        </div>
-                        <div class="company">
-                            <div class="company_category">
-                                <div class="company_logo">N</div>
-                                <div class="company_detail">
-                                    <h6 class="company_name">네이버</h6>
-                                    <h6 class="company_have_stock">1주</h6>
-                                </div>
-                            </div>
-                            <div class="company_money">
-                                <h5 class="now_money"> 198,500 원 </h5>
-                                <h6 class="now_percent increase">+20,000원 (+0.23%)</h6>
-                            </div>
-                        </div>
-                    </div>
+                    	<div class="test_info_title"  style="text-align: left;" >
+	                        <h3 class="money">[[${#numbers.formatInteger(10000000 +(8960000-totalP), 0, 'COMMA')}]] 원</h3>
+	                        <div th:onclick="movePage('/member/account');" class="account">내 계좌 보기</div>
+                    	</div>
+                    	<div class="companies">
+                        	<h5 class="in-area font-weight-bolder">국내주식</h5>
+                           <div th:each="nowStock : ${nowStock}">
+                           		<div class="company">
+				                    <div class="company_category">
+				                        <div class="company_logo">S</div>
+				                        <div class="company_detail">
+				                            <h6 class="company_name">[[${nowStock.stockNum}]]</h6>
+				                            <h6  class="company_have_stock">[[${nowStock.cnt}]]주</h6>
+				                        </div>
+				                    </div>
+					             <!--
+				                    <div class="company_money">
+				                        <h5 class="now_money"> 611,000 원 </h5>
+				                        <h6 class="now_percent decrease">-10,000원 (-0.27%)</h6>
+				                    </div>  -->
+		                   		</div>
+                           </div>
+                    	</div>
+                    </th:block>	
                 </div>
-                    </th:block>
-                    
                 <div class="card shadow-soft test_info_card">     
                     <h4 class="card_title"> 내 수익률</h4>
                     <th:block th:if="${myAcc == null}">
@@ -148,23 +135,21 @@
                     </th:block>
                     <th:block th:if="${myAcc != null}">
                     	<div class="test_info_title">
-                        <h3 class="money">1,010,000원</h3>
+                        <h3 class="money">[[${#numbers.formatInteger(8960000-totalP, 0, 'COMMA')}]] 원</h3>
                     </div>
                     <div class="gain_percent">
                         <div class="gain_money">
                             <h5 class="moeny_title">원금</h5>
-                            <h5 class="moeny">1,000,000원</h5>
+                            <h5 class="moeny">10,000,000 원</h5>
                         </div>
-                        <div class="total_money">
-                            <h5 class="moeny_title">총수익</h5>
-                            <h5 class="moeny increase">10,000원</h5>
-                        </div>
-                        <!-- 
                         <div class="day_money">
-                            <h5 class="moeny_title">일간수익</h5>
-                            <h5 class="moeny increase">+100원</h5>
-                        </div>                      
-                         -->
+                            <h5 class="moeny_title">현재 보유 자산</h5>
+                            <h5 class="moeny increase">[[${#numbers.formatInteger(10000000 +(8960000-totalP), 0, 'COMMA')}]] 원</h5>
+                        </div>  
+                        <div class="total_money">
+                            <h5 class="moeny_title">보유중인 한화</h5>
+                            <h5 class="moeny increase">[[${#numbers.formatInteger(10000000 -totalP, 0, 'COMMA')}]] 원</h5>
+                        </div>
                     </div>
                     <!--  <div class="sell">
                         <h5 class="sell_title font-weight-bolder">판매수익</h5>

@@ -360,22 +360,19 @@ public class StockController {
 		model.addAttribute("KOSPI", KOSPI);
 		model.addAttribute("KOSDAQ", KOSDAQ);
 		
-		
-		
-		Map<String, String> member = new HashMap<String, String>();
-		member.put("id", loginMember.getId());
-		List<InvestedStock> check = isService.getInvestedStockList(member);
-		
-		
-		for (int i = 0; i <check.size(); i++) {
-			totalP +=check.get(i).getTotalPrice();
-			System.out.println(totalP);
-		}
-		model.addAttribute("totalP", totalP);
-		
-		
-		
-		
+		//총자산
+		try {
+			Map<String, String> member = new HashMap<String, String>();
+			member.put("id", loginMember.getId());
+			List<InvestedStock> check = isService.getInvestedStockList(member);
+			
+			for (int i = 0; i <check.size(); i++) {
+				totalP +=check.get(i).getTotalPrice();
+				System.out.println(totalP);
+			}
+			model.addAttribute("totalP", totalP);
+			
+		} catch (Exception e) {}
 		
 		try {
 			Map<String, String> myStockMap = new HashMap<String, String>();
@@ -392,7 +389,16 @@ public class StockController {
 			model.addAttribute("myAcc", myAcc);
 		} catch (Exception e) {}
 		
-
+		log.info("보유주식리스트 뽑기");
+		//보유주식
+		try {
+			Map<String, String> getId = new HashMap<String, String>();
+			getId.put("id", loginMember.getId());
+			List<InvestedStock> nowStock = isService.getInvestedStockList2(getId);
+			System.out.println("여기야!!!!!!!!!!!!!!!"  + nowStock.toString());
+			model.addAttribute("nowStock", nowStock);
+		} catch (Exception e) {	}
+		
 		
 		log.info("환율 테이블 요청: 원하는 국가만 가져옴");
 		ExchangeRate USD = service.findExchangeRate("USD");
