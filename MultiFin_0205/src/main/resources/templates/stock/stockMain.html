@@ -26,6 +26,7 @@
                                         <div class="input-group input-group-merge shadow-none">
                                             <div class="input-group-prepend"><span class="input-group-text bg-transparent border-0"><i class="fas fa-search"></i></span></div>
                                             <input id="search-location"  type="text" class="form-control border-0 form-control-flush shadow-none pb-2" placeholder="검색할 내용을 입력해주세요"  required th:value="${param.searchValue}" name="searchValue">
+                                            <input id="checkType"  type="text" required th:value="1" name="check" style="display: none;">
                                         </div>
                                     </div>
                                     <div class="col-auto">

@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.multi.multifin.account.model.service.AccountService;
+import com.multi.multifin.account.model.vo.Account;
 import com.multi.multifin.board.model.service.BoardService;
 import com.multi.multifin.board.model.vo.Board;
 import com.multi.multifin.common.util.PageInfo;
@@ -41,6 +43,8 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private AccountService accountservice;
 	final static private String savePath = "c:\\multifin\\";
 	
 	
@@ -131,6 +135,7 @@ public class MemberController {
 		
 		if(result > 0) { // 성공
 			model.addAttribute("msg", "회원가입에 성공하였습니다.");
+			
 			model.addAttribute("location", "/");
 		}else { // 실패
 			model.addAttribute("msg", "회원가입에 실패하였습니다. 입력정보를 확인하세요.");

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<th:block th:replace="layout/head :: config"></th:block>
-	<title>MultiFin:통합검색</title>
+	<title>MultiFin:은행검색</title>
 	<!-- 현재 페이지에서만 쓰는 css, script -->
 	<link rel="stylesheet" th:href="@{/css/bank/bank.css}">
 	<link rel="stylesheet" th:href="@{/css/common/searchTotal.css}">
@@ -50,7 +50,7 @@
                 	<table class="board_table_bank mt-0">
 	                    <tr class="table_row table_header_bank">
 	                      <th class="table-header_bank">번호</th>
-	                      <th class="table-header_bank" >금융상품</th>
+	                      <th class="table-header_bank">금융상품</th>
 	                      <th class="table-header_bank">이율</th>
 	                      <th class="table-header_bank">금융회사</th>
 	                      <th class="table-header_bank">가입방법</th>
@@ -153,30 +153,6 @@
 	                        <td class="board-content">[[${loanRentHoustList0.rpayTypeNm}]]</td>
 	                        <td class="board-content">[[${loanRentHoustList0.lendRateTypeNm}]]</td>
 	                        <td class="board-content" style="width:72px;">[[${loanRentHoustList0.lendRateAvg}]]</td>
-	                    </tr>
-	                </table>
-                </th:block>
-                <th:block th:if="${savingList.size == 0}">
-					<h4 class="mt-5 mb-1">조회된 적금상품이 없습니다.</h4>
-				</th:block>
-               	<th:block th:if="${savingList.size != 0}">
-               		<h4 class="mt-5 mb-1">적금상품</h4>
-                	<table class="board_table_bank mt-0">
-	                    <tr class="table_row table_header_bank">
-	                      	<th class="table-header">번호</th>
-	                        <th class="table-header" >금융상품</th>
-	                        <th class="table-header">이율</th>
-	                        <th class="table-header">금융회사</th>
-	                        <th class="table-header">가입방법</th>
-	                        <th class="table-header">적립유형</th>
-	                    </tr>
-	                    <tr class="table_row table_header_bank" th:each="savingList, number : ${savingList}" th:onclick="|location.href='/bank/bankFind?no=@{${savingList.finPrdtCd}}'|">
-	                        <td class="board-content">[[(${pageSavingInfo.currentPage}-1)*10+${number.index}+1]]</td>
-	                        <td class="board-content board-title">[[${savingList.finPrdtNm}]]</td>
-	                        <td class="board-content">[[${savingList.intrRate2}]]</td>
-	                        <td class="board-content">[[${savingList.korCoNm}]]</td>
-	                        <td class="board-content">[[${savingList.joinWay}]]</td>
-	                        <td class="board-content">[[${savingList.intrRateTypeNm}]]</td>
 	                    </tr>
 	                </table>
                 </th:block>

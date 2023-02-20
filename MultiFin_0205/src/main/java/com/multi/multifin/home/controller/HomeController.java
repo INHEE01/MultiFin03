@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.multi.multifin.common.util.PageInfo;
 import com.multi.multifin.home.model.service.HomeBlueService;
@@ -25,8 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequestMapping("/home")
-@Controller
-
+@org.springframework.stereotype.Controller
 public class HomeController {
 
 	@Autowired
@@ -75,61 +76,55 @@ public class HomeController {
 	}
 	
 	@GetMapping("/homeBlue2")
-	public String homeBlueSearch2(Model model, @RequestParam Map<String, Object> paramMap,
-			@RequestParam(required =  false) List<String> locationCheck
-			) {
+	public String homeBlue2(Model model, @RequestParam Map<String, Object> paramMap ) {
 		log.info("오피스텔 조회 페이지 요청 성공");
 		int page = 1;
 		Map<String, Object> searchMap = new HashMap<>();
 		
 		try {
-			searchMap.put("searchValue", paramMap.get("searchValue"));
-			searchMap.put("locationCheck", locationCheck);
-			page = Integer.parseInt(""+paramMap.get("page"));
+			String searchValue = ""+ paramMap.get("searchValue"); 
+			if(searchValue != null && searchValue.length() > 0) {
+				String searchType = ""+ paramMap.get("searchType");
+				searchMap.put(searchType, searchValue);
+			}else {
+				paramMap.put("searchType", "all");
+			}
 		} catch (Exception e) {	}
-		System.out.println("searchMap : " + searchMap);
 		
 		int officeCount = blueService.selectOfficeCount(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 5, officeCount, 10);
 		List<OfficeDetail> Officelist = blueService.searchOfficeList(pageInfo, searchMap);
-		if(locationCheck == null) {
-			locationCheck = new ArrayList<>();
-		}
-		paramMap.put("locationCheck", locationCheck);
-		
+
 		model.addAttribute("Officelist", Officelist);
 		model.addAttribute("pageInfo",pageInfo);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("searchMap", searchMap);
 		
+		
 		return "home/homeBlue2";
 	}
 	
 	@GetMapping("/homeBlue3")
-	public String homeBlue3(Model model, @RequestParam Map<String, Object> paramMap,
-			@RequestParam(required =  false) List<String> locationCheck) {
+	public String homeBlue3(Model model, @RequestParam Map<String, Object> paramMap ) {
 		log.info("기타 조회 페이지 요청 성공");
 		int page = 1;
 		Map<String, Object> searchMap = new HashMap<>();
 		
 		// TODO 검색기능 다시보기
 		try {
-			searchMap.put("searchValue", paramMap.get("searchValue"));
-			searchMap.put("locationCheck", locationCheck);
-			page = Integer.parseInt(""+paramMap.get("page"));
+			String searchValue = ""+ paramMap.get("searchValue"); 
+			if(searchValue != null && searchValue.length() > 0) {
+				String searchType ="" + paramMap.get("searchType");
+				searchMap.put(searchType, searchValue);
+			}else {
+				paramMap.put("searchType", "all");
+			}
 		} catch (Exception e) {	}
-		
-		System.out.println("searchMap : " + searchMap);
 		
 		int remainCount = blueService.selectRemainCount(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 5, remainCount, 10);
 		List<RemainDetail> Remainlist = blueService.searchRemainList(pageInfo, searchMap);
 
-		if(locationCheck == null) {
-			locationCheck = new ArrayList<>();
-		}
-		paramMap.put("locationCheck", locationCheck);
-		
 		model.addAttribute("Remainlist", Remainlist);
 		model.addAttribute("pageInfo",pageInfo);
 		model.addAttribute("paramMap", paramMap);
@@ -139,13 +134,101 @@ public class HomeController {
 		return "home/homeBlue3";
 	}
 	
+	
 	@GetMapping("/homeMain")
-	public String homeMain(Model model, @RequestParam Map<String, Object> paramMap) {
+	public String homeMain(Model model, @RequestParam Map<String, Object> paramMap,
+			@RequestParam(required =  false) List<String> locationCheck, @RequestParam Map<String, Object> searchMap) {
+		log.info("부동산 메인 페이지 요청 성공");
 		
+		if(searchMap.get("day")==null) {
+			searchMap.put("day","-02-");
+		}
+
+		int page = 1;
+		
+		try {
+			searchMap.put("searchValue", paramMap.get("searchValue"));
+			searchMap.put("locationCheck", locationCheck);
+			page = Integer.parseInt(""+paramMap.get("page"));
+		} catch (Exception e) {	}
+		
+		System.out.println("searchMap : " + searchMap);
+		System.out.println("paramMap : " + paramMap);
+		
+		int aptCount = blueService.selectAptCount(searchMap);
+		PageInfo pageInfo = new PageInfo(page, 5, aptCount, 10);
+		List<Aptdetail> Aptlist = blueService.searchAptList(pageInfo, searchMap);
+		List<Aptdetail> Aptlist3 = blueService.searchAptList3(searchMap);
+		if(locationCheck == null) {
+			locationCheck = new ArrayList<>();
+		}
+		paramMap.put("locationCheck", locationCheck);
+		
+		 
+		model.addAttribute("Aptlist", Aptlist);
+		model.addAttribute("Aptlist3", Aptlist3);
+		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("searchMap", searchMap);
+		
+		
+		List<Home> list = homeService.searchHomeBylocatin(searchMap);
+		int homeCount = homeService.getHomeCount(searchMap);
+
+		
+		model.addAttribute("homeCount", homeCount);
+		model.addAttribute("list", list);
 		
 		return "home/homeMain";
 	}
+	
+	
+	
+	@GetMapping("/homeMainSearch")
+	public String homeMainSearch(Model model, @RequestParam Map<String, Object> paramMap,@RequestParam(required =  false) List<String> locationCheck,
+			@RequestParam Map<String, Object> searchMap
+			) {
+		log.info("부동산 매물 페이지 요청 성공");
+		
+		
+		
+		System.out.println(paramMap.get("searchValue"));
+		
+		List<Home> list = homeService.searchHomeBylocatin(searchMap);
+		List<Home> home = homeService.searchHomeList(searchMap);
+		int homeCount = homeService.getHomeCount(searchMap);
+		
+		
+		System.out.println(homeCount);
+		model.addAttribute("homeCount", homeCount);
+		model.addAttribute("list", list);
+		model.addAttribute("home", home);
+		model.addAttribute("paramMap", paramMap);
 
+		//
+		int page = 1;
+		
+		try {
+			searchMap.put("searchValue", paramMap.get("searchValue"));
+			searchMap.put("locationCheck", locationCheck);
+			page = Integer.parseInt(""+paramMap.get("page"));
+		} catch (Exception e) {	}
+		System.out.println("searchMap : " + searchMap);
+		
+		int aptCount = blueService.selectAptCount(searchMap);
+		PageInfo pageInfo = new PageInfo(page, 5, aptCount, 10);
+		List<Aptdetail> Aptlist2 = blueService.searchAptList2(searchMap);
+		if(locationCheck == null) {
+			locationCheck = new ArrayList<>();
+		}
+		paramMap.put("locationCheck", locationCheck);
+		
+		model.addAttribute("Aptlist2", Aptlist2);
+		model.addAttribute("pageInfo",pageInfo);
+		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("searchMap", searchMap);
+		
+		return "home/homeMainSearch";
+	}
 	@GetMapping("/homeSell")
 	public String homeSellSearch(Model model, @RequestParam Map<String, Object> paramMap,
 			@RequestParam(required = false) List<String> searchType, @RequestParam Map<String, Object> searchMap

@@ -6,6 +6,7 @@
 <title>MultiFin:통합검색</title>
 <!-- 현재 페이지에서만 쓰는 css, script -->
 <link rel="stylesheet" th:href="@{/css/common/searchTotal.css}">
+<link rel="stylesheet" th:href="@{/css/bank/bank.css}">
 </head>
 <body>
 	<header th:replace="~{layout/header :: #header}"></header>
@@ -28,7 +29,7 @@
 				<span style="color: orange">[[${searchValue}]]</span> 에 대한 검색 결과입니다.
 			</h4>
 			<form class="search_form" action="" method="get">
-				<input class="search_input" type="text" name="searchValue"
+				<input class="search_input" type="text" name="searchValue" id="search_input"
 					th:value="${param.searchValue}" placeholder="다른 검색어를 입력하고 싶으신가요?">
 				<button class="search_btn" type="submit">
 					<i class="fa-solid fa-magnifying-glass"></i>
@@ -45,14 +46,14 @@
 				<input type="button" value="# 청약"
 					onclick="location.href='http://localhost/common/searchTotal?searchValue=청약'"
 					class="seaching_keyword"> <input type="button"
-					value="# 삼성 전자"
-					onclick="location.href='http://localhost/common/searchTotal?searchValue=삼성 전자'"
+					value="# 삼성"
+					onclick="location.href='http://localhost/common/searchTotal?searchValue=삼성'"
 					class="seaching_keyword"> <input type="button"
 					value="# KOSPI"
 					onclick="location.href='http://localhost/common/searchTotal?searchValue=KOSPI'"
 					class="seaching_keyword"> <input type="button"
-					value="# 예적금 상품"
-					onclick="location.href='http://localhost/common/searchTotal?searchValue=예적금 상품'"
+					value="# 저축"
+					onclick="location.href='http://localhost/common/searchTotal?searchValue=저축'"
 					class="seaching_keyword"> <input type="button"
 					value="# 주택 대출"
 					onclick="location.href='http://localhost/common/searchTotal?searchValue=주택 대출'"
@@ -66,195 +67,313 @@
 	<section class="bg-white search_result_tab">
 		<div class="container">
 			<ul class="tabs">
+			<th:block th:if="${check} == '0'">
 				<li class="tab-link current" data-tab="tab-1">금융</li>
+			</th:block>
+			<th:block th:if="${check} != '0'">
+				<li class="tab-link" data-tab="tab-1">금융</li>
+			</th:block>
+			<th:block th:if="${check} == '1'">
+				<li class="tab-link current" data-tab="tab-2">증권</li>
+			</th:block>
+			<th:block th:if="${check} != '1'">
 				<li class="tab-link" data-tab="tab-2">증권</li>
+			</th:block>
+			<th:block th:if="${check} == '2'">
+				<li class="tab-link current" data-tab="tab-3">부동산</li>
+			</th:block>
+			<th:block th:if="${check} != '2'">
 				<li class="tab-link" data-tab="tab-3">부동산</li>
+			</th:block>
+			<th:block th:if="${check} == '3'">
+				<li class="tab-link current" data-tab="tab-4">뉴스</li>
+			</th:block>
+			<th:block th:if="${check} != '3'">
 				<li class="tab-link" data-tab="tab-4">뉴스</li>
+			</th:block>
+			<th:block th:if="${check} == '4'">
+				<li class="tab-link current" data-tab="tab-5">게시판</li>
+			</th:block>
+			<th:block th:if="${check} != '4'">
 				<li class="tab-link" data-tab="tab-5">게시판</li>
+			</th:block>
 			</ul>
-			<div id="tab-1" class="tab-content current">
+			
+			<th:block th:if="${check} == '0'">
+	            <div id="tab-1" class="tab-content current">
+	        </th:block>
+	        <th:block th:if="${check} != '0'">
+	            <div id="tab-1" class="tab-content">
+	        </th:block>
 				<th:block th:if="${bankSize != 0}">
-					<h5 class="search_result_description">
-						검색 결과
-						<sapn style="color: orange;"> [[${bankSize}]]</sapn>
-						건
+					<h5 class="search_result_description" style="margin-bottom: -70px;">
+						검색 결과 <sapn style="color: orange;"> [[${bankSize}]]</sapn>건
 					</h5>
 				</th:block>
 				<table id="tbl-board" class="board_table_bank">
 					<th:block th:if="${bankSize == 0}">
 						<tr>
-							<td colspan="6" style="text-align: center;">조회된 정보가 없습니다.</td>
+							<td colspan="6" style="text-align: center;">검색 결과가 없습니다.</td>
 						</tr>
 					</th:block>
-
 					<th:block th:if="${bankSize != 0}">
-						<th:block th:if="${creditList.size != 0}">
-							<h4 class="mt-5 mb-1">체크카드</h4>
+						<th:block th:if="${savingList.size != 0}">
+							<tr><td colspan="6" class="h5" style="height: 100px;vertical-align: bottom;line-height: 60px;border-top: none;">예금적금상품</td></tr>
 							<tr class="table_row table_header_bank">
-								<th class="table-header">번호</th>
-								<th class="table-header">카드명</th>
-								<th class="table-header">상품특징</th>
-								<th class="table-header">주요혜택</th>
-								<th class="table-header">상세정보</th>
+								<th class="table_header_bank">타입</th>
+								<th class="table_header_bank">금융회사</th>
+								<th class="table_header_bank">금융상품</th>
+								<th class="table_header_bank">이율</th>
+								<th class="table_header_bank">가입방법</th>
+								<th class="table_header_bank">적립유형</th>
 							</tr>
-							<tr class="table_row" th:each="credit, number : ${creditList}">
-								<td class="board-content_bank">[[${number.index}+1]]</td>
-								<td class="board-content_bank">[[${credit.productNm}]]</td>
-								<td class="board-content_bank"><img
-									th:src="${credit.productImg}">[[${credit.productChar}]]</td>
-								<td class="board-content_bank">[[${credit.keyBenefit}]]</td>
-								<td class="board-content_bank"><a
-									th:href="${credit.detailUrl}" target="_blank">카드사바로가기</a></td>
+							<tr class="table_row"
+								th:each="savingList, number : ${savingList}" th:onclick="|location.href='/bank/bankFind?no=@{${savingList.finPrdtCd}}'|">
+								<td class="board-content_bank">적금</td>
+								<td class="board-content_bank" style="color: orange;">[[${savingList.korCoNm}]]</td>
+								<td class="board-content_bank">[[${savingList.finPrdtNm}]]</td>
+								<td class="board-content_bank">[[${savingList.intrRate2}]]</td>
+								<td class="board-content_bank">[[${savingList.joinWay}]]</td>
+								<td class="board-content_bank">[[${savingList.intrRateTypeNm}]]</td>
 							</tr>
 						</th:block>
-
-						<th:block th:if="${debitList.size != 0}">
-							<h4 class="mt-5 mb-1">신용카드</h4>
-							<tr class="table_row table_header_bank">
-								<th class="table-header">번호</th>
-								<th class="table-header">카드명</th>
-								<th class="table-header">상품특징</th>
-								<th class="table-header">주요혜택</th>
-								<th class="table-header">상세정보</th>
+						<th:block th:if="${depositList.size != 0}">
+							<th:block th:if="${savingList.size == 0}">
+								<tr><td colspan="6" class="h5" style="height: 100px;vertical-align: bottom;line-height: 60px;border-top: none;">예금적금상품</td></tr>
+								<tr class="table_row table_header_bank">
+									<th class="table_header_bank">타입</th>
+									<th class="table_header_bank">금융회사</th>
+									<th class="table_header_bank">금융상품</th>
+									<th class="table_header_bank">이율</th>
+									<th class="table_header_bank">가입방법</th>
+									<th class="table_header_bank">적립유형</th>
+								</tr>
+							</th:block>
+							<tr class="table_row"
+								th:each="depositList, number : ${depositList}" th:onclick="|location.href='/bank/bankFind?no=@{${depositList.finPrdtCd}}'|">
+								<td class="board-content_bank">정기예금</td>
+								<td class="board-content_bank" style="color: orange;">[[${depositList.korCoNm}]]</td>
+								<td class="board-content_bank">[[${depositList.finPrdtNm}]]</td>
+								<td class="board-content_bank">[[${depositList.intrRate2}]]</td>
+								<td class="board-content_bank">[[${depositList.joinWay}]]</td>
+								<td class="board-content_bank">[[${depositList.intrRateTypeNm}]]</td>
 							</tr>
+						</th:block>
+						<th:block th:if="${creditList.size != 0}">
+							<tr><td colspan="6" class="h5" style="height: 100px;vertical-align: bottom;line-height: 60px;border-top: none;">카드상품</td></tr>
+							<tr class="table_row table_header_bank">
+								<th class="table-header_bank" style="width: 100px;">타입</th>
+								<th class="table-header_bank">상품명</th>
+								<th class="table-header_bank">상품특징</th>
+								<th class="table-header_bank" colspan="2">주요혜택</th>
+								<th class="table-header_bank">상세정보</th>
+							</tr>
+							<tr class="table_row" th:each="credit, number : ${creditList}">
+								<td class="board-content_bank">체크카드</td>
+								<td class="board-content_bank board-cardimg">
+									<img th:src="${credit.productImg}">[[${credit.productNm}]]
+								</td>
+								<td class="board-content_bank">[[${credit.productChar}]]</td>
+								<td class="board-content_bank" colspan="2">[[${credit.keyBenefit}]]</td>
+								<td class="board-content_bank">
+									<a th:href="${credit.detailUrl}" target="_blank">바로가기</a>
+								</td>
+							</tr>
+						</th:block>
+						<th:block th:if="${debitList.size != 0}">
+							<th:block th:if="${creditList.size == 0}">
+								<tr><td colspan="6" class="h5" style="height: 100px;vertical-align: bottom;line-height: 60px;border-top: none;">카드상품</td></tr>
+								<tr class="table_row table_header_bank">
+									<th class="table-header_bank" style="width: 100px;">타입</th>
+									<th class="table-header_bank">상품명</th>
+									<th class="table-header_bank">상품특징</th>
+									<th class="table-header_bank" colspan="2">주요혜택</th>
+									<th class="table-header_bank">상세정보</th>
+								</tr>
+							</th:block>
 							<tr class="table_row" th:each="debitList, number : ${debitList}">
-								<td class="board-content_bank">[[${number.index}+1]]</td>
-								<td class="board-content_bank">[[${debitList.productNm}]]</td>
-								<td class="board-content_bank"><img
-									th:src="${debitList.productImg}">[[${debitList.productChar}]]</td>
-								<td class="board-content_bank">[(${debitList.keyBenefit})]</td>
-								<td class="board-content_bank"><a
-									th:href="${debitList.detailUrl}" target="_blank">카드사 바로가기</a></td>
+								<td class="board-content_bank">신용카드</td>
+								<td class="board-content_bank board-cardimg">
+									<img th:src="${debitList.productImg}">[[${debitList.productNm}]]
+								</td>
+								<td class="board-content_bank">[[${debitList.productChar}]]</td>
+								<td class="board-content_bank" colspan="2">[(${debitList.keyBenefit})]</td>
+								<td class="board-content_bank">
+									<a th:href="${debitList.detailUrl}" target="_blank">카드사 바로가기</a>
+								</td>
 							</tr>
 						</th:block>
 
 						<th:block th:if="${loanCreditList0.size != 0}">
-							<h4 class="mt-5 mb-1">개인신용대출</h4>
+							<tr><td colspan="6" class="h5" style="height: 100px;vertical-align: bottom;line-height: 60px;border-top: none;">대출상품</td></tr>
 							<tr class="table_row table_header_bank">
-								<th class="table-header">번호</th>
-								<th class="table-header">금융회사명</th>
-								<th class="table-header">금융상품</th>
-								<th class="table-header">대출종류명</th>
-								<th class="table-header">금리구분</th>
-								<th class="table-header">평균금리</th>
+								<th class=table_header_bank>타입</th>
+								<th class="table_header_bank">금융회사명</th>
+								<th class="table_header_bank">금융상품</th>
+								<th class="table_header_bank">대출종류명</th>
+								<th class="table_header_bank">금리구분</th>
+								<th class="table_header_bank">평균금리</th>
 							</tr>
-							<tr class="table_row"
-								th:each="loanCreditList0, number : ${loanCreditList0}">
-								<td class="board-content_bank">[[${number.index}+1]]</td>
-								<td class="board-content_bank" style="width: 240px;">[[${loanCreditList0.korCoNm}]]</td>
+							<tr class="table_row" th:each="loanCreditList0, number : ${loanCreditList0}">
+								<td class="board-content_bank">개인신용대출</td>
+								<td class="board-content_bank" style="width: 240px;color: orange;">[[${loanCreditList0.korCoNm}]]</td>
 								<td class="board-content_bank" style="width: 240px;">[[${loanCreditList0.finPrdtNm}]]</td>
 								<td class="board-content_bank">[[${loanCreditList0.crdtPrdtTypeNm}]]</td>
 								<td class="board-content_bank">[[${loanCreditList0.crdtLendRateTypeNm}]]</td>
 								<td class="board-content_bank" style="width: 72px;">[[${loanCreditList0.crdtGradAvg}]]</td>
 							</tr>
 						</th:block>
-
 						<th:block th:if="${loanMortgageList0.size != 0}">
-							<h4 class="mt-5 mb-1">주택담보대출</h4>
-							<tr class="table_row table_header_bank">
-								<th class="table-header">번호</th>
-								<th class="table-header">금융회사명</th>
-								<th class="table-header">금융상품</th>
-								<th class="table-header">대출종류명</th>
-								<th class="table-header">금리구분</th>
-								<th class="table-header">평균금리</th>
-							</tr>
-							<tr class="table_row"
-								th:each="loanMortgageList0, number : ${loanMortgageList0}">
-								<td class="board-content_bank">[[${number.index}+1]]</td>
-								<td class="board-content_bank">[[${loanMortgageList0.korCoNm}]]</td>
+							<th:block th:if="${loanCreditList0.size == 0}">
+								<tr><td colspan="6" class="h5" style="height: 100px;vertical-align: bottom;line-height: 60px;border-top: none;">대출상품</td></tr>
+								<tr class="table_row table_header_bank">
+									<th class=table_header_bank>타입</th>
+									<th class="table_header_bank">금융회사명</th>
+									<th class="table_header_bank">금융상품</th>
+									<th class="table_header_bank">대출종류명</th>
+									<th class="table_header_bank">금리구분</th>
+									<th class="table_header_bank">평균금리</th>
+								</tr>
+							</th:block>
+							<tr class="table_row" th:each="loanMortgageList0, number : ${loanMortgageList0}">
+								<td class="board-content_bank">주택담보대출</td>
+								<td class="board-content_bank" style="color: orange;">[[${loanMortgageList0.korCoNm}]]</td>
 								<td class="board-content_bank">[[${loanMortgageList0.finPrdtNm}]]</td>
 								<td class="board-content_bank">[[${loanMortgageList0.rpayTypeNm}]]</td>
 								<td class="board-content_bank">[[${loanMortgageList0.lendRateTypeNm}]]</td>
 								<td class="board-content_bank">[[${loanMortgageList0.lendRateAvg}]]</td>
 							</tr>
 						</th:block>
-
-						<th:block th:if="${savingList.size != 0}">
-							<h4 class="mt-5 mb-1">적금상품</h4>
-							<tr class="table_row table_header_bank">
-								<th class="table-header">번호</th>
-								<th class="table-header">금융상품</th>
-								<th class="table-header">이율</th>
-								<th class="table-header">금융회사</th>
-								<th class="table-header">가입방법</th>
-								<th class="table-header">적립유형</th>
-							</tr>
-							<tr class="table_row"
-								th:each="savingList, number : ${savingList}">
-								<td class="board-content_bank">[[(${pageSavingInfo.currentPage}-1)*10+${number.index}+1]]</td>
-								<td class="board-content_bank">[[${savingList.finPrdtNm}]]</td>
-								<td class="board-content_bank">[[${savingList.intrRate2}]]</td>
-								<td class="board-content_bank">[[${savingList.korCoNm}]]</td>
-								<td class="board-content_bank">[[${savingList.joinWay}]]</td>
-								<td class="board-content_bank">[[${savingList.intrRateTypeNm}]]</td>
-							</tr>
-						</th:block>
-
-						<th:block th:if="${depositList.size != 0}">
-							<h4 class="mt-5 mb-1">예금상품</h4>
-							<tr class="table_row table_header_bank">
-								<th class="table-header_bank">번호</th>
-								<th class="table-header_bank">금융상품</th>
-								<th class="table-header_bank">이율</th>
-								<th class="table-header_bank">금융회사</th>
-								<th class="table-header_bank">가입방법</th>
-								<th class="table-header_bank">적립유형</th>
-							</tr>
-							<tr class="table_row"
-								th:each="depositList, number : ${depositList}">
-								<td class="board-content_bank">[[(${pageDepositInfo.currentPage}-1)*10+${number.index}+1]]</td>
-								<td class="board-content_bank">[[${depositList.finPrdtNm}]]</td>
-								<td class="board-content_bank">[[${depositList.intrRate2}]]</td>
-								<td class="board-content_bank">[[${depositList.korCoNm}]]</td>
-								<td class="board-content_bank">[[${depositList.joinWay}]]</td>
-								<td class="board-content_bank">[[${depositList.intrRateTypeNm}]]</td>
+						<th:block th:if="${loanRentHoustList0.size != 0}">
+							<th:block th:if="${loanCreditList0.size == 0 && loanRentHoustList0.size == 0}">
+								<tr><td colspan="6" class="h5" style="height: 100px;vertical-align: bottom;line-height: 60px;border-top: none;">대출상품</td></tr>
+								<tr class="table_row table_header_bank">
+									<th class=table_header_bank>타입</th>
+									<th class="table_header_bank">금융회사명</th>
+									<th class="table_header_bank">금융상품</th>
+									<th class="table_header_bank">대출종류명</th>
+									<th class="table_header_bank">금리구분</th>
+									<th class="table_header_bank">평균금리</th>
+								</tr>
+							</th:block>
+							<tr class="table_row" th:each="loanRentHoustList0, number : ${loanRentHoustList0}">
+								<td class="board-content_bank">전세자금대출</td>
+								<td class="board-content_bank" style="color: orange;">[[${loanRentHoustList0.korCoNm}]]</td>
+								<td class="board-content_bank">[[${loanRentHoustList0.finPrdtNm}]]</td>
+								<td class="board-content_bank">[[${loanRentHoustList0.rpayTypeNm}]]</td>
+								<td class="board-content_bank">[[${loanRentHoustList0.lendRateTypeNm}]]</td>
+								<td class="board-content_bank">[[${loanRentHoustList0.lendRateAvg}]]</td>
 							</tr>
 						</th:block>
 					</th:block>
 				</table>
 			</div>
-
-			<div id="tab-2" class="tab-content">
-				<!-- 주식 -->
-				
+			
+<!-- 주식 시작 -->
+			<th:block th:if="${check} == '1'">
+	            <div id="tab-2" class="tab-content current">
+	        </th:block>
+	        <th:block th:if="${check} != '1'">
+	            <div id="tab-2" class="tab-content">
+	        </th:block>
+				<th:block th:if="${stockList.size != 0}">
+					<h5 class="search_result_description">
+						검색 결과 <sapn style="color: orange;"> [[${stockCount}]]</sapn>건
+					</h5>
+				</th:block>
+				<table id="tbl-board" class="board_table_bank">
+					<th:block th:if="${stockList.size == 0}">
+						<tr>
+							<td colspan="6" style="text-align: center;">검색 결과가 없습니다.</td>
+						</tr>
+					</th:block>
+					<th:block th:if="${stockList.size != 0}">
+						<tr class="table_row table_header">
+							<th class="table-header">번호</th>
+							<th class="table-header">주식시장구분</th>
+							<th class="table-header">회사명</th>
+							<th class="table-header" colspan="2">시세</th>
+						</tr>
+						<tr class="table_row" th:each="stock, num : ${stockList}">
+							<td class="board-content_bank">[[(${stockPageInfo.currentPage}-1)*10+${num.index}+1]]</td>
+							<td class="board-content_bank">[[${stock.mrktCtg}]]</td>
+							<td class="board-content_bank">[[${stock.itmsNm}]]</td>
+							<td class="board-content_bank text-right" th:text="|*{#numbers.formatInteger(stock.clpr, 0, 'COMMA')}원|"></td>
+							<th:block th:if="${#strings.contains(stock.vs, '-') == true }">
+								<td class="percent-money decrease font-weight-bolder board-content_bank text-left">▼ <span th:text="|*{#numbers.formatInteger(stock.vs, 0, 'COMMA')}|"></span> ([[${stock.fltRt}]]%)</td>
+							</th:block>
+							<th:block th:if="${#strings.contains(stock.vs, '-') == false }">
+								<td class="percent-money increase font-weight-bolder board-content_bank text-left">▲ <span th:text="|*{#numbers.formatInteger(stock.vs, 0, 'COMMA')}|"></span> (+[[${stock.fltRt}]]%)</td>
+							</th:block>
+						</tr>
+					</th:block>
+				</table>
+				<div class="table-buttons">
+                    <button th:onclick="|movePage('/common/searchTotal?stockPage=1','1');|" class="table-button">&lt;</button>
+                    <button th:onclick="|movePage('/common/searchTotal?stockPage=${stockPageInfo.prevPage}','1');|" class="table-button">&lt;</button>
+                    <th:block th:each="num, status : ${#numbers.sequence(stockPageInfo.startPage, stockPageInfo.endPage)}">
+						<th:block th:if="${status.current == stockPageInfo.currentPage}">
+							<button class="table-button" disabled >[[${status.current}]]</button>
+						</th:block>
+						<th:block th:if="${status.current != stockPageInfo.currentPage}">
+							<button th:onclick="|movePage('/common/searchTotal?stockPage=${status.current}','1');|" class="table-button">
+								[[${status.current}]]
+							</button>
+						</th:block>
+					</th:block>
+                    <button th:onclick="|movePage('/common/searchTotal?stockPage=${stockPageInfo.nextPage}','1');|" class="table-button">&gt;</button>
+                    <button th:onclick="|movePage('/common/searchTotal?stockPage=${stockPageInfo.maxPage}','1');|" class="table-button">&gt;&gt;</button>
+                </div>
 			</div>
+<!-- 주식 끝 -->
 
-			<div id="tab-3" class="tab-content">
-				<!-- 부동산 -->
+<!-- 부동산 시작 -->
+			<th:block th:if="${check} == '2'">
+	            <div id="tab-3" class="tab-content current">
+	        </th:block>
+	        <th:block th:if="${check} != '2'">
+	            <div id="tab-3" class="tab-content">
+	        </th:block>
 				<th:block th:if="${newsList1.size != 0}">
 					<h5 class="search_result_description">
-						검색 결과
-						<sapn style="color: orange;"> [[${newsList1.size}]]</sapn>
-						건
+						검색 결과 <sapn style="color: orange;"> [[${newsList1.size}]]</sapn>건
 					</h5>
 				</th:block>
 				<table id="tbl-board" class="board_table_bank">
 					<th:block th:if="${newsList1.size == 0}">
 						<tr>
-							<td colspan="6" style="text-align: center;">조회된 정보가 없습니다.</td>
+							<td colspan="6" style="text-align: center;">검색 결과가 없습니다.</td>
 						</tr>
 					</th:block>
 					<th:block th:if="${newsList1.size != 0}">
 						<tr class="table_row table_header_bank">
-							<th class="table-header">번호</th>
-							<th class="table-header">구분</th>
-							<th class="table-header">지역</th>
-							<th class="table-header">주택명</th>
-							<th class="table-header">주택구분</th>
-							<th class="table-header">등록일</th>
-							<th class="table-header">관련정보</th>
+							<th class="news_title">번호</th>
+							<th class="news_title">구분</th>
+							<th class="news_title">지역</th>
+							<th class="news_title">주택명</th>
+							<th class="news_title">주택구분</th>
+							<th class="news_title">등록일</th>
+							<th class="news_title">관련정보</th>
 						</tr>
 						<tr th:each="news, number : ${newsList1}">
-							<td class="board-content">[[${number.index}+1]]</td>
-							<td class="board-content">[[${news.title}]]</td>
+							<td class="board_table_news">[[${number.index}+1]]</td>
+							<td class="board_table_news">[[${news.title}]]</td>
 							<td th:onclick="|location.href='@{${news.originallink}}'|">바로가기</td>
 						</tr>
 					</th:block>
 				</table>
 			</div>
-			<div id="tab-4" class="tab-content">
-				<!--뉴스-->
+<!-- 부동산 끝 -->
+
+
+
+<!-- 뉴스 시작 -->
+			<th:block th:if="${check} == '3'">
+	            <div id="tab-4" class="tab-content current">
+	        </th:block>
+	        <th:block th:if="${check} != '3'">
+	            <div id="tab-4" class="tab-content">
+	        </th:block>
 				<th:block th:if="${newsList1.size != 0}">
 					<h5 class="search_result_description">
 						검색 결과
@@ -265,7 +384,7 @@
 				<table id="tbl-board" class="board_table_bank">
 					<th:block th:if="${newsList1.size == 0}">
 						<tr>
-							<td colspan="6" style="text-align: center;">조회된 정보가 없습니다.</td>
+							<td colspan="6" style="text-align: center;">검색 결과가 없습니다.</td>
 						</tr>
 					</th:block>
 					<th:block th:if="${newsList1.size != 0}">
@@ -275,51 +394,77 @@
 							<th class="table-header">뉴스보기</th>
 						</tr>
 						<tr th:each="news, number : ${newsList1}">
-							<td class="board-content">[[${number.index}+1]]</td>
-							<td class="board-content">[[${news.title}]]</td>
-							<td th:onclick="|location.href='@{${news.originallink}}'|">바로가기</td>
+							<td class="board-content_bank">[[${number.index}+1]]</td>
+							<td class="board-content_bank">[[${news.title}]]</td>
+							<td class="board-content_bank" th:onclick="|location.href='@{${news.originallink}}'|">바로가기</td>
 						</tr>
 					</th:block>
 				</table>
 			</div>
-			<div id="tab-5" class="tab-content">
-				<!-- 자유게시판 -->
+<!-- 뉴스 끝 -->
+<!-- 게시판 시작 -->
+			<th:block th:if="${check} == '4'">
+	            <div id="tab-5" class="tab-content current">
+	        </th:block>
+	        <th:block th:if="${check} != '4'">
+	            <div id="tab-5" class="tab-content">
+	        </th:block>
+	        	<th:block th:if="${freeList.size != 0}">
+					<h5 class="search_result_description">
+						검색 결과 <sapn style="color: orange;"> [[${freeList.size}]]</sapn>건
+					</h5>
+				</th:block>
 				<table id="tbl-board" class="board_table_bank">
-					<th:if test="[[${freeList.size == 0}]]">
-						<h5 class="search_result_description" colspan="5">
-							검색 결과가 없습니다.
+					<th:block th:if="${freeList.size == 0}">
+						<tr>
+							<td colspan="6" style="text-align: center;">검색 결과가 없습니다.</td>
+						</tr>
+					</th:block>
+					<th:block th:if="${freeList.size != 0}">
+						<tr class="table_row table_header_bank">
+							<th class="table-header">번호</th>
+							<th class="table-header">제목</th>
+							<th class="table-header">작성자</th>
+							<th class="table-header">첨부파일</th>
+							<th class="table-header">조회수</th>
+							<th class="table-header">댓글수</th>
+						</tr>
+						<tr th:each="freeList, number : ${freeList}" th:onclick="|location.href='@{/community/view?no=${freeList.bno}}'|">
+							<td class="board-content_bank">[[(${pageFreeInfo.currentPage}-1)*10+${number.index}+1]]</td>
+							<td class="board-content_bank">[[${freeList.title}]]</td>
+							<td class="board-content_bank">[[${freeList.id}]]</td>
+							<td class="board-content_bank">
+								<th:block th:if="${freeList.originalFileName != null }">
+									<span>📁</span>
+								</th:block>
+								<th:block th:if="${freeList.originalFileName == null }">
+									<span>-</span>
+								</th:block>
 							</td>
-						</h5>
-					</th:if>
-					<tr class="table_row table_header">
-						<th class="table-header">번호</th>
-						<th class="table-header">구분</th>
-						<th class="table-header">제목</th>
-						<th class="table-header">작성일</th>
-					</tr>
-					<th:if test="[[${not empty freeList}]]">
-						<th:block th:each="board, status : ${freeList}">
-							<tr>
-								<td class="board-content"><a
-									href="$/localhost/community/freeList?no=${board.board_bNo}">${board.bNo}</a></td>
-								<td class="board-content"><a
-									href="$localhost/community/freeList?no=${board.board_bNo}">${board.type}</a></td>
-								<td class="board-content"><a
-									href="$localhost/community/freeList?no=${board.board_bNo}">${board.title}</a></td>
-								<td class="board-content"><fmt:formatDate
-										pattern="yyyy-MM-dd" value="${board.createDate}" /></td>
-							</tr>
-						</th:block>
-					</th:if>
+							<td class="board-content_bank">[[${freeList.readCount}]]</td>
+							<td class="board-content_bank">[[${freeList.replyCount}]]</td>
+						</tr>
+					</th:block>
+					
 				</table>
 				<div class="table-buttons">
-					<button onclick="" class="table-button">&lt;&lt;</button>
-					<button onclick="" class="table-button">&lt;</button>
-					<button onclick="" class="table-button">1</button>
-					<button onclick="" class="table-button">&gt;</button>
-					<button onclick="" class="table-button">&gt;&gt;</button>
-				</div>
+                    <button th:onclick="|movePage('/common/searchTotal?pageFree=1','4');|" class="table-button">&lt;</button>
+                    <button th:onclick="|movePage('/common/searchTotal?pageFree=${pageFreeInfo.prevPage}','4');|" class="table-button">&lt;</button>
+                    <th:block th:each="num, status : ${#numbers.sequence(pageFreeInfo.startPage, pageFreeInfo.endPage)}">
+						<th:block th:if="${status.current == pageFreeInfo.currentPage}">
+							<button class="table-button" disabled >[[${status.current}]]</button>
+						</th:block>
+						<th:block th:if="${status.current != pageFreeInfo.currentPage}">
+							<button th:onclick="|movePage('/common/searchTotal?pageFree=${status.current}','4');|" class="table-button">
+								[[${status.current}]]
+							</button>
+						</th:block>
+					</th:block>
+                    <button th:onclick="|movePage('/common/searchTotal?pageFree=${pageFreeInfo.nextPage}','4');|" class="table-button">&gt;</button>
+                    <button th:onclick="|movePage('/common/searchTotal?pageFree=${pageFreeInfo.maxPage}','4');|" class="table-button">&gt;&gt;</button>
+                </div>
 			</div>
+<!-- 게시판 끝 -->
 		</div>
 	</section>
 	<section class="stock__total pb-5">
@@ -520,5 +665,17 @@
 
 		});
 	</script>
+	
+	<!-- 테이블 페이징 -->
+<script type="text/javascript">
+	function movePage(pageUrl, isCheck){
+		var searchValue = document.getElementById("search_input"); // 갤럭시
+		if(searchValue.value.length != 0){
+			pageUrl = pageUrl + '&searchValue=' + searchValue.value; 
+		}
+		pageUrl = pageUrl + '&check='+isCheck;
+		location.href = encodeURI(pageUrl);
+	}
+</script>
 </body>
 </html>

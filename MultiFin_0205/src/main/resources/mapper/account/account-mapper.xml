@@ -22,13 +22,13 @@
 		WHERE M.ID = '${id}'
 	</select>
 	<!-- 계좌 번호 생성 후 테이블에 삽입 -->
-	<insert id="insertAccount" parameterType="Account">
+	<insert id="insertAccount" parameterType="int">
 		INSERT INTO ACCOUNT(
-			ANUM, A.ACCOUNT, MNO, 	
+			ANUM, ACCOUNT, MNO, 	
 			TOTALASSET, WON, TOTALPROFIT
 		) VALUES (
-			 0, #{account}, #{mNo},
-			 #{totalAsset}, #{won}, #{totalProfit}
+			 0, DEFAULT, #{mNo},
+			 DEFAULT, DEFAULT, DEFAULT
 			 )
 	</insert>
 </mapper>

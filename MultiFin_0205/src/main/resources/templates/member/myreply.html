@@ -54,16 +54,17 @@
                                 <div class="card border-light mb-4" >
                                     <div class="row no-gutters align-items-center  pt-5 pb-5 pl-5 pr-5" >
                                          <section class="board mb-6">
-                                            <div class="boardbox_01 pl-0 mb-2"><h5>작성 댓글</h5></div> 
-                                            <div class="delete mb-2" style="display:flex;">
+                                            <div class="boardbox_01 pl-0 mb-2" style="padding: 35px "><h5>작성 댓글</h5></div> 
+                                            <div class="delete mb-2" style="padding-bottom: 50px">
                                                 <button type="submit" class="myboard_btn" style="float: right;" onclick="deleteAllPage();">전체 삭제</button>
                                             </div>
                                             <table id="tbl-board" class="board-table">
 	                                            <tr>
-	                                                <th class="table-header"></th>
-	                                                <th class="table-header"></th>
-	                                                <th class="table-header"><a style="margin-left: -80%; font-weight: 700">댓글</a></th>
-	                                                <th class="table-header"></th>
+	                                                <th class="table-header" >댓글</div></th>
+	                                                <th class="table-header" >작성한날짜</th>
+	                                                <th class="table-header" >원제</th>
+	                                                <th class="table-header">삭제</th>
+	                                                
 	                                               
 	                                            </tr>
 	                                            <th:block th:if="${list == null || list.size()==0}">
@@ -74,11 +75,11 @@
 												<th:block th:if="${list != null}">
 												
 														<tr th:each="list, number: ${list}" > 
-															<td class="board-content" th:onclick="|directView('${list.bNo}')|">[[${list.content}]]</td>
+															<td class="board-content board-title2" th:onclick="|directView('${list.bNo}')|">[[${list.content}]]</td>
 															
 															<td class="board-content" th:onclick="|directView('${list.bNo}')|" th:text="${#dates.format(list.createDate, 'yyyy/MM/dd')}"/></td>
 															
-															<td class="board-content board-title" th:onclick="|directView('${list.bNo}')|">
+															<td class="board-content board-title2" th:onclick="|directView('${list.bNo}')|">
 														 		[[${list.title}]]
 															</td>
 															<td class="board-content">

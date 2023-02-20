@@ -24,13 +24,18 @@
         </section>
         <section class="board mb-6">
             <div class="top">
-                <th:block th:if="${session.loginMember != null}">
+                <th:block th:if="${session.loginMember != null && session.loginMember.role == 'ROLE_ADMIN'}">
                 <!-- && {email.equals("admin@test.com")} -->
                 	<button class="write_btn" type="button" id="btn-add" onclick="location.href='/community/noticeWrite'">글쓰기</button>
                 </th:block>
 				<th:block th:if="${session.loginMember == null}">
                 	<button class="write_btn" type="button" id="btn-add" onclick="location.href='/member/sign-in'">글쓰기</button>
-                </th:block>                
+                </th:block>
+                <th:block th:if="${session.loginMember != null && session.loginMember.role != 'ROLE_ADMIN'}">
+                <!-- && {email.equals("admin@test.com")} -->
+                	 <div class="space" ></div>
+                </th:block>       
+                         
                 <!-- 검색창 시작 -->
                 <form th:action="@{/community/noticeList}" method="get" class="search">
                     <div style="text-align: center;">
