@@ -165,6 +165,10 @@
   
   .none{font-size: 17px;}
   .table-header{height: 50px;}
+  
+  .increase{ color: rgb(231, 76, 60);}
+  .decrease{color:  rgb(52, 152, 219);}
+  
   /*부동산*/
   
   .more{

@@ -47,7 +47,7 @@
 <div class="section bg-dark text-center text-white pt-3 pb-3">
     <i class="fa-solid fa-comments fa-2x onlineChatBtn m-4"> &nbsp;멀티핀 챗봇</i>
     <p>웹소켓을 연결하고 궁금한 것을 물어보세요</p>
-   	<p>로그인 [[${loginMember.id}]]</p>
+   	<p>닉네임 : [[${loginMember.id}]]</p>
    	<input type="hidden" id="loginMember" th:value="${loginMember.id}">
 </div>
 <!-- 타이틀 끝 -->
@@ -90,55 +90,8 @@
     </div>
 </div>
 <!-- 채팅 부분 끝 -->
-    </main>
-    
-<!-- Core -->
-<script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
-<script src="../../assets/vendor/popper.js/dist/umd/popper.min.js"></script>
-<script src="../../assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../../assets/vendor/headroom.js/dist/headroom.min.js"></script>
-<script src="../../assets/vendor/onscreen/dist/on-screen.umd.min.js"></script>
-
-<!-- NoUISlider -->
-<script src="../../assets/vendor/nouislider/distribute/nouislider.min.js"></script>
-
-<!-- Bootstrap Datepicker -->
-<script src="../../vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-
-<!-- jQuery Waypoints -->
-<script src="../../assets/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
-
-<!-- Owl acrousel -->
-<script src="../../assets/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
-
-<!-- Smooth scroll -->
-<script src="../../assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-
-<!-- Fancybox -->
-<script src="../../assets/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
-
-<!-- Sticky sidebar -->
-<script src="../../assets/vendor/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
-
-<!-- Mapbox & Leaflet.js -->
-<script src="../../assets/vendor/leaflet/dist/leaflet.js"></script>
-
-<!-- Chartist -->
-<script src="../../assets/vendor/chartist/dist/chartist.min.js"></script>
-<script src="../../assets/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-
-<!-- Vector Maps -->
-<script src="../../assets/vendor/jqvmap/dist/jquery.vmap.min.js"></script>
-<script src="../../assets/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
-
-<!-- Sliderform -->
-<script src="../../assets/assets/js/jquery.slideform.js"></script>
-
-<!-- Spaces custom Javascript -->
-<script src="../../assets/js/spaces.js"></script>
-
-<!-- Spaces custom Javascript -->
-<script src="../assets/js/spaces.js"></script>
+</main>
+<th:block th:replace="layout/scripts :: scripts"></th:block>
 </body>
 
 </html>
