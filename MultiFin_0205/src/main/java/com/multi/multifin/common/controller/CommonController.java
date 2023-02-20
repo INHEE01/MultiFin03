@@ -26,6 +26,8 @@ import com.multi.multifin.bank.model.vo.LoanRentHouse;
 import com.multi.multifin.common.util.PageInfo;
 import com.multi.multifin.news.naverapi.NaverSearchAPI;
 import com.multi.multifin.news.naverapi.News;
+import com.multi.multifin.stock.model.service.StockPriceService;
+import com.multi.multifin.stock.model.vo.FundProductInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,6 +52,9 @@ public class CommonController {
 	
 	@Autowired
 	private LoanRentHouseService lrhService;
+	
+	@Autowired
+	private StockPriceService fundService;
 	
 	@RequestMapping("/searchTotal")
 	public String searchTotal(Model model, @RequestParam("searchValue") String param, Map<String, String> paramMap) {
@@ -83,7 +88,7 @@ public class CommonController {
 		int savingCount = cardService.getCreditCount(paramMap);
 		PageInfo pageSavingInfo = new PageInfo(pageSaving, 5, savingCount, 10);
 		List<BankSaving> savingList = bankbookService.selectSavingListUnique(pageSavingInfo, paramMap);
-		
+		System.out.println(savingList);
 		model.addAttribute("savingList", savingList);
 		model.addAttribute("pageSavingInfo", pageSavingInfo);
 		
@@ -157,14 +162,17 @@ public class CommonController {
 		int bankSize = depositList.size() + savingList.size() + loanCreditList0.size() + loanMortgageList0.size() + loanRentHoustList0.size() + debitList.size() + creditList.size();
 		model.addAttribute("bankSize", bankSize);
 		
+		
 		log.info("뉴스 요청 성공");
 		if(param != null) {
-			List<News> mainList = NaverSearchAPI.getNewsList(param, 5, 1);
+			List<News> mainList = NaverSearchAPI.getNewsList(param, 10, 1);
 			model.addAttribute("newsList1", mainList); // 이게 뉴스메인에서 검색결과로 나오는것
 			System.out.println("newsList1" + mainList.toString());
 		}else {
 			model.addAttribute("newsList1", newsList1);
 		}
+		
+		
 		return "common/searchTotal";
 	}
 	

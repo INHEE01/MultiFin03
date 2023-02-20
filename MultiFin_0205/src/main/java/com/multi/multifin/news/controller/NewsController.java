@@ -28,14 +28,14 @@ public class NewsController {
 		
 		if(searchValue != null) {
 			List<News> mainList = NaverSearchAPI.getNewsList(searchValue, 5, 1);
-			model.addAttribute("newsList1", mainList); // 이게 뉴스메인에서 검색결과로 나오는것
-			model.addAttribute("newsList2", mainList); // 이건 예시로 주어지게 보이는거
+			model.addAttribute("newsList1", mainList); //  뉴스메인에서 검색결과
+			model.addAttribute("newsList2", mainList); //  예시
 		}else {
 			model.addAttribute("newsList1", newsList1);
 			model.addAttribute("newsList2", newsList2);
 		}
 		
-		model.addAttribute("newsList3", newsList3); // 이건 한줄뉴스입니다.
+		model.addAttribute("newsList3", newsList3); //  한줄뉴스
 
 		return "news/newsMain";
 	}
