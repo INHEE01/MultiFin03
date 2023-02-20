@@ -28,6 +28,7 @@ import com.multi.multifin.news.naverapi.NaverSearchAPI;
 import com.multi.multifin.news.naverapi.News;
 import com.multi.multifin.stock.model.service.StockPriceService;
 import com.multi.multifin.stock.model.vo.FundProductInfo;
+import com.multi.multifin.stock.model.vo.StockPrice;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,13 +55,22 @@ public class CommonController {
 	private LoanRentHouseService lrhService;
 	
 	@Autowired
+	private StockPriceService spService;
+	
+	@Autowired
 	private StockPriceService fundService;
 	
 	@RequestMapping("/searchTotal")
-	public String searchTotal(Model model, @RequestParam("searchValue") String param, Map<String, String> paramMap) {
+	public String searchTotal(Model model, @RequestParam("searchValue") String param, @RequestParam Map<String, String> paramMap) {
 		
 		log.info("통합검색 결과페이지 요청");
 		model.addAttribute("searchValue", param);
+		
+		try {
+			String check = paramMap.getOrDefault("check", "0");
+			model.addAttribute("check",check);
+		} catch (Exception e) {
+		}
 		
 		log.info("예금상품 전체 요청");
 		
@@ -88,7 +98,6 @@ public class CommonController {
 		int savingCount = cardService.getCreditCount(paramMap);
 		PageInfo pageSavingInfo = new PageInfo(pageSaving, 5, savingCount, 10);
 		List<BankSaving> savingList = bankbookService.selectSavingListUnique(pageSavingInfo, paramMap);
-		System.out.println(savingList);
 		model.addAttribute("savingList", savingList);
 		model.addAttribute("pageSavingInfo", pageSavingInfo);
 		
@@ -161,6 +170,31 @@ public class CommonController {
 		model.addAttribute("pageCreditInfo", pageCreditInfo);
 		int bankSize = depositList.size() + savingList.size() + loanCreditList0.size() + loanMortgageList0.size() + loanRentHoustList0.size() + debitList.size() + creditList.size();
 		model.addAttribute("bankSize", bankSize);
+		
+		log.info("주가 동향 요청");
+		int stockPage = 1;
+		try {
+			String searchValue = paramMap.get("searchValue");
+			if (searchValue != null && searchValue.length() > 0) {
+				paramMap.put("itmsNm", searchValue);
+			}
+			stockPage = Integer.parseInt(paramMap.get("stockPage"));
+		} catch (Exception e) {}
+		
+		int stockCount = spService.getStockCount(paramMap);
+		PageInfo pageInfo = new PageInfo(stockPage, 5, stockCount, 10);
+		List<StockPrice> stockList = spService.getStockList(pageInfo, paramMap);
+		
+		System.out.println(stockList.size());
+		model.addAttribute("stockCount", stockCount);
+		model.addAttribute("stockList", stockList);
+		model.addAttribute("stockPage", stockPage);
+		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("stockPageInfo", pageInfo);
+		
+		
+		
+		
 		
 		
 		log.info("뉴스 요청 성공");
