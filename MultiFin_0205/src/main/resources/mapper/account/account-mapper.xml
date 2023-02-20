@@ -21,14 +21,32 @@
 		LEFT OUTER JOIN MEMBER M ON M.MNO=A.MNO
 		WHERE M.ID = '${id}'
 	</select>
+	
+	<select id="getMyAccount" resultMap="AccountResultMap" parameterType="String">
+		SELECT 
+		DISTINCT A.ANUM, A.ACCOUNT, A.MNO, A.TOTALASSET, A.WON, A.TOTALPROFIT
+		FROM ACCOUNT A
+		LEFT OUTER JOIN MEMBER M ON M.MNO=A.MNO
+		WHERE M.ID = '${id}'
+	</select>
+	
+	
 	<!-- 계좌 번호 생성 후 테이블에 삽입 -->
 	<insert id="insertAccount" parameterType="int">
 		INSERT INTO ACCOUNT(
 			ANUM, ACCOUNT, MNO, 	
 			TOTALASSET, WON, TOTALPROFIT
 		) VALUES (
-			 0, DEFAULT, #{mNo},
-			 DEFAULT, DEFAULT, DEFAULT
+			 0, default, #{mNo},
+			default,default,default
 			 )
 	</insert>
+	
+	
+	<!-- 계좌 번호 업데이트 -->
+	 <update id="updateAccount" parameterType="int">
+	 	UPDATE ACCOUNT
+	 	SET ACCOUNT = concat(ACCOUNT,MNO)
+	 	WHERE MNO = #{mNo}
+	 </update>
 </mapper>

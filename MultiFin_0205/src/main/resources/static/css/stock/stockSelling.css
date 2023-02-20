@@ -37,7 +37,6 @@ padding-bottom: 30px;
 .money{
   font-family: 'IBM Plex Sans KR', sans-serif;
   margin-right: 30px;   
-  color: rgb(231, 76, 60);
   font-size: 25px;
 }
 .money-description{
@@ -73,18 +72,19 @@ padding-bottom: 30px;
 }
 .stock_details{
   background-color: white;
-  width: 800px;
+  width: 935px;
   height: 360px;
   padding: 50px;
   margin-right: 20px;
 }
 .stock_details_title{
   font-weight: 700;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 .stock_more{
-  width: 380px;
+  width: 250px;
   padding: 40px;
+  line-height: 35px;
 }
 
 .stock_details_title,.selling-now_money-title,
@@ -151,8 +151,8 @@ padding-bottom: 30px;
 }
 
 
-
 /*마지막stock랭킹*/
+.table-content{text-align:right}
 .stock__total{
   background-color: rgb(248, 248, 248);
   padding: 10px ;
@@ -160,19 +160,22 @@ padding-bottom: 30px;
 }
 .stock__total_table{
   display: flex;
-  margin: 20px auto;
+  margin: 0px auto;
   width: 1200px;
   justify-content: center;
   margin-bottom: 0px;
 }
 .stock__table{
-  width: 400px;
+  width: 420px;
   height: 250px;
   background-color: white;
   margin: 20px 10px;
   padding: 30px 25px;
   justify-content: left;
 }
+.stock__table.er{width:480px !important;}
+.table_money{text-align:right;}
+.table_name{text-align:right;}
 .stock{
   margin: 0px auto;
   margin-top: 15px;
@@ -184,11 +187,11 @@ padding-bottom: 30px;
   font-weight: 500;
 }
 .rank_title{
-  padding-left: 25px;
+  padding-left: 15px;
   font-size: 19px;
   font-weight: 600;
 }
-.nasdaq, .adver{
+.er, .adver{
   height: 390px;
 }
 .adver{
@@ -202,14 +205,17 @@ padding-bottom: 30px;
 .adver__Title,.adver__description{
   font-family: 'IBM Plex Sans KR', sans-serif;
 }
+.adver__Title{
+  font-weight: 600;
+}
 .adver__description{
   font-weight: 400;
   text-align: justify;
-  margin-bottom: 100px;
 }
 .adver_btn{
   font-family: 'IBM Plex Sans KR', sans-serif;
   background-color: rgb(13, 27, 72);
+  border: 2px solid  rgb(13, 27, 72);
   color: white;
   width: 100px;
   height: 40px;
@@ -225,11 +231,8 @@ padding-bottom: 30px;
 .adver i{
   width: 5px;
   height: 50px;
-  font-size: 40px;
+  font-size: 50px;
+  margin-top: 110px;
   color: rgb(13, 27, 72);
-  margin-bottom: 20px;
+  margin-left: 100px;
 }
-
-
-
-

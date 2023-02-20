@@ -20,8 +20,18 @@ public class AccountService {
 		return mapper.selectAccountList(param);
 	}
 	
-	public Account saveInvestedStock(int mno) {
-		return mapper.insertAccount(mno);
+	
+	/*계좌 생성코드*/
+	public int saveInvestedStock(int mNo) {
+		return mapper.insertAccount(mNo);
+	}
+	
+	public int updateAccount(int mNo) {
+		return mapper.updateAccount(mNo);
+	}
+	
+	public Account getMyAccount(String id) {
+		return mapper.getMyAccount(id);
 	}
 	
 }

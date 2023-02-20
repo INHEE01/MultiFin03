@@ -315,10 +315,76 @@ public class StockController {
 		return "stock/stockFundDetail";
 	}
 	
+	
+	
+	
 	@RequestMapping("/stockSelling")
-	public String stockSelling() {
+	public String stockSelling(Model model,@RequestParam("no") int no) {
+		
+		log.info("리스트 요청");
+		Map<String, String> KospiTop5 = new HashMap<String, String>();
+		Map<String, String> KosdaqTop5 = new HashMap<String, String>();
+		KospiTop5.put("limit", "5");
+		KosdaqTop5.put("limit", "5");
+		List<StockPrice> KOSPI = service.getKospiRankingTop(KospiTop5);
+		List<StockPrice> KOSDAQ = service.getKosdaqRankingTop(KosdaqTop5);
+		model.addAttribute("KOSPI", KOSPI);
+		model.addAttribute("KOSDAQ", KOSDAQ);
+		
+		
+		log.info("환율 테이블 요청: 원하는 국가만 가져옴");
+		ExchangeRate USD = service.findExchangeRate("USD");
+		ExchangeRate JPY = service.findExchangeRate("JPY(100)");
+		ExchangeRate GBP = service.findExchangeRate("GBP");
+		ExchangeRate HKD = service.findExchangeRate("HKD");
+		ExchangeRate EUR = service.findExchangeRate("EUR");
+		ExchangeRate CNH = service.findExchangeRate("CNH");
+		ExchangeRate AUD = service.findExchangeRate("AUD");
+		ExchangeRate SGD = service.findExchangeRate("SGD");
+		ExchangeRate THB = service.findExchangeRate("THB");
+		ExchangeRate CAD = service.findExchangeRate("CAD");
+		model.addAttribute("USD", USD);
+		model.addAttribute("JPY", JPY);
+		model.addAttribute("GBP", GBP);
+		model.addAttribute("HKD", HKD);
+		model.addAttribute("EUR", EUR);
+		model.addAttribute("CNH", CNH);
+		model.addAttribute("AUD", AUD);
+		model.addAttribute("SGD", SGD);
+		model.addAttribute("THB", THB);
+		model.addAttribute("CAD", CAD);
+		
+		
+		StockPrice sp = service.findByNo(no);
+		List<StockPrice> stockList=service.stockMoreViewList(no);
+		model.addAttribute("sp", sp);
+		model.addAttribute("stockList", stockList);
 		return "stock/stockSelling";
 	}
+	
+	
+	
+	
+	/*계좌 생성코드*/
+	@RequestMapping("/createAccount")
+	public String createAccount (Model model,
+			@SessionAttribute(name = "loginMember", required = false) Member loginMember) {
+		
+		int mNo =  loginMember.getMNo();
+		int result=	aService.saveInvestedStock(mNo);
+		int result2 = aService.updateAccount(mNo);
+		
+		if(result > 0 && result2 >0) { 
+			model.addAttribute("msg", "계좌 생성에 성공하였습니다.");
+			model.addAttribute("location", "/stock/stockTest");
+		}else { // 실패
+			model.addAttribute("msg", "계좌 생성 실패하셨습니다. 계좌가 이미 생성되어있는지 확인해주세요.");
+			model.addAttribute("location", "/stock/stockTest");
+		}
+		return "common/msg";
+	}
+	
+	
 	
 	@GetMapping("/stockTest")
 	public String stockTest(Model model, @SessionAttribute(name = "loginMember", required = false) Member loginMember,

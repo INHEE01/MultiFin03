@@ -10,5 +10,9 @@ import com.multi.multifin.account.model.vo.Account;
 @Mapper
 public interface AccountMapper {
 	List<Account> selectAccountList(Map<String, String> param);
-	Account insertAccount(int account);
+	
+	/*계좌 생성코드*/
+	Account getMyAccount(String id);
+	int insertAccount(int mNo);
+	int updateAccount(int mNo);
 }

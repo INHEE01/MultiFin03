@@ -227,6 +227,7 @@ padding-bottom: 30px;
 .table_row{
   height: 35px;
 }
+.stock-rank-table tr{height:35px;}
 .stock-rank-table tr:nth-child(2n){
   background-color: rgb(248, 248, 248);
 }
@@ -246,12 +247,13 @@ padding-bottom: 30px;
 .stock_buy__btns,
 .stock_sell__btns{
   background-color: transparent;
-  width: 60px;
+  width: 80px;
   border-radius: 5px;
 }
 .stock_buy__btns{
   border: 2px solid rgb(231, 76, 60);
   color:  rgb(231, 76, 60);
+  padding:3px 10px;
 }
 .stock_sell__btns{
   border: 2px solid rgb(52, 152, 219);

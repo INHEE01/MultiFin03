@@ -33,7 +33,7 @@
                 </div>
                 <div id="tab-1" class="tab-content new current">
                     <div class="content_container first_container">
-                            <a class="menu_btn" href="#">
+                                <a class="menu_btn" href="/stock/createAccount" id="createAccount">
                                 <div class="tab_sub">
                                     <i class="fa-solid fa-money-check-dollar"></i>
                                     <h5 class="sub_title">계좌 만들기</h5>
@@ -307,7 +307,7 @@
 						</th:block>         		 	           	
             			<td th:text="${#numbers.formatInteger(stock.lstgStCnt, 3, 'COMMA')}" class="board-content"></td>
             			<td th:text="${#numbers.formatInteger(stock.mrktTotAmt, 3, 'COMMA')}" class="board-content"></td>
-                  		<td class="board-content"> <button class="stock_buy__btns"  onclick="window.open('./stockBuying')">매수</button></td>
+                  		<td class="board-content "> <a class="stock_buy__btns" th:href="|/stock/stockSelling?no=${stock.srtnCd}|">매수</a></td>
                   		<!-- <td class="board-content"> <button class="stock_sell__btns"  onclick="window.open('./stockSelling.html')">매도</button></td> -->
             		</tr>
             	</th:block>
@@ -508,7 +508,12 @@
 	    str = String(str);
 	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g,'$1');
 	}
-   	
+    /*계좌 생성코드*/
+	$("#createAccount").on("click", (e) => {
+		if(confirm("계좌를 생성하시겠습니까?")) {
+			location.replace("/stock/createAccount");
+		}
+	});
 </script>
 
 
