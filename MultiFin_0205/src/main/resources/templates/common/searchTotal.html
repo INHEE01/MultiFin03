@@ -73,9 +73,14 @@
 				<li class="tab-link" data-tab="tab-5">게시판</li>
 			</ul>
 			<div id="tab-1" class="tab-content current">
+				<th:block th:if="${bankSize != 0}">
+					<h5 class="search_result_description">
+						검색 결과
+						<sapn style="color: orange;"> [[${bankSize}]]</sapn>
+						건
+					</h5>
+				</th:block>
 				<table id="tbl-board" class="board_table_bank">
-				
-					
 					<th:block th:if="${bankSize == 0}">
 						<tr>
 							<td colspan="6" style="text-align: center;">조회된 정보가 없습니다.</td>
@@ -107,13 +112,6 @@
 					<button onclick="" class="table-button">&gt;</button>
 					<button onclick="" class="table-button">&gt;&gt;</button>
 				</div>
-				<h5 class="search_result_description">
-					검색 결과
-					<sapn style="color: orange;"> [[${depositList.size +
-					savingList.size + loanCreditList0.size + loanMortgageList0.size +
-					loanRentHoustList0.size + debitList.size + creditList.size}]]</sapn>
-					건
-				</h5>
 			</div>
 			<div id="tab-2" class="tab-content">
 				<!-- 주식 -->
@@ -199,52 +197,43 @@
 					<button onclick="" class="table-button">1</button>
 					<button onclick="" class="table-button">&gt;</button>
 					<button onclick="" class="table-button">&gt;&gt;</button>
+				</div>
 			</div>
 			<div id="tab-4" class="tab-content">
-			
 			<!--뉴스-->
+			<th:block th:if="${newsList1.size != 0}">
+				<h5 class="search_result_description">
+					검색 결과
+					<sapn style="color: orange;"> [[${newsList1.size}]]</sapn>
+					건
+				</h5>
+			</th:block>
 				<table id="tbl-board" class="board_table_bank">
-					<th:if
-						test="[[${empty newsList1}]]">
-						<h5 class="search_result_description" colspan="5">
-							검색 결과가 없습니다.
-							</td>
-						</h5>
-					</th:if>
-					<tr class="table_row table_header_bank">
-						<th class="table-header">번호</th>
-						<th class="table-header">구분</th>
-						<th class="table-header">종목이름</th>
-					</tr>
-					<th:if test="[[${not empty newsList1}]]">
-						<th:block>
-							<tr th:each="news, status : ${newsList1}">
-								<a th:href="${news.originallink}">
-									<td class="board-content"><a
-										href="$/news/newsMain/view?no=${news.News_nno}">${news.nno}</a></td>
-									<td class="board-content"><a
-										href="$/news/newsMain/view?no=${news.News_nno}">${news.type}</a>
-										</td>
-									<td class="board-content"><a
-										href="$/news/newsMain/view?no=${news.News_nno}">${news.description}</a>
-								</td>
-							</tr>
-						</th:block>
+					<th:block th:if="${newsList1.size == 0}">
+						<tr>
+							<td colspan="6" style="text-align: center;">조회된 정보가 없습니다.</td>
+						</tr>
+					</th:block>
+					<th:block th:if="${newsList1.size != 0}">
+						<tr class="table_row table_header_bank">
+							<th class="table-header">번호</th>
+							<th class="table-header">제목</th>
+							<th class="table-header">뉴스보기</th>
+						</tr>
+						<tr th:each="news, number : ${newsList1}">
+							<td class="board-content">[[${number.index}+1]]</td>
+							<td class="board-content">[[${news.title}]]</td>
+							<td th:onclick="|location.href='@{${news.originallink}}'|">바로가기</td>
+						</tr>
+					</th:block>
 					</th:if>
 				</table>
-				<div class="table-buttons">
-					<button onclick="" class="table-button">&lt;&lt;</button>
-					<button onclick="" class="table-button">&lt;</button>
-					<button onclick="" class="table-button">1</button>
-					<button onclick="" class="table-button">&gt;</button>
-					<button onclick="" class="table-button">&gt;&gt;</button>
-				</div>
 			</div>
 			<div id="tab-5" class="tab-content">
 				<!-- 자유게시판 -->
 				<table id="tbl-board" class="board_table_bank">
 					<th:if
-						test="[[${empty freeList}]]">
+						test="[[${freeList.size == 0}]]">
 						<h5 class="search_result_description" colspan="5">
 							검색 결과가 없습니다.
 							</td>
