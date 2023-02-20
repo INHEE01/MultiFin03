@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.multi.multifin.common.util.PageInfo;
 import com.multi.multifin.home.model.mapper.HomeMapper;
 import com.multi.multifin.home.model.vo.Home;
 import com.multi.multifin.home.model.vo.MarkerParsing;
@@ -35,5 +36,10 @@ public class HomeService {
 	public List<MarkerParsing> selectHomeByXY(Map<String, Object> map) {
 		return mapper.selectHomeByXY(map);
 	}
-
+	
+	public List<Home> searchHomeBylocatin2(PageInfo pageInfo, Map<String, Object> map) {
+		map.put("limit", "" + pageInfo.getListLimit());
+		map.put("offset", "" + (pageInfo.getStartList() - 1));
+		return mapper.selectHomeBylocatin2(map);
+	}
 }

@@ -18,5 +18,5 @@ public interface HomeMapper {
 	int selectHomeCount(Map<String, Object> map);
 	List<Home> selectHomeInfo(String map);
 	List<MarkerParsing> selectHomeByXY(Map<String, Object> map);
-
+	List<Home> selectHomeBylocatin2(Map<String, Object> map);
 }

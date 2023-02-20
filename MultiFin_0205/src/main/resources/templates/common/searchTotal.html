@@ -335,7 +335,7 @@
 	            <div id="tab-3" class="tab-content">
 	        </th:block>
 				<th:block th:if="${homeSize != 0}">
-					<h5 class="search_result_description">
+					<h5 class="search_result_description" style="margin-bottom: -70px;">
 						검색 결과 <sapn style="color: orange;"> [[${homeSize}]]</sapn>건
 					</h5>
 				</th:block>
@@ -346,37 +346,73 @@
 						</tr>
 					</th:block>
 					<th:block th:if="${Aptlist.size != 0}">
-							<tr><td colspan="6" class="h5" style="height: 100px;vertical-align: bottom;line-height: 60px;border-top: none;">청약</td></tr>
-							<tr class="table_row table_header_bank">
-								<th class="table_header_bank">공급유형</th>
-								<th class="table_header_bank">주택명</th>
-								<th class="table_header_bank">모집공고일</th>
-								<th class="table_header_bank">홈페이지</th>
-							</tr>
-							<tr class="table_row" th:each="Aptlist, number : ${Aptlist}">
-								<td class="board-content_bank">APT</td>
-								<td class="board-content_bank">[[${Aptlist.houseNm}]]</td>
-								<td class="board-content_bank">[[${Aptlist.rcritPblancDe}]]</td>
-								<td class="board-content_bank">
-									<a class="address"th:href="${Aptlist.pblancUrl}"  target="_blank">
-		                                <span class="adress_decription"> 
-		                                    <i style="padding-top: 3px; margin-right: 10px;" class="fas fa-home"></i>
-		                                    홈페이지
-		                                </span>
-		                            </a>
-								</td>
-							</tr>
-						</th:block>
+						<tr><td colspan="6" class="h5" style="height: 100px;vertical-align: bottom;line-height: 60px;border-top: none;">청약</td></tr>
+						<tr class="table_row table_header_bank">
+							<th class="table_header_bank">공급유형</th>
+							<th class="table_header_bank">주택명</th>
+							<th class="table_header_bank">모집공고일</th>
+							<th class="table_header_bank">홈페이지</th>
+						</tr>
+						<tr class="table_row" th:each="Aptlist, number : ${Aptlist}">
+							<td class="board-content_bank">APT</td>
+							<td class="board-content_bank">[[${Aptlist.houseNm}]]</td>
+							<td class="board-content_bank">[[${Aptlist.rcritPblancDe}]]</td>
+							<td class="board-content_bank">
+								<a class="address"th:href="${Aptlist.pblancUrl}"  target="_blank">
+	                                <span class="adress_decription"> 
+	                                    <i style="padding-top: 3px; margin-right: 10px;" class="fas fa-home"></i>
+	                                    홈페이지
+	                                </span>
+	                            </a>
+							</td>
+						</tr>
+					</th:block>
+					<th:block th:if="${Offlist.size != 0}">
+						<tr class="table_row"
+							th:each="Offlist, number : ${Offlist}">
+							<td class="board-content_bank">오피스텔</td>
+							<td class="board-content_bank">[[${Offlist.houseNm}]]</td>
+							<td class="board-content_bank">[[${Offlist.rcritPblancDe}]]</td>
+							<td class="board-content_bank">
+								<a class="address"th:href="${Offlist.pblancUrl}"  target="_blank">
+	                                <span class="adress_decription"> 
+	                                    <i style="padding-top: 3px; margin-right: 10px;" class="fas fa-home"></i>
+	                                    홈페이지
+	                                </span>
+	                            </a>
+							</td>
+						</tr>
+					</th:block>
+					<th:block th:if="${Etclist.size != 0}">
+						<tr class="table_row"
+							th:each="Etclist, number : ${Etclist}">
+							<td class="board-content_bank">오피스텔</td>
+							<td class="board-content_bank">[[${Etclist.houseNm}]]</td>
+							<td class="board-content_bank">[[${Etclist.rcritPblancDe}]]</td>
+							<td class="board-content_bank">
+								<a class="address"th:href="${Etclist.pblancUrl}"  target="_blank">
+	                                <span class="adress_decription"> 
+	                                    <i style="padding-top: 3px; margin-right: 10px;" class="fas fa-home"></i>
+	                                    홈페이지
+	                                </span>
+	                            </a>
+							</td>
+						</tr>
+					</th:block>
+				</table>
+				<table  id="tbl-board" class="board_table_bank">
 					<th:block th:if="${homeSize != 0}">
 						<th:block th:if="${homeList.size != 0}">
 							<tr><td colspan="6" class="h5" style="height: 100px;vertical-align: bottom;line-height: 60px;border-top: none;">매물</td></tr>
 							<tr class="table_row table_header_bank">
+								<th class="table_header_bank">번호</th>
 								<th class="table_header_bank">건축년도</th>
 								<th class="table_header_bank">아파트명</th>
 								<th class="table_header_bank">상세위치</th>
 								<th class="table_header_bank">상세정보</th>
 							</tr>
 							<tr class="table_row" th:each="homeList, number : ${homeList}">
+								<td class="board-content_bank">[[(${pageHomeInfo.currentPage}-1)*10+${number.index}+1]]</td>
 								<td class="board-content_bank">[[${homeList.build_Year}]]년</td>
 								<td class="board-content_bank">[[${homeList.apartment_Name}]]</td>
 								<td class="board-content_bank">[[${homeList.dong}]]-[[${homeList.jibun}]]/  [[${homeList.Floor}]]층</td>
@@ -392,6 +428,22 @@
 						</th:block>
 					</th:block>
 				</table>
+				<div class="table-buttons">
+                    <button th:onclick="|movePage('/common/searchTotal?pageHome=1','2');|" class="table-button">&lt;</button>
+                    <button th:onclick="|movePage('/common/searchTotal?pageHome=${pageHomeInfo.prevPage}','2');|" class="table-button">&lt;</button>
+                    <th:block th:each="num, status : ${#numbers.sequence(pageHomeInfo.startPage, pageHomeInfo.endPage)}">
+						<th:block th:if="${status.current == pageHomeInfo.currentPage}">
+							<button class="table-button" disabled >[[${status.current}]]</button>
+						</th:block>
+						<th:block th:if="${status.current != pageHomeInfo.currentPage}">
+							<button th:onclick="|movePage('/common/searchTotal?pageHome=${status.current}','2');|" class="table-button">
+								[[${status.current}]]
+							</button>
+						</th:block>
+					</th:block>
+                    <button th:onclick="|movePage('/common/searchTotal?pageHome=${pageHomeInfo.nextPage}','2');|" class="table-button">&gt;</button>
+                    <button th:onclick="|movePage('/common/searchTotal?pageHome=${pageHomeInfo.maxPage}','2');|" class="table-button">&gt;&gt;</button>
+                </div>
 			</div>
 <!-- 부동산 끝 -->
 

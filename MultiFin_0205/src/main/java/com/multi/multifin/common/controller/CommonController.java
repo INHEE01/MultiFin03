@@ -213,19 +213,28 @@ public class CommonController {
 		model.addAttribute("stockPageInfo", pageInfo);
 		
 		log.info("부동산 매물 요청");
-		List<Home> homeList = homeService.searchHomeBylocatin(searchMapHome);
-		List<Home> home = homeService.searchHomeList(searchMapHome);
+		int pageHome = 1;
+		try {
+			pageHome = Integer.parseInt(""+paramMapHome.get("pageHome"));
+		} catch (Exception e) {
+		}
 		int homeCount = homeService.getHomeCount(searchMapHome);
-		
+		PageInfo pageHomeInfo = new PageInfo(pageHome, 5, homeCount, 10);
+		List<Home> homeList = homeService.searchHomeBylocatin2(pageHomeInfo, searchMapHome);
 		model.addAttribute("homeCount", homeCount);
 		model.addAttribute("homeList", homeList);
-		model.addAttribute("home", home);
+		model.addAttribute("pageHomeInfo", pageHomeInfo);
 		model.addAttribute("paramMapHome", paramMapHome);
 
 		log.info("부동산 청약 아파트 요청");
+		if(locationCheck == null) {
+			locationCheck = new ArrayList<>();
+			locationCheck.add("" + paramMapHome.get("searchValue"));
+		}
+		System.out.println("locationCheck : "+ locationCheck.toString());
 		int pageAPT = 1;
 		try {
-			searchMapHome.put("searchValue", paramMapHome.get("searchValue"));
+			searchMapHome.put("searchValue", null);
 			searchMapHome.put("locationCheck", locationCheck);
 			pageAPT = Integer.parseInt(""+paramMapHome.get("pageAPT"));
 		} catch (Exception e) {	}
@@ -233,11 +242,8 @@ public class CommonController {
 		int aptCount = blueService.selectAptCount(searchMapHome);
 		PageInfo pageAPTInfo = new PageInfo(pageAPT, 5, aptCount, 10);
 		List<Aptdetail> Aptlist = blueService.searchAptList(pageAPTInfo, searchMapHome);
-		if(locationCheck == null) {
-			locationCheck = new ArrayList<>();
-		}
+
 		paramMapHome.put("locationCheck", locationCheck);
-		
 		model.addAttribute("Aptlist", Aptlist);
 		model.addAttribute("pageAPTInfo",pageAPTInfo);
 		model.addAttribute("searchMapHome", searchMapHome);
@@ -245,7 +251,7 @@ public class CommonController {
 		log.info("부동산 청약 오피스텔 요청");
 		int pageOff = 1;
 		try {
-			searchMapHome.put("searchValue", paramMapHome.get("searchValue"));
+			searchMapHome.put("searchValue", null);
 			searchMapHome.put("locationCheck", locationCheck);
 			pageOff = Integer.parseInt(""+paramMapHome.get("pageOff"));
 		} catch (Exception e) {	}
@@ -259,7 +265,7 @@ public class CommonController {
 		log.info("부동산 청약 기타 요청");
 		int pageEtc = 1;
 		try {
-			searchMapHome.put("searchValue", paramMapHome.get("searchValue"));
+			searchMapHome.put("searchValue", null);
 			searchMapHome.put("locationCheck", locationCheck);
 			pageEtc = Integer.parseInt(""+paramMapHome.get("pageEtc"));
 		} catch (Exception e) {	}
@@ -298,11 +304,9 @@ public class CommonController {
 			}
 			pageFree = Integer.parseInt(paramMap.get("pageFree"));
 		} catch (Exception e) {}
-		log.info("pageFree:" + pageFree);
 		int boardCount = boardService.getBoardCount2(searchMap);
 		PageInfo pageFreeInfo = new PageInfo(pageFree, 10, boardCount, 10);
 		List<Board> freeList = boardService.getBoardList2(pageFreeInfo, searchMap);
-		System.out.println(freeList);
 		model.addAttribute("freeList", freeList);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("pageFreeInfo", pageFreeInfo);

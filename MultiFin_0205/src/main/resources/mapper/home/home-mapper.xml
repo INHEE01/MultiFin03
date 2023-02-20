@@ -90,4 +90,24 @@
 		AND RealEstateDealNo = #{RealEstateDealNo}
 		</if>
 	</select>
+	
+		<select id="selectHomeBylocatin2"  resultMap="HomeResultMap" parameterType="map">
+			SELECT RealEstateDealNo,Build_Year,Contract_Type,Term_Contract,Offi_Name,Deal_Year,Dong,Deposit,Sigungu,Apartment_Name,
+			Deal_Month,Monthly_Rent,Deal_Day,Area,Jibun,Regional_Code,Floor
+			FROM REALESTATE
+			WHERE 1=1
+				<if test="searchType == 'deal_year' ">
+				AND  Monthly_Rent = 0
+				</if>
+				<if test="searchType == 'deal_monthly' ">
+				AND  Monthly_Rent  <![CDATA[>]]> 0
+				</if>
+			
+		 		<if test="searchValue != null">
+		 			AND (concat(dong,' ',jibun) like '%${searchValue}%' OR  Apartment_Name like '%${searchValue}%')
+				</if>
+				
+				ORDER BY RealEstateDealNo
+				LIMIT ${limit} OFFSET ${offset}
+		</select>
 </mapper>
