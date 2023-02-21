@@ -129,9 +129,13 @@ public class MemberController {
 		}
 		
 		Member member = memberForm.toMember();
+		
 		System.out.println(member);
-
-		int result = service.save(member);
+		
+		int result  = 0;
+		try {
+			result = service.save(member);
+		} catch (Exception e) {}
 		
 		if(result > 0) { // 성공
 			model.addAttribute("msg", "회원가입에 성공하였습니다.");
@@ -139,7 +143,7 @@ public class MemberController {
 			model.addAttribute("location", "/");
 		}else { // 실패
 			model.addAttribute("msg", "회원가입에 실패하였습니다. 입력정보를 확인하세요.");
-			model.addAttribute("location", "/");
+			model.addAttribute("location", "/member/sign-up");
 		}
 		return "common/msg";
 	}
