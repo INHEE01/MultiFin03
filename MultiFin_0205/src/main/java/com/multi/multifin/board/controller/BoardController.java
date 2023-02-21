@@ -269,6 +269,12 @@ public class BoardController {
 			@ModelAttribute Board board,
 			@RequestParam("reloadFile") MultipartFile reloadFile
 			) {
+//		System.out.println("originalFileName 크기 : " + board.getOriginalFileName().length());
+		if(board.getOriginalFileName().length() <= 0) {
+			board.setOriginalFileName(null);
+			board.setRenamedFileName(null);
+		}
+		
 		log.info("게시글 수정 요청");
 		log.info("bno" + board.getBNo());
 		board.setMNo(loginMember.getMNo());

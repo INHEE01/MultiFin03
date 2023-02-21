@@ -147,7 +147,7 @@ public class HomeController {
 		log.info("부동산 메인 페이지 요청 성공");
 		
 		if(searchMap.get("day")==null) {
-			searchMap.put("day","-02-");
+			searchMap.put("day","2023-02-01");
 		}
 
 		int page = 1;
@@ -198,14 +198,11 @@ public class HomeController {
 		
 		
 		System.out.println(paramMap.get("searchValue"));
+		System.out.println(paramMap.get("day"));
 		
 		List<Home> list = homeService.searchHomeBylocatin(searchMap);
 		List<Home> home = homeService.searchHomeList(searchMap);
-		int homeCount = homeService.getHomeCount(searchMap);
 		
-		
-		System.out.println(homeCount);
-		model.addAttribute("homeCount", homeCount);
 		model.addAttribute("list", list);
 		model.addAttribute("home", home);
 		model.addAttribute("paramMap", paramMap);
@@ -215,6 +212,7 @@ public class HomeController {
 		
 		try {
 			searchMap.put("searchValue", paramMap.get("searchValue"));
+			searchMap.put("day", paramMap.get("day"));
 			searchMap.put("locationCheck", locationCheck);
 			page = Integer.parseInt(""+paramMap.get("page"));
 		} catch (Exception e) {	}
