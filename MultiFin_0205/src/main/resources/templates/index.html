@@ -40,8 +40,8 @@
                             <div class="card-body p-2 p-md-0">
                                 <form autocomplete="off" class="seach_box" method="get" th:action="@{/common/searchTotal}">
                                     <select class="form-control options" name="check" id="">
-                                        <option value="">전체</option>
-                                        <option value="check">은행</option>
+                                        <option th:value="0">전체</option>
+                                        <option th:value="0">은행</option>
                                         <option th:value="1">증권</option>
                                         <option th:value="2">부동산</option>
                                         <option th:value="3">뉴스</option>
