@@ -99,7 +99,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/view")
-	public String view(Model model, @RequestParam("no") int no) {
+	public String view(Model model, @RequestParam("no") int no, @RequestParam("type") String type) {
 		Board board = service.findByNo(no);
 		if(board == null) {
 			return "redirect:error";
@@ -108,6 +108,7 @@ public class BoardController {
 		log.info("댓글개수: " + board.getReplyCount());
 		model.addAttribute("board", board);
 		model.addAttribute("replyList", board.getReplyList());
+		model.addAttribute("type", type);
 		return "community/view";
 	}
 	
