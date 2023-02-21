@@ -78,7 +78,7 @@
                                     <h5 class="stock_title">[[${kospiIndex.stockType}]]</h5> 
                                 </div>
                                <div class="card-numbers mb-3">
-	                                <h5 class="text-gray number">[[${kospiIndex.fin}]] 원</h5>
+	                                <h5 class="text-gray number">[[${kospiIndex.fin}]]</h5>
 	                                <th:block th:if="${#strings.contains(kospiIndex.changePercent, '-') == true } ">
 			                              <h5 class="increase">▼ [[${kospiIndex.changePercent}]]</h5>
 									</th:block>	                                    
@@ -105,7 +105,7 @@
                                     <h6 class="today">[[${#dates.format(kosdaqIndex.stockDate, 'YY.MM.dd')}]]</h6>
                                 </div>
                                <div class="card-numbers" style="height: 25px;">
-	                                <h6 class="text-gray number">[[${kosdaqIndex.fin}]] 원</h6>
+	                                <h6 class="text-gray number">[[${kosdaqIndex.fin}]]</h6>
 	                                <th:block th:if="${#strings.contains(kosdaqIndex.changePercent, '-') == true } ">
 			                              <h6 class="increase">▼ [[${kosdaqIndex.changePercent}]]</h6>
 									</th:block>	                                    
@@ -126,7 +126,7 @@
                                     <h6 class="today">[[${#dates.format(nasdaqIndex.stockDate, 'YY.MM.dd')}]]</h6>
                                 </div>
                                <div class="card-numbers" style="height: 25px;">
-	                                <h6 class="text-gray number">[[${nasdaqIndex.fin}]] 원</h6>
+	                                <h6 class="text-gray number">[[${nasdaqIndex.fin}]]</h6>
 	                                <th:block th:if="${#strings.contains(nasdaqIndex.changePercent, '-') == true } ">
 			                              <h6 class="increase">▼ [[${nasdaqIndex.changePercent}]]</h6>
 									</th:block>	                                    
