@@ -485,7 +485,7 @@
 			  <th:block th:if="${list != null}">
 					<tr class="table_content" th:each="board : ${list}">
 						<td class="board-content board-title">
-							<a th:href="|/community/view?no=${board.bNo}|">
+							<a th:href="|/community/view?no=${board.bNo}&type=공지사항|">
 								 <h6 class="board_c_title"> [[${board.title}]] </h6>
 							</a>
 						</td>
