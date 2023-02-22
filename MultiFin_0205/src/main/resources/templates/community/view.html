@@ -119,6 +119,7 @@
                     <form action="/community/reply" method="post" class="comment-inputer">
                     
                         <input type="hidden" name="bNo" th:value="${board.bNo}" />
+                        <input type="hidden" name="type" th:value="${type}" />
                         <!-- <input type="hidden" name="Id" value="${loginMember.id}" /> -->
                           <textarea name="content" id="replyContent"  cols="135" rows="3"></textarea>
                           <button type="submit" id="btn-insert">등록</button>	  	

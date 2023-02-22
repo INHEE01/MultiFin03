@@ -100,10 +100,13 @@ public class BoardController {
 	
 	@RequestMapping("/view")
 	public String view(Model model, @RequestParam("no") int no, @RequestParam("type") String type) {
+		System.out.println(no);
 		Board board = service.findByNo(no);
 		if(board == null) {
 			return "redirect:error";
 		}
+		
+		System.out.println(board);
 		board.setReplyCount(board.getReplyList().size());
 		log.info("댓글개수: " + board.getReplyCount());
 		model.addAttribute("board", board);
@@ -197,19 +200,21 @@ public class BoardController {
 	@RequestMapping("/reply")
 	public String writeReply(Model model, 
 			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
-			@ModelAttribute Reply reply
+			@ModelAttribute Reply reply,
+			String type
 			) {
 		reply.setMNo(loginMember.getMNo());
 		log.info("리플 작성 요청 Reply : " + reply);
 		
-		int result = service.saveReply(reply);
+		int	result = service.saveReply(reply);
+		
 		
 		if(result > 0) {
 			model.addAttribute("msg", "리플이 등록되었습니다.");
 		}else {
 			model.addAttribute("msg", "리플 등록에 실패하였습니다.");
 		}
-		model.addAttribute("location", "/community/view?no="+reply.getBNo());
+		model.addAttribute("location", "/community/view?no="+reply.getBNo()+"&type="+type);
 		return "common/msg";
 	}
 	
