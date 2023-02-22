@@ -257,12 +257,14 @@ public class BoardController {
 	}
 	
 	@GetMapping("/update")
-	public String updateView(Model model,
+	public String updateView(Model model, HttpSession session,
 			@SessionAttribute(name = "loginMember", required = false)  Member loginMember,
 			@RequestParam("no") int no
 			) {
 		Board board = service.findByNo(no);
 		model.addAttribute("board",board);
+		session.setAttribute("type", board.getType());
+		System.out.println("수정 요청 전 : " + board);
 		return "/community/update";
 	}
 	
@@ -271,7 +273,8 @@ public class BoardController {
 	@PostMapping("/update")
 	public String updateBoard(Model model, HttpSession session,
 			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
-			@ModelAttribute Board board,
+			@ModelAttribute("board") Board board,
+			@SessionAttribute("type") String type,
 			@RequestParam("reloadFile") MultipartFile reloadFile
 			) {
 //		System.out.println("originalFileName 크기 : " + board.getOriginalFileName().length());
@@ -281,9 +284,12 @@ public class BoardController {
 		}
 		
 		log.info("게시글 수정 요청");
+//		System.out.println(board);
+//		System.out.println("type : " + type);
 		log.info("bno" + board.getBNo());
+		
 		board.setMNo(loginMember.getMNo());
-
+		board.setType(type);
 		if(reloadFile != null && reloadFile.isEmpty() == false) {
 			if(board.getRenamedFileName() != null) {
 				service.deleteFile(savePath + "/" +board.getRenamedFileName());
@@ -298,10 +304,14 @@ public class BoardController {
 		
 		log.debug("board : " + board);
 		int result = service.saveBoard(board);
-
+		System.out.println(board.getType());
 		if(result > 0) {
 			model.addAttribute("msg", "게시글이 수정 되었습니다.");
-			model.addAttribute("location", "/community/freeList");
+			if(board.getType().equals("공지사항")) {
+				model.addAttribute("location", "/community/noticeList");
+			} else {
+				model.addAttribute("location", "/community/freeList");
+			}
 		}else {
 			model.addAttribute("msg", "게시글 수정에 실패하였습니다.");
 			model.addAttribute("location", "/community/freeList");
