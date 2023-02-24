@@ -81,7 +81,7 @@
 					<tr th:each="board, number : ${list}">
 						<td class="board-content" th:text="${list.size - number.index}"></td>
 						<td class="board-content board-title">
-							<a th:href="|/community/view?no=${board.bNo}|">
+							<a th:href="|/community/view?no=${board.bNo}&type=공지사항|">
 								[[${board.title}]]
 							</a>
 						</td>

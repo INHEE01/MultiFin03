@@ -21,6 +21,9 @@ public class MemberForm {
 	@NotNull(message = "이름이 입력되지 않았습니다.")
 	@Size(max = 20, min = 2, message = "이름을 2글자 이상, 20글자 미만 입력바랍니다.")
 	private String name;
+	
+	@NotNull(message = "휴대폰 번호가 입력되지 않았습니다.")
+	@Size(max = 11, min = 11, message = "올바른 전화번호가 아닙니다.")
 	private String phone;
 	private String email;
 	private String address;

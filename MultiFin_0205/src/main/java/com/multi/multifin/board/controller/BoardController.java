@@ -99,15 +99,19 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/view")
-	public String view(Model model, @RequestParam("no") int no) {
+	public String view(Model model, @RequestParam("no") int no, @RequestParam("type") String type) {
+		System.out.println(no);
 		Board board = service.findByNo(no);
 		if(board == null) {
 			return "redirect:error";
 		}
+		
+		System.out.println(board);
 		board.setReplyCount(board.getReplyList().size());
 		log.info("댓글개수: " + board.getReplyCount());
 		model.addAttribute("board", board);
 		model.addAttribute("replyList", board.getReplyList());
+		model.addAttribute("type", type);
 		return "community/view";
 	}
 	
@@ -196,19 +200,21 @@ public class BoardController {
 	@RequestMapping("/reply")
 	public String writeReply(Model model, 
 			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
-			@ModelAttribute Reply reply
+			@ModelAttribute Reply reply,
+			String type
 			) {
 		reply.setMNo(loginMember.getMNo());
 		log.info("리플 작성 요청 Reply : " + reply);
 		
-		int result = service.saveReply(reply);
+		int	result = service.saveReply(reply);
+		
 		
 		if(result > 0) {
 			model.addAttribute("msg", "리플이 등록되었습니다.");
 		}else {
 			model.addAttribute("msg", "리플 등록에 실패하였습니다.");
 		}
-		model.addAttribute("location", "/community/view?no="+reply.getBNo());
+		model.addAttribute("location", "/community/view?no="+reply.getBNo()+"&type="+type);
 		return "common/msg";
 	}
 	
@@ -251,12 +257,14 @@ public class BoardController {
 	}
 	
 	@GetMapping("/update")
-	public String updateView(Model model,
+	public String updateView(Model model, HttpSession session,
 			@SessionAttribute(name = "loginMember", required = false)  Member loginMember,
 			@RequestParam("no") int no
 			) {
 		Board board = service.findByNo(no);
 		model.addAttribute("board",board);
+		session.setAttribute("type", board.getType());
+		System.out.println("수정 요청 전 : " + board);
 		return "/community/update";
 	}
 	
@@ -265,13 +273,23 @@ public class BoardController {
 	@PostMapping("/update")
 	public String updateBoard(Model model, HttpSession session,
 			@SessionAttribute(name = "loginMember", required = false) Member loginMember,
-			@ModelAttribute Board board,
+			@ModelAttribute("board") Board board,
+			@SessionAttribute("type") String type,
 			@RequestParam("reloadFile") MultipartFile reloadFile
 			) {
+//		System.out.println("originalFileName 크기 : " + board.getOriginalFileName().length());
+		if(board.getOriginalFileName().length() <= 0) {
+			board.setOriginalFileName(null);
+			board.setRenamedFileName(null);
+		}
+		
 		log.info("게시글 수정 요청");
+//		System.out.println(board);
+//		System.out.println("type : " + type);
 		log.info("bno" + board.getBNo());
+		
 		board.setMNo(loginMember.getMNo());
-
+		board.setType(type);
 		if(reloadFile != null && reloadFile.isEmpty() == false) {
 			if(board.getRenamedFileName() != null) {
 				service.deleteFile(savePath + "/" +board.getRenamedFileName());
@@ -286,10 +304,14 @@ public class BoardController {
 		
 		log.debug("board : " + board);
 		int result = service.saveBoard(board);
-
+		System.out.println(board.getType());
 		if(result > 0) {
 			model.addAttribute("msg", "게시글이 수정 되었습니다.");
-			model.addAttribute("location", "/community/freeList");
+			if(board.getType().equals("공지사항")) {
+				model.addAttribute("location", "/community/noticeList");
+			} else {
+				model.addAttribute("location", "/community/freeList");
+			}
 		}else {
 			model.addAttribute("msg", "게시글 수정에 실패하였습니다.");
 			model.addAttribute("location", "/community/freeList");

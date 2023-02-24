@@ -126,6 +126,7 @@ public class MainController {
 		logger.info("게시판(공지사항) 요청 성공");
 		List<Board> boardList = boardService.selectMainBoard();
 		model.addAttribute("list", boardList);
+		System.out.println(boardList);
 		return "index";
 	}
 	

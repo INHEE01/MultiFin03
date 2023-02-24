@@ -40,8 +40,8 @@
                             <div class="card-body p-2 p-md-0">
                                 <form autocomplete="off" class="seach_box" method="get" th:action="@{/common/searchTotal}">
                                     <select class="form-control options" name="check" id="">
-                                        <option value="">전체</option>
-                                        <option value="check">은행</option>
+                                        <option th:value="0">전체</option>
+                                        <option th:value="0">은행</option>
                                         <option th:value="1">증권</option>
                                         <option th:value="2">부동산</option>
                                         <option th:value="3">뉴스</option>
@@ -78,7 +78,7 @@
                                     <h5 class="stock_title">[[${kospiIndex.stockType}]]</h5> 
                                 </div>
                                <div class="card-numbers mb-3">
-	                                <h5 class="text-gray number">[[${kospiIndex.fin}]] 원</h5>
+	                                <h5 class="text-gray number">[[${kospiIndex.fin}]]</h5>
 	                                <th:block th:if="${#strings.contains(kospiIndex.changePercent, '-') == true } ">
 			                              <h5 class="increase">▼ [[${kospiIndex.changePercent}]]</h5>
 									</th:block>	                                    
@@ -105,7 +105,7 @@
                                     <h6 class="today">[[${#dates.format(kosdaqIndex.stockDate, 'YY.MM.dd')}]]</h6>
                                 </div>
                                <div class="card-numbers" style="height: 25px;">
-	                                <h6 class="text-gray number">[[${kosdaqIndex.fin}]] 원</h6>
+	                                <h6 class="text-gray number">[[${kosdaqIndex.fin}]]</h6>
 	                                <th:block th:if="${#strings.contains(kosdaqIndex.changePercent, '-') == true } ">
 			                              <h6 class="increase">▼ [[${kosdaqIndex.changePercent}]]</h6>
 									</th:block>	                                    
@@ -126,7 +126,7 @@
                                     <h6 class="today">[[${#dates.format(nasdaqIndex.stockDate, 'YY.MM.dd')}]]</h6>
                                 </div>
                                <div class="card-numbers" style="height: 25px;">
-	                                <h6 class="text-gray number">[[${nasdaqIndex.fin}]] 원</h6>
+	                                <h6 class="text-gray number">[[${nasdaqIndex.fin}]]</h6>
 	                                <th:block th:if="${#strings.contains(nasdaqIndex.changePercent, '-') == true } ">
 			                              <h6 class="increase">▼ [[${nasdaqIndex.changePercent}]]</h6>
 									</th:block>	                                    
@@ -312,7 +312,7 @@
                             <div class="row">
                                 <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0">
                                     <!-- Card -->
-                                    <a href="#" class="card img-card fh-240 border-0 outer-bg main-box-shadow">
+                                    <a th:href="|/bank/bankDetail?no=${loanCreditList0[0].finPrdtCd}|" class="card img-card fh-240 border-0 outer-bg main-box-shadow">
                                         <div class="card-img-overlay d-flex align-items-center">
                                             <div class="card-body text-dark">
                                                 <h6>개인신용대출</h6>
@@ -326,7 +326,7 @@
                                 </div>
                                 <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0">
                                     <!-- Card -->
-                                    <a href="#" class="card img-card fh-240 border-0 outer-bg main-box-shadow">
+                                    <a th:href="|/bank/bankDetail?no=${loanMortgageList0[0].finPrdtCd}|" class="card img-card fh-240 border-0 outer-bg main-box-shadow">
                                         <div class="card-img-overlay d-flex align-items-center">
                                             <div class="card-body text-dark">
                                                 <h6>주택담보대출</h6>
@@ -340,7 +340,7 @@
                                 </div>
                                 <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0">
                                     <!-- Card -->
-                                    <a href="#" class="card img-card fh-240 border-0 outer-bg main-box-shadow">
+                                    <a th:href="|/bank/bankDetail?no=${loanRentHoustList0[0].finPrdtCd}|" class="card img-card fh-240 border-0 outer-bg main-box-shadow">
                                         <div class="card-img-overlay d-flex align-items-center">
                                             <div class="card-body text-dark">
                                                 <h6>전세자금대출</h6>
@@ -354,7 +354,7 @@
                                 </div>
                                 <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0">
                                     <!-- Card -->
-                                    <a href="#" class="card img-card fh-240 border-0 outer-bg main-box-shadow">
+                                    <a th:href="|/bank/bankDetail?no=${loanRentHoustList0[1].finPrdtCd}|" class="card img-card fh-240 border-0 outer-bg main-box-shadow">
                                         <div class="card-img-overlay d-flex align-items-center">
                                             <div class="card-body text-dark">
                                                 <h6>전세자금대출</h6>
@@ -485,7 +485,7 @@
 			  <th:block th:if="${list != null}">
 					<tr class="table_content" th:each="board : ${list}">
 						<td class="board-content board-title">
-							<a th:href="|/community/view?no=${board.bNo}|">
+							<a th:href="|/community/view?no=${board.bNo}&type=공지사항|">
 								 <h6 class="board_c_title"> [[${board.title}]] </h6>
 							</a>
 						</td>

@@ -171,6 +171,7 @@ public class BankController {
 		}
 		
 		int depositCount = bankbookService.getDepositCountUnique(paramMap);
+		log.info("depositCount"+depositCount);
 		PageInfo pageDepositInfo = new PageInfo(pageDeposit, 5, depositCount, 10);
 		List<BankDeposit> depositList = bankbookService.selectDepositListUnique(pageDepositInfo, paramMap);
 		for(BankDeposit deposit : depositList0) {
@@ -192,7 +193,8 @@ public class BankController {
 			pageSaving = Integer.parseInt(paramMap.get("pageSaving"));
 		} catch (Exception e) {
 		}
-		int savingCount = cardService.getCreditCount(paramMap);
+		int savingCount = bankbookService.getSavingCountUnique(paramMap);
+		log.info("savingCount"+savingCount);
 		PageInfo pageSavingInfo = new PageInfo(pageSaving, 5, savingCount, 10);
 		List<BankSaving> savingList = bankbookService.selectSavingListUnique(pageSavingInfo, paramMap);
 		for(BankSaving saving : savingList0) {

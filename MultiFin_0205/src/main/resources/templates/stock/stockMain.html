@@ -47,7 +47,7 @@
                             <div class="card-body">
                               <h5 class="text-gray card-name font-weight-bolder">[[${kospiIndex.stockType}]]</h5>
                               <div class="card-numbers">
-                                <h6 class="text-gray number">[[${kospiIndex.fin}]] 원</h6>
+                                <h6 class="text-gray number">[[${kospiIndex.fin}]]</h6>
                                 <th:block th:if="${#strings.contains(kospiIndex.changePercent, '-') == true } ">
 		                              <h6 class="increase">▼ [[${kospiIndex.changePercent}]]</h6>
 								</th:block>	                                    
@@ -67,7 +67,7 @@
                             <div class="card-body">
                               <h5 class="text-gray card-name font-weight-bolder">[[${kosdaqIndex.stockType}]]</h5>
                               <div class="card-numbers">
-                                <h6 class="text-gray number">[[${kosdaqIndex.fin}]] 원</h6>
+                                <h6 class="text-gray number">[[${kosdaqIndex.fin}]]</h6>
                                 <th:block th:if="${#strings.contains(kosdaqIndex.changePercent, '-') == true } ">
 		                              <h6 class="increase">▼ [[${kosdaqIndex.changePercent}]]</h6>
 								</th:block>	                                    
